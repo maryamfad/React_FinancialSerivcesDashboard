@@ -1,0 +1,103 @@
+:root {
+  --triangle-color: green;
+}
+.scroller {
+  width: 100%;
+}
+.scroller[data-animated="true"] {
+  overflow: hidden;
+  /* mask: linear-gradient(40deg, transparent, white 10%, white 80%, transparent); */
+  /* background-color: blue; */
+}
+.scroller_inner {
+  width: 100vw;
+  display: flex;
+  padding-block: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.scroller[data-animated="true"] .scroller_inner {
+  flex-wrap: nowrap;
+  animation: scroll 40s linear infinite;
+}
+.scroller[data-animated="true"] .scroller_inner:hover {
+  animation-play-state: paused;
+}
+
+.box {
+  min-width: 250px;
+  height: 100px;
+  font-family: Arial, sans-serif;
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+  width: 250px;
+  background-color: #f9f9f9;
+}
+
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50% - 0.5rem));
+  }
+}
+
+.stock-info {
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  background-color: #f9f9f9;
+}
+
+.stock-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.stock-price {
+  font-size: 14px;
+}
+
+.stock-change {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.stock-volume {
+  font-size: 14px;
+  margin-top: 5px;
+  color: #666;
+}
+
+.diagram-card {
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+
+  border-radius: 5px;
+  margin: 20px;
+  padding: 20px;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  align-items: "center";
+}
+.title {
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.tooltip {
+  opacity: 0; /* Initially hidden */
+  background-color: white;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute; /* Required for positioning */
+  pointer-events: none; /* Tooltip should not capture mouse events */
+  transition: opacity 0.3s; /* Smooth transition */
+}
