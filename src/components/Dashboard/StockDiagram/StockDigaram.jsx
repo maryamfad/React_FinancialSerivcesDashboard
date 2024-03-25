@@ -1,13 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "../Dashboard.css";
-import { Line } from "react-chartjs-2";
-import Chart from "chart.js/auto"; // Needed for Chart.js v3 and above
 import LinearChart from "./LinearChart";
 function StockDiagram() {
-  const [historicalBarData, setHistoricalBarData] = useState(null);
-  const [historicalPrice, setHistoricalPrice] = useState(null);
-  const [historicalTime, setHistoricalTime] = useState(null);
   const [symbol, setSymbol] = useState("AAPL");
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -30,11 +25,7 @@ function StockDiagram() {
         );
 
         const data = await response.json();
-        console.log("===>", data);
-        setHistoricalBarData(data.bars);
-        const stockPrice = data.bars.map((stock) => stock.c);
-        setHistoricalPrice(stockPrice);
-        setHistoricalTime(data.bars.map((stock) => stock.t));
+
         setData(
           data.bars.map((stock) => ({
             time:
@@ -63,11 +54,11 @@ function StockDiagram() {
   if (error) return <div>Error: {error}</div>;
   //   if (!data) return <div>No data fetched</div>;
   const datatemp = [
-    { time: "08:00", price: 10 },
-    { time: "09:00", price: 15 },
-    { time: "10:00", price: 30 },
-    { time: "11:00", price: 50 },
-    { time: "12:00", price: 40 },
+    { time: "08:00", close: 10 },
+    { time: "09:00", close: 15 },
+    { time: "10:00", close: 30 },
+    { time: "11:00", close: 50 },
+    { time: "12:00", close: 40 },
   ];
   return (
     <div>

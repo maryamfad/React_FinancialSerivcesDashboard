@@ -8,37 +8,83 @@ const LinearChart = ({ data }) => {
 
   useEffect(() => {
     if (data && d3Container.current) {
+      d3.select(d3Container.current).selectAll("*").remove();
+
       const parseTime = d3.timeParse("%H:%M");
 
       const formattedData = data.map((d) => ({
         time: parseTime(d.time),
         close: d.close,
+        open: d.open,
+        high: d.high,
+        low: d.low,
+        volume: d.volume,
       }));
 
       const margin = { top: 10, right: 20, bottom: 30, left: 40 },
         width = 660 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
 
-      const x = d3.scaleTime().range([0, width]);
-      const y = d3.scaleLinear().range([height, 0]);
-
-      const valueline = d3
-        .line()
-        .x((d) => x(d.time))
-        .y((d) => y(d.close));
-
+      //Defining svg
       const svg = d3
         .select(d3Container.current)
+        .attr("class", "svg-container")
+        .style("position", "relative")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+        .on("mouseout", () => tooltipDiv.style("display", "none"))
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-      x.domain(d3.extent(formattedData, (d) => d.time));
-      y.domain([
-        d3.min(formattedData, (d) => d.close),
-        d3.max(formattedData, (d) => d.close),
-      ]);
+      //Scales
+      const xScale = d3
+        .scaleTime()
+        .domain(d3.extent(formattedData, (d) => d.time))
+        .range([0, width]);
+
+      const yScale = d3
+        .scaleLinear()
+        .domain([
+          d3.min(formattedData, (d) => d.close),
+          d3.max(formattedData, (d) => d.close),
+        ])
+        .range([height, 0]);
+
+      //Axes
+      svg
+        .append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(xScale));
+
+      svg.append("g").call(d3.axisLeft(yScale));
+
+      //Grids
+      svg
+        .append("g")
+        .call(d3.axisLeft(yScale).tickSize(-width).tickFormat(""))
+        .style("color", "lightgray")
+        .selectAll(".tick line")
+        .style("stroke", "lightgray")
+        .style("stroke-opacity", "0.7")
+        .style("shape-rendering", "crispEdges")
+        .classed("grid", true);
+
+      svg
+        .append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(xScale).tickSize(-height).tickFormat(""))
+        .style("color", "lightgray")
+        .selectAll(".tick line")
+        .style("stroke", "lightgray")
+        .style("stroke-opacity", "0.7")
+        .style("shape-rendering", "crispEdges")
+        .classed("grid", true);
+
+      //Chart Line
+      const valueline = d3
+        .line()
+        .x((d) => xScale(d.time))
+        .y((d) => yScale(d.close));
 
       svg
         .append("path")
@@ -49,38 +95,11 @@ const LinearChart = ({ data }) => {
         .style("fill", "none")
         .style("stroke-width", "2px");
 
-      svg
-        .append("g")
-        .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x));
-
-      svg.append("g").call(d3.axisLeft(y));
-
-      svg
-        .append("g")
-        .call(d3.axisLeft(y).tickSize(-width).tickFormat(""))
-        .style("color", "lightgray")
-        .selectAll(".tick line")
-        .style("stroke", "lightgray")
-        .style("stroke-opacity", "0.7")
-        .style("shape-rendering", "crispEdges")
-
-        .classed("grid", true);
-
-      svg
-        .append("g")
-        .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x).tickSize(-height).tickFormat(""))
-        .style("color", "lightgray")
-        .selectAll(".tick line")
-        .style("stroke", "lightgray")
-        .style("stroke-opacity", "0.7")
-        .style("shape-rendering", "crispEdges")
-        .classed("grid", true);
-
+      // Tooltip setup
       const tooltipDiv = d3
-        .select(tooltip.current) // Use the existing D3 container
+        .select(tooltip.current)
         .style("opacity", 0)
+        .style("position", "absolute")
         .attr("class", "tooltip")
         .style("background-color", "white")
         .style("border", "solid")
@@ -88,22 +107,69 @@ const LinearChart = ({ data }) => {
         .style("border-radius", "5px")
         .style("padding", "5px");
 
+      // Mouse move line
+      const mouseLine = svg
+        .append("line")
+        .attr("stroke", "#000")
+        .attr("stroke-width", 1)
+        .style("opacity", 0);
+
+      // Invisible rectangle to capture hover events
       svg
-        .selectAll(".dot")
-        .data(data)
-        .enter()
-        .append("circle")
-        .attr("class", "dot")
-        // Define circle attributes here
-        .on("mouseover", function (event, d) {
-          tooltipDiv.style("opacity", 1);
-          tooltipDiv
-            .html("Tooltip content here" + d.close)
-            .style("left", event.pageX + 10 + "px")
-            .style("top", event.pageY - 15 + "px");
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .on("mouseover", () => {
+          tooltipDiv.style("display", null);
+          mouseLine.style("opacity", 1);
         })
-        .on("mouseout", function () {
-          tooltipDiv.style("opacity", 0);
+        .on("mousemove", function (event) {
+        
+          const containerRect = document
+            .querySelector(".svg-container")
+            .getBoundingClientRect();
+          const bisectDate = d3.bisector((d) => d.time).left;
+          const x0 = xScale.invert(d3.pointer(event, this)[0]);
+          const i = bisectDate(formattedData, x0, 1);
+          const d0 = formattedData[i - 1];
+          const d1 = formattedData[i];
+          const d =
+            d0 && d1 ? (x0 - d0.time > d1.time - x0 ? d1 : d0) : d0 ? d0 : d1;
+          tooltipDiv
+            .style("opacity", 1)
+            .style("display", "block")
+            .style("left", containerRect.left + xScale(d.time) + 20 + "px")
+            .style("top", containerRect.top + yScale(d.close) + 20 + "px")
+            .html(
+              `Time: ${new Date(d.time)
+                .getHours()
+                .toString()
+                .padStart(2, "0")}:${new Date(d.time)
+                .getMinutes()
+                .toString()
+                .padStart(2, "0")} ${
+                new Date(d.time).getHours() < 12 ? "AM" : "PM"
+              } <br/>Close: ${d.close} <br/>Open: ${d.open} <br/>High: ${
+                d.high
+              } <br/>Low: ${d.low}<br/>Volume: ${d.volume}`
+            );
+          // .attr(
+          //   "transform",
+          //   `translate(${xScale(d.time)},${yScale(d.close)})`
+          // );
+          //  console.log(`translate(${xScale(d.time)},${yScale(d.close)})`);
+          mouseLine
+            .attr("x1", xScale(d.time))
+            .attr("x2", xScale(d.time))
+            .attr("y1", 0)
+            .attr("y2", height)
+            .style("opacity", 0.5);
+        })
+        .on("mouseout", () => {
+          tooltipDiv.style("display", "none");
+          mouseLine.style("opacity", 0);
         });
     }
   }, [data]); // Redraw chart if data changes
@@ -111,7 +177,7 @@ const LinearChart = ({ data }) => {
   return (
     <>
       {" "}
-      <svg ref={d3Container} /> 
+      <svg ref={d3Container} />
       <div ref={tooltip} />{" "}
     </>
   );
