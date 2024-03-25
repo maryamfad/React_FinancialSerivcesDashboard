@@ -101,3 +101,9 @@
   pointer-events: none; /* Tooltip should not capture mouse events */
   transition: opacity 0.3s; /* Smooth transition */
 }
+
+.linear-chart{
+  width: 100%;
+  height: auto;
+  display: block;
+}

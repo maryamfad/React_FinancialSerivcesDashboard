@@ -1,13 +1,36 @@
 // src/LinearChart.js
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
 import "../Dashboard.css";
 const LinearChart = ({ data }) => {
   const d3Container = useRef(null);
   const tooltip = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
 
   useEffect(() => {
-    if (data && d3Container.current) {
+    // Initialize resize observer
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        // Assuming you want to use the contentRect width, which does not include borders or padding
+        setContainerWidth(entry.contentRect.width);
+      }
+    });
+
+    // Observe the d3Container
+    if (d3Container.current) {
+      resizeObserver.observe(d3Container.current);
+    }
+
+    // Cleanup on component unmount
+    return () => {
+      if (d3Container.current) {
+        resizeObserver.unobserve(d3Container.current);
+      }
+    };
+  }, [d3Container.current]);
+
+  function drawChart(width) {
+    if (data && d3Container.current && data.length > 0 && width > 0) {
       d3.select(d3Container.current).selectAll("*").remove();
 
       const parseTime = d3.timeParse("%H:%M");
@@ -22,7 +45,7 @@ const LinearChart = ({ data }) => {
       }));
 
       const margin = { top: 10, right: 20, bottom: 30, left: 40 },
-        width = 660 - margin.left - margin.right,
+        //   width = 660 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
 
       //Defining svg
@@ -30,7 +53,7 @@ const LinearChart = ({ data }) => {
         .select(d3Container.current)
         .attr("class", "svg-container")
         .style("position", "relative")
-        .attr("width", width + margin.left + margin.right)
+        .attr("width", "100%")
         .attr("height", height + margin.top + margin.bottom)
         .on("mouseout", () => tooltipDiv.style("display", "none"))
         .append("g")
@@ -126,7 +149,6 @@ const LinearChart = ({ data }) => {
           mouseLine.style("opacity", 1);
         })
         .on("mousemove", function (event) {
-        
           const containerRect = document
             .querySelector(".svg-container")
             .getBoundingClientRect();
@@ -172,12 +194,21 @@ const LinearChart = ({ data }) => {
           mouseLine.style("opacity", 0);
         });
     }
-  }, [data]); // Redraw chart if data changes
+  }
 
+  useEffect(() => {
+    if (containerWidth > 0) {
+      drawChart(containerWidth);
+    }
+  }, [containerWidth, data]);
   return (
     <>
       {" "}
-      <svg ref={d3Container} />
+      <svg
+        className="linear-chart"
+        ref={d3Container}
+        style={{ width: "100%" }}
+      />
       <div ref={tooltip} />{" "}
     </>
   );
