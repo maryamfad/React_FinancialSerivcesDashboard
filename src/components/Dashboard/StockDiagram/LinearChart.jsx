@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
 import "../Dashboard.css";
-const LinearChart = ({ data }) => {
+const LinearChart = ({ data, timeFrame }) => {
   const d3Container = useRef(null);
   const tooltip = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -11,17 +11,12 @@ const LinearChart = ({ data }) => {
     // Initialize resize observer
     const resizeObserver = new ResizeObserver((entries) => {
       for (let entry of entries) {
-        // Assuming you want to use the contentRect width, which does not include borders or padding
         setContainerWidth(entry.contentRect.width);
       }
     });
-
-    // Observe the d3Container
     if (d3Container.current) {
       resizeObserver.observe(d3Container.current);
     }
-
-    // Cleanup on component unmount
     return () => {
       if (d3Container.current) {
         resizeObserver.unobserve(d3Container.current);
@@ -34,16 +29,30 @@ const LinearChart = ({ data }) => {
       d3.select(d3Container.current).selectAll("*").remove();
 
       const parseTime = d3.timeParse("%H:%M");
-
+      const parseDate = d3.timeParse("%Y-%m-%d");
       const formattedData = data.map((d) => ({
-        time: parseTime(d.time),
+      //   time: parseTime(
+      //     new Date(d.time).getHours().toString().padStart(2, "0") +
+      //       ":" +
+      //       new Date(d.time).getMinutes().toString().padStart(2, "0")
+      //   ),
+      //   date: parseDate(
+      //     new Date(d.time).getFullYear() +
+      //       "-" +
+      //       new Date(d.time).getMonth() +
+      //       1 +
+      //       "-" +
+      //       new Date(d.time).getDate()
+      //   ),
+      time: new Date(d.time),
         close: d.close,
         open: d.open,
         high: d.high,
         low: d.low,
         volume: d.volume,
       }));
-
+      // console.log(data);
+      // console.log(formattedData);
       const margin = { top: 10, right: 20, bottom: 30, left: 40 },
         //   width = 660 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
@@ -52,7 +61,6 @@ const LinearChart = ({ data }) => {
       const svg = d3
         .select(d3Container.current)
         .attr("class", "svg-container")
-        .style("position", "relative")
         .attr("width", "100%")
         .attr("height", height + margin.top + margin.bottom)
         .on("mouseout", () => tooltipDiv.style("display", "none"))
@@ -68,8 +76,10 @@ const LinearChart = ({ data }) => {
       const yScale = d3
         .scaleLinear()
         .domain([
-          d3.min(formattedData, (d) => d.close),
-          d3.max(formattedData, (d) => d.close),
+          d3.min(formattedData, (d) => d.close) -
+            d3.min(formattedData, (d) => d.close) * 0.01,
+          d3.max(formattedData, (d) => d.close) +
+            d3.max(formattedData, (d) => d.close) * 0.01,
         ])
         .range([height, 0]);
 
@@ -122,7 +132,6 @@ const LinearChart = ({ data }) => {
       const tooltipDiv = d3
         .select(tooltip.current)
         .style("opacity", 0)
-        .style("position", "absolute")
         .attr("class", "tooltip")
         .style("background-color", "white")
         .style("border", "solid")
@@ -145,7 +154,7 @@ const LinearChart = ({ data }) => {
         .style("fill", "none")
         .style("pointer-events", "all")
         .on("mouseover", () => {
-          tooltipDiv.style("display", null);
+          //  tooltipDiv.style("display", null);
           mouseLine.style("opacity", 1);
         })
         .on("mousemove", function (event) {
@@ -177,11 +186,7 @@ const LinearChart = ({ data }) => {
                 d.high
               } <br/>Low: ${d.low}<br/>Volume: ${d.volume}`
             );
-          // .attr(
-          //   "transform",
-          //   `translate(${xScale(d.time)},${yScale(d.close)})`
-          // );
-          //  console.log(`translate(${xScale(d.time)},${yScale(d.close)})`);
+
           mouseLine
             .attr("x1", xScale(d.time))
             .attr("x2", xScale(d.time))
