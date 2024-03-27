@@ -19,7 +19,7 @@ const Dashboard = ({ show }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [symbol, setSymbol] = useState('AAPL');
+  const [symbol, setSymbol] = useState("AAPL");
 
   const handleSearchChange = (event) => {
     event.stopPropagation();
@@ -28,7 +28,7 @@ const Dashboard = ({ show }) => {
   };
   const handleItemClick = (event) => {
     const item = event.target.getAttribute("data-item");
-    console.log("Item clicked:", item);
+
     setQuery(item);
     setSymbol(item);
     setTimeout(() => setIsFocused(false), 100);
@@ -38,7 +38,7 @@ const Dashboard = ({ show }) => {
     event.preventDefault();
     // setTimeout(() => setIsFocused(false), 100);
   };
-  console.log("query", query);
+
   const filteredItems = query
     ? stockNames.filter((item) =>
         item.toLowerCase().includes(query.toLowerCase())
@@ -61,7 +61,7 @@ const Dashboard = ({ show }) => {
         });
 
         const data = await response.json();
-        // console.log(data);
+
         setData(data);
         setGainerStocks(data.most_actives);
         setStockNames(data.most_actives.map((d) => d.symbol));
@@ -79,11 +79,11 @@ const Dashboard = ({ show }) => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!data) return <div>No data fetched</div>;
-  console.log("isFocused", isFocused);
+
   return (
-    <div className={show ? "col-11" : "col-12"}>
+    <div className="dashboard">
       <div
-        className="scroller d-flex justify-content-end"
+        className="scroller"
         data-animated={
           !window.matchMedia("(prefers-reduced-motion: reduce)").matches
             ? "true"
@@ -129,11 +129,7 @@ const Dashboard = ({ show }) => {
           <div className="search-results">
             {filteredItems.length > 0 ? (
               filteredItems.map((item, index) => (
-                <div
-                  key={index}
-                  data-item={item}
-                  onClick={handleItemClick}
-                >
+                <div key={index} data-item={item} onClick={handleItemClick}>
                   {item}
                 </div>
               ))
@@ -145,9 +141,9 @@ const Dashboard = ({ show }) => {
       </div>
       <div className="h-50 d-flex flex-row justify-content-evenly">
         <div className="col-7 p-1 mb-2 my-3">
-          <StockDiagram symbol={symbol}/>
+          <StockDiagram symbol={symbol} />
         </div>
-        {/* <div className="col-3 p-1 mb-2 my-3 bg-secondary text-white">5</div> */}
+        <div className="col-3 p-1 mb-2 my-3 bg-secondary text-white">5</div>
       </div>
       {/* <div className="h-25 d-flex flex-row justify-content-evenly">
         <div className="col-3 p-1 mb-2 my-3 bg-danger text-white">7</div>

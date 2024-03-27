@@ -1,8 +1,16 @@
 :root {
   --triangle-color: green;
+  
+}
+.dashboard{
+  width: 100%;
 }
 .scroller {
   width: 100%;
+  /* position: relative; */
+  margin-top: 5%;
+  z-index: 1;
+  
 }
 .scroller[data-animated="true"] {
   overflow: hidden;
