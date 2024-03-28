@@ -8,7 +8,7 @@ function App() {
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(show);
+
   return (
     <div className="app-container">
       <Navbar show={show} handleClose={handleClose} handleShow={handleShow} setShow={setShow}/>

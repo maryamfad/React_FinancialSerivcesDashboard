@@ -37,7 +37,7 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
       [stateKey]: true, // Set the selected state to true
     }));
   };
-  console.log(selectedItem);
+
   return (
     <div className="navbar-container">
       <ul className="navbar-list">

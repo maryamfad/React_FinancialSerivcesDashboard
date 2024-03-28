@@ -1,26 +1,30 @@
 import { useState, useEffect } from "react";
 import StockDiagram from "./StockDiagram/StockDigaram";
 import "./Dashboard.css";
-import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
+import { stockNames } from "./stockNames";
+import getMostActiveStocks from "../../api/getMostActiveStocks";
+import Scroller from "./Scroller";
+import getLatestQuoteForAStock from "../../api/getLatestQuoteForAStock";
+import getLatestBarForAStock from "../../api/getLatestBarForAStock";
 
 const Dashboard = ({ show }) => {
   const [gainerStocks, setGainerStocks] = useState([]);
   const [loserStocks, setLoserStocks] = useState([]);
-  const [stockNames, setStockNames] = useState([]);
+  // const [stockNames, setStockNames] = useState([]);
+
   const [isFocused, setIsFocused] = useState(false);
   const [query, setQuery] = useState("");
-  let stocksAndDuplicates = [
-    ...gainerStocks,
-    ...loserStocks,
-    ...gainerStocks,
-    ...loserStocks,
-  ];
-  stocksAndDuplicates.sort(() => Math.random() - 0.5);
+
+  // console.log("stocksAndDuplicates", stocksAndDuplicates);
+  // stocksAndDuplicates.sort(() => Math.random() - 0.5);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [volume, setVolume] = useState(0);
+  const [change, setChange] = useState(0);
   const [symbol, setSymbol] = useState("AAPL");
-
+  const [mostActiveStocks, setMostActiveStocks] = useState([]);
+  let stocksAndDuplicates = [...mostActiveStocks, ...mostActiveStocks];
   const handleSearchChange = (event) => {
     event.stopPropagation();
     setIsFocused(true);
@@ -36,7 +40,6 @@ const Dashboard = ({ show }) => {
   const handleBlur = (event) => {
     event.stopPropagation();
     event.preventDefault();
-    // setTimeout(() => setIsFocused(false), 100);
   };
 
   const filteredItems = query
@@ -45,76 +48,72 @@ const Dashboard = ({ show }) => {
       )
     : [];
 
-  const url =
-    "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=volume&top=100";
+  const loadMostActiveStocksData = async () => {
+    try {
+      const result = await getMostActiveStocks();
+
+      setMostActiveStocks(result.most_actives);
+    } catch (error) {
+      console.error("Failed to fetch data: ", error);
+    }
+  };
+
+  const loadLatestQuoteData = async (symbol) => {
+    try {
+      const result = await getLatestQuoteForAStock(symbol);
+      // console.log("result", result);
+      return result;
+    } catch (error) {
+      console.error("Failed to fetch data: ", error);
+    }
+  };
+
+  const loadLatestBarData = async (symbol) => {
+    try {
+      const result = await getLatestBarForAStock(symbol);
+      // console.log("result", result);
+      return result;
+    } catch (error) {
+      console.error("Failed to fetch data: ", error);
+    }
+  };
+
+  // console.log("////", mostActiveStocks);
+  const mergeStocksData = async () => {
+    let array = mostActiveStocks.map((item) => ({
+      ...item,
+      symbol: item.symbol,
+      quote: loadLatestQuoteData(item.symbol),
+      bar: loadLatestBarData(item.symbol),
+    }));
+    setMostActiveStocks(array);
+    // console.log("////", mostActiveStocks);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-            "APCA-API-KEY-ID": process.env.REACT_APP_ALPACA_API_KEY,
-            "APCA-API-SECRET-KEY": process.env.REACT_APP_ALPACA_API_SECRET,
-          },
-        });
+    // loadLatestQuoteData("AAPL");
+    loadMostActiveStocksData();
+    // mergeStocksData();
 
-        const data = await response.json();
-
-        setData(data);
-        setGainerStocks(data.most_actives);
-        setStockNames(data.most_actives.map((d) => d.symbol));
-        // setLoserStocks(data.losers);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    // Promise.all([loadMostActiveStocksData, mergeStocksData])
+    // .then(() => {
+    //   console.log("mostActiveStocks",mostActiveStocks);
+    // })
+    // .catch(error => {
+    //   console.error('An error occurred:', error);
+    // });
   }, []);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
-  if (!data) return <div>No data fetched</div>;
+  // if (!data) return <div>No data fetched</div>;
 
   return (
     <div className="dashboard">
-      <div
-        className="scroller"
-        data-animated={
-          !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-            ? "true"
-            : "false"
-        }
-      >
-        <div className="scroller_inner">
-          {stocksAndDuplicates.map((stock, index) => (
-            <div className="box" key={index}>
-              <div className="d-flex justify-content-between">
-                <div>
-                  <div class="stock-name">{stock.symbol}</div>
-                  <div class="stock-price">{stock.price} $</div>
-
-                  {stock.change < 0 ? (
-                    <div class="stock-change" style={{ color: "red" }}>
-                      <GoTriangleDown color={"red"} /> {stock.change} (
-                      {stock.percent_change} %)
-                    </div>
-                  ) : (
-                    <div class="stock-change" style={{ color: "green" }}>
-                      <GoTriangleUp color={"green"} /> {stock.change} (
-                      {stock.percent_change} %)
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Scroller
+        stocksAndDuplicates={stocksAndDuplicates}
+        setSymbol={setSymbol}
+      />
 
       <div className="search-container" onBlur={handleBlur} tabIndex="0">
         <input
@@ -140,7 +139,7 @@ const Dashboard = ({ show }) => {
         )}
       </div>
       <div className="h-50 d-flex flex-row justify-content-evenly">
-        <div className="col-7 p-1 mb-2 my-3">
+        <div className="stock-diagram">
           <StockDiagram symbol={symbol} />
         </div>
         <div className="col-3 p-1 mb-2 my-3 bg-secondary text-white">5</div>

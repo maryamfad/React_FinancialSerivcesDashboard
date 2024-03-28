@@ -1,16 +1,13 @@
 :root {
   --triangle-color: green;
-  
 }
-.dashboard{
+.dashboard {
   width: 100%;
 }
 .scroller {
   width: 100%;
-  /* position: relative; */
   margin-top: 5%;
   z-index: 1;
-  
 }
 .scroller[data-animated="true"] {
   overflow: hidden;
@@ -28,7 +25,6 @@
 .scroller[data-animated="true"] .scroller_inner {
   flex-wrap: nowrap;
   animation: scroll 40s linear infinite;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
 }
 .scroller[data-animated="true"] .scroller_inner:hover {
   animation-play-state: paused;
@@ -41,12 +37,14 @@
   border: 2px solid #ccc;
   border-radius: 15px;
   padding: 10px;
-  margin: 10px;
-  width: 250px;
   background-color: #f9f9f9;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
+.stock-diagram {
+  margin-left: 10%;
+  width: 50%;
+}
 @keyframes scroll {
   to {
     transform: translate(calc(-50% - 0.5rem));
@@ -62,7 +60,12 @@
   width: 200px;
   background-color: #f9f9f9;
 }
-
+.stock-trade_count {
+  font-size: 0.7rem;
+}
+.stock-volume {
+  font-size: 0.7rem;
+}
 .stock-name {
   font-size: 14px;
   font-weight: bold;
@@ -87,7 +90,7 @@
   background-color: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-z-index: -1;
+  z-index: -1;
   border-radius: 5px;
   margin: 20px;
   padding: 20px;
@@ -102,23 +105,22 @@ z-index: -1;
 }
 
 .tooltip {
-  /* opacity: 0; Initially hidden */
   background-color: white;
   border: solid 1px #ccc;
   border-radius: 5px;
   padding: 10px;
-  position: absolute; /* Required for positioning */
-  pointer-events: none; /* Tooltip should not capture mouse events */
-  transition: opacity 0.3s; /* Smooth transition */
+  position: absolute;
+  pointer-events: none;
+  transition: opacity 0.3s;
 }
 
-.linear-chart{
+.linear-chart {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.time-buttons{
+.time-buttons {
   color: blue;
   cursor: pointer;
 }
@@ -129,8 +131,8 @@ z-index: -1;
   align-items: center;
   position: relative;
   width: 100vw;
-  max-width: 600px; /* Set a max-width for the search container */
-  margin: auto; /* Center the search container */
+  max-width: 600px; 
+  margin: auto;
 }
 
 .search-results {
@@ -141,12 +143,12 @@ z-index: -1;
   z-index: 10;
   border: 1px solid #ddd;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .search-results div {
   padding: 10px;
-  /* cursor: pointer; */
+  
 }
 
 .search-results div:hover {

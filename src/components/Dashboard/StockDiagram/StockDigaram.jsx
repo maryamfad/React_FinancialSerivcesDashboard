@@ -71,7 +71,7 @@ function StockDiagram({symbol}) {
           start.setDate(end.getDate() - 1);
           setBarTimeFrame("1Min");
       }
-      // console.log(start, end);
+      
       try {
         const response = await fetch(
           `https://data.alpaca.markets/v2/stocks/${symbol}/bars?timeframe=${barTimeFrame}&start=${toYYYYMMDD(
@@ -90,7 +90,7 @@ function StockDiagram({symbol}) {
         );
 
         const data = await response.json();
-
+// console.log(end);
         setData(
           data.bars.map((stock) => ({
             time: stock.t,
