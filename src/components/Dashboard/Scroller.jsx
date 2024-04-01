@@ -54,7 +54,7 @@ const Scroller = ({ setSymbol }) => {
           let symbol = entry.target
             .querySelector(".stock-name")
             .innerText.toString();
-          console.log(symbol);
+          // console.log(symbol);
           fetchDataAndUpdateArray(symbol, entry.target);
         }
       }
@@ -81,7 +81,7 @@ const Scroller = ({ setSymbol }) => {
         }
         return item;
       });
-      console.log(stocksAndDuplicates);
+      // console.log(stocksAndDuplicates);
       const stockChangeHtml =
         priceDifference < 0
           ? `<div class="stock-change" style="color: red; width:250px">
