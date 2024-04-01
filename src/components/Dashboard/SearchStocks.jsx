@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import getStocksList from "../../api/getStocksList";
-const SearchStocks = ({setSymbol}) => {
-    const [isFocused, setIsFocused] = useState(false);
+const SearchStocks = ({ setSymbol }) => {
+  const [isFocused, setIsFocused] = useState(false);
   const [query, setQuery] = useState("");
   const [stocksList, setStocksList] = useState([]);
 
-  const loadStocksList= async () => {
+  const loadStocksList = async () => {
     try {
       const result = await getStocksList();
-      console.log('result',result.map((element)=> element.symbol));
-      setStocksList(result.map((element)=> element.symbol))
+      console.log(
+        "result",
+        result.map((element) => element.symbol)
+      );
+      setStocksList(result.map((element) => element.symbol));
     } catch (error) {
       console.error("Failed to fetch data: ", error);
     }
@@ -39,31 +42,33 @@ const SearchStocks = ({setSymbol}) => {
       )
     : [];
 
-    useEffect(() => {
-       loadStocksList();
-      }, []);
-    return (  <div className="search-container" onBlur={handleBlur} tabIndex="0">
-    <input
-      type="text"
-      placeholder="Search..."
-      value={query}
-      onChange={handleSearchChange}
-      onClick={() => setIsFocused(true)}
-      onFocus={() => setIsFocused(true)}
-    />
-    {isFocused && query && (
-      <div className="search-results">
-        {filteredItems.length > 0 ? (
-          filteredItems.map((item, index) => (
-            <div key={index} data-item={item} onClick={handleItemClick}>
-              {item}
-            </div>
-          ))
-        ) : (
-          <div>No results found</div>
-        )}
-      </div>
-    )}
-  </div>)
-}
+  useEffect(() => {
+    loadStocksList();
+  }, []);
+  return (
+    <div className="search-container" onBlur={handleBlur} tabIndex="0">
+      <input
+        type="text"
+        placeholder="Search..."
+        value={query}
+        onChange={handleSearchChange}
+        onClick={() => setIsFocused(true)}
+        onFocus={() => setIsFocused(true)}
+      />
+      {isFocused && query && (
+        <div className="search-results">
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item, index) => (
+              <div key={index} data-item={item} onClick={handleItemClick}>
+                {item}
+              </div>
+            ))
+          ) : (
+            <div>No results found</div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
 export default SearchStocks;
