@@ -20,7 +20,6 @@ const StockNews = () => {
   const loadStocksList = async () => {
     try {
       const result = await getStocksNews();
-      console.log("result", result);
       setStocksNews(result.content);
     } catch (error) {
       console.error("Failed to fetch data: ", error);
@@ -34,8 +33,8 @@ const StockNews = () => {
       <div class="news-section">
         <h2>Latest Stock News</h2>
         <div class="news-list">
-          {stocksNews.map((content) => (
-            <article class="news-item">
+          {stocksNews.map((content, index) => (
+            <article class="news-item" key={index}>
               <img src={content.image} alt="News" class="news-image" />
               <div class="news-content">
                 <h3 class="news-title">

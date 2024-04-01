@@ -8,10 +8,6 @@ const SearchStocks = ({ setSymbol }) => {
   const loadStocksList = async () => {
     try {
       const result = await getStocksList();
-      console.log(
-        "result",
-        result.map((element) => element.symbol)
-      );
       setStocksList(result.map((element) => element.symbol));
     } catch (error) {
       console.error("Failed to fetch data: ", error);

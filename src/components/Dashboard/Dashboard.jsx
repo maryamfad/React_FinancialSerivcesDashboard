@@ -10,18 +10,9 @@ import MostSharedStocks from "./MostSharedStocks/MostSharedStocks";
 import SearchStocks from "./SearchStocks";
 import StockNews from "./StocksNew";
 
-const Dashboard = ({ show }) => {
-  const [gainerStocks, setGainerStocks] = useState([]);
-  const [loserStocks, setLoserStocks] = useState([]);
-  // const [stockNames, setStockNames] = useState([]);
-
-  // console.log("stocksAndDuplicates", stocksAndDuplicates);
-  // stocksAndDuplicates.sort(() => Math.random() - 0.5);
-  const [data, setData] = useState(null);
+const Dashboard = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [volume, setVolume] = useState(0);
-  const [change, setChange] = useState(0);
   const [symbol, setSymbol] = useState("AAPL");
   const [mostActiveStocks, setMostActiveStocks] = useState([]);
   let stocksAndDuplicates = [...mostActiveStocks, ...mostActiveStocks];
@@ -53,17 +44,17 @@ const Dashboard = ({ show }) => {
 
       <SearchStocks setSymbol={setSymbol} />
       {/* <div className="middle-container"> */}
-        <div className="middle-area">
-          <div className="stock-diagram">
-            <StockDiagram symbol={symbol} />
-          </div>
-          <div className="most-shared-stocks">
-            <MostSharedStocks setSymbol={setSymbol} />
-          </div>
+      <div className="middle-area">
+        <div className="stock-diagram">
+          <StockDiagram symbol={symbol} />
         </div>
-        <div className="news-container">
-          <StockNews />
+        <div className="most-shared-stocks">
+          <MostSharedStocks setSymbol={setSymbol} />
         </div>
+      </div>
+      <div className="news-container">
+        <StockNews />
+      </div>
       {/* </div> */}
     </div>
     // </div>

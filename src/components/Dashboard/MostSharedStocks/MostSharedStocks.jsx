@@ -8,7 +8,6 @@ const MostSharedStocks = ({ setSymbol }) => {
       const result = await getMostSearchedStocks();
 
       setMostSearchedStocks(result);
-      console.log(result);
     } catch (error) {
       console.error("Failed to fetch data: ", error);
     }

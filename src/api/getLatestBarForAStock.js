@@ -1,4 +1,4 @@
-const getLatestQuoteForStock = async (symbol) => {
+const getLatestBarForAStock = async (symbol) => {
     const url =
       `https://data.alpaca.markets/v2/stocks/${symbol}/bars/latest?feed=iex`;
     try {
@@ -17,4 +17,4 @@ const getLatestQuoteForStock = async (symbol) => {
       throw error;
     }
   };
-  export default getLatestQuoteForStock;
+  export default getLatestBarForAStock;
