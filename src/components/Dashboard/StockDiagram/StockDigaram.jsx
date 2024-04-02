@@ -139,9 +139,9 @@ function StockDiagram({ symbol, stockLogo }) {
   // if (error) return <div>Errorrrr: {error}</div>;
 
   return (
-    <div>
+    <div className="diagram-card">
       {isDataReady ? (
-        <div className="diagram-card">
+        <div >
           {" "}
           <div className="stock-name-container">
           <div className="title">{symbol}</div>

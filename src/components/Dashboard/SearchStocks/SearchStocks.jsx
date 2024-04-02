@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import getStocksList from "../../api/getStocksList";
-import { stockNames } from "./stockNames";
+import getStocksList from "../../../api/getStocksList";
+import { stockNames } from "../stockNames";
+import "./SearchStocks.css"
 const SearchStocks = ({ setSymbol }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [query, setQuery] = useState("");
@@ -45,6 +46,7 @@ const SearchStocks = ({ setSymbol }) => {
   return (
     <div className="search-container" onBlur={handleBlur} tabIndex="0">
       <input
+      className="search-input"
         type="text"
         placeholder="Search..."
         value={query}
@@ -52,6 +54,7 @@ const SearchStocks = ({ setSymbol }) => {
         onClick={() => setIsFocused(true)}
         onFocus={() => setIsFocused(true)}
       />
+      
       {isFocused && query && (
         <div className="search-results">
           {filteredItems.length > 0 ? (

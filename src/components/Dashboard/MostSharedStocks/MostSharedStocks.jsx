@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import getMostSearchedStocks from "../../../api/getMostSearchedStock";
-import "../Dashboard.css";
+import "./MostSharedStocks.css";
 const MostSharedStocks = ({ setSymbol }) => {
   const [mostSearchedStocks, setMostSearchedStocks] = useState([]);
   const loadMostSearchedStocks = async () => {

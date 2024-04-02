@@ -7,7 +7,7 @@ import Scroller from "./Scroller";
 import getLatestQuoteForAStock from "../../api/getLatestQuoteForAStock";
 import getLatestBarForAStock from "../../api/getLatestBarForAStock";
 import MostSharedStocks from "./MostSharedStocks/MostSharedStocks";
-import SearchStocks from "./SearchStocks";
+import SearchStocks from "./SearchStocks/SearchStocks";
 import StockNews from "./StockNews/StocksNew";
 import getStockLogo from "../../api/getStockLogo";
 
@@ -55,18 +55,21 @@ const Dashboard = () => {
         stockLogo={stockLogo}
       />
 
-      <SearchStocks setSymbol={setSymbol} />
       {/* <div className="middle-container"> */}
       <div className="middle-area">
         <div className="stock-diagram">
+          <SearchStocks setSymbol={setSymbol} />
           <StockDiagram symbol={symbol} stockLogo={stockLogo} />
         </div>
-        <div className="most-shared-stocks">
-          {/* <MostSharedStocks setSymbol={setSymbol} /> */}
+        {/* <div className="most-shared-stocks">
+          <MostSharedStocks setSymbol={setSymbol} />
         </div>
+        <div className="most-shared-stocks">
+          <MostSharedStocks setSymbol={setSymbol} />
+        </div> */}
       </div>
       <div className="news-container">
-        <StockNews symbol={symbol} />
+        {/* <StockNews symbol={symbol} /> */}
       </div>
       {/* </div> */}
     </div>
