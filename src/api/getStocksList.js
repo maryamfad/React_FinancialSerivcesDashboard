@@ -1,5 +1,8 @@
 const getStocksList = async () => {
-  const url = `https://financialmodelingprep.com/api/v3/stock/list?apikey=${process.env.REACT_APP_FINANCIAL_MODELING_PREP_API_KEY}`;
+  const url = new URL(
+    "/path",
+    `https://financialmodelingprep.com/api/v3/stock/list?apikey=${process.env.REACT_APP_FINANCIAL_MODELING_PREP_API_KEY}`
+  );
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -9,7 +12,7 @@ const getStocksList = async () => {
     });
     const data = await response.json();
     //   const limitedData = data.slice(0, 100);
-    return data
+    return data;
     // .filter(
     //   (element) =>
     //     element.type === "stock" && element.symbol.indexOf(".") === -1

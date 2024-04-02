@@ -3,7 +3,7 @@ import StockDiagram from "./StockDiagram/StockDigaram";
 import "./Dashboard.css";
 import { stockNames } from "./stockNames";
 import getMostActiveStocks from "../../api/getMostActiveStocks";
-import Scroller from "./Scroller";
+import Scroller from "./Scroller/Scroller";
 import getLatestQuoteForAStock from "../../api/getLatestQuoteForAStock";
 import getLatestBarForAStock from "../../api/getLatestBarForAStock";
 import MostSharedStocks from "./MostSharedStocks/MostSharedStocks";
@@ -69,7 +69,7 @@ const Dashboard = () => {
         </div> */}
       </div>
       <div className="news-container">
-        {/* <StockNews symbol={symbol} /> */}
+        <StockNews symbol={symbol} />
       </div>
       {/* </div> */}
     </div>

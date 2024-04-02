@@ -26,13 +26,17 @@ const StockNews = ({ symbol }) => {
               <img src={feed.banner_image} alt="News" class="news-image" />
               <div class="news-feed">
                 <div class="news-title">
-                  <a href={feed.url} rel="noopener noreferrer" target="_blank">
+                  <a
+                    href={new URL("/path", feed.url)}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
                     {feed.title}
                   </a>
                 </div>
                 <p class="news-summary">{feed.summary}</p>
                 <a
-                  href={feed.url}
+                  href={new URL("/path", feed.url)}
                   rel="noopener noreferrer"
                   target="_blank"
                   class="news-link"

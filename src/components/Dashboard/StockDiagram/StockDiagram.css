@@ -4,14 +4,16 @@
   justify-content: space-between;
   margin-left: 3%;
   width: 50%;
+  
 }
 .diagram-card {
   background-color: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  border-radius: 5px;
+  border-radius: 15px;
   margin-top: 20px;
   height: 100%;
+  border: 2px solid #343a40;
   /* margin-bottom: 20px; */
   padding: 20px;
   display: flex;

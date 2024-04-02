@@ -1,13 +1,31 @@
 import { useState, useEffect } from "react";
-import "./Dashboard.css";
-import getLatestQuoteForStock from "../../api/getLatestQuoteForAStock";
-import getLatestBarForAStock from "../../api/getLatestBarForAStock";
-import getStockLogo from "../../api/getStockLogo";
+import "./Scroller.css";
+import getLatestQuoteForStock from "../../../api/getLatestQuoteForAStock";
+import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
+import getStockLogo from "../../../api/getStockLogo";
 
 const Scroller = ({ setSymbol }) => {
   const [closePrice, setClosePrice] = useState(0);
   const [bidPrice, setBidPrice] = useState(0);
   let stocksAndDuplicates = [
+    { symbol: "NKLA", price: 0, change: 0 },
+    { symbol: "IBIO", price: 0, change: 0 },
+    { symbol: "VERB", price: 0, change: 0 },
+    { symbol: "GMDA", price: 0, change: 0 },
+    { symbol: "SOXS", price: 0, change: 0 },
+    { symbol: "CCL", price: 0, change: 0 },
+    { symbol: "SQQQ", price: 0, change: 0 },
+    { symbol: "CISS", price: 0, change: 0 },
+    { symbol: "NIO", price: 0, change: 0 },
+    { symbol: "NKLA", price: 0, change: 0 },
+    { symbol: "IBIO", price: 0, change: 0 },
+    { symbol: "VERB", price: 0, change: 0 },
+    { symbol: "GMDA", price: 0, change: 0 },
+    { symbol: "SOXS", price: 0, change: 0 },
+    { symbol: "CCL", price: 0, change: 0 },
+    { symbol: "SQQQ", price: 0, change: 0 },
+    { symbol: "CISS", price: 0, change: 0 },
+    { symbol: "NIO", price: 0, change: 0 },
     { symbol: "NKLA", price: 0, change: 0 },
     { symbol: "IBIO", price: 0, change: 0 },
     { symbol: "VERB", price: 0, change: 0 },
