@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import getStocksList from "../../api/getStocksList";
+import { stockNames } from "./stockNames";
 const SearchStocks = ({ setSymbol }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [query, setQuery] = useState("");
-  const [stocksList, setStocksList] = useState([]);
+  // const [stocksList, setStocksList] = useState([]);
 
   const loadStocksList = async () => {
     try {
       const result = await getStocksList();
-      setStocksList(result.map((element) => element.symbol));
+      // setStocksList(result.map((element) => element.symbol));
     } catch (error) {
       console.error("Failed to fetch data: ", error);
     }
@@ -33,13 +34,13 @@ const SearchStocks = ({ setSymbol }) => {
   };
 
   const filteredItems = query
-    ? stocksList.filter((item) =>
+    ? stockNames.filter((item) =>
         item.toLowerCase().includes(query.toLowerCase())
       )
     : [];
 
   useEffect(() => {
-    loadStocksList();
+    // loadStocksList();
   }, []);
   return (
     <div className="search-container" onBlur={handleBlur} tabIndex="0">

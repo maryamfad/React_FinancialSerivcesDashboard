@@ -8,7 +8,7 @@ import getLatestQuoteForAStock from "../../api/getLatestQuoteForAStock";
 import getLatestBarForAStock from "../../api/getLatestBarForAStock";
 import MostSharedStocks from "./MostSharedStocks/MostSharedStocks";
 import SearchStocks from "./SearchStocks";
-import StockNews from "./StocksNew";
+import StockNews from "./StockNews/StocksNew";
 import getStockLogo from "../../api/getStockLogo";
 
 const Dashboard = () => {
@@ -31,7 +31,7 @@ const Dashboard = () => {
   const loadStockLogo = async (symbol) => {
     try {
       const result = await getStockLogo(symbol);
-      console.log('logo',result);
+      console.log("logo", result);
       setStockLogo(result);
     } catch (error) {
       console.error("Failed to fetch data: ", error);
@@ -39,7 +39,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    loadMostActiveStocksData();
+    // loadMostActiveStocksData();
     loadStockLogo(symbol);
   }, [symbol]);
 
@@ -62,11 +62,11 @@ const Dashboard = () => {
           <StockDiagram symbol={symbol} stockLogo={stockLogo} />
         </div>
         <div className="most-shared-stocks">
-          <MostSharedStocks setSymbol={setSymbol} />
+          {/* <MostSharedStocks setSymbol={setSymbol} /> */}
         </div>
       </div>
       <div className="news-container">
-        <StockNews />
+        <StockNews symbol={symbol} />
       </div>
       {/* </div> */}
     </div>

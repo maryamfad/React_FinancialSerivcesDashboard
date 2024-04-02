@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "../Dashboard.css";
+import "./StockDiagram.css";
 import LinearChart from "./LinearChart";
 import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
 import getStockLogo from "../../../api/getStockLogo";
@@ -111,7 +111,7 @@ function StockDiagram({ symbol, stockLogo }) {
 
       const data = await response.json();
       // console.log("barTimeFrame", barTimeFrame);
-      // console.log(data);
+      console.log('data',data);
       setData(
         data.bars.map((stock) => ({
           time: stock.t,

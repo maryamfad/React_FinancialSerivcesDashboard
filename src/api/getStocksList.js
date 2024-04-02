@@ -9,10 +9,11 @@ const getStocksList = async () => {
     });
     const data = await response.json();
     //   const limitedData = data.slice(0, 100);
-    return data.filter(
-      (element) =>
-        element.type === "stock" && element.symbol.indexOf(".") === -1
-    );
+    return data
+    // .filter(
+    //   (element) =>
+    //     element.type === "stock" && element.symbol.indexOf(".") === -1
+    // );
   } catch (error) {
     console.log(error.message);
     throw error;

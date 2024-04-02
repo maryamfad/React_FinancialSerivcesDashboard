@@ -75,7 +75,7 @@ const Scroller = ({ setSymbol }) => {
       const [bidPrice, closePrice, stockLogo] = await Promise.all([
         loadLatestBidPrice(symbol),
         loadLatestClosePrice(symbol),
-        loadStockLogo(symbol),
+        // loadStockLogo(symbol),
       ]);
 
       const priceDifference = closePrice - bidPrice;

@@ -1,13 +1,15 @@
-const getStocksNews = async () => {
-  const url = `https://financialmodelingprep.com/api/v3/fmp/articles?page=0&size=5&apikey=${process.env.REACT_APP_FINANCIAL_MODELING_PREP_API_KEY}`;
+const getStocksNews = async (symbol) => {
+  const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=${symbol}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`;
   try {
     const response = await fetch(url, {
       method: "GET",
       headers: {
         accept: "application/json",
+        "User-Agent": "request",
       },
     });
     const data = await response.json();
+    // console.log(data);
     return data;
   } catch (error) {
     console.log(error.message);
