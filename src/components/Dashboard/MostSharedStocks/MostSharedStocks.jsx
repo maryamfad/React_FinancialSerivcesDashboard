@@ -6,7 +6,6 @@ const MostSharedStocks = ({ setSymbol }) => {
   const loadMostSearchedStocks = async () => {
     try {
       const result = await getMostSearchedStocks();
-
       setMostSearchedStocks(result);
     } catch (error) {
       console.error("Failed to fetch data: ", error);

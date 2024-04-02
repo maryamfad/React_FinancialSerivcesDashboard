@@ -9,12 +9,14 @@ import getLatestBarForAStock from "../../api/getLatestBarForAStock";
 import MostSharedStocks from "./MostSharedStocks/MostSharedStocks";
 import SearchStocks from "./SearchStocks";
 import StockNews from "./StocksNew";
+import getStockLogo from "../../api/getStockLogo";
 
 const Dashboard = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [symbol, setSymbol] = useState("AAPL");
   const [mostActiveStocks, setMostActiveStocks] = useState([]);
+  const [stockLogo, setStockLogo] = useState(null);
   let stocksAndDuplicates = [...mostActiveStocks, ...mostActiveStocks];
 
   const loadMostActiveStocksData = async () => {
@@ -26,10 +28,20 @@ const Dashboard = () => {
       console.error("Failed to fetch data: ", error);
     }
   };
+  const loadStockLogo = async (symbol) => {
+    try {
+      const result = await getStockLogo(symbol);
+      console.log('logo',result);
+      setStockLogo(result);
+    } catch (error) {
+      console.error("Failed to fetch data: ", error);
+    }
+  };
 
   useEffect(() => {
     loadMostActiveStocksData();
-  }, []);
+    loadStockLogo(symbol);
+  }, [symbol]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -40,13 +52,14 @@ const Dashboard = () => {
       <Scroller
         stocksAndDuplicates={stocksAndDuplicates}
         setSymbol={setSymbol}
+        stockLogo={stockLogo}
       />
 
       <SearchStocks setSymbol={setSymbol} />
       {/* <div className="middle-container"> */}
       <div className="middle-area">
         <div className="stock-diagram">
-          <StockDiagram symbol={symbol} />
+          <StockDiagram symbol={symbol} stockLogo={stockLogo} />
         </div>
         <div className="most-shared-stocks">
           <MostSharedStocks setSymbol={setSymbol} />

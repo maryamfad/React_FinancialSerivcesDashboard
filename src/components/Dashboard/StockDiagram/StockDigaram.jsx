@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import "../Dashboard.css";
 import LinearChart from "./LinearChart";
 import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
-function StockDiagram({ symbol }) {
+import getStockLogo from "../../../api/getStockLogo";
+function StockDiagram({ symbol, stockLogo }) {
   // const [symbol, setSymbol] = useState("AMZN");
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -11,6 +12,7 @@ function StockDiagram({ symbol }) {
   const [loading, setLoading] = useState(false);
   const [timeFrame, setTimeFrame] = useState("1D");
   const [stockLatestBar, setStockLatestBar] = useState(null);
+  
   // const [barTimeFrame, setBarTimeFrame] = useState("1Min");
   let barTimeFrame = "1Min";
 
@@ -27,12 +29,22 @@ function StockDiagram({ symbol }) {
   const loadLatestBarForAStock = async (symbol) => {
     try {
       const result = await getLatestBarForAStock(symbol);
-      console.log(result);
+      // console.log(result);
       setStockLatestBar(result.bar);
     } catch (error) {
       console.error("Failed to fetch data: ", error);
     }
   };
+
+  // const loadStockLogo = async (symbol) => {
+  //   try {
+  //     const result = await getStockLogo(symbol);
+  //     console.log('logo',result);
+  //     setStockLogo(result);
+  //   } catch (error) {
+  //     console.error("Failed to fetch data: ", error);
+  //   }
+  // };
   const fetchData = async () => {
     setLoading(true);
     let end;
@@ -120,6 +132,7 @@ function StockDiagram({ symbol }) {
   useEffect(() => {
     fetchData();
     loadLatestBarForAStock(symbol);
+    // loadStockLogo(symbol);
   }, [timeFrame, symbol]);
 
   // if (loading) return <div>Loading...</div>;
@@ -130,10 +143,13 @@ function StockDiagram({ symbol }) {
       {isDataReady ? (
         <div className="diagram-card">
           {" "}
+          <div className="stock-name-container">
           <div className="title">{symbol}</div>
-          {/* <div className="stock-details"> */}
-          <div className="stock-details">
-            {/* <h2>Stock Diagram: {stockLatestBar.symbol}</h2> */}
+          <img src={stockLogo} alt="logo" class="stock-logo" />
+          </div>
+         
+          <div className="stock-details-container">
+            
             <div className="stock-info">
               <div>
                 <div class="info-item">
@@ -167,22 +183,12 @@ function StockDiagram({ symbol }) {
                   <span>As of:</span> {stockLatestBar.t}
                 </div>
               </div>
-              {/* <p>Change: {stockLatestBar.change > 0 ? '+' : ''}{stockLatestBar.change}%</p> */}
-              {/* Add more stock details here */}
+           
             </div>
 
-            {/* <div class="info-item"><span>Last Close Price:</span> $10.41</div>
-  <div class="info-item"><span>Open Price:</span> $10.41</div>
-  <div class="info-item"><span>High Price:</span> $10.41</div>
-  <div class="info-item"><span>Low Price:</span> $10.41</div>
-  <div class="info-item"><span>Volume:</span> 250</div>
-  <div class="info-item"><span>Average Volume:</span> $10.41</div>
-  <div class="info-item"><span>Number of Transactions:</span> 1</div>
-  <div class="info-item"><span>As of:</span> 2024-04-01T20:51:00Z</div> */}
-            {/* This could be a placeholder for your stock diagram/chart component */}
+           
           </div>
-          {/* </div> */}
-          {/* </div> */}
+       
           <div className="d-flex justify-content-end">
             <div className="time-frame-buttons d-flex justify-content-between col-4">
               <div onClick={() => setTimeFrame("1D")}>1D</div>

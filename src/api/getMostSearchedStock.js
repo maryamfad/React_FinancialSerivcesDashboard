@@ -11,10 +11,9 @@ const getMostSearchedStocks = async () => {
     });
     const data = await response.json();
     const limitedData = data.slice(0, 100);
-    return limitedData.filter(
-      (element) =>
-        element.type === "stock" && element.symbol.indexOf(".") === -1
-    );
+    return limitedData.filter((element) => {
+      return element.type === "stock";
+    });
   } catch (error) {
     console.log(error.message);
     throw error;

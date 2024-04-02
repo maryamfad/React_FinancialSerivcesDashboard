@@ -33,13 +33,15 @@
 }
 
 .box {
-  min-width: 150px;
+  /* min-width: 150px; */
+  display: flex;
+  background-color: #e2e8f1;
   /* height: 70px; */
   font-family: Arial, sans-serif;
-  border: 2px solid #ccc;
+  border: 1px solid #343a40;
   border-radius: 15px;
   padding: 10px;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -104,15 +106,7 @@
   }
 }
 
-.stock-info {
-  font-family: Arial, sans-serif;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  width: 200px;
-  background-color: #f9f9f9;
-}
+
 .stock-trade_count {
   font-size: 0.7rem;
 }
@@ -191,7 +185,7 @@
 
 .table-container {
   height: 40vh;
-  /* overflow-x: auto; */
+  width: auto;
   overflow-y: auto;
   margin: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -341,45 +335,41 @@ tr:nth-child(even) {
   }
 }
 
-.stock-details {
+.stock-details-container {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
-  border-radius: 8px;
+  /* border-bottom-left-radius: 8px; */
 }
 
+
 .stock-info {
-  width: 100%;
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 2%;
+  border: 1px solid #343a40;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  width: 100%;
+  background-color: #f9f9f9;
+  /* height: 50px; */
 }
 
 .stock-info p {
   margin: 2% 0;
 }
 
-/* .stock-info {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-} */
 
 .stock-info h2 {
   text-align: center;
   color: #333;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .info-item {
   font-size: 13px;
   display: flex;
   justify-content: space-between;
-  /* padding: 8px 0; */
+  padding: 5px 0;
   border-bottom: 1px solid #dee2e6;
 }
 
@@ -389,4 +379,38 @@ tr:nth-child(even) {
 
 .info-item:last-child {
   border-bottom: none;
+}
+
+.stock-name-container{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #343a40;
+  color: white;
+  align-items: center;
+  padding: 1%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+}
+
+.stock-logo{
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.scroller-stock-logo{
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px;
+  /* background-color: #333; */
+}
+
+.stock-change-value{
+  min-width: 150px;
+  display: flex;
+  justify-content: space-between;
+  
 }

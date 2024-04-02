@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./Dashboard.css";
 import getLatestQuoteForStock from "../../api/getLatestQuoteForAStock";
 import getLatestBarForAStock from "../../api/getLatestBarForAStock";
+import getStockLogo from "../../api/getStockLogo";
 
 const Scroller = ({ setSymbol }) => {
   const [closePrice, setClosePrice] = useState(0);
@@ -36,6 +37,14 @@ const Scroller = ({ setSymbol }) => {
       console.error("Failed to fetch data: ", error);
     }
   };
+  const loadStockLogo = async (symbol) => {
+    try {
+      const result = await getStockLogo(symbol);
+      return result;
+    } catch (error) {
+      console.error("Failed to fetch data: ", error);
+    }
+  };
 
   const loadLatestClosePrice = async (symbol) => {
     try {
@@ -63,9 +72,10 @@ const Scroller = ({ setSymbol }) => {
 
   async function fetchDataAndUpdateArray(symbol, divElement) {
     try {
-      const [bidPrice, closePrice] = await Promise.all([
+      const [bidPrice, closePrice, stockLogo] = await Promise.all([
         loadLatestBidPrice(symbol),
         loadLatestClosePrice(symbol),
+        loadStockLogo(symbol),
       ]);
 
       const priceDifference = closePrice - bidPrice;
@@ -84,25 +94,29 @@ const Scroller = ({ setSymbol }) => {
       // console.log(stocksAndDuplicates);
       const stockChangeHtml =
         priceDifference < 0
-          ? `<div class="stock-change" style="color: red; width:250px">
+          ? `<div class="stock-change" style="color: red;">
     <span style="color: red;">▼</span> ${priceDifference.toFixed(4)} (${(
               priceDifference * 0.1
             ).toFixed(2)} %)
   </div>`
-          : `<div class="stock-change" style="color: green; width:250px">
+          : `<div class="stock-change" style="color: green;">
     <span style="color: green;">▲</span> ${priceDifference.toFixed(4)} (${(
               priceDifference * 0.1
             ).toFixed(2)} %)
   </div>`;
 
       const html = `
-<div class="d-flex justify-content-between width-250">
-  <div class="d-flex flex-column col-6">
-    <div class="stock-price">${closePrice} $</div>
-    ${stockChangeHtml}
-  </div>
+      
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column col-12">
+          <div class="stock-price">
+            ${closePrice} $
+          </div>
+            ${stockChangeHtml}
+        </div>
 
-</div>
+      </div>
+      <img src=${stockLogo} alt="logo" class="scroller-stock-logo"/>
 `;
 
       divElement.querySelector(".stock-change-value").innerHTML += html;
@@ -139,9 +153,10 @@ const Scroller = ({ setSymbol }) => {
                 <div class="stock-name" onClick={() => setSymbol(stock.symbol)}>
                   {stock.symbol}
                 </div>
+
                 <div
                   className="stock-change-value"
-                  style={{ width: "250px" }}
+                  // style={{ width: "250px" }}
                 ></div>
               </div>
             </div>
