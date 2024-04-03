@@ -6,11 +6,13 @@ import getMostActiveStocks from "../../api/getMostActiveStocks";
 import Scroller from "./Scroller/Scroller";
 import getLatestQuoteForAStock from "../../api/getLatestQuoteForAStock";
 import getLatestBarForAStock from "../../api/getLatestBarForAStock";
-import MostSharedStocks from "./MostSharedStocks/MostSharedStocks";
+import MostSharedStocks from "./MarketBiggestGainers/MarketBiggestGainers";
 import SearchStocks from "./SearchStocks/SearchStocks";
 import StockNews from "./StockNews/StocksNew";
 import getStockLogo from "../../api/getStockLogo";
 import StockSummary from "./StockSummary/StockSummary";
+import MarketBiggestGainers from "./MarketBiggestGainers/MarketBiggestGainers.jsx"
+import MarketBiggestLosers from "./MarketBiggestLosers/MarketBiggestLosers.jsx"
 
 const Dashboard = () => {
   const [error, setError] = useState(null);
@@ -56,7 +58,7 @@ const Dashboard = () => {
         stockLogo={stockLogo}
       />
 
-      {/* <div className="middle-container"> */}
+      <div className="middle-container">
       <div className="middle-area">
         <div className="company-profile">
           <StockSummary symbol={symbol} />
@@ -67,7 +69,8 @@ const Dashboard = () => {
         </div>
 
         <div className="most-shared-stocks">
-          <MostSharedStocks setSymbol={setSymbol} />
+          <MarketBiggestGainers setSymbol={setSymbol} />
+          <MarketBiggestLosers setSymbol={setSymbol} />
         </div>
       </div>
       <div className="news-container">

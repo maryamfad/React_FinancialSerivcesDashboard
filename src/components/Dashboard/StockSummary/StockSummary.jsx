@@ -19,7 +19,7 @@ const StockSummary = ({ symbol }) => {
   return (
     <div className="stock-summary-card">
       <div className="stock-summary-title">Summary</div>
-      <div className="table-container">
+      <div className="stock-summary-table-container">
       <div className="summary-row">
           <div className="first-col"><span>Name:</span> {stockSummary.name}</div>
           <div className="second-col"><span>Exchange:</span> {stockSummary.exchange}</div>
