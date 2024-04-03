@@ -111,7 +111,7 @@ function StockDiagram({ symbol, stockLogo }) {
 
       const data = await response.json();
       // console.log("barTimeFrame", barTimeFrame);
-      console.log('data',data);
+      // console.log('data',data);
       setData(
         data.bars.map((stock) => ({
           time: stock.t,
@@ -148,7 +148,7 @@ function StockDiagram({ symbol, stockLogo }) {
           <img src={stockLogo} alt="logo" class="stock-logo" />
           </div>
          
-          <div className="stock-details-container">
+          {/* <div className="stock-details-container">
             
             <div className="stock-info">
               <div>
@@ -187,10 +187,10 @@ function StockDiagram({ symbol, stockLogo }) {
             </div>
 
            
-          </div>
+          </div> */}
        
-          <div className="d-flex justify-content-end">
-            <div className="time-frame-buttons d-flex justify-content-between col-4">
+          <div className="timeframe-container">
+            <div className="timeframe-buttons ">
               <div onClick={() => setTimeFrame("1D")}>1D</div>
               <div onClick={() => setTimeFrame("5D")}>5D</div>
               <div onClick={() => setTimeFrame("1M")}>1M</div>

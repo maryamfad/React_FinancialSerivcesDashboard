@@ -1,8 +1,5 @@
 const getLatestQuoteForStock = async (symbol) => {
-  const url = new URL(
-    "/path",
-    `https://data.alpaca.markets/v2/stocks/${symbol}/quotes/latest?feed=iex`
-  );
+  const url = `https://data.alpaca.markets/v2/stocks/${symbol}/quotes/latest?feed=iex`;
   try {
     const response = await fetch(url, {
       method: "GET",

@@ -1,8 +1,5 @@
-const getMostSearchedStocks = async () => {
-  const url = new URL(
-    "/path",
-    `https://financialmodelingprep.com/api/v3/stock/list?apikey=${process.env.REACT_APP_FINANCIAL_MODELING_PREP_API_KEY}`
-  );
+const getFullQuote = async (symbol) => {
+  const url = `https://financialmodelingprep.com/api/v3/quote/${symbol}?apikey=${process.env.REACT_APP_FINANCIAL_MODELING_PREP_API_KEY}`;
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -13,13 +10,11 @@ const getMostSearchedStocks = async () => {
       // },
     });
     const data = await response.json();
-    const limitedData = data.slice(0, 100);
-    return limitedData.filter((element) => {
-      return element.type === "stock";
-    });
+    console.log(data);
+    return data;
   } catch (error) {
     console.log(error.message);
     throw error;
   }
 };
-export default getMostSearchedStocks;
+export default getFullQuote;

@@ -1,8 +1,5 @@
 const getStocksList = async () => {
-  const url = new URL(
-    "/path",
-    `https://financialmodelingprep.com/api/v3/stock/list?apikey=${process.env.REACT_APP_FINANCIAL_MODELING_PREP_API_KEY}`
-  );
+  const url = `https://financialmodelingprep.com/api/v3/stock/list?apikey=${process.env.REACT_APP_FINANCIAL_MODELING_PREP_API_KEY}`;
   try {
     const response = await fetch(url, {
       method: "GET",

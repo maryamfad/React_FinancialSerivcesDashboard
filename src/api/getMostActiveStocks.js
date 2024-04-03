@@ -1,8 +1,6 @@
 const getMostActiveStocks = async () => {
-  const url = new URL(
-    "/path",
-    "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=volume&top=100"
-  );
+  const url =
+    "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=volume&top=100";
   try {
     const response = await fetch(url, {
       method: "GET",

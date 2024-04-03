@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import getMostSearchedStocks from "../../../api/getMostSearchedStock";
+import getMostSearchedStocks from "../../../api/getFullQuote";
 import "./MostSharedStocks.css";
 const MostSharedStocks = ({ setSymbol }) => {
   const [mostSearchedStocks, setMostSearchedStocks] = useState([]);
@@ -12,7 +12,7 @@ const MostSharedStocks = ({ setSymbol }) => {
     }
   };
   useEffect(() => {
-    loadMostSearchedStocks();
+    // loadMostSearchedStocks();
   }, []);
   return (
     <div className="most-shared-card">

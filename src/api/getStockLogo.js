@@ -1,8 +1,5 @@
 const getStockLogo = async (symbol) => {
-  const url = new URL(
-    "/path",
-    `https://financialmodelingprep.com/image-stock/${symbol}.png`
-  );
+  const url = `https://financialmodelingprep.com/image-stock/${symbol}.png`;
   try {
     const response = await fetch(url, {
       method: "GET",

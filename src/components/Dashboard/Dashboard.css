@@ -9,7 +9,7 @@
 
 .middle-area {
   display: flex;
-  height: 80vh;
+  height: 65vh;
   /* width: 90vw; */
   /* display: flex; */
   /* padding-left: 10%; */
@@ -73,12 +73,12 @@
   margin-left: 1%;
 }
 
-.stock-details-container {
-  display: flex;
-  /* justify-content: space-between; */
-
-  /* border-bottom-left-radius: 8px; */
+.company-profile {
+  width: 25%;
+  margin-left: 1%;
 }
+
+
 
 .scroller-stock-logo {
   width: 40px;
