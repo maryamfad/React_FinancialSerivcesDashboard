@@ -1,9 +1,11 @@
 .navbar-container {
-  background-color: #343a40;
+  /* background-color: #343a40; */
+  background-color: #125667;
   height: 60px;
   position: fixed;
   min-width: 100vw;
   z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .navbar-list {

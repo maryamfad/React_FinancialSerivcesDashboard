@@ -14,7 +14,7 @@ const MarketBiggestLosers = ({ setSymbol }) => {
     }
   };
   useEffect(() => {
-    loadMarketBiggestLosers();
+    // loadMarketBiggestLosers();
   }, []);
   return (
     <div className="biggest-losers-card">
@@ -30,7 +30,7 @@ const MarketBiggestLosers = ({ setSymbol }) => {
             </tr>
           </thead>
           <tbody>
-            {marketBiggestLosers.map((row) => (
+            {marketBiggestLosers? marketBiggestLosers?.map((row) => (
               <tr key={row.symbol}>
                 <td
                   style={{ color: "blue", cursor: "pointer" }}
@@ -44,7 +44,7 @@ const MarketBiggestLosers = ({ setSymbol }) => {
                   {row.change}({row.changesPercentage.toFixed(2)})
                 </td>
               </tr>
-            ))}
+            )):<div>There is no data to show for now!!</div>}
           </tbody>
         </table>
       </div>

@@ -3,10 +3,15 @@ import "./Scroller.css";
 import getLatestQuoteForStock from "../../../api/getLatestQuoteForAStock";
 import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
 import getStockLogo from "../../../api/getStockLogo";
+import getFullQuote from "../../../api/getFullQuote";
 
 const Scroller = ({ setSymbol }) => {
   const [closePrice, setClosePrice] = useState(0);
   const [bidPrice, setBidPrice] = useState(0);
+  // const [stockSummary, setStockSummary] = useState([]);
+  let stockSummary;
+  let stockLogo;
+  // const [stockLogo,setStockLogo] =useState(null);
   let stocksAndDuplicates = [
     { symbol: "NKLA", price: 0, change: 0 },
     { symbol: "IBIO", price: 0, change: 0 },
@@ -55,9 +60,21 @@ const Scroller = ({ setSymbol }) => {
       console.error("Failed to fetch data: ", error);
     }
   };
+  const loadStockSummaryData = async (symbol) => {
+    try {
+      const result = await getFullQuote(symbol);
+      console.log(result[0]);
+      // setStockSummary(result[0]);
+      stockSummary = result[0]
+    } catch (error) {
+      console.error("Failed to fetch data: ", error);
+    }
+  };
   const loadStockLogo = async (symbol) => {
     try {
       const result = await getStockLogo(symbol);
+      // setStockLogo(result)
+      stockLogo = result;
       return result;
     } catch (error) {
       console.error("Failed to fetch data: ", error);
@@ -90,36 +107,42 @@ const Scroller = ({ setSymbol }) => {
 
   async function fetchDataAndUpdateArray(symbol, divElement) {
     try {
-      const [bidPrice, closePrice, stockLogo] = await Promise.all([
-        loadLatestBidPrice(symbol),
-        loadLatestClosePrice(symbol),
-        // loadStockLogo(symbol),
-      ]);
+      // const [bidPrice, closePrice, stockLogo] = await Promise.all([
+      //   loadLatestBidPrice(symbol),
+      //   loadLatestClosePrice(symbol),
+      //   loadStockLogo(symbol),
+      // ]);
 
-      const priceDifference = closePrice - bidPrice;
+      // const [quoteData, stockLogo] = await Promise.all([
+        // loadStockSummaryData(symbol);
+        // loadStockLogo(symbol);
+      // ]);
+
+      const priceDifference = stockSummary.change;
 
       stocksAndDuplicates = stocksAndDuplicates.map((item) => {
         if (item.symbol === symbol) {
           return {
             ...item,
             symbol: symbol,
-            price: closePrice.toFixed(4),
-            change: priceDifference.toFixed(4),
+            price: stockSummary.price,
+            change: stockSummary.change,
+            changePercentage: stockSummary.changesPercentage,            
           };
         }
         return item;
       });
-      // console.log(stocksAndDuplicates);
+      console.log("stockSummary",stockSummary);
       const stockChangeHtml =
-        priceDifference < 0
+        stockSummary.change < 0
           ? `<div class="stock-change" style="color: red;">
-    <span style="color: red;">▼</span> ${priceDifference.toFixed(4)} (${(
-              priceDifference * 0.1
+    <span style="color: red;">▼</span> ${stockSummary.change} (${(
+              stockSummary.change * 0.1
             ).toFixed(2)} %)
   </div>`
           : `<div class="stock-change" style="color: green;">
-    <span style="color: green;">▲</span> ${priceDifference.toFixed(4)} (${(
-              priceDifference * 0.1
+    <span style="color: green;">▲</span> ${stockSummary.change} (${(
+              stockSummary.change * 0.1
             ).toFixed(2)} %)
   </div>`;
 

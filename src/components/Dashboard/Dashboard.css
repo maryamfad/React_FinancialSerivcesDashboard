@@ -1,5 +1,5 @@
 :root {
-  --triangle-color: green;
+  --triangle-color:  #009975;
 }
 .dashboard {
   width: 100%;
@@ -63,10 +63,6 @@
   display: block;
 }
 
-.time-buttons {
-  color: blue;
-  cursor: pointer;
-}
 
 .most-shared-stocks {
   width: 25%;
@@ -76,7 +72,7 @@
 
 .company-profile {
   width: 25%;
-  margin-left: 1%;
+  margin-left: 3%;
 }
 
 

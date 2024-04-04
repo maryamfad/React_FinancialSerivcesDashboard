@@ -74,7 +74,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="news-container">
-        <StockNews symbol={symbol} />
+        {/* <StockNews symbol={symbol} /> */}
       </div>
       {/* </div> */}
     </div>
