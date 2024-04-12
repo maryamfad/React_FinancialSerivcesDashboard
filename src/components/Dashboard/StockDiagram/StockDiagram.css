@@ -98,7 +98,12 @@
   display: flex;
   justify-content: space-between;
   width: 50%;
-  color: blue;
+  /* color: blue; */
   cursor: pointer;
+
+}
+.selected {
+  color: #007BFF;
+  font-weight: 500;
 
 }

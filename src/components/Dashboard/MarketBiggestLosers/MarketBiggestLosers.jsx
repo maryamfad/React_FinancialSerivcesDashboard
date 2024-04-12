@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 // import getMostSearchedStocks from "../../../api/getFullQuote";
 import "./MarketBiggestLosers.css";
 import getMarketBiggestLosers from "../../../api/getMarketBiggestLosers";
+import { marketBiggestLosersData } from "../marketBiggestLosersData";
 const MarketBiggestLosers = ({ setSymbol }) => {
   const [marketBiggestLosers, setMarketBiggestLosers] = useState([]);
   const loadMarketBiggestLosers = async () => {
@@ -30,7 +31,7 @@ const MarketBiggestLosers = ({ setSymbol }) => {
             </tr>
           </thead>
           <tbody>
-            {marketBiggestLosers? marketBiggestLosers?.map((row) => (
+            {marketBiggestLosersData? marketBiggestLosersData?.map((row) => (
               <tr key={row.symbol}>
                 <td
                   style={{ color: "blue", cursor: "pointer" }}
@@ -41,7 +42,7 @@ const MarketBiggestLosers = ({ setSymbol }) => {
                 <td>{row.name}</td>
                 <td>{row.price}</td>
                 <td>
-                  {row.change}({row.changesPercentage.toFixed(2)})
+                  {/* {row.change}({row.changesPercentage.toFixed(2)}) */}
                 </td>
               </tr>
             )):<div>There is no data to show for now!!</div>}

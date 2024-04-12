@@ -2,6 +2,7 @@
   width: 100%;
   margin-top: 3%;
   /* z-index: 0; */
+ 
 }
 .scroller[data-animated="true"] {
   overflow: hidden;
@@ -9,16 +10,18 @@
   /* background-color: blue; */
 }
 .scroller_inner {
-  width: 100vw;
+  width: 2000%;
   display: flex;
   padding-block: 1rem;
   gap: 1rem;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 .scroller[data-animated="true"] .scroller_inner {
-  flex-wrap: nowrap;
-  animation: scroll 40s linear infinite;
+  display: inline-flex;
+  flex-direction: row;
+  /* flex-wrap: nowrap; */
+  animation: scroll 700s linear infinite;
 }
 .scroller[data-animated="true"] .scroller_inner:hover {
   animation-play-state: paused;
@@ -31,4 +34,44 @@
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+}
+/* .stock-trade_count {
+  font-size: 0.7rem;
+} */
+.stock-volume {
+  /* font-size: 0.7rem; */
+}
+.stock-name {
+  /* font-size: 14px; */
+  border: 1px;
+  
+}
+.stock-symbol {
+  /* font-size: 14px; */
+  font-weight: bold;
+}
+
+.stock-price {
+  /* font-size: 14px; */
+}
+
+.stock-change {
+  /* font-size: 12px; */
+  /* margin-top: 5px; */
+}
+
+.stock-volume {
+  /* font-size: 14px; */
+  /* margin-top: 5px; */
+  color: #666;
+}
+
+.stock-logo{
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 5px;
+  padding: 1%;
+  border: 1px;
 }

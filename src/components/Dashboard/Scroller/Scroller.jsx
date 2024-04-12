@@ -3,178 +3,67 @@ import "./Scroller.css";
 import getLatestQuoteForStock from "../../../api/getLatestQuoteForAStock";
 import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
 import getStockLogo from "../../../api/getStockLogo";
-import getFullQuote from "../../../api/getFullQuote";
+import { scrollerData } from "../scrollerData";
+import getMarketMostActiveStocks from "../../../api/getMarketMostActiveStocks";
+import { AiOutlineRise, AiOutlineFall } from "react-icons/ai";
+import { color } from "d3";
 
 const Scroller = ({ setSymbol }) => {
-  const [closePrice, setClosePrice] = useState(0);
-  const [bidPrice, setBidPrice] = useState(0);
-  // const [stockSummary, setStockSummary] = useState([]);
-  let stockSummary;
-  let stockLogo;
-  // const [stockLogo,setStockLogo] =useState(null);
-  let stocksAndDuplicates = [
-    { symbol: "NKLA", price: 0, change: 0 },
-    { symbol: "IBIO", price: 0, change: 0 },
-    { symbol: "VERB", price: 0, change: 0 },
-    { symbol: "GMDA", price: 0, change: 0 },
-    { symbol: "SOXS", price: 0, change: 0 },
-    { symbol: "CCL", price: 0, change: 0 },
-    { symbol: "SQQQ", price: 0, change: 0 },
-    { symbol: "CISS", price: 0, change: 0 },
-    { symbol: "NIO", price: 0, change: 0 },
-    { symbol: "NKLA", price: 0, change: 0 },
-    { symbol: "IBIO", price: 0, change: 0 },
-    { symbol: "VERB", price: 0, change: 0 },
-    { symbol: "GMDA", price: 0, change: 0 },
-    { symbol: "SOXS", price: 0, change: 0 },
-    { symbol: "CCL", price: 0, change: 0 },
-    { symbol: "SQQQ", price: 0, change: 0 },
-    { symbol: "CISS", price: 0, change: 0 },
-    { symbol: "NIO", price: 0, change: 0 },
-    { symbol: "NKLA", price: 0, change: 0 },
-    { symbol: "IBIO", price: 0, change: 0 },
-    { symbol: "VERB", price: 0, change: 0 },
-    { symbol: "GMDA", price: 0, change: 0 },
-    { symbol: "SOXS", price: 0, change: 0 },
-    { symbol: "CCL", price: 0, change: 0 },
-    { symbol: "SQQQ", price: 0, change: 0 },
-    { symbol: "CISS", price: 0, change: 0 },
-    { symbol: "NIO", price: 0, change: 0 },
-    { symbol: "NKLA", price: 0, change: 0 },
-    { symbol: "IBIO", price: 0, change: 0 },
-    { symbol: "VERB", price: 0, change: 0 },
-    { symbol: "GMDA", price: 0, change: 0 },
-    { symbol: "SOXS", price: 0, change: 0 },
-    { symbol: "CCL", price: 0, change: 0 },
-    { symbol: "SQQQ", price: 0, change: 0 },
-    { symbol: "CISS", price: 0, change: 0 },
-    { symbol: "NIO", price: 0, change: 0 },
-  ];
-
-  const loadLatestBidPrice = async (symbol) => {
+  const [mostActiveStocks, setMostActiveStocks] = useState([]);
+  // console.log(scrollerData);
+  const loadMostActiveStocksData = async () => {
     try {
-      const result = await getLatestQuoteForStock(symbol);
-
-      return result.quote.bp;
-    } catch (error) {
-      console.error("Failed to fetch data: ", error);
-    }
-  };
-  const loadStockSummaryData = async (symbol) => {
-    try {
-      const result = await getFullQuote(symbol);
-      console.log(result[0]);
-      // setStockSummary(result[0]);
-      stockSummary = result[0]
-    } catch (error) {
-      console.error("Failed to fetch data: ", error);
-    }
-  };
-  const loadStockLogo = async (symbol) => {
-    try {
-      const result = await getStockLogo(symbol);
-      // setStockLogo(result)
-      stockLogo = result;
+      const result = await getMarketMostActiveStocks();
+      // console.log(result);
+      // setMostActiveStocks(result);
       return result;
     } catch (error) {
       console.error("Failed to fetch data: ", error);
     }
   };
 
-  const loadLatestClosePrice = async (symbol) => {
+  async function enrichScrollerDataWithLogo() {
     try {
-      const result = await getLatestBarForAStock(symbol);
-      return result.bar.c;
+      // const scrollerData = await loadMostActiveStocksData(); // Fetch initial scroller data
+  
+      // Map over scrollerData to fetch logos
+      const promises = scrollerData.map(stock =>
+        loadStockLogo(stock.symbol)
+          .then(logo => ({
+            ...stock,
+            logo: logo // Enrich each stock with its logo
+          }))
+      );
+  
+      // Wait for all promises to resolve
+      const updatedData = await Promise.all(promises);
+      return updatedData; // This is the enriched scroller data
+    } catch (error) {
+      console.error('Failed to enrich scroller data:', error);
+      throw error; // Rethrow or handle as needed
+    }
+  }
+
+    const loadStockLogo = async (symbol) => {
+    try {
+      const result = await getStockLogo(symbol);
+      // console.log('logo',result);
+      // setStockLogo(result);
+      return result;
     } catch (error) {
       console.error("Failed to fetch data: ", error);
     }
   };
 
-  const observerCallback = (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const priceDiv = entry.target.querySelector(".stock-price");
-        if (!priceDiv) {
-          let symbol = entry.target
-            .querySelector(".stock-name")
-            .innerText.toString();
-          // console.log(symbol);
-          fetchDataAndUpdateArray(symbol, entry.target);
-        }
-      }
-    });
-  };
-
-  async function fetchDataAndUpdateArray(symbol, divElement) {
-    try {
-      // const [bidPrice, closePrice, stockLogo] = await Promise.all([
-      //   loadLatestBidPrice(symbol),
-      //   loadLatestClosePrice(symbol),
-      //   loadStockLogo(symbol),
-      // ]);
-
-      // const [quoteData, stockLogo] = await Promise.all([
-        // loadStockSummaryData(symbol);
-        // loadStockLogo(symbol);
-      // ]);
-
-      const priceDifference = stockSummary.change;
-
-      stocksAndDuplicates = stocksAndDuplicates.map((item) => {
-        if (item.symbol === symbol) {
-          return {
-            ...item,
-            symbol: symbol,
-            price: stockSummary.price,
-            change: stockSummary.change,
-            changePercentage: stockSummary.changesPercentage,            
-          };
-        }
-        return item;
-      });
-      console.log("stockSummary",stockSummary);
-      const stockChangeHtml =
-        stockSummary.change < 0
-          ? `<div class="stock-change" style="color: red;">
-    <span style="color: red;">▼</span> ${stockSummary.change} (${(
-              stockSummary.change * 0.1
-            ).toFixed(2)} %)
-  </div>`
-          : `<div class="stock-change" style="color: green;">
-    <span style="color: green;">▲</span> ${stockSummary.change} (${(
-              stockSummary.change * 0.1
-            ).toFixed(2)} %)
-  </div>`;
-
-      const html = `
-      
-      <div class="d-flex justify-content-between">
-        <div class="d-flex flex-column col-12">
-          <div class="stock-price">
-            ${closePrice} $
-          </div>
-            ${stockChangeHtml}
-        </div>
-
-      </div>
-      <img src=${stockLogo} alt="logo" class="scroller-stock-logo"/>
-`;
-
-      divElement.querySelector(".stock-change-value").innerHTML += html;
-    } catch (error) {
-      console.error("Error fetching data or updating array:", error);
-    }
-  }
-
   useEffect(() => {
-    const observer = new IntersectionObserver(observerCallback);
-    const elements = document.querySelectorAll(".box");
-
-    elements.forEach((el) => {
-      observer.observe(el);
+    // loadMostActiveStocksData();
+    enrichScrollerDataWithLogo().then(updatedData => {
+      setMostActiveStocks(updatedData)
+      console.log("updatedData",updatedData); // Logs the enriched data
+    }).catch(error => {
+      // Handle or log error
+      console.error('Error in processing:', error);
     });
-
-    return () => elements.forEach((el) => observer.unobserve(el));
   }, []);
 
   return (
@@ -187,18 +76,35 @@ const Scroller = ({ setSymbol }) => {
       }
     >
       <div className="scroller_inner">
-        {stocksAndDuplicates.map((stock, index) => (
+        {[...mostActiveStocks,...mostActiveStocks].map((stock, index) => (
           <div className="box" key={index}>
             <div className="d-flex justify-content-between">
               <div>
-                <div class="stock-name" onClick={() => setSymbol(stock.symbol)}>
+                <div className="d-flex justify-content-between">
+                <div
+                  class="stock-symbol"
+                  onClick={() => setSymbol(stock.symbol)}
+                >
+                  {index}-
                   {stock.symbol}
                 </div>
-
+                <img src={stock.logo} alt="logo" class="stock-logo" />
+                </div>
                 <div
                   className="stock-change-value"
-                  // style={{ width: "250px" }}
-                ></div>
+                  style={
+                    stock.change < 0
+                      ? { color: "#FF6B6B" }
+                      : { color: "#009975" }
+                  }
+                >
+                  {stock.change < 0 ? (
+                    <AiOutlineFall size={"25px"} />
+                  ) : (
+                    <AiOutlineRise size={"25px"} />
+                  )}
+                  {stock.change} ({stock.changesPercentage} %)
+                </div>
               </div>
             </div>
           </div>

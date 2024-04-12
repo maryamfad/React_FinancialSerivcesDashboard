@@ -21,31 +21,7 @@
   }
 }
 
-.stock-trade_count {
-  font-size: 0.7rem;
-}
-.stock-volume {
-  font-size: 0.7rem;
-}
-.stock-name {
-  font-size: 14px;
-  font-weight: bold;
-}
 
-.stock-price {
-  font-size: 14px;
-}
-
-.stock-change {
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.stock-volume {
-  font-size: 14px;
-  margin-top: 5px;
-  color: #666;
-}
 
 .tooltip {
   background-color: white;

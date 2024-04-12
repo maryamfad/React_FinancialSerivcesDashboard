@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 // import getMostSearchedStocks from "../../../api/getFullQuote";
 import "./MarketBiggestGainers.css";
 import getMarketBiggestGainers from "../../../api/getMarketBiggestGainers";
+import { marketBiggestGainersData } from "../marketBiggestGainersData";
+import { MdOutlineExpandMore } from "react-icons/md";
 const MarketBiggestGainers = ({ setSymbol }) => {
   const [marketBiggestGainers, setMarketBiggestGainers] = useState([]);
+
   const loadMarketBiggestGainers = async () => {
     try {
       const result = await getMarketBiggestGainers();
@@ -18,7 +21,13 @@ const MarketBiggestGainers = ({ setSymbol }) => {
   }, []);
   return (
     <div className="biggest-gainers-card">
-      <div className="biggest-gainers-card-title">Market Biggest Gainers</div>
+      <div className="biggest-gainers-card-title">
+        Market Biggest Gainers{" "}
+        {/* <div className="primary expand-icon">
+          <MdOutlineExpandMore />
+        </div> */}
+      </div>
+
       <div className="biggest-gianer-table-container">
         <table>
           <thead>
@@ -30,8 +39,8 @@ const MarketBiggestGainers = ({ setSymbol }) => {
             </tr>
           </thead>
           <tbody>
-            {marketBiggestGainers ? (
-              marketBiggestGainers?.map((row) => (
+            {marketBiggestGainersData ? (
+              marketBiggestGainersData?.map((row) => (
                 <tr key={row.symbol}>
                   <td
                     style={{ color: "blue", cursor: "pointer" }}
@@ -42,7 +51,7 @@ const MarketBiggestGainers = ({ setSymbol }) => {
                   <td>{row.name}</td>
                   <td>{row.price}</td>
                   <td>
-                    {row.change}({row.changesPercentage.toFixed(2)})
+                    {/* {row.change}({row.changesPercentage.toFixed(2)}) */}
                   </td>
                 </tr>
               ))
