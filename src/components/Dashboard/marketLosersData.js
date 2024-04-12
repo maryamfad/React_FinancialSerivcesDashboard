@@ -1,4 +1,4 @@
-export const marketBiggestLosersData = [[
+export const marketLosersData = [
     {
       "symbol": "RIBT",
       "name": "RiceBran Technologies",
@@ -349,4 +349,4 @@ export const marketBiggestLosersData = [[
       "price": 1.575,
       "changesPercentage": -9.5095
     }
-  ]]
+  ]

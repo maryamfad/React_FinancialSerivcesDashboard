@@ -1,4 +1,4 @@
-export const marketBiggestGainersData =[
+export const marketGainersData =[
     {
       "symbol": "SRAX",
       "name": "SRAX, Inc.",

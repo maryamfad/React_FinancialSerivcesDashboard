@@ -1,4 +1,4 @@
-const getMarketBiggestLosers = async () => {
+const getMarketLosers = async () => {
     const url = `https://financialmodelingprep.com/api/v3/stock_market/losers?apikey=${process.env.REACT_APP_FINANCIAL_MODELING_PREP_API_KEY}`;
     try {
       const response = await fetch(url, {
@@ -11,4 +11,4 @@ const getMarketBiggestLosers = async () => {
       throw error;
     }
   };
-  export default getMarketBiggestLosers;
+  export default getMarketLosers;

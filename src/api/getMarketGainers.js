@@ -1,4 +1,4 @@
-const getMarketBiggestGainers = async () => {
+const getMarketGainers = async () => {
   const url = `https://financialmodelingprep.com/api/v3/stock_market/gainers?apikey=${process.env.REACT_APP_FINANCIAL_MODELING_PREP_API_KEY}`;
   try {
     const response = await fetch(url, {
@@ -11,4 +11,4 @@ const getMarketBiggestGainers = async () => {
     throw error;
   }
 };
-export default getMarketBiggestGainers;
+export default getMarketGainers;
