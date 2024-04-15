@@ -26,7 +26,7 @@ const MarketLosers = ({
   useEffect(() => {
     // loadMarketLosers();
   }, []);
-  console.log("losersTableExpanded", losersTableExpanded);
+  
   return (
     <div
       className={

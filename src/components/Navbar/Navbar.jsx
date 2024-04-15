@@ -6,8 +6,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import "./Navbar.css";
 import { IoMenu } from "react-icons/io5";
-
+import {  Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 function NavbarMenu({ show, setShow, handleShow, handleClose }) {
+
+  let navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState({
     menu: false,
@@ -52,19 +55,25 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
         >
           <IoMenu />
         </li>
-
+        {/* <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+      </nav> */}
         <li
           className={selectedItem.home ? "nav-item-glassy" : "nav-item"}
           onClick={() => {
             updateSelectedItem("home");
+            navigate('/home');
           }}
         >
           Home
+          {/* <Link to="/">Home</Link> */}
         </li>
         <li
           className={selectedItem.about ? "nav-item-glassy" : "nav-item"}
           onClick={() => {
             updateSelectedItem("about");
+            navigate('/about');
           }}
         >
           About
@@ -73,6 +82,7 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
           className={selectedItem.services ? "nav-item-glassy" : "nav-item"}
           onClick={() => {
             updateSelectedItem("services");
+            navigate('/services');
           }}
         >
           Services
@@ -83,6 +93,7 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
           onClick={() => {
             setIsDropdownOpen(!isDropdownOpen);
             updateSelectedItem("products");
+            
           }}
           
         >
@@ -120,37 +131,14 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
           className={selectedItem.contact ? "nav-item-glassy" : "nav-item"}
           onClick={() => {
             updateSelectedItem("contact");
+            navigate("/contact")
           }}
         >
           Contact
         </li>
       </ul>
     </div>
-    // <Navbar expand="lg" className=" navbar navbar-fixed-top" style={{backgroundColor:'#343A40', color:'#F8F9FA'}}>
-    //   <Container>
-    //     <i class="bi bi-list" style={{height: '20px'}} onClick={()=>setShow(!show)} ></i>
 
-    //     <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
-    //     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    //     <Navbar.Collapse id="basic-navbar-nav">
-    //       <Nav className="me-auto" >
-    //         <Nav.Link href="#home" style={{color:'#F8F9FA'}}>Home</Nav.Link>
-    //         <Nav.Link href="#link" style={{color:'#F8F9FA'}}>Link</Nav.Link>
-    //         <NavDropdown title="Dropdown" id="basic-nav-dropdown" style={{color:'#F8F9FA'}}>
-    //           <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-    //           <NavDropdown.Item href="#action/3.2">
-    //             Another action
-    //           </NavDropdown.Item>
-    //           <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-    //           <NavDropdown.Divider />
-    //           <NavDropdown.Item href="#action/3.4">
-    //             Separated link
-    //           </NavDropdown.Item>
-    //         </NavDropdown>
-    //       </Nav>
-    //     </Navbar.Collapse>
-    //   </Container>
-    // </Navbar>
   );
 }
 

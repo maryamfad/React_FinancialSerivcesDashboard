@@ -45,8 +45,8 @@ const Dashboard = () => {
             {/* <StockSummary symbol={symbol} /> */}
           </div>
           <div className="stock-diagram">
-            <SearchStocks setSymbol={setSymbol} />
-            <StockDiagram symbol={symbol} stockLogo={stockLogo} />
+            {/* <SearchStocks setSymbol={setSymbol} />
+            <StockDiagram symbol={symbol} stockLogo={stockLogo} /> */}
           </div>
 
           <div className="most-shared-stocks">
