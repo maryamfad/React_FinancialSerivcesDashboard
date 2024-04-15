@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Navbar from "./components/Navbar/Navbar";
 import About from "./components/About/About";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Services from "./components/Services/Services";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<Dashboard show={show}/>} />
         <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
       </Routes>
       </div>
     </BrowserRouter>
