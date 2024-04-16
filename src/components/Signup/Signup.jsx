@@ -11,6 +11,8 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  // const [isDisabled, setIsDisabled] = useState(false);
+  let isDisabled = false;
 
   const passwordRequirements = {
     minLength: password.length >= 8,
@@ -18,7 +20,14 @@ function Signup() {
     hasNumber: /\d/.test(password),
     hasUppercase: /[A-Z]/.test(password),
   };
-  console.log(passwordRequirements);
+  isDisabled = !(
+    passwordRequirements.hasNumber &&
+    passwordRequirements.hasSpecialChar &&
+    passwordRequirements.hasUppercase &&
+    passwordRequirements.minLength &&
+    confirmPassword
+  );
+
   const handleSignup = async () => {
     if (!username || !password || !confirmPassword) {
       setErrorMessage("Please fill in all fields");
@@ -116,7 +125,12 @@ function Signup() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="Confirm your password"
         />
-        <button className="signup-button" onClick={handleSignup}>
+        <button
+          className="signup-button"
+          onClick={handleSignup}
+          disabled={isDisabled}
+          style={isDisabled ? { color: "gray", backgroundColor: "#ccc" } : {}}
+        >
           Sign Up
         </button>
       </div>
