@@ -13,6 +13,8 @@
   background: url("../../../public/about.jpg") no-repeat center center/cover;
   color: white;
   /* text-align: center; */
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
   padding: 60px 20px;
 }
 
@@ -79,7 +81,7 @@ h2{
 .values-commitments li {
   display: inline-block;
   margin: 0 10px;
-  background: #007bff;
+  background: #FF6B6B;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
@@ -87,7 +89,7 @@ h2{
 
 .call-to-action {
   text-align: center;
-  background: #007bff;
+  background: #009975;
   color: white;
   padding: 40px 20px;
 }
@@ -113,8 +115,10 @@ h2{
 footer {
   text-align: center;
   padding: 20px 10px;
-  background: #333;
+  background: #003366;
   color: white;
+  border-bottom-left-radius: 13px;
+  border-bottom-right-radius: 13px;
 }
 
 @media (max-width: 768px) {

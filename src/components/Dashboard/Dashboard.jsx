@@ -36,17 +36,17 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <div style={{ height: "100px" }}>
-        {/* <Scroller setSymbol={setSymbol} stockLogo={stockLogo} /> */}
+      <div style={{ height: "170px" }}>
+        <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
       </div>
       <div className="middle-container">
         <div className="middle-area">
           <div className="company-profile">
-            {/* <StockSummary symbol={symbol} /> */}
+            <StockSummary symbol={symbol} />
           </div>
           <div className="stock-diagram">
-            {/* <SearchStocks setSymbol={setSymbol} />
-            <StockDiagram symbol={symbol} stockLogo={stockLogo} /> */}
+            <SearchStocks setSymbol={setSymbol} />
+            <StockDiagram symbol={symbol} stockLogo={stockLogo} />
           </div>
 
           <div className="most-shared-stocks">
@@ -67,7 +67,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="news-container">
-          {/* <StockNews symbol={symbol} /> */}
+          <StockNews symbol={symbol} />
         </div>
       </div>
     </div>

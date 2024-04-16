@@ -50,7 +50,7 @@ const About = () => {
       </section>
 
       <footer>
-        <p>Contact us at [Phone] | Follow us on [Social Media Links]</p>
+        <p>Contact us at 222-555-444 | Follow us on Tweeter: @WealthPath</p>
       </footer>
     </div>
   );

@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import About from "./components/About/About";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Services from "./components/Services/Services";
+import Signup from "./components/Signup/Signup";
 
 
 function App() {
@@ -33,9 +34,11 @@ function App() {
       
 
       <Routes>
-        <Route path="/home" element={<Dashboard show={show}/>} />
+      {/* <Route path="/" element={<Dashboard show={show}/>} /> */}
+        {/* <Route path="/home" element={<Dashboard show={show}/>} /> */}
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
       </div>
     </BrowserRouter>

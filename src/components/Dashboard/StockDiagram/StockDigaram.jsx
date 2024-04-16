@@ -142,9 +142,9 @@ function StockDiagram({ symbol, stockLogo }) {
       </div>
       {isDataReady ? (
         <div>
-          {/* <div className="chart-container">
+          <div className="chart-container">
             <LinearChart data={data} timeFrame={timeFrame} />
-          </div> */}
+          </div>
         </div>
       ) : (
         <div>Loading...</div>
