@@ -51,6 +51,7 @@ function Signup() {
   return (
     <div className="signup-container">
       <div className="signup-form">
+        <div className="signup-title">Sign Up</div>
         <div className="error-message-container">
           {errorMessage && (
             <div className="error-message">
