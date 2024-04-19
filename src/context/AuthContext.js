@@ -5,6 +5,18 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
+  const signup = async (username, password) => {
+    try {
+      const res = await axios.post("http://localhost:3001/signup", {
+        username,
+        password,
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  }
+
   const login = async (username, password) => {
     try {
       const res = await axios.post("http://localhost:3001/login", {
@@ -24,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, signup, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

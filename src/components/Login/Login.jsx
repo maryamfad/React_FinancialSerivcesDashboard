@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import "./Login.css";
-import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { login } from "../../services/AuthServices";
+// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const { login } = useAuth();
 
-  const handleLogin = async () => {
-    try {
-        // Assuming you validate the credentials here
-        login( username, password );
-        // navigate('/home');
-    } catch (err) {
-        alert('Login failed!');
-    }
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    login(username, password)
+      .then((user) => console.log(user))
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (

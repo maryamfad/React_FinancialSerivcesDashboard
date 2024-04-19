@@ -5,13 +5,16 @@ import { GiConfirmed } from "react-icons/gi";
 import { MdErrorOutline } from "react-icons/md";
 import "./Signup.css";
 import axios from "axios";
+// import { useAuth } from "../../context/AuthContext";
+import { signUp } from '../../services/AuthServices';
 
 function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  // const [isDisabled, setIsDisabled] = useState(false);
+  // const { signup } = useAuth();
+  
   let isDisabled = false;
 
   const passwordRequirements = {
@@ -28,7 +31,7 @@ function Signup() {
     confirmPassword
   );
 
-  const handleSignup = async () => {
+  const handleSignup = async (event) => {
     if (!username || !password || !confirmPassword) {
       setErrorMessage("Please fill in all fields");
       return;
@@ -37,14 +40,14 @@ function Signup() {
       setErrorMessage("Passwords do not match");
       return;
     }
+    // signup(username, password);
+    event.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3001/signup", {
-        username,
-        password,
-      });
-      console.log(res.data);
+      await signUp(username, password);
+      alert('User registered successfully!');
     } catch (error) {
-      console.error(error.response.data);
+      alert(error.message);
+      console.log(error.message);
     }
   };
 

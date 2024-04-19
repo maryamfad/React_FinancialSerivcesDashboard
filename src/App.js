@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Services from "./components/Services/Services";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
+import PrivateRouter from "./routes/PrivateRoute"
+import Workspace from "./components/Workspace/Workspace";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -41,6 +43,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/workspace" element={<PrivateRouter><Workspace /></PrivateRouter>} />
           </Routes>
         </div>
       </AuthProvider>
