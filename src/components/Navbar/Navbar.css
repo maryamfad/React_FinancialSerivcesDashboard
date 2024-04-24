@@ -6,8 +6,15 @@
   min-width: 100vw;
   z-index: 2;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
+.login{
+  color: white;
+  margin-right: 60px;
+  font-size: 1.25rem;
+}
 .navbar-list {
   margin-top: 1rem;
   list-style: none;

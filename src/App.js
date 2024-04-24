@@ -38,7 +38,7 @@ function App() {
 
           <Routes>
             {/* <Route path="/" element={<Dashboard show={show}/>} /> */}
-            {/* <Route path="/home" element={<Dashboard show={show}/>} /> */}
+            <Route path="/home" element={<Dashboard show={show}/>} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/signup" element={<Signup />} />
