@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { MdError } from "react-icons/md";
-import { TiTick } from "react-icons/ti";
 import { GiConfirmed } from "react-icons/gi";
 import { MdErrorOutline } from "react-icons/md";
 import "./Signup.css";
-import axios from "axios";
-// import { useAuth } from "../../context/AuthContext";
-import { signUp } from '../../services/AuthServices';
+import { signUp } from "../../services/AuthServices";
+import { insertUserIntoUsers } from "../../services/UserServices";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const [username, setUsername] = useState("");
+  let navigate = useNavigate();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  // const { signup } = useAuth();
-  
+
   let isDisabled = false;
 
   const passwordRequirements = {
@@ -32,19 +31,23 @@ function Signup() {
   );
 
   const handleSignup = async (event) => {
-    if (!username || !password || !confirmPassword) {
+    if (!email || !password || !confirmPassword) {
       setErrorMessage("Please fill in all fields");
       return;
     }
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match");
+      setErrorMessage("Passwords don't match");
       return;
     }
-    // signup(username, password);
+
     event.preventDefault();
     try {
-      await signUp(username, password);
-      alert('User registered successfully!');
+      await signUp(email, password)
+        .then((user) => insertUserIntoUsers(email, password))
+        .then(() => navigate("/home"))
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     } catch (error) {
       alert(error.message);
       console.log(error.message);
@@ -65,13 +68,13 @@ function Signup() {
             </div>
           )}
         </div>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="email">email</label>
         <input
           type="text"
           className="signup-input"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="email"
         />
         <label htmlFor="password">Password</label>
         <input

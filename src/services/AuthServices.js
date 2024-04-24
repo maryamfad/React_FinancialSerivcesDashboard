@@ -6,7 +6,17 @@ import {
 } from "../firebase/firebaseConfig";
 
 export const signUp = (email, password) => {
-  return createUserWithEmailAndPassword(auth, email, password);
+  return new Promise((resolve, reject) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("user signiedUp", user);
+        resolve(userCredential);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 };
 
 export const login = (email, password) => {

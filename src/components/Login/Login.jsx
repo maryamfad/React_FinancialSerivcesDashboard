@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { login } from "../../services/AuthServices";
-// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -11,7 +12,7 @@ function Login() {
     event.preventDefault();
 
     login(username, password)
-      .then((user) => console.log(user))
+      .then(() => navigate("/home"))
       .catch((error) => {
         console.error("Error:", error);
       });
