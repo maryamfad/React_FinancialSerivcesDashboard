@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import getStocksList from "../../../api/getStocksList";
+// import getStocksList from "../../../api/getStocksList";
 import { stockNames } from "../stockNames";
 import "./SearchStocks.css"
 const SearchStocks = ({ setSymbol }) => {
@@ -7,14 +7,14 @@ const SearchStocks = ({ setSymbol }) => {
   const [query, setQuery] = useState("");
   // const [stocksList, setStocksList] = useState([]);
 
-  const loadStocksList = async () => {
-    try {
-      const result = await getStocksList();
-      // setStocksList(result.map((element) => element.symbol));
-    } catch (error) {
-      console.error("Failed to fetch data: ", error);
-    }
-  };
+  // const loadStocksList = async () => {
+  //   try {
+  //     const result = await getStocksList();
+  //     // setStocksList(result.map((element) => element.symbol));
+  //   } catch (error) {
+  //     console.error("Failed to fetch data: ", error);
+  //   }
+  // };
 
   const handleSearchChange = (event) => {
     event.stopPropagation();

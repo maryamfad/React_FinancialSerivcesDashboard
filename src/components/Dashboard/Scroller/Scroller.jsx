@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
 import "./Scroller.css";
-import getLatestQuoteForStock from "../../../api/getLatestQuoteForAStock";
-import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
+// import getLatestQuoteForStock from "../../../api/getLatestQuoteForAStock";
+// import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
 import getStockLogo from "../../../api/getStockLogo";
 import { scrollerData } from "../scrollerData";
-import getMarketMostActiveStocks from "../../../api/getMarketMostActiveStocks";
+// import getMarketMostActiveStocks from "../../../api/getMarketMostActiveStocks";
 import { AiOutlineRise, AiOutlineFall } from "react-icons/ai";
-import { color } from "d3";
+// import { color } from "d3";
 
 const Scroller = ({ setSymbol }) => {
   const [mostActiveStocks, setMostActiveStocks] = useState([]);
   // console.log(scrollerData);
-  const loadMostActiveStocksData = async () => {
-    try {
-      const result = await getMarketMostActiveStocks();
-      // console.log(result);
-      // setMostActiveStocks(result);
-      return result;
-    } catch (error) {
-      console.error("Failed to fetch data: ", error);
-    }
-  };
+  // const loadMostActiveStocksData = async () => {
+  //   try {
+  //     const result = await getMarketMostActiveStocks();
+  //     // console.log(result);
+  //     // setMostActiveStocks(result);
+  //     return result;
+  //   } catch (error) {
+  //     console.error("Failed to fetch data: ", error);
+  //   }
+  // };
 
   async function enrichScrollerDataWithLogo() {
     try {

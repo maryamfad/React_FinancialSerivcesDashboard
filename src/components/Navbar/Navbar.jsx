@@ -1,16 +1,19 @@
-import { useState } from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Button from "react-bootstrap/Button";
+import { useState, useEffect } from "react";
+// import firebase from 'firebase/app';
+// import Container from "react-bootstrap/Container";
+// import Nav from "react-bootstrap/Nav";
+// import Navbar from "react-bootstrap/Navbar";
+// import NavDropdown from "react-bootstrap/NavDropdown";
+// import Button from "react-bootstrap/Button";
 import "./Navbar.css";
 import { IoMenu } from "react-icons/io5";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import {logout} from "../../services/AuthServices"
 function NavbarMenu({ show, setShow, handleShow, handleClose }) {
   let navigate = useNavigate();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const [selectedItem, setSelectedItem] = useState({
     menu: false,
     home: false,
@@ -22,10 +25,11 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
     product3: false,
     contact: false,
     login: false,
+    logout: false,
   });
 
   const updateSelectedItem = (stateKey) => {
-    setSelectedItem((prevStates) => ({
+    setSelectedItem(() => ({
       ...{
         menu: false,
         home: false,
@@ -37,17 +41,23 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
         product3: false,
         contact: false,
         login: false,
-      }, // Reset all states
-      [stateKey]: true, // Set the selected state to true
+        logout: false,
+      },
+      [stateKey]: true,
     }));
   };
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
   return (
     <div className="navbar-container">
       <div>
         <ul className="navbar-list">
           <li
-            // className="nav-item"
             className={selectedItem.menu ? "nav-item-glassy" : "nav-item"}
             onClick={(e) => {
               e.preventDefault();
@@ -66,7 +76,6 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
             }}
           >
             Home
-            {/* <Link to="/">Home</Link> */}
           </li>
           <li
             className={selectedItem.about ? "nav-item-glassy" : "nav-item"}
@@ -86,7 +95,7 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
           >
             Services
           </li>
-          <li
+          {/* <li
             className="nav-item"
             onMouseEnter={() => {
               updateSelectedItem("products");
@@ -99,34 +108,13 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
             Products
             {isDropdownOpen && (
               <ul className="dropdown">
-                <li
-                  className="dropdown-item"
-                  // onClick={() => {
-                  //   updateSelectedItem("product1");
-                  // }}
-                >
-                  Product 1
-                </li>
-                <li
-                  className="dropdown-item"
-                  // onClick={() => {
-                  //   updateSelectedItem("product2");
-                  // }}
-                >
-                  Product 2
-                </li>
-                <li
-                  className="dropdown-item"
-                  // onClick={() => {
-                  //   updateSelectedItem("product3");
-                  // }}
-                >
-                  Product 3
-                </li>
+                <li className="dropdown-item">Product 1</li>
+                <li className="dropdown-item">Product 2</li>
+                <li className="dropdown-item">Product 3</li>
               </ul>
             )}
-          </li>
-          <li
+          </li> */}
+          {/* <li
             className={selectedItem.contact ? "nav-item-glassy" : "nav-item"}
             onClick={() => {
               updateSelectedItem("contact");
@@ -134,18 +122,34 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
             }}
           >
             Contact
-          </li>
+          </li> */}
         </ul>
       </div>
-      <div
-        className={selectedItem.login ? "nav-item-glassy" : "nav-item"}
-        onClick={() => {
-          updateSelectedItem("login");
-          navigate("/login");
-        }}
-      >
-        Login
-      </div>
+      {localStorage.getItem("user") ? (
+        <div
+          className={selectedItem.login ? "nav-item-glassy" : "nav-item"}
+          onClick={() => {
+            updateSelectedItem("logout");
+            logout()
+            localStorage.removeItem("user");
+            setUser(null);
+            navigate("/home");
+          }}
+        >
+          <div>{user}</div>
+          Logout
+        </div>
+      ) : (
+        <div
+          className={selectedItem.login ? "nav-item-glassy" : "nav-item"}
+          onClick={() => {
+            updateSelectedItem("login");
+            navigate("/login");
+          }}
+        >
+          Login
+        </div>
+      )}
     </div>
   );
 }

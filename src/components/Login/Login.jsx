@@ -12,6 +12,9 @@ function Login() {
     event.preventDefault();
 
     login(username, password)
+      .then((user) => {
+        localStorage.setItem("user", JSON.stringify(user));
+      })
       .then(() => navigate("/home"))
       .catch((error) => {
         console.error("Error:", error);

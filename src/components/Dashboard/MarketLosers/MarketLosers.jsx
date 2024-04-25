@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 // import getMostSearchedStocks from "../../../api/getFullQuote";
 import "./MarketLosers.css";
-import getMarketLosers from "../../../api/getMarketLosers";
+// import getMarketLosers from "../../../api/getMarketLosers";
 import { marketLosersData } from "../marketLosersData";
-import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
+// import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
 import { LuFoldVertical } from "react-icons/lu";
-import {GoFoldUp, GoFoldDown } from "react-icons/go";
+// import {GoFoldUp, GoFoldDown } from "react-icons/go";
 const MarketLosers = ({
   setSymbol,
   gainersTableExpanded,
@@ -13,16 +13,16 @@ const MarketLosers = ({
   losersTableExpanded,
   setLosersTableExpanded,
 }) => {
-  const [marketLosers, setMarketLosers] = useState([]);
-  const loadMarketLosers = async () => {
-    try {
-      const result = await getMarketLosers();
-      console.log(result);
-      setMarketLosers(result);
-    } catch (error) {
-      console.error("Failed to fetch data: ", error);
-    }
-  };
+  // const [marketLosers, setMarketLosers] = useState([]);
+  // const loadMarketLosers = async () => {
+  //   try {
+  //     const result = await getMarketLosers();
+  //     console.log(result);
+  //     setMarketLosers(result);
+  //   } catch (error) {
+  //     console.error("Failed to fetch data: ", error);
+  //   }
+  // };
   useEffect(() => {
     // loadMarketLosers();
   }, []);

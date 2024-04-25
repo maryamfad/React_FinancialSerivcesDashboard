@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Navbar from "./components/Navbar/Navbar";
 import About from "./components/About/About";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Services from "./components/Services/Services";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
@@ -26,6 +26,8 @@ function App() {
             handleClose={handleClose}
             handleShow={handleShow}
             setShow={setShow}
+            // user={user}
+            // setUser={setUser}
           />
           <div className="page">
             <Sidebar
@@ -37,7 +39,7 @@ function App() {
           </div>
 
           <Routes>
-            {/* <Route path="/" element={<Dashboard show={show}/>} /> */}
+            <Route path="/" element={<Navigate replace to="/home" />}/>
             <Route path="/home" element={<Dashboard show={show}/>} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />

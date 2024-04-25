@@ -11,18 +11,17 @@ import MarketLosers from "./MarketLosers/MarketLosers.jsx";
 import StockNews from "./StockNews/StocksNew.jsx";
 
 const Dashboard = () => {
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  
   const [symbol, setSymbol] = useState("AAPL");
   const [gainersTableExpanded, setGainersTableExpanded] = useState(false);
   const [losersTableExpanded, setLosersTableExpanded] = useState(false);
   const [stockLogo, setStockLogo] = useState(null);
-  // let stocksAndDuplicates = [...mostActiveStocks, ...mostActiveStocks];
+
 
   const loadStockLogo = async (symbol) => {
     try {
       const result = await getStockLogo(symbol);
-      // console.log("logo", result);
+
       setStockLogo(result);
     } catch (error) {
       console.error("Failed to fetch data: ", error);
@@ -31,22 +30,22 @@ const Dashboard = () => {
 
   useEffect(() => {
     // loadMostActiveStocksData();
-    // loadStockLogo(symbol);
+    loadStockLogo(symbol);
   }, [symbol]);
 
   return (
     <div className="dashboard">
       <div style={{ height: "170px" }}>
-        {/* <Scroller setSymbol={setSymbol} stockLogo={stockLogo} /> */}
+        <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
       </div>
       <div className="middle-container">
         <div className="middle-area">
           <div className="company-profile">
-            {/* <StockSummary symbol={symbol} /> */}
+            <StockSummary symbol={symbol} />
           </div>
           <div className="stock-diagram">
-            {/* <SearchStocks setSymbol={setSymbol} />
-            <StockDiagram symbol={symbol} stockLogo={stockLogo} /> */}
+            <SearchStocks setSymbol={setSymbol} />
+            <StockDiagram symbol={symbol} stockLogo={stockLogo} />
           </div>
 
           <div className="most-shared-stocks">
@@ -67,11 +66,11 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="news-container">
-          {/* <StockNews symbol={symbol} /> */}
+          <StockNews symbol={symbol} />
         </div>
       </div>
     </div>
-    //  </div>
+
   );
 };
 

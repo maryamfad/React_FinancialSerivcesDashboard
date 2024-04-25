@@ -5,6 +5,7 @@ import {
   signOut,
 } from "../firebase/firebaseConfig";
 
+
 export const signUp = (email, password) => {
   return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -34,5 +35,12 @@ export const login = (email, password) => {
 };
 
 export const logout = () => {
-  return signOut();
+  signOut(auth)
+    .then(() => {
+      console.log("User signed out successfully");
+      // Update any application state or redirect the user to the login page
+    })
+    .catch((error) => {
+      console.error("Sign Out Error", error);
+    });
 };

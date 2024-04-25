@@ -28,8 +28,8 @@ const LinearChart = ({ data, timeFrame }) => {
     if (data && d3Container.current && data.length > 0 && width > 0) {
       d3.select(d3Container.current).selectAll("*").remove();
 
-      const parseTime = d3.timeParse("%H:%M");
-      const parseDate = d3.timeParse("%Y-%m-%d");
+      // const parseTime = d3.timeParse("%H:%M");
+      // const parseDate = d3.timeParse("%Y-%m-%d");
       const formattedData = data.map((d) => ({
       //   time: parseTime(
       //     new Date(d.time).getHours().toString().padStart(2, "0") +

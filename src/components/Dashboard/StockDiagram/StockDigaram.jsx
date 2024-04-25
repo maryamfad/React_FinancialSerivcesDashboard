@@ -2,16 +2,16 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./StockDiagram.css";
 import LinearChart from "./LinearChart";
-import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
-import getStockLogo from "../../../api/getStockLogo";
+// import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
+// import getStockLogo from "../../../api/getStockLogo";
 import getTodayHistoricalChart from "../../../api/getTodayHistoricalChart";
 import getEndOfDayHistorical from "../../../api/getEndOfDayHistorical";
 function StockDiagram({ symbol, stockLogo }) {
   // const [symbol, setSymbol] = useState("AMZN");
   const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [isDataReady, setIsDataReady] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [timeFrame, setTimeFrame] = useState("1D");
 
   function toYYYYMMDD(date) {
@@ -41,9 +41,9 @@ function StockDiagram({ symbol, stockLogo }) {
       console.log("dataaaa", data);
       setIsDataReady(true);
     } catch (error) {
-      setError(error.message);
+      // setError(error.message);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
@@ -62,15 +62,15 @@ function StockDiagram({ symbol, stockLogo }) {
       );
       console.log("data22222", data);
       setIsDataReady(true);
-    } catch (error) {
-      setError(error.message);
+    // } catch (error) {
+      // setError(error.message);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
   const fetchData = () => {
-    setLoading(true);
+    // setLoading(true);
     let end;
     let start;
 
