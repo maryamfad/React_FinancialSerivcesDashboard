@@ -62,8 +62,10 @@ const Scroller = ({ setSymbol }) => {
       console.log("updatedData",updatedData); // Logs the enriched data
     }).catch(error => {
       // Handle or log error
+       
       console.error('Error in processing:', error);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

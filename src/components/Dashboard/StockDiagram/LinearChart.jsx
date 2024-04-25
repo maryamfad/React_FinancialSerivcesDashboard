@@ -19,9 +19,11 @@ const LinearChart = ({ data, timeFrame }) => {
     }
     return () => {
       if (d3Container.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         resizeObserver.unobserve(d3Container.current);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [d3Container.current]);
 
   function drawChart(width) {
@@ -205,6 +207,7 @@ const LinearChart = ({ data, timeFrame }) => {
     if (containerWidth > 0) {
       drawChart(containerWidth);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerWidth, data]);
   return (
     <>
