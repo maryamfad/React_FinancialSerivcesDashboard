@@ -10,7 +10,7 @@ import Services from "./components/Services/Services";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import PrivateRouter from "./routes/PrivateRoute"
-import Workspace from "./components/Workspace/Workspace";
+import BrokerageAccount from "./components/BrokerageAccount/BrokerageAccount";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -45,7 +45,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/workspace" element={<PrivateRouter><Workspace /></PrivateRouter>} />
+            <Route path="/borkerage-account" element={<PrivateRouter><BrokerageAccount /></PrivateRouter>} />
           </Routes>
         </div>
       </AuthProvider>

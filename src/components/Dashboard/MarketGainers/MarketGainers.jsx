@@ -1,9 +1,11 @@
-import {  useEffect } from "react";
+import { useEffect } from "react";
 // import getMostSearchedStocks from "../../../api/getFullQuote";
 import "./MarketGainers.css";
 // import getMarketGainers from "../../../api/getMarketGainers";
 
 import { marketGainersData } from "../marketGainersData";
+import { BiSolidUpArrow } from "react-icons/bi";
+import { AiOutlineRise } from "react-icons/ai";
 // import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
 import { LuFoldVertical } from "react-icons/lu";
 // import {GoFoldUp, GoFoldDown } from "react-icons/go";
@@ -28,50 +30,18 @@ const MarketGainers = ({
   useEffect(() => {
     // loadMarketGainers();
   }, []);
-  console.log("gainersTableExpanded", gainersTableExpanded);
+
   return (
-    <div
-      className={
-        gainersTableExpanded === true
-        ? "gainers-card-expanded"
-        : losersTableExpanded
-        ? "gainers-card"
-        : "gainers-card-not-expanded"
-      }
-    >
-      <div className="gainers-card-title">
-        Market Biggest Gainers{" "}
-        {/* {losersTableExpanded === true ? ( */}
-          <div
-            className="primary expand-icon"
-            onClick={() => {
-              setGainersTableExpanded(!gainersTableExpanded);
-              setLosersTableExpanded(!losersTableExpanded);
-            }}
-          >
-            <LuFoldVertical />
-          </div>
-        {/* ) : (
-          <div
-            className="primary expand-icon"
-            onClick={() => {
-              setGainersTableExpanded(false);
-              setLosersTableExpanded(true);
-            }}
-          >
-            <GoFoldUp />
-          </div>
-        )} */}
-      </div>
+    <div className="gainers-card">
+      <div className="gainers-card-title">Market Biggest Gainers</div>
 
       <div className="gianer-table-container">
         <table>
           <thead>
             <tr className="gianer-table-header">
-              <th>Symbol</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Change</th>
+              <th style={{width:"100px"}}>Symbol</th>
+              <th style={{width:"100px"}}>Name</th>
+              <th style={{width:"100px"}}>Price</th>
             </tr>
           </thead>
           <tbody>
@@ -79,15 +49,38 @@ const MarketGainers = ({
               marketGainersData?.map((row) => (
                 <tr key={row.symbol}>
                   <td
-                    style={{ color: "blue", cursor: "pointer" }}
+                    style={{
+                      color: "blue",
+                      cursor: "pointer",
+                      fontSize: "14px",
+                      fontWeight: "500",
+                    }}
                     onClick={() => setSymbol(row.symbol)}
                   >
                     {row.symbol}
                   </td>
-                  <td>{row.name}</td>
-                  <td>{row.price}</td>
+                  <td style={{ fontSize: "14px", fontWeight: "500" }}>
+                    {row.name}
+                  </td>
                   <td>
-                    {/* {row.change}({row.changesPercentage.toFixed(2)}) */}
+                    {" "}
+                    <div>
+                      <div style={{ fontWeight: "bold" }}>{row.price}</div>
+                      <div
+                        style={{
+                          color: "green",
+                          display: "flex",
+                          justifyContent: "space-evenly",
+                          alignItems: "center",
+                        }}
+                      >
+                        {" "}
+                        [<AiOutlineRise size={"18px"} /> {row.change}]
+                      </div>
+                      {/* <div style={{ color: "green" }}>
+                        ({row.changesPercentage.toFixed(2)})
+                      </div> */}
+                    </div>
                   </td>
                 </tr>
               ))
