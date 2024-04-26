@@ -4,9 +4,7 @@ import "./MarketLosers.css";
 // import getMarketLosers from "../../../api/getMarketLosers";
 import { marketLosersData } from "../marketLosersData";
 // import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
-import { BiSolidDownArrow } from "react-icons/bi";
 import { AiOutlineFall } from "react-icons/ai";
-import { LuFoldVertical } from "react-icons/lu";
 // import {GoFoldUp, GoFoldDown } from "react-icons/go";
 const MarketLosers = ({
   setSymbol,

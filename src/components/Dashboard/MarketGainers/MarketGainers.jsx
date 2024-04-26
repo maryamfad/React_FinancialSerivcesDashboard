@@ -2,12 +2,9 @@ import { useEffect } from "react";
 // import getMostSearchedStocks from "../../../api/getFullQuote";
 import "./MarketGainers.css";
 // import getMarketGainers from "../../../api/getMarketGainers";
-
 import { marketGainersData } from "../marketGainersData";
-import { BiSolidUpArrow } from "react-icons/bi";
 import { AiOutlineRise } from "react-icons/ai";
 // import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
-import { LuFoldVertical } from "react-icons/lu";
 // import {GoFoldUp, GoFoldDown } from "react-icons/go";
 const MarketGainers = ({
   setSymbol,
@@ -39,9 +36,9 @@ const MarketGainers = ({
         <table>
           <thead>
             <tr className="gianer-table-header">
-              <th style={{width:"100px"}}>Symbol</th>
-              <th style={{width:"100px"}}>Name</th>
-              <th style={{width:"100px"}}>Price</th>
+              <th style={{ width: "100px" }}>Symbol</th>
+              <th style={{ width: "100px" }}>Name</th>
+              <th style={{ width: "100px" }}>Price</th>
             </tr>
           </thead>
           <tbody>
