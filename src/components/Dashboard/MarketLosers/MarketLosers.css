@@ -137,3 +137,11 @@ tr:nth-child(even) {
     padding: 10px 5px;
   }
 }
+
+@media (max-width: 450px) {
+  .losers-card{
+    width: auto;
+    margin-top: 5%;
+  }
+
+}

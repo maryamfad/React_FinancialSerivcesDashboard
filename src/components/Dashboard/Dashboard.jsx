@@ -11,12 +11,10 @@ import MarketLosers from "./MarketLosers/MarketLosers.jsx";
 import StockNews from "./StockNews/StocksNew.jsx";
 
 const Dashboard = () => {
-  
   const [symbol, setSymbol] = useState("AAPL");
   const [gainersTableExpanded, setGainersTableExpanded] = useState(false);
   const [losersTableExpanded, setLosersTableExpanded] = useState(false);
   const [stockLogo, setStockLogo] = useState(null);
-
 
   const loadStockLogo = async (symbol) => {
     try {
@@ -35,10 +33,10 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <div style={{ height: "170px" }}>
+      {/* <div style={{ height: "170px" }}> */}
         <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
-      </div>
-      <div className="middle-container">
+      {/* </div> */}
+      {/* <div className="middle-container"> */}
         <div className="middle-area">
           <div className="company-profile">
             <StockSummary symbol={symbol} />
@@ -65,12 +63,11 @@ const Dashboard = () => {
             />
           </div>
         </div>
-        <div className="news-container">
-          <StockNews symbol={symbol} />
-        </div>
+      {/* </div> */}
+      <div className="news-container">
+        <StockNews symbol={symbol} />
       </div>
     </div>
-
   );
 };
 

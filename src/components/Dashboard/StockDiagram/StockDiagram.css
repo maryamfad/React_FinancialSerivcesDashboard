@@ -107,3 +107,11 @@
   font-weight: 500;
 
 }
+
+@media (max-width: 450px) {
+  .stock-diagram{
+    width: auto;
+    margin: 2%;
+    margin-top: 5%;
+  }
+}

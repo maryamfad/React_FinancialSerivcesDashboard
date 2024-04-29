@@ -136,3 +136,13 @@ tr:nth-child(even) {
     padding: 10px 5px;
   }
 }
+
+@media (max-width: 450px) {
+  .gainers-card{
+    width: auto;
+    margin-top: 5%;
+  }
+  .gainers-card-title{
+    /* border-top-left-radius: 1%; */
+  }
+}
