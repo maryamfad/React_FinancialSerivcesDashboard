@@ -1,48 +1,49 @@
 import { useEffect } from "react";
 // import getMostSearchedStocks from "../../../api/getFullQuote";
-import "./MarketLosers.css";
-// import getMarketLosers from "../../../api/getMarketLosers";
-import { marketLosersData } from "../marketLosersData";
+import "./MarketGainers.css";
+// import getMarketGainers from "../../../api/getMarketGainers";
+import { marketGainersData } from "../../Home/marketGainersData";
+import { AiOutlineRise } from "react-icons/ai";
 // import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
-import { AiOutlineFall } from "react-icons/ai";
 // import {GoFoldUp, GoFoldDown } from "react-icons/go";
-const MarketLosers = ({
+const MarketGainers = ({
   setSymbol,
   gainersTableExpanded,
   setGainersTableExpanded,
   losersTableExpanded,
   setLosersTableExpanded,
 }) => {
-  // const [marketLosers, setMarketLosers] = useState([]);
-  // const loadMarketLosers = async () => {
+  // const [marketGainers, setMarketGainers] = useState([]);
+
+  // const loadMarketGainers = async () => {
   //   try {
-  //     const result = await getMarketLosers();
+  //     const result = await getMarketGainers();
   //     console.log(result);
-  //     setMarketLosers(result);
+  //     setMarketGainers(result);
   //   } catch (error) {
   //     console.error("Failed to fetch data: ", error);
   //   }
   // };
   useEffect(() => {
-    // loadMarketLosers();
+    // loadMarketGainers();
   }, []);
 
   return (
-    <div className="losers-card">
-      <div className="losers-card-title">Market Biggest Losers </div>
-      <div className="losers-table-container">
+    <div className="gainers-card">
+      <div className="gainers-card-title">Market Biggest Gainers</div>
+
+      <div className="gianer-table-container">
         <table>
           <thead>
-            <tr className="losers-table-header">
+            <tr className="gianer-table-header">
               <th style={{ width: "100px" }}>Symbol</th>
               <th style={{ width: "100px" }}>Name</th>
               <th style={{ width: "100px" }}>Price</th>
-              {/* <th>Change</th> */}
             </tr>
           </thead>
           <tbody>
-            {marketLosersData ? (
-              marketLosersData?.map((row) => (
+            {marketGainersData ? (
+              marketGainersData?.map((row) => (
                 <tr key={row.symbol}>
                   <td
                     style={{
@@ -59,28 +60,25 @@ const MarketLosers = ({
                     {row.name}
                   </td>
                   <td>
+                    {" "}
                     <div>
                       <div style={{ fontWeight: "bold" }}>{row.price}</div>
                       <div
                         style={{
-                          color: "red",
+                          color: "green",
                           display: "flex",
                           justifyContent: "space-evenly",
                           alignItems: "center",
                         }}
                       >
                         {" "}
-                        [<AiOutlineFall size={"18px"} />
-                        {row.change}]
+                        [<AiOutlineRise size={"18px"} /> {row.change}]
                       </div>
-                      {/* <div style={{ color: "red" }}>
+                      {/* <div style={{ color: "green" }}>
                         ({row.changesPercentage.toFixed(2)})
                       </div> */}
                     </div>
                   </td>
-                  {/* <td>
-                    
-                  </td> */}
                 </tr>
               ))
             ) : (
@@ -92,4 +90,4 @@ const MarketLosers = ({
     </div>
   );
 };
-export default MarketLosers;
+export default MarketGainers;

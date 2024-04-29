@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 // import getStocksList from "../../../api/getStocksList";
-import { stockNames } from "../stockNames";
+import { stockNames } from "../../Home/stockNames";
 import "./SearchStocks.css"
 const SearchStocks = ({ setSymbol }) => {
   const [isFocused, setIsFocused] = useState(false);

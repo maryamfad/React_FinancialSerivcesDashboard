@@ -1,29 +1,17 @@
 import { useState, useEffect } from "react";
-// import firebase from 'firebase/app';
-// import Container from "react-bootstrap/Container";
-// import Nav from "react-bootstrap/Nav";
-// import Navbar from "react-bootstrap/Navbar";
-// import NavDropdown from "react-bootstrap/NavDropdown";
-// import Button from "react-bootstrap/Button";
 import "./Navbar.css";
 import { IoMenu } from "react-icons/io5";
-// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {logout} from "../../services/AuthServices"
-function NavbarMenu({ show, setShow, handleShow, handleClose }) {
+import { logout } from "../../services/AuthServices";
+
+function NavbarMenu({ show, setShow }) {
   let navigate = useNavigate();
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [selectedItem, setSelectedItem] = useState({
     menu: false,
     home: false,
     about: false,
     services: false,
-    products: false,
-    product1: false,
-    product2: false,
-    product3: false,
-    contact: false,
     login: false,
     logout: false,
   });
@@ -35,11 +23,6 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
         home: false,
         about: false,
         services: false,
-        products: false,
-        product1: false,
-        product2: false,
-        product3: false,
-        contact: false,
         login: false,
         logout: false,
       },
@@ -95,34 +78,6 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
           >
             Services
           </li>
-          {/* <li
-            className="nav-item"
-            onMouseEnter={() => {
-              updateSelectedItem("products");
-            }}
-            onClick={() => {
-              setIsDropdownOpen(!isDropdownOpen);
-              updateSelectedItem("products");
-            }}
-          >
-            Products
-            {isDropdownOpen && (
-              <ul className="dropdown">
-                <li className="dropdown-item">Product 1</li>
-                <li className="dropdown-item">Product 2</li>
-                <li className="dropdown-item">Product 3</li>
-              </ul>
-            )}
-          </li> */}
-          {/* <li
-            className={selectedItem.contact ? "nav-item-glassy" : "nav-item"}
-            onClick={() => {
-              updateSelectedItem("contact");
-              navigate("/contact");
-            }}
-          >
-            Contact
-          </li> */}
         </ul>
       </div>
       {localStorage.getItem("user") ? (
@@ -130,7 +85,7 @@ function NavbarMenu({ show, setShow, handleShow, handleClose }) {
           className={selectedItem.login ? "nav-item-glassy" : "nav-item"}
           onClick={() => {
             updateSelectedItem("logout");
-            logout()
+            logout();
             localStorage.removeItem("user");
             setUser(null);
             navigate("/home");
