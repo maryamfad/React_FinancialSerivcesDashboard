@@ -15,7 +15,6 @@ function Sidebar({ show, handleShow, handleClose }) {
     }));
   };
 
-
   return (
     <div className={`sidebar ${show ? "open" : "closed"}`}>
       {show && (

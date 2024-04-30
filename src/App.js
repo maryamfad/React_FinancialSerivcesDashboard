@@ -1,16 +1,16 @@
 import { useState } from "react";
 import "./App.css";
 import { AuthProvider } from "./context/AuthContext";
-import Dashboard from "./components/Dashboard/Dashboard";
+import Home from "./components/Home/Home";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Navbar from "./components/Navbar/Navbar";
+// import Navbar from "./components/Navbar/Navbar";
 import About from "./components/About/About";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Services from "./components/Services/Services";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
-import PrivateRouter from "./routes/PrivateRoute"
-import BrokerageAccount from "./components/BrokerageAccount/BrokerageAccount";
+import PrivateRouter from "./routes/PrivateRoute";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -21,31 +21,32 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <div className="app-container">
-          <Navbar
+          {/* <Navbar
             show={show}
             handleClose={handleClose}
             handleShow={handleShow}
             setShow={setShow}
             // user={user}
             // setUser={setUser}
-          />
-          <div className="page">
-            <Sidebar
+          /> */}
+          {/* <div className="page"> */}
+            {/* <Sidebar
               show={show}
               handleClose={handleClose}
               handleShow={handleShow}
-            />
+            /> */}
             {/* <Dashboard show={show}/> */}
-          </div>
+          {/* </div> */}
 
           <Routes>
-            <Route path="/" element={<Navigate replace to="/home" />}/>
-            <Route path="/home" element={<Dashboard show={show}/>} />
+            <Route path="/" element={<Navigate replace to="/home" />} />
+            <Route path="/home" element={<Home show={show} />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/borkerage-account" element={<PrivateRouter><BrokerageAccount /></PrivateRouter>} />
+            {/* <Route path="/dashboard" element={<PrivateRouter><Dashboard /></PrivateRouter>} /> */}
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </div>
       </AuthProvider>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./Navbar.css";
 import { IoMenu } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../services/AuthServices";
+import { logout } from "../../../services/AuthServices";
 
 function NavbarMenu({ show, setShow }) {
   let navigate = useNavigate();

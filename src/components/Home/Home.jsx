@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import StockDiagram from "./StockDiagram/StockDigaram.jsx";
 import "./Home.css";
+import NavbarMenu from "./Navbar/Navbar.jsx";
 // import getMostActiveStocks from "../../api/getMostActiveStocks";
 import Scroller from "./Scroller/Scroller.jsx";
 import SearchStocks from "./SearchStocks/SearchStocks.jsx";
@@ -33,6 +34,7 @@ const Home = () => {
 
   return (
     <div className="home">
+      <NavbarMenu />
       <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
 
       <div className="middle-area">
