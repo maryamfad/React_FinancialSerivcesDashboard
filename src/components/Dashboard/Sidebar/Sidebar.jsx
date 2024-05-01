@@ -11,7 +11,7 @@ import {
 import { FiBriefcase, FiDollarSign, FiHome, FiMenu, FiSettings } from "react-icons/fi";
 import SidebarItem from "./SidebarItem";
 
-function Sidebar({ show, handleShow, handleClose }) {
+function Sidebar() {
   const [sidebarSize, setSizebarSize] = useState("large");
   // const [selectedItem, setSelectedItem] = useState({
   //   transaction: false,
