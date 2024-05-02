@@ -129,13 +129,14 @@ function StockDiagram({ symbol, stockLogo }) {
       flexDir={"column"}
       justifyContent={"space-between"}
       mr={5}
-      mt={5}
+      mt={1}
       boxShadow={
         "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
       }
+      height={"90%"}
     >
       <Flex justifyContent={"space-evenly"} alignItems={"center"}>
-        <Text textAlign={"center"} fontSize={"2rem"} fontWeight={"bold"}>
+        <Text textAlign={"center"} fontSize={"24px"} fontWeight={"bold"}>
           {symbol}
         </Text>
 
@@ -146,11 +147,11 @@ function StockDiagram({ symbol, stockLogo }) {
           height={"60px"}
           objectFit={"cover"}
           borderRadius={"5px"}
-          padding={2}
+          padding={1}
         />
       </Flex>
       <Divider m={0} />
-      <Flex justifyContent={"flex-end"} pt={3} pr={5}>
+      <Flex justifyContent={"flex-end"} pr={5}>
         <Flex justifyContent={"space-between"} cursor={"pointer"} width={"50%"}>
           <Text
             color={timeFrame === "1D" && "#007BFF"}
@@ -198,7 +199,7 @@ function StockDiagram({ symbol, stockLogo }) {
       </Flex>
       {isDataReady ? (
         <Box>
-          <Box p={"3"}>
+          <Box>
             <LinearChart data={data} timeFrame={timeFrame} />
           </Box>
         </Box>

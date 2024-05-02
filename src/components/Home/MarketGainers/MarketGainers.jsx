@@ -45,8 +45,8 @@ const MarketGainers = ({
       boxShadow={
         "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
       }
-      mb={5}
-      height={"49%"}
+      // mb={5}
+      height={"47%"}
     >
       <Text fontWeight={500} fontSize={"18px"} m={3} pt={3}>
         Market Biggest Gainers

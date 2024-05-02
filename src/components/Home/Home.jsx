@@ -38,16 +38,16 @@ const Home = () => {
       <NavbarMenu />
       <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
 
-      <Flex height={"65vh"}>
-        <div className="company-profile">
+      <Flex height={"65vh"} justifyContent={"space-evenly"}>
+        <Flex width={"25%"}>
           <StockSummary symbol={symbol} />
-        </div>
-        <Box width={"40%"} pl={5}>
+        </Flex>
+        <Box width={"40%"} >
           <SearchStocks setSymbol={setSymbol} />
           <StockDiagram symbol={symbol} stockLogo={stockLogo} />
         </Box>
 
-        <div className="most-shared-stocks">
+        <Flex flexDir={"column"} justifyContent={"space-between"} width={"25%"} gap={5}>
           <MarketGainers
             setSymbol={setSymbol}
             gainersTableExpanded={gainersTableExpanded}
@@ -62,7 +62,7 @@ const Home = () => {
             losersTableExpanded={losersTableExpanded}
             setLosersTableExpanded={setLosersTableExpanded}
           />
-        </div>
+        </Flex>
       </Flex>
 
       <div className="news-container">
