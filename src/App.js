@@ -13,24 +13,21 @@ import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
-  
   return (
-    // <div className="app-container">
-      <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Navigate replace to="/dashboard" />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-            {/* <Route path="/dashboard" element={<PrivateRouter><Dashboard /></PrivateRouter>} /> */}
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </AuthProvider>
-      </BrowserRouter>
-    // </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/home" />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          {/* <Route path="/dashboard" element={<PrivateRouter><Dashboard /></PrivateRouter>} /> */}
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
