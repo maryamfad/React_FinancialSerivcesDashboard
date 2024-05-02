@@ -10,6 +10,10 @@
   justify-content: space-between;
   align-items: center;
   padding-right: 30px;
+  /* width: 70%; */
+}
+.first-part-navbar{
+  width: 60%;
 }
 .login{
   color: white;
@@ -21,7 +25,7 @@
   list-style: none;
   display: flex;
   flex-direction: row;
-  /* gap:20px; */
+  
 }
 
 .nav-item {
@@ -63,6 +67,15 @@
   /* font-weight: 600; */
   padding-left: 5px;
   padding-right: 5px;
+}
+.dashboard-button{
+  margin-left: 120px;
+  border-width: 2px;
+  border-radius: 15px;
+  color: white;
+  padding: 1%;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .dropdown {

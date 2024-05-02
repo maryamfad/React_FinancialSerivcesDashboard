@@ -8,7 +8,13 @@ import {
   Text,
   IconButton,
 } from "@chakra-ui/react";
-import { FiBriefcase, FiDollarSign, FiHome, FiMenu, FiSettings } from "react-icons/fi";
+import {
+  FiBriefcase,
+  FiDollarSign,
+  FiHome,
+  FiMenu,
+  FiSettings,
+} from "react-icons/fi";
 import SidebarItem from "./SidebarItem";
 
 function Sidebar() {
@@ -28,21 +34,20 @@ function Sidebar() {
 
   return (
     <Flex
-      pos={"sticky"}
-      h="98vh"
-      boxShadow={"0 4px 12px 0 rgba(0,0,0,0.05)"}
+      height="100vh"
+      position="sticky"
+      top="0"
+      overflowY="auto"
+      boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
       w={sidebarSize === "small" ? "75px" : "200px"}
+      transition="all 0.3s ease-in-out"
       borderTopRightRadius={sidebarSize === "small" ? "15px" : "30px"}
       borderBottomRightRadius={sidebarSize === "small" ? "15px" : "30px"}
       flexDir={"column"}
       justifyContent={"space-between"}
-      backgroundColor={"teal"}
+      backgroundColor={"#125667"}
     >
-      <Flex
-        p={"5%"}
-        flexDir={"column"}
-        as={"nav"}
-      >
+      <Flex p={"5%"} flexDir={"column"} as={"nav"}>
         <IconButton
           background={"none"}
           color={"white"}
@@ -101,42 +106,6 @@ function Sidebar() {
         </Flex>
       </Flex>
     </Flex>
-    // <div className={`sidebar ${show ? "open" : "closed"}`}>
-    //   {show && (
-    //     <div className="sidebar-items">
-    //       <div
-    //         className={
-    //           selectedItem.transaction ? "sidebar-item-glassy" : "sidebar-item"
-    //         }
-    //         onClick={() => {
-    //           updateSelectedItem("transaction");
-    //         }}
-    //       >
-    //         Transactions
-    //       </div>
-    //       <div
-    //         className={
-    //           selectedItem.holding ? "sidebar-item-glassy" : "sidebar-item"
-    //         }
-    //         onClick={() => {
-    //           updateSelectedItem("holding");
-    //         }}
-    //       >
-    //         Holdings
-    //       </div>
-    //       <div
-    //         className={
-    //           selectedItem.setting ? "sidebar-item-glassy" : "sidebar-item"
-    //         }
-    //         onClick={() => {
-    //           updateSelectedItem("setting");
-    //         }}
-    //       >
-    //         Settings
-    //       </div>
-    //     </div>
-    //   )}
-    // </div>
   );
 }
 

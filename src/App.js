@@ -13,31 +13,11 @@ import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
-  // const [show, setShow] = useState(false);
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-
+  
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <div className="app-container">
-          {/* <Navbar
-            show={show}
-            handleClose={handleClose}
-            handleShow={handleShow}
-            setShow={setShow}
-            // user={user}
-            // setUser={setUser}
-          /> */}
-          {/* <div className="page"> */}
-            {/* <Sidebar
-              show={show}
-              handleClose={handleClose}
-              handleShow={handleShow}
-            /> */}
-            {/* <Dashboard show={show}/> */}
-          {/* </div> */}
-
+    // <div className="app-container">
+      <BrowserRouter>
+        <AuthProvider>
           <Routes>
             <Route path="/" element={<Navigate replace to="/home" />} />
             <Route path="/home" element={<Home />} />
@@ -48,9 +28,9 @@ function App() {
             {/* <Route path="/dashboard" element={<PrivateRouter><Dashboard /></PrivateRouter>} /> */}
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
-        </div>
-      </AuthProvider>
-    </BrowserRouter>
+        </AuthProvider>
+      </BrowserRouter>
+    // </div>
   );
 }
 

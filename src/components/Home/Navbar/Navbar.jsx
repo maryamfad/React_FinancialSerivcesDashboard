@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import "./Navbar.css";
-import { IoMenu } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../services/AuthServices";
 
-function NavbarMenu({ show, setShow }) {
+function NavbarMenu() {
   let navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [selectedItem, setSelectedItem] = useState({
@@ -38,19 +37,8 @@ function NavbarMenu({ show, setShow }) {
   }, []);
   return (
     <div className="navbar-container">
-      <div>
+      <div className="first-part-navbar">
         <ul className="navbar-list">
-          <li
-            className={selectedItem.menu ? "nav-item-glassy" : "nav-item"}
-            onClick={(e) => {
-              e.preventDefault();
-              updateSelectedItem("menu");
-              setShow(!show);
-            }}
-          >
-            <IoMenu />
-          </li>
-
           <li
             className={selectedItem.home ? "nav-item-glassy" : "nav-item"}
             onClick={() => {
@@ -77,6 +65,14 @@ function NavbarMenu({ show, setShow }) {
             }}
           >
             Services
+          </li>
+          <li
+            className="dashboard-button"
+            onClick={() => {
+              navigate("/dashboard");
+            }}
+          >
+            Dashboard
           </li>
         </ul>
       </div>

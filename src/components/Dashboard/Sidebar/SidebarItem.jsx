@@ -27,6 +27,7 @@ const SidebarItem = ({ sidebarSize, title, icon, active }) => {
                 ml={5}
                 color={active ? "#82AAAD" : "white"}
                 display={sidebarSize === "small" ? "none" : ""}
+                
               >
                 {title}
               </Flex>
