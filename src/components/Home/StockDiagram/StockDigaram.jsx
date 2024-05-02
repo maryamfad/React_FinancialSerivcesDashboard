@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./StockDiagram.css";
 import LinearChart from "./LinearChart";
 // import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
 // import getStockLogo from "../../../api/getStockLogo";
 import getTodayHistoricalChart from "../../../api/getTodayHistoricalChart";
 import getEndOfDayHistorical from "../../../api/getEndOfDayHistorical";
+import { Divider, Flex, Text, Box, Image } from "@chakra-ui/react";
 function StockDiagram({ symbol, stockLogo }) {
   // const [symbol, setSymbol] = useState("AMZN");
   const [data, setData] = useState(null);
@@ -62,7 +62,7 @@ function StockDiagram({ symbol, stockLogo }) {
       );
       console.log("data22222", data);
       setIsDataReady(true);
-    // } catch (error) {
+      // } catch (error) {
       // setError(error.message);
     } finally {
       // setLoading(false);
@@ -125,32 +125,87 @@ function StockDiagram({ symbol, stockLogo }) {
   }, [timeFrame, symbol]);
 
   return (
-    <div className="diagram-card">
-      {/* <div> */}{" "}
-      <div className="stock-name-container">
-        <div className="title">{symbol}</div>
-        <img src={stockLogo} alt="logo" class="stock-logo" />
-      </div>
-      <div className="timeframe-container">
-        <div className="timeframe-buttons ">
-          <div className={timeFrame === "1D" ? "selected" : ""} onClick={() => setTimeFrame("1D")}>1D</div>
-          <div className={timeFrame === "5D" ? "selected" : ""} onClick={() => setTimeFrame("5D")}>5D</div>
-          <div className={timeFrame === "1M" ? "selected" : ""} onClick={() => setTimeFrame("1M")}>1M</div>
-          <div className={timeFrame === "3M" ? "selected" : ""} onClick={() => setTimeFrame("3M")}>3M</div>
-          <div className={timeFrame === "6M" ? "selected" : ""} onClick={() => setTimeFrame("6M")}>6M</div>
-          <div className={timeFrame === "1Y" ? "selected" : ""} onClick={() => setTimeFrame("1Y")}>1Y</div>
-        </div>
-      </div>
+    <Flex
+      flexDir={"column"}
+      justifyContent={"space-between"}
+      mr={5}
+      mt={5}
+      boxShadow={
+        "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+      }
+    >
+      <Flex justifyContent={"space-evenly"} alignItems={"center"}>
+        <Text textAlign={"center"} fontSize={"2rem"} fontWeight={"bold"}>
+          {symbol}
+        </Text>
+
+        <Image
+          src={stockLogo}
+          alt="logo"
+          width={"60px"}
+          height={"60px"}
+          objectFit={"cover"}
+          borderRadius={"5px"}
+          padding={2}
+        />
+      </Flex>
+      <Divider m={0} />
+      <Flex justifyContent={"flex-end"} pt={3} pr={5}>
+        <Flex justifyContent={"space-between"} cursor={"pointer"} width={"50%"}>
+          <Text
+            color={timeFrame === "1D" && "#007BFF"}
+            fontWeight={timeFrame === "1D" && "bold"}
+            onClick={() => setTimeFrame("1D")}
+          >
+            1D
+          </Text>
+          <Text
+            color={timeFrame === "5D" && "#007BFF"}
+            fontWeight={timeFrame === "5D" && "bold"}
+            onClick={() => setTimeFrame("5D")}
+          >
+            5D
+          </Text>
+          <Text
+            color={timeFrame === "1M" && "#007BFF"}
+            fontWeight={timeFrame === "1M" && "bold"}
+            onClick={() => setTimeFrame("1M")}
+          >
+            1M
+          </Text>
+          <Text
+            color={timeFrame === "3M" && "#007BFF"}
+            fontWeight={timeFrame === "3M" && "bold"}
+            onClick={() => setTimeFrame("3M")}
+          >
+            3M
+          </Text>
+          <Text
+            color={timeFrame === "6M" && "#007BFF"}
+            fontWeight={timeFrame === "6M" && "bold"}
+            onClick={() => setTimeFrame("6M")}
+          >
+            6M
+          </Text>
+          <Text
+            color={timeFrame === "1Y" && "#007BFF"}
+            fontWeight={timeFrame === "1Y" && "bold"}
+            onClick={() => setTimeFrame("1Y")}
+          >
+            1Y
+          </Text>
+        </Flex>
+      </Flex>
       {isDataReady ? (
-        <div>
-          <div className="chart-container">
+        <Box>
+          <Box p={"3"}>
             <LinearChart data={data} timeFrame={timeFrame} />
-          </div>
-        </div>
+          </Box>
+        </Box>
       ) : (
-        <div>Loading...</div>
+        <Text>Loading...</Text>
       )}
-    </div>
+    </Flex>
   );
 }
 
