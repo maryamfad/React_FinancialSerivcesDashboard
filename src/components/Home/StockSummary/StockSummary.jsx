@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import getFullQuote from "../../../api/getFullQuote";
-import "./StockSummary.css";
+import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 const StockSummary = ({ symbol }) => {
   const [stockSummary, setStockSummary] = useState([]);
 
   const loadStockSummaryData = async (stockSymbol) => {
     try {
       const result = await getFullQuote(stockSymbol);
-      // console.log(result);
       setStockSummary(result[0]);
     } catch (error) {
       console.error("Failed to fetch data: ", error);
@@ -17,36 +16,119 @@ const StockSummary = ({ symbol }) => {
     loadStockSummaryData(symbol);
   }, [symbol]);
   return (
-    <div className="stock-summary-card">
-      <div className="stock-summary-title">Summary</div>
-      <div className="stock-summary-table-container">
-      <div className="summary-row">
-          <div className="first-col"><span>Name:</span> {stockSummary?.name}</div>
-          <div className="second-col"><span>Exchange:</span> {stockSummary?.exchange}</div>
-        </div>
-        <div className="summary-row">
-          <div className="first-col"> <span>Price:</span> {stockSummary?.price}</div>
-          <div className="second-col"><span>Change:</span> {stockSummary?.change}</div>
-        </div>
-        <div className="summary-row">
-          <div className="first-col"><span>High:</span> {stockSummary?.dayHigh}</div>
-          <div className="second-col"><span>Low:</span> {stockSummary?.dayLow}</div>
-        </div>
-        <div className="summary-row">
-          <div className="first-col"><span>Market Cap:</span> {stockSummary?.marketCap}</div>
-          <div className="second-col"><span>open:</span> {stockSummary?.open}</div>
-        </div>
-        <div className="summary-row">
-          <div className="first-col"><span>Prevouse Close:</span> {stockSummary?.previousClose}</div>
-          <div className="second-col"><span>Price:</span> {stockSummary?.price}</div>
-        </div>
-        <div className="summary-row">
-          <div className="first-col"><span>Volume:</span> {stockSummary?.volume}</div>
-          <div className="second-col"><span>Average Volume:</span> {stockSummary?.avgVolume}</div>
-        </div>
-        
-      </div>
-    </div>
+    <Box
+      height={"100%"}
+      p={5}
+      boxShadow={
+        "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+      }
+    >
+      <Text fontWeight={500} fontSize={"18px"}>
+        Summary
+      </Text>
+      <Divider />
+      <Flex
+        flexDir={"column"}
+        height={"90%"}
+        justifyContent={"space-between"}
+        overflow={"auto"}
+      >
+        <Flex
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          width={"100%"}
+          height={"100%"}
+          borderBottom={"1px solid #dee2e6;"}
+        >
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>Name:</Text> {stockSummary?.name}
+          </Flex>
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>Exchange:</Text> {stockSummary?.exchange}
+          </Flex>
+        </Flex>
+        <Flex
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          width={"100%"}
+          height={"100%"}
+          borderBottom={"1px solid #dee2e6;"}
+        >
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            {" "}
+            <Text fontWeight={"500"}>Price:</Text>{" "}
+            <Text>{stockSummary?.price}</Text>
+          </Flex>
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>Change:</Text> {stockSummary?.change}
+          </Flex>
+        </Flex>
+        <Flex
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          width={"100%"}
+          height={"100%"}
+          borderBottom={"1px solid #dee2e6"}
+        >
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>High:</Text>{" "}
+            <Text>{stockSummary?.dayHigh}</Text>
+          </Flex>
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>Low:</Text>{" "}
+            <Text>{stockSummary?.dayLow}</Text>
+          </Flex>
+        </Flex>
+        <Flex
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          width={"100%"}
+          height={"100%"}
+          borderBottom={"1px solid #dee2e6;"}
+        >
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>Market Cap:</Text>{" "}
+            <Text>{stockSummary?.marketCap}</Text>
+          </Flex>
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>open:</Text>
+            <Text>{stockSummary?.open}</Text>
+          </Flex>
+        </Flex>
+        <Flex
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          width={"100%"}
+          height={"100%"}
+          borderBottom={"1px solid #dee2e6;"}
+        >
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>Prevouse Close:</Text>{" "}
+            <Text>{stockSummary?.previousClose}</Text>
+          </Flex>
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>Price:</Text>{" "}
+            <Text>{stockSummary?.price}</Text>
+          </Flex>
+        </Flex>
+        <Flex
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          width={"100%"}
+          height={"100%"}
+          borderBottom={"1px solid #dee2e6;"}
+        >
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>Volume:</Text>
+            <Text>{stockSummary?.volume}</Text>
+          </Flex>
+          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
+            <Text fontWeight={"500"}>Average Volume:</Text>
+            <Text> {stockSummary?.avgVolume}</Text>
+          </Flex>
+        </Flex>
+      </Flex>
+    </Box>
   );
 };
 export default StockSummary;

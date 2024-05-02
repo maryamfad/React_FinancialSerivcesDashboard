@@ -5,8 +5,10 @@ import Orders from "./Orders/Orders";
 import Positions from "./Positions/Positions";
 import BuySell from "./BuySell/BuySell";
 import BuyingPower from "./BuyingPower/BuyingPower";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+    let navigate = useNavigate();
   return (
     <Flex
       className="dashboard-container"
@@ -22,7 +24,7 @@ const Dashboard = () => {
             borderColor={"teal"}
             borderWidth={"2px"}
             m={"10px"}
-            onClick={() => window.history.back()}
+            onClick={() => navigate("/home")}
           >
             Home
           </Button>

@@ -3,8 +3,10 @@ const Positions = () => {
   return (
     <Box
       m={5}
+      mb={10}
       width={"50%"}
-      height={"30%"}
+      minHeight={"300px"}
+      overflow={"auto"}
       boxShadow={
         "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
       }

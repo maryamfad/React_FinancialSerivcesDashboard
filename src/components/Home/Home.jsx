@@ -10,6 +10,7 @@ import StockSummary from "./StockSummary/StockSummary.jsx";
 import MarketGainers from "./MarketGainers/MarketGainers.jsx";
 import MarketLosers from "./MarketLosers/MarketLosers.jsx";
 import StockNews from "./StockNews/StocksNew.jsx";
+import { Box } from "@chakra-ui/react";
 
 const Home = () => {
   const [symbol, setSymbol] = useState("AAPL");
@@ -33,7 +34,7 @@ const Home = () => {
   }, [symbol]);
 
   return (
-    <div className="home">
+    <Box className="home">
       <NavbarMenu />
       <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
 
@@ -67,7 +68,7 @@ const Home = () => {
       <div className="news-container">
         <StockNews symbol={symbol} />
       </div>
-    </div>
+    </Box>
   );
 };
 
