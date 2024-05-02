@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Sidebar.css";
+
 import {
   Flex,
   Divider,
@@ -18,7 +18,7 @@ import {
 import SidebarItem from "./SidebarItem";
 
 function Sidebar() {
-  const [sidebarSize, setSizebarSize] = useState("large");
+  const [sidebarSize, setSizebarSize] = useState("small");
   // const [selectedItem, setSelectedItem] = useState({
   //   transaction: false,
   //   holding: false,
