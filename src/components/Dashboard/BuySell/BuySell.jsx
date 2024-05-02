@@ -31,6 +31,7 @@ function BuySell() {
   };
   return (
     <Box
+    mr={5}
       width={"25%"}
       height={"100%"}
       boxShadow={
@@ -49,7 +50,7 @@ function BuySell() {
             setBuySelected(true);
           }}
         >
-          <Text color={"white"} fontWeight={"600"} mb={0} p={2}>
+          <Text color={isBuySelected ? "white" : "none"} fontWeight={"600"} mb={0} p={2}>
             Buy
           </Text>
         </Flex>
@@ -64,7 +65,7 @@ function BuySell() {
             setBuySelected(false);
           }}
         >
-          <Text color={"white"} fontWeight={"600"} mb={0} p={2}>
+          <Text color={!isBuySelected ? "white" : "none"} fontWeight={"600"} mb={0} p={2}>
             Sell
           </Text>
         </Flex>
@@ -77,7 +78,7 @@ function BuySell() {
           </Box>
           <Box width={"50%"} ml={10}>
             <Text fontWeight={"500"}>Market Price</Text>
-            <Text>181.98 $</Text>
+            <Text fontWeight={"500"} color={"#343a40"}>181.98 $</Text>
           </Box>
         </Flex>
         <Box mt={4}>
@@ -114,7 +115,7 @@ function BuySell() {
           </Box>
           <Box width={"50%"} ml={10}>
             <Text fontWeight={"500"}>Estimated Cost</Text>
-            <Text>181.98 $</Text>
+            <Text fontWeight={"500"} color={"#343a40"}>181.98 $</Text>
           </Box>
         </Flex>
         <FormControl mt={4}>

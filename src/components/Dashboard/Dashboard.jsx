@@ -4,6 +4,7 @@ import Portfolio from "./Protfolio/Portfolio";
 import Orders from "./Orders/Orders";
 import Positions from "./Positions/Positions";
 import BuySell from "./BuySell/BuySell";
+import BuyingPower from "./BuyingPower/BuyingPower";
 
 const Dashboard = () => {
   return (
@@ -12,9 +13,10 @@ const Dashboard = () => {
       height="100vh"
       width="100vw"
       overflowX="hidden"
+      
     >
       <Sidebar />
-      <Flex flexDir={"column"} w={"100%"}>
+      <Flex flexDir={"column"} w={"100%"}  >
         <Flex>
           <Button
             borderColor={"teal"}
@@ -25,18 +27,21 @@ const Dashboard = () => {
             Home
           </Button>
         </Flex>
-        <Box w={"100%"}>
-          {" "}
+        <Box w={"100%"}  >
           <Box p={5}>
             <Heading as="h1" size="xl" textAlign="flex-start" color="#343a40">
               Dashboard
             </Heading>
           </Box>
           <Flex>
-          <Portfolio /> 
-          <BuySell/>
+            <Flex flexDir={"column"} width={"50%"}>
+              <BuyingPower />
+              <Portfolio />
+            </Flex>
+            <Orders />
+            <BuySell />
           </Flex>
-          <Orders />
+          
           <Positions />
         </Box>
       </Flex>
