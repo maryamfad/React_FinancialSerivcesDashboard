@@ -10,7 +10,7 @@ import StockSummary from "./StockSummary/StockSummary.jsx";
 import MarketGainers from "./MarketGainers/MarketGainers.jsx";
 import MarketLosers from "./MarketLosers/MarketLosers.jsx";
 import StockNews from "./StockNews/StocksNew.jsx";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 const Home = () => {
   const [symbol, setSymbol] = useState("AAPL");
@@ -42,10 +42,10 @@ const Home = () => {
         <div className="company-profile">
           <StockSummary symbol={symbol} />
         </div>
-        <div className="stock-diagram">
+        <Box width={"40%"} pl={5}>
           <SearchStocks setSymbol={setSymbol} />
           <StockDiagram symbol={symbol} stockLogo={stockLogo} />
-        </div>
+        </Box>
 
         <div className="most-shared-stocks">
           <MarketGainers

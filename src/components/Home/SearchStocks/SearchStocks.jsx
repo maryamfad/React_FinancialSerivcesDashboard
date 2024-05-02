@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 // import getStocksList from "../../../api/getStocksList";
 import { stockNames } from "../../Home/stockNames";
-import "./SearchStocks.css"
+import "./SearchStocks.css";
+import { Box, Flex, Input, Text } from "@chakra-ui/react";
 const SearchStocks = ({ setSymbol }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [query, setQuery] = useState("");
@@ -44,9 +45,19 @@ const SearchStocks = ({ setSymbol }) => {
     // loadStocksList();
   }, []);
   return (
-    <div className="search-container" onBlur={handleBlur} tabIndex="0">
-      <input
-      className="search-input"
+    <Flex
+      position={"relative"}
+      flexDir={"column"}
+      alignSelf={"center"}
+      pr={5}
+      width={"100%"}
+      onBlur={handleBlur}
+      tabIndex="0"
+    >
+      <Input
+        boxShadow={
+          "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+        }
         type="text"
         placeholder="Search..."
         value={query}
@@ -54,21 +65,45 @@ const SearchStocks = ({ setSymbol }) => {
         onClick={() => setIsFocused(true)}
         onFocus={() => setIsFocused(true)}
       />
-      
+
       {isFocused && query && (
-        <div className="search-results">
+        <Flex
+          flexDir={"column"}
+          position={"absolute"}
+          top={"100%"}
+          left={0}
+          right={0}
+          zIndex={10}
+          mr={6}
+          alignSelf={"center"}
+          p={3}
+          boxShadow={
+            "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+          }
+          backgroundColor={"#fff"}
+          css={{
+            "& > div:nth-child(even)": {
+              backgroundColor: "#f8f9fa",
+            },
+          }}
+        >
           {filteredItems.length > 0 ? (
             filteredItems.map((item, index) => (
-              <div key={index} data-item={item} onClick={handleItemClick}>
+              <Box
+                _hover={{ backgroundColor: "#f0f0f0" }}
+                key={index}
+                data-item={item}
+                onClick={handleItemClick}
+              >
                 {item}
-              </div>
+              </Box>
             ))
           ) : (
-            <div>No results found</div>
+            <Text>No results found</Text>
           )}
-        </div>
+        </Flex>
       )}
-    </div>
+    </Flex>
   );
 };
 export default SearchStocks;
