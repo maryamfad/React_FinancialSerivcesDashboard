@@ -4,6 +4,18 @@ import "./MarketGainers.css";
 // import getMarketGainers from "../../../api/getMarketGainers";
 import { marketGainersData } from "../../Home/marketGainersData";
 import { AiOutlineRise } from "react-icons/ai";
+import {
+  Box,
+  Flex,
+  Text,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Icon,
+} from "@chakra-ui/react";
 // import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
 // import {GoFoldUp, GoFoldDown } from "react-icons/go";
 const MarketGainers = ({
@@ -29,65 +41,75 @@ const MarketGainers = ({
   }, []);
 
   return (
-    <div className="gainers-card">
-      <div className="gainers-card-title">Market Biggest Gainers</div>
+    <Box
+      boxShadow={
+        "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+      }
+      mb={5}
+      height={"49%"}
+    >
+      <Text fontWeight={500} fontSize={"18px"} m={3} pt={3}>
+        Market Biggest Gainers
+      </Text>
 
-      <div className="gianer-table-container">
-        <table>
-          <thead>
-            <tr className="gianer-table-header">
-              <th style={{ width: "100px" }}>Symbol</th>
-              <th style={{ width: "100px" }}>Name</th>
-              <th style={{ width: "100px" }}>Price</th>
-            </tr>
-          </thead>
-          <tbody>
+      <Box
+        height={"70%"}
+        overflowY={"auto"}
+        overflowX={{ base: "hidden", md: "auto" }}
+      >
+        <Table variant="simple">
+          <Thead zIndex={-10}>
+            <Tr>
+              <Th>Symbol</Th>
+              <Th>Name</Th>
+              <Th>Price</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
             {marketGainersData ? (
-              marketGainersData?.map((row) => (
-                <tr key={row.symbol}>
-                  <td
-                    style={{
-                      color: "blue",
-                      cursor: "pointer",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                    }}
+              marketGainersData.map((row) => (
+                <Tr key={row.symbol}>
+                  <Td
+                    cursor="pointer"
+                    color="blue"
+                    fontSize="sm"
+                    p={2}
+                    pl={4}
                     onClick={() => setSymbol(row.symbol)}
                   >
                     {row.symbol}
-                  </td>
-                  <td style={{ fontSize: "14px", fontWeight: "500" }}>
+                  </Td>
+                  <Td fontSize="sm" p={2}>
                     {row.name}
-                  </td>
-                  <td>
-                    {" "}
-                    <div>
-                      <div style={{ fontWeight: "bold" }}>{row.price}</div>
-                      <div
-                        style={{
-                          color: "green",
-                          display: "flex",
-                          justifyContent: "space-evenly",
-                          alignItems: "center",
-                        }}
+                  </Td>
+                  <Td p={2}>
+                    <Flex fontSize="sm" justifyContent={"space-evenly"}>
+                      <Box>{row.price}</Box>
+                      <Flex
+                        justifyContent="space-evenly"
+                        alignItems="center"
+                        color="green"
                       >
-                        {" "}
-                        [<AiOutlineRise size={"18px"} /> {row.change}]
-                      </div>
-                      {/* <div style={{ color: "green" }}>
-                        ({row.changesPercentage.toFixed(2)})
-                      </div> */}
-                    </div>
-                  </td>
-                </tr>
+                        <Icon as={AiOutlineRise} boxSize={4} />
+                        <Text>{row.change}</Text>
+                      </Flex>
+                    </Flex>
+                  </Td>
+                </Tr>
               ))
             ) : (
-              <div>There is no data to show for now!!</div>
+              <Tr>
+                <Td colSpan="3">
+                  <Text textAlign="center">
+                    There is no data to show for now!
+                  </Text>
+                </Td>
+              </Tr>
             )}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </Tbody>
+        </Table>
+      </Box>
+    </Box>
   );
 };
 export default MarketGainers;

@@ -38,7 +38,7 @@ const Home = () => {
       <NavbarMenu />
       <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
 
-      <div className="middle-area">
+      <Flex height={"65vh"}>
         <div className="company-profile">
           <StockSummary symbol={symbol} />
         </div>
@@ -63,8 +63,8 @@ const Home = () => {
             setLosersTableExpanded={setLosersTableExpanded}
           />
         </div>
-      </div>
-     
+      </Flex>
+
       <div className="news-container">
         <StockNews symbol={symbol} />
       </div>

@@ -29,16 +29,16 @@ const StockSummary = ({ symbol }) => {
       <Divider />
       <Flex
         flexDir={"column"}
-        height={"90%"}
+        height={"85%"}
         justifyContent={"space-between"}
-        overflow={"auto"}
+        backgroundColor={"#f9f9f9"}
+        border={"1px solid #dee2e6"}
       >
         <Flex
           justifyContent={"space-between"}
           alignItems={"center"}
           width={"100%"}
           height={"100%"}
-          borderBottom={"1px solid #dee2e6;"}
         >
           <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
             <Text fontWeight={"500"}>Name:</Text> {stockSummary?.name}
