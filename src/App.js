@@ -11,11 +11,13 @@ import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 // import PrivateRouter from "./routes/PrivateRoute";
 import Dashboard from "./components/Dashboard/Dashboard";
+import NavbarMenu from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+      <NavbarMenu />
         <Routes>
           <Route path="/" element={<Navigate replace to="/home" />} />
           <Route path="/home" element={<Home />} />

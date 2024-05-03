@@ -38,7 +38,7 @@ function NavbarMenu() {
   return (
     <Flex
       backgroundColor="#125667"
-      height={"60px"}
+      height={{base:"150px",sm:"150px",md:"60px",lg:"60px", xl:"60px"}}
       position={"fixed"}
       minWidth={"100vw"}
       zIndex={2}
@@ -48,7 +48,8 @@ function NavbarMenu() {
       pr={"30px"}
     >
       <Box width={"60%"} ml={"70px"}>
-        <Flex>
+        <Flex flexDir={{base:"column", sm:"column", md:"row", lg:"row", xl:"row"}} 
+        width={{base:"60%", sm:"60%", md:"100%", lg:"100%", xl:"100%"}}>
           <Flex
             justifyContent={"center"}
             alignItems={"center"}
@@ -156,7 +157,8 @@ function NavbarMenu() {
             cursor={"pointer"}
             p={2}
             color={"white"}
-            marginLeft={120}
+            textAlign={"center"}
+            marginLeft={{base:0, sm:0, md:0, lg:120,xl:120}}
             borderWidth={"2px"}
             borderRadius={"5px"}
             onClick={() => {

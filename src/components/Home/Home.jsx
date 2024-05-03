@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import StockDiagram from "./StockDiagram/StockDigaram.jsx";
-import NavbarMenu from "./Navbar/Navbar.jsx";
 import Scroller from "./Scroller/Scroller.jsx";
 import SearchStocks from "./SearchStocks/SearchStocks.jsx";
 import getStockLogo from "../../api/getStockLogo.js";
@@ -31,8 +30,8 @@ const Home = () => {
 
   return (
     <Box className="home">
-      <NavbarMenu />
-      <Box mt={{ base: "10%", sm: "10%", md: "10%", lg:"1%", xl:"1%" }}>
+      
+      <Box mt={{ base: "32%", sm: "32%", md: "32%", lg:"0", xl:"0" }}>
         <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
       </Box>
 
@@ -47,7 +46,7 @@ const Home = () => {
         height={{
           base: "180vh",
           sm: "180vh",
-          md: "100vh",
+          md: "180vh",
           lg: "65vh",
           xl: "65vh",
         }}

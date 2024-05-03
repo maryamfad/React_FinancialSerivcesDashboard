@@ -20,12 +20,12 @@ const StockNews = ({ symbol }) => {
   return (
     <Box
       m={5}
-      mt={0}
+      // mt={5}
       // width={{ sm:"100%", base: "50%", md: "100%", lg: "50%" }}
       width={{
         base: "90%",
         sm: "90%",
-        md: "90%",
+        md: "95%",
         lg: "50%",
         xl: "50%",
       }}
