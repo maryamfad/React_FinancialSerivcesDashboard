@@ -60,7 +60,7 @@ function StockDiagram({ symbol, stockLogo }) {
           volume: stock.volume,
         }))
       );
-      console.log("data22222", data);
+    
       setIsDataReady(true);
       // } catch (error) {
       // setError(error.message);
@@ -128,7 +128,7 @@ function StockDiagram({ symbol, stockLogo }) {
     <Flex
       flexDir={"column"}
       justifyContent={"space-between"}
-      mr={5}
+      // mr={{lg:5, xl:5}}
       mt={1}
       boxShadow={
         "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"

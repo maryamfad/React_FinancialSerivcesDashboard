@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import StockDiagram from "./StockDiagram/StockDigaram.jsx";
 import NavbarMenu from "./Navbar/Navbar.jsx";
-// import getMostActiveStocks from "../../api/getMostActiveStocks";
 import Scroller from "./Scroller/Scroller.jsx";
 import SearchStocks from "./SearchStocks/SearchStocks.jsx";
 import getStockLogo from "../../api/getStockLogo.js";
@@ -13,8 +12,7 @@ import { Box, Flex } from "@chakra-ui/react";
 
 const Home = () => {
   const [symbol, setSymbol] = useState("AAPL");
-  const [gainersTableExpanded, setGainersTableExpanded] = useState(false);
-  const [losersTableExpanded, setLosersTableExpanded] = useState(false);
+
   const [stockLogo, setStockLogo] = useState(null);
 
   const loadStockLogo = async (symbol) => {
@@ -28,45 +26,82 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // loadMostActiveStocksData();
     loadStockLogo(symbol);
   }, [symbol]);
 
   return (
     <Box className="home">
       <NavbarMenu />
-      <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
+      <Box mt={{ base: "10%", sm: "10%", md: "10%", lg:"1%", xl:"1%" }}>
+        <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
+      </Box>
 
-      <Flex height={"65vh"} justifyContent={"space-evenly"}>
-        <Flex width={"25%"}>
+      <Flex
+        flexDir={{
+          base: "column",
+          sm: "column",
+          md: "column",
+          lg: "row",
+          xl: "row",
+        }}
+        height={{
+          base: "180vh",
+          sm: "180vh",
+          md: "100vh",
+          lg: "65vh",
+          xl: "65vh",
+        }}
+        width={"100vw"}
+        p={5}
+        gap={{ base: 5, sm: 5, md: 5 }}
+        // p={{ base: 5, sm: 5, md: 5, lg: 5, xl: 5}}
+        justifyContent={"space-between"}
+        alignItems={{ base: "center", sm: "center", md: "center" }}
+      >
+        <Flex
+          height={"100%"}
+          width={{
+            base: "100%",
+            sm: "100%",
+            md: "100%",
+            lg: "25%",
+            xl: "25%",
+          }}
+        >
           <StockSummary symbol={symbol} />
         </Flex>
-        <Box width={"40%"} >
+        <Box
+          height={"100%"}
+          width={{
+            base: "100%",
+            sm: "100%",
+            md: "100%",
+            lg: "40%",
+            xl: "40%",
+          }}
+        >
           <SearchStocks setSymbol={setSymbol} />
           <StockDiagram symbol={symbol} stockLogo={stockLogo} />
         </Box>
 
-        <Flex flexDir={"column"} justifyContent={"space-between"} width={"25%"} gap={5}>
-          <MarketGainers
-            setSymbol={setSymbol}
-            gainersTableExpanded={gainersTableExpanded}
-            setGainersTableExpanded={setGainersTableExpanded}
-            losersTableExpanded={losersTableExpanded}
-            setLosersTableExpanded={setLosersTableExpanded}
-          />
-          <MarketLosers
-            setSymbol={setSymbol}
-            gainersTableExpanded={gainersTableExpanded}
-            setGainersTableExpanded={setGainersTableExpanded}
-            losersTableExpanded={losersTableExpanded}
-            setLosersTableExpanded={setLosersTableExpanded}
-          />
+        <Flex
+          height={"100%"}
+          flexDir={"column"}
+          justifyContent={"space-between"}
+          width={{
+            base: "100%",
+            sm: "100%",
+            md: "100%",
+            lg: "25%",
+            xl: "25%",
+          }}
+        >
+          <MarketGainers setSymbol={setSymbol} />
+          <MarketLosers setSymbol={setSymbol} />
         </Flex>
       </Flex>
 
-      <div className="news-container">
-        <StockNews symbol={symbol} />
-      </div>
+      <StockNews symbol={symbol} />
     </Box>
   );
 };

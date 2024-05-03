@@ -18,9 +18,7 @@ import {
   Td,
   Icon,
 } from "@chakra-ui/react";
-const MarketLosers = ({
-  setSymbol
-}) => {
+const MarketLosers = ({ setSymbol }) => {
   // const [marketLosers, setMarketLosers] = useState([]);
   // const loadMarketLosers = async () => {
   //   try {
@@ -40,15 +38,20 @@ const MarketLosers = ({
       boxShadow={
         "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
       }
-      // mb={5}
-      height={"47%"}
+      height={{
+        base: "300px",
+        sm: "300px",
+        md: "300px",
+        lg: "200px",
+        xl: "200px",
+      }}
     >
-      <Text fontWeight={500} fontSize={"18px"} m={3} pt={3}>
+      <Text fontWeight={500} fontSize={"18px"} ml={2} mt={2} mb={1}>
         Market Biggest Losers
       </Text>
 
       <Box
-        height={"70%"}
+        height={{ base: "78%", sm: "78%",md:"78%", lg: "80%", xl: "80%" }}
         overflowY={"auto"}
         overflowX={{ base: "hidden", md: "auto" }}
       >
