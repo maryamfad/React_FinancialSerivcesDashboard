@@ -39,7 +39,17 @@ function Sidebar() {
       top="0"
       overflowY="auto"
       boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
-      w={sidebarSize === "small" ? "75px" : "200px"}
+      w={
+        sidebarSize === "small"
+          ? { base: "55px", sm: "55px", md: "55px", lg: "75px", xl: "75px" }
+          : {
+              base: "150px",
+              sm: "150px",
+              md: "150px",
+              lg: "200px",
+              xl: "200px",
+            }
+      }
       transition="all 0.3s ease-in-out"
       borderTopRightRadius={sidebarSize === "small" ? "15px" : "30px"}
       borderBottomRightRadius={sidebarSize === "small" ? "15px" : "30px"}

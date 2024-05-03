@@ -8,6 +8,8 @@ import MarketGainers from "./MarketGainers/MarketGainers.jsx";
 import MarketLosers from "./MarketLosers/MarketLosers.jsx";
 import StockNews from "./StockNews/StocksNew.jsx";
 import { Box, Flex } from "@chakra-ui/react";
+import NavbarMenu from "../Navbar/Navbar.jsx";
+// import NavbarMenu from "./Navbar/Navbar.jsx";
 
 const Home = () => {
   const [symbol, setSymbol] = useState("AAPL");
@@ -30,7 +32,7 @@ const Home = () => {
 
   return (
     <Box className="home">
-      
+      <NavbarMenu />
       <Box mt={{ base: "32%", sm: "32%", md: "32%", lg:"0", xl:"0" }}>
         <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
       </Box>

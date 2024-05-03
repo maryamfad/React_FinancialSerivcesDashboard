@@ -31,9 +31,9 @@ function BuySell() {
   };
   return (
     <Box
-    mr={5}
-      width={"25%"}
-      height={"100%"}
+      mr={5}
+      width={{ base: "100%", sm: "100%", md: "100%", lg: "25%", xl: "25%" }}
+      height={{ base: "50%", sm: "50%", md: "50%", lg: "100%", xl: "100%" }}
       boxShadow={
         "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
       }
@@ -50,7 +50,12 @@ function BuySell() {
             setBuySelected(true);
           }}
         >
-          <Text color={isBuySelected ? "white" : "none"} fontWeight={"600"} mb={0} p={2}>
+          <Text
+            color={isBuySelected ? "white" : "none"}
+            fontWeight={"600"}
+            mb={0}
+            p={2}
+          >
             Buy
           </Text>
         </Flex>
@@ -65,7 +70,12 @@ function BuySell() {
             setBuySelected(false);
           }}
         >
-          <Text color={!isBuySelected ? "white" : "none"} fontWeight={"600"} mb={0} p={2}>
+          <Text
+            color={!isBuySelected ? "white" : "none"}
+            fontWeight={"600"}
+            mb={0}
+            p={2}
+          >
             Sell
           </Text>
         </Flex>
@@ -78,10 +88,12 @@ function BuySell() {
           </Box>
           <Box width={"50%"} ml={10}>
             <Text fontWeight={"500"}>Market Price</Text>
-            <Text fontWeight={"500"} color={"#343a40"}>181.98 $</Text>
+            <Text fontWeight={"500"} color={"#343a40"}>
+              181.98 $
+            </Text>
           </Box>
         </Flex>
-        <Box mt={4}>
+        <Box mt={0}>
           <FormControl>
             <FormLabel htmlFor="order-type">Order Type</FormLabel>
             <Select
@@ -115,10 +127,12 @@ function BuySell() {
           </Box>
           <Box width={"50%"} ml={10}>
             <Text fontWeight={"500"}>Estimated Cost</Text>
-            <Text fontWeight={"500"} color={"#343a40"}>181.98 $</Text>
+            <Text fontWeight={"500"} color={"#343a40"}>
+              181.98 $
+            </Text>
           </Box>
         </Flex>
-        <FormControl mt={4}>
+        <FormControl mt={0}>
           <FormLabel htmlFor="time-in-force">Time in Force</FormLabel>
           <Select
             id="time-in-force"

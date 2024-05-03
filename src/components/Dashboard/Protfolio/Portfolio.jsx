@@ -3,8 +3,8 @@ import { Box, Flex, Text, Button, Divider } from "@chakra-ui/react";
 const Portfolio = () => {
   return (
     <Box
-      m={5}
-      mb={0}
+      // m={5}
+      // mb={0}
       // height={"auto"}
       flexGrow={1}
       boxShadow={
@@ -12,14 +12,23 @@ const Portfolio = () => {
       }
       borderRadius={"5px"}
     >
-      <Flex m={5} p={5} mb={0} pb={0} justifyContent={"space-between"}>
+      <Flex
+        m={{ base: 2, sm: 2, md: 2, lg: 5, xl: 5 }}
+        p={{ base: 2, sm: 2, md: 2, lg: 5, xl: 5 }}
+        mb={0}
+        pb={0}
+        justifyContent={"space-between"}
+      >
         <Box width={"50%"}>
           <Text fontWeight={500} fontSize={"18px"}>
             {" "}
             Your Protfolio
           </Text>
         </Box>
-        <Flex width={"50%"} justifyContent={"space-evenly"}>
+        <Flex
+          width={{ base: "60%", sm: "60%", md: "60%", lg: "50%", xl: "50%" }}
+          justifyContent={"space-evenly"}
+        >
           <Button>1D</Button>
           <Button>1M</Button>
           <Button>1Y</Button>

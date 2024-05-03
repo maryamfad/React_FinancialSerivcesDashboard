@@ -8,17 +8,21 @@ import BuyingPower from "./BuyingPower/BuyingPower";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
   return (
     <Flex
       className="dashboard-container"
       height="100vh"
-      width="100vw"
+      width="100%"
       overflowX="hidden"
       
     >
       <Sidebar />
-      <Flex flexDir={"column"} w={"100%"}  >
+      <Flex
+        flexDir={"column"}
+        w={{ base: "85%", sm: "85%", md: "85%", lg: "100%", xl: "100%" }}
+        p={5}
+      >
         <Flex>
           <Button
             borderColor={"teal"}
@@ -29,21 +33,43 @@ const Dashboard = () => {
             Home
           </Button>
         </Flex>
-        <Box w={"100%"}  >
+        <Box w={"100%"}>
           <Box p={5}>
             <Heading as="h1" size="xl" textAlign="flex-start" color="#343a40">
               Dashboard
             </Heading>
           </Box>
-          <Flex>
-            <Flex flexDir={"column"} width={"50%"}>
+          <Flex
+            className="middle-area"
+            justifyContent={"space-between"}
+            height={{base:"100%", sm:"100%", md:"100%", lg:"57%", xl:"57%"}}
+            flexDir={{
+              base: "column",
+              sm: "column",
+              md: "column",
+              bg: "row",
+              xl: "row",
+            }}
+            mb={5}
+          >
+            <Flex
+              flexDir={"column"}
+              height={{base:"35%", sm:"35%", md:"35%", lg:"100%", xl:"100%"}}
+              width={{
+                base: "100%",
+                sm: "100%",
+                md: "100%",
+                lg: "45%",
+                xl: "45%",
+              }}
+            >
               <BuyingPower />
               <Portfolio />
             </Flex>
             <Orders />
             <BuySell />
           </Flex>
-          
+
           <Positions />
         </Box>
       </Flex>
