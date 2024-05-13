@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import getFullQuote from "../../../api/getFullQuote";
-import { Box, Divider, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 const StockSummary = ({ symbol }) => {
   const [stockSummary, setStockSummary] = useState([]);
 
