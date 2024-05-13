@@ -56,7 +56,7 @@ const MarketLosers = ({ setSymbol }) => {
         overflowX={{ base: "hidden", md: "auto" }}
       >
         <Table variant="simple">
-          <Thead zIndex={-10}>
+          <Thead position={"sticky"}>
             <Tr>
               <Th>Symbol</Th>
               <Th>Name</Th>

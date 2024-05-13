@@ -6,6 +6,7 @@ import Positions from "./Positions/Positions";
 import BuySell from "./BuySell/BuySell";
 import BuyingPower from "./BuyingPower/BuyingPower";
 import { useNavigate } from "react-router-dom";
+import Watchlist from "./Watchlist";
 
 const Dashboard = () => {
   let navigate = useNavigate();
@@ -15,7 +16,6 @@ const Dashboard = () => {
       height="100vh"
       width="100%"
       overflowX="hidden"
-      
     >
       <Sidebar />
       <Flex
@@ -27,7 +27,7 @@ const Dashboard = () => {
           <Button
             borderColor={"teal"}
             borderWidth={"2px"}
-            m={"10px"}
+            // m={"10px"}
             onClick={() => navigate("/home")}
           >
             Home
@@ -42,7 +42,13 @@ const Dashboard = () => {
           <Flex
             className="middle-area"
             justifyContent={"space-between"}
-            height={{base:"100%", sm:"100%", md:"100%", lg:"57%", xl:"57%"}}
+            height={{
+              base: "100%",
+              sm: "100%",
+              md: "100%",
+              lg: "57%",
+              xl: "57%",
+            }}
             flexDir={{
               base: "column",
               sm: "column",
@@ -54,7 +60,13 @@ const Dashboard = () => {
           >
             <Flex
               flexDir={"column"}
-              height={{base:"35%", sm:"35%", md:"35%", lg:"100%", xl:"100%"}}
+              height={{
+                base: "35%",
+                sm: "35%",
+                md: "35%",
+                lg: "100%",
+                xl: "100%",
+              }}
               width={{
                 base: "100%",
                 sm: "100%",
@@ -69,8 +81,18 @@ const Dashboard = () => {
             <Orders />
             <BuySell />
           </Flex>
-
-          <Positions />
+          <Flex
+            flexDir={{
+              base: "column",
+              sm: "column",
+              md: "column",
+              bg: "row",
+              xl: "row",
+            }}
+          >
+            <Positions />
+            <Watchlist />
+          </Flex>
         </Box>
       </Flex>
     </Flex>

@@ -1,9 +1,11 @@
 import { Box, Flex, Text, Divider } from "@chakra-ui/react";
-const Positions = () => {
+
+const Watchlist = () => {
   return (
     <Box
       mb={5}
-      width={{ base: "100%", sm: "100%", md: "100%", lg: "45%", xl: "45%" }}
+      ml={6}
+      width={{ base: "100%", sm: "100%", md: "100%", lg: "52%", xl: "52%" }}
       minHeight={{
         base: "100px",
         sm: "100px",
@@ -22,7 +24,7 @@ const Positions = () => {
         <Box width={"50%"}>
           <Text fontWeight={500} fontSize={"18px"}>
             {" "}
-            Top Positions
+            Watchlist
           </Text>
         </Box>
       </Flex>
@@ -30,4 +32,4 @@ const Positions = () => {
     </Box>
   );
 };
-export default Positions;
+export default Watchlist;

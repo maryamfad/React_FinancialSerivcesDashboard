@@ -52,13 +52,13 @@ const MarketGainers = ({ setSymbol }) => {
       </Text>
 
       <Box
-        height={{ base: "78%", sm: "78%",md:"78%", lg: "80%", xl: "80%"}}
+        height={{ base: "78%", sm: "78%", md: "78%", lg: "80%", xl: "80%" }}
         overflowY={"auto"}
         overflowX={{ base: "hidden", md: "auto" }}
       >
         <Table variant="simple">
-          <Thead >
-            <Tr >
+          <Thead position={"sticky"}>
+            <Tr>
               <Th>Symbol</Th>
               <Th>Name</Th>
               <Th>Price</Th>

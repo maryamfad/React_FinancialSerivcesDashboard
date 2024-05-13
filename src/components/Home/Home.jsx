@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <Box className="home">
       <NavbarMenu />
-      <Box mt={{ base: "32%", sm: "32%", md: "32%", lg:"0", xl:"0" }}>
+      <Box mt={{ base: "32%", sm: "32%", md: "3%", lg:"0", xl:"0" }}>
         <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
       </Box>
 
@@ -52,11 +52,13 @@ const Home = () => {
           lg: "65vh",
           xl: "65vh",
         }}
-        width={"100vw"}
-        p={5}
-        gap={{ base: 5, sm: 5, md: 5 }}
-        // p={{ base: 5, sm: 5, md: 5, lg: 5, xl: 5}}
-        justifyContent={"space-between"}
+        width={"100%"}
+        // borderWidth={"3px"}
+        pl={15}
+        pr={15}
+        // gap={{ base: 5, sm: 5, md: 5 }}
+        // p={{ base: 5, sm: 5, md: 5, lg: 15, xl: 15}}
+        justifyContent={"space-evenly"}
         alignItems={{ base: "center", sm: "center", md: "center" }}
       >
         <Flex
@@ -77,8 +79,8 @@ const Home = () => {
             base: "100%",
             sm: "100%",
             md: "100%",
-            lg: "40%",
-            xl: "40%",
+            lg: "45%",
+            xl: "45%",
           }}
         >
           <SearchStocks setSymbol={setSymbol} />

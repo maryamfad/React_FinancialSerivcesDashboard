@@ -41,7 +41,7 @@ function NavbarMenu() {
       height={"60px"}
       position={"fixed"}
       minWidth={"100vw"}
-      zIndex={2}
+      zIndex={10}
       boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
       justifyContent={"space-between"}
       alignItems={"center"}
