@@ -3,7 +3,7 @@
   height: auto;
   overflow-y: auto;
   min-width: 100vw;
-  background-color: #f2e5f3;
+  background-color: #dbdee0;
 }
 
 .App {
@@ -12,7 +12,35 @@
   min-width: 100vw;
 }
 
+body {
+  background-color: #ffffff;
+  color: #333333;
+}
 
+.header {
+  background-color: #001f3f;
+  color: #00aaff;
+}
+
+.button-primary {
+  background-color: #00aaff;
+  color: #ffffff;
+}
+
+.button-error {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+.container {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.text-success {
+  color: #20c997;
+}
 
 
 

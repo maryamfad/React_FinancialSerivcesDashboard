@@ -6,10 +6,11 @@ import "./Signup.css";
 import { signUp } from "../../services/AuthServices";
 import { insertUserIntoUsers } from "../../services/UserServices";
 import { useNavigate } from "react-router-dom";
+import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, useBreakpointValue, useColorModeValue } from '@chakra-ui/react';
 
 function Signup() {
   let navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -31,7 +32,7 @@ function Signup() {
   );
 
   const handleSignup = async (event) => {
-    if (!email || !password || !confirmPassword) {
+    if (!username || !password || !confirmPassword) {
       setErrorMessage("Please fill in all fields");
       return;
     }
@@ -42,9 +43,9 @@ function Signup() {
 
     event.preventDefault();
     try {
-      await signUp(email, password)
-        .then((user) => insertUserIntoUsers(email, password))
-        .then(() => navigate("/home"))
+      await signUp(username, password)
+        // .then((user) => insertUserIntoUsers(username, password))
+        .then(() => navigate("/dashboard"))
         .catch((error) => {
           console.error("Error:", error);
         });
@@ -53,95 +54,65 @@ function Signup() {
       console.log(error.message);
     }
   };
+  const formWidth = useBreakpointValue({ base: '90%', md: '50%', lg: '40%' });
+  const inputBg = useColorModeValue('white', 'gray.700');
+  const inputBorderColor = useColorModeValue('gray.300', 'gray.600');
 
   return (
-    <div className="signup-container">
-      <div className="signup-form">
-        <div className="signup-title">Sign Up</div>
-        <div className="error-message-container">
-          {errorMessage && (
-            <div className="error-message">
-              <MdError
-                style={{ verticalAlign: "middle", marginRight: "5px" }}
-              />
-              {errorMessage}
-            </div>
-          )}
-        </div>
-        <label htmlFor="email">email</label>
-        <input
-          type="text"
-          className="signup-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="email"
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          className="signup-input"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <div className="password-hints">
-          <p>Password must:</p>
-          <ul>
-            <li className={passwordRequirements.minLength ? "met" : "unmet"}>
-              {passwordRequirements.minLength ? (
-                <GiConfirmed />
-              ) : (
-                <MdErrorOutline />
-              )}{" "}
-              Be at least 8 characters long
-            </li>
-            <li
-              className={passwordRequirements.hasSpecialChar ? "met" : "unmet"}
-            >
-              {passwordRequirements.hasSpecialChar ? (
-                <GiConfirmed />
-              ) : (
-                <MdErrorOutline />
-              )}
-              Include special characters (e.g., !@#$%)
-            </li>
-            <li className={passwordRequirements.hasNumber ? "met" : "unmet"}>
-              {passwordRequirements.hasNumber ? (
-                <GiConfirmed />
-              ) : (
-                <MdErrorOutline />
-              )}{" "}
-              Contain at least one number
-            </li>
-            <li className={passwordRequirements.hasUppercase ? "met" : "unmet"}>
-              {passwordRequirements.hasUppercase ? (
-                <GiConfirmed />
-              ) : (
-                <MdErrorOutline />
-              )}{" "}
-              Have at least one uppercase letter
-            </li>
-          </ul>
-        </div>
-        <label htmlFor="confirm-password">Confirm Password</label>
-        <input
-          type="password"
-          className="signup-input"
-          id="confirm-password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Confirm your password"
-        />
-        <button
-          className="signup-button"
-          onClick={handleSignup}
-          disabled={isDisabled}
-          style={isDisabled ? { color: "gray", backgroundColor: "#ccc" } : {}}
-        >
+    <Box bg="white" p={8} borderRadius="lg" boxShadow="lg" w={formWidth} mx="auto" mt={10}>
+      <Heading as="h2" size="xl" mb={6} textAlign="center" color="gray.700">
+        Sign Up
+      </Heading>
+      <VStack spacing={4}>
+        <FormControl id="username" isRequired>
+          <FormLabel>Username</FormLabel>
+          <Input
+            type="text"
+            placeholder="Enter your username"
+            aria-label="Username"
+            aria-required="true"
+            bg={inputBg}
+            borderColor={inputBorderColor}
+          />
+        </FormControl>
+        <FormControl id="email" isRequired>
+          <FormLabel>Email</FormLabel>
+          <Input
+            type="email"
+            placeholder="Enter your email"
+            aria-label="Email"
+            aria-required="true"
+            bg={inputBg}
+            borderColor={inputBorderColor}
+          />
+        </FormControl>
+        <FormControl id="password" isRequired>
+          <FormLabel>Password</FormLabel>
+          <Input
+            type="password"
+            placeholder="Enter your password"
+            aria-label="Password"
+            aria-required="true"
+            bg={inputBg}
+            borderColor={inputBorderColor}
+          />
+        </FormControl>
+        <FormControl id="confirm-password" isRequired>
+          <FormLabel>Confirm Password</FormLabel>
+          <Input
+            type="password"
+            placeholder="Confirm your password"
+            aria-label="Confirm Password"
+            aria-required="true"
+            bg={inputBg}
+            borderColor={inputBorderColor}
+          />
+        </FormControl>
+        <Button colorScheme="blue" size="lg" width="full" mt={4}>
           Sign Up
-        </button>
-      </div>
-    </div>
+        </Button>
+      </VStack>
+    </Box>
   );
 }
 

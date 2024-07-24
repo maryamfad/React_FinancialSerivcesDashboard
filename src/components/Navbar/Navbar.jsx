@@ -37,7 +37,7 @@ function NavbarMenu() {
   }, []);
   return (
     <Flex
-      backgroundColor="#125667"
+      backgroundColor="#003366"
       height={{base:"150px",sm:"150px",md:"60px",lg:"60px", xl:"60px"}}
       position={"fixed"}
       minWidth={"100vw"}
