@@ -8,7 +8,7 @@ const StockNews = ({ symbol }) => {
   const loadStocksList = async (stockSymbol) => {
     try {
       const result = await getStocksNews(stockSymbol);
-      console.log(result.feed);
+
       setStocksNews(result.feed);
     } catch (error) {
       console.error("Failed to fetch data: ", error);
@@ -54,23 +54,30 @@ const StockNews = ({ symbol }) => {
               borderBottom={"1px solid #eee"}
               key={index}
             >
-              <Image src={feed.banner_image} alt="News" width={"120px"} height={"80px"} objectFit={"cover"} borderRadius={"5px"} />
-              <div class="news-feed">
-                <div class="news-title">
+              <Image
+                src={feed.banner_image}
+                alt="News"
+                width={"120px"}
+                height={"80px"}
+                objectFit={"cover"}
+                borderRadius={"5px"}
+              />
+              <div className="news-feed">
+                <div className="news-title">
                   <a href={feed.url} rel="noopener noreferrer" target="_blank">
                     {feed.title}
                   </a>
                 </div>
-                <p class="news-summary">{feed.summary}</p>
+                <p className="news-summary">{feed.summary}</p>
                 <a
                   href={feed.url}
                   rel="noopener noreferrer"
                   target="_blank"
-                  class="news-link"
+                  className="news-link"
                 >
                   Read More
                 </a>
-                <span class="news-date">{feed.time_published}</span>
+                <span className="news-date">{feed.time_published}</span>
               </div>
             </Flex>
           ))

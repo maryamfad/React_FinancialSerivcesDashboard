@@ -3,7 +3,9 @@
   height: auto;
   overflow-y: auto;
   min-width: 100vw;
+  background-color: #f2e5f3;
 }
+
 .App {
   text-align: center;
   min-height: 100vh;

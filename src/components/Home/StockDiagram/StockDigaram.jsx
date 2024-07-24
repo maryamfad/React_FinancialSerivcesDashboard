@@ -38,7 +38,7 @@ function StockDiagram({ symbol, stockLogo }) {
           volume: stock.volume,
         }))
       );
-      console.log("dataaaa", data);
+  
       setIsDataReady(true);
     } catch (error) {
       // setError(error.message);

@@ -76,13 +76,7 @@ export const scrollerData = [
     price: 43.13,
     changesPercentage: 1.7937,
   },
-  {
-    symbol: "GCTS",
-    name: "GCT Semiconductor Holding, Inc.",
-    change: 3.57,
-    price: 9.3,
-    changesPercentage: 62.6206,
-  },
+
   {
     symbol: "WISA",
     name: "WiSA Technologies, Inc.",

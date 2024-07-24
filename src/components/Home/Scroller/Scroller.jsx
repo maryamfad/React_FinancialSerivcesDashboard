@@ -60,7 +60,7 @@ const Scroller = ({ setSymbol }) => {
     enrichScrollerDataWithLogo()
       .then((updatedData) => {
         setMostActiveStocks(updatedData);
-        console.log("updatedData", updatedData); // Logs the enriched data
+      
       })
       .catch((error) => {
         // Handle or log error
@@ -100,12 +100,12 @@ const Scroller = ({ setSymbol }) => {
               <div>
                 <div className="d-flex justify-content-between">
                   <div
-                    class="stock-symbol"
+                    className="stock-symbol"
                     onClick={() => setSymbol(stock.symbol)}
                   >
                     {index}-{stock.symbol}
                   </div>
-                  <img src={stock.logo} alt="logo" class="stock-logo" />
+                  <img src={stock.logo} alt="logo" className="stock-logo" />
                 </div>
                 <div
                   className="stock-change-value"
