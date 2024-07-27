@@ -21,11 +21,8 @@ import {
   ModalBody,
   ModalCloseButton,
   Icon,
-  List,
-  ListItem,
-  ListIcon,
 } from "@chakra-ui/react";
-import { CheckCircleIcon, WarningIcon } from '@chakra-ui/icons';
+import { CheckCircleIcon, WarningIcon } from "@chakra-ui/icons";
 function Signup() {
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -43,7 +40,6 @@ function Signup() {
     hasSpecialChar: "Password must contain at least one special character.",
   };
 
-
   const checkPasswordRules = (password) => {
     return {
       minLength: password.length >= 8,
@@ -55,16 +51,15 @@ function Signup() {
   };
   const passwordRulesStatus = checkPasswordRules(password);
 
-
-  console.log(passwordRulesStatus);
-  // let isDisabled = !(
-  //   passwordRulesStatus.hasNumber &&
-  //   passwordRulesStatus.hasSpecialChar &&
-  //   passwordRulesStatus.hasUppercase &&
-  //   passwordRulesStatus.minLength &&
-  //   confirmPassword
-  // );
-
+  let isDisabled = !(
+    passwordRulesStatus.hasNumber &&
+    passwordRulesStatus.hasSpecialChar &&
+    passwordRulesStatus.hasUpperCase &&
+    passwordRulesStatus.hasLowerCase &&
+    passwordRulesStatus.minLength &&
+    confirmPassword
+  );
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (isLoading) return;
@@ -80,20 +75,21 @@ function Signup() {
       })
       .catch((error) => {
         if (error.status === 400) {
-          setErrorMessage("Invalid input")
+          setErrorMessage("Invalid input");
           onOpen();
         } else {
           setErrorMessage(error.message || "An unexpected error occurred.");
           onOpen();
         }
-      }).finally(() => {
-          setIsLoading(false);
-        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
   const formWidth = useBreakpointValue({ base: "90%", md: "50%", lg: "40%" });
   const inputBg = useColorModeValue("white", "gray.700");
   const inputBorderColor = useColorModeValue("gray.300", "gray.600");
- 
+
   return (
     <Box
       bg="white"
@@ -148,10 +144,17 @@ function Signup() {
               borderColor={inputBorderColor}
             />
           </FormControl>
-          <Box width={'100%'} spacing={2} mt={2} mb={4} ml={2} fontSize="sm">
+          <Box width={"100%"} spacing={2} mt={2} mb={4} ml={2} fontSize="sm">
             {Object.entries(passwordRules).map(([rule, description]) => (
-              <Box key={rule} color={passwordRulesStatus[rule] ? 'green.500' : 'gray.500'}>
-                <Box mr={2} as={passwordRulesStatus[rule] ? CheckCircleIcon : WarningIcon} color={passwordRulesStatus[rule] ? 'green.500' : 'gray.500'} />
+              <Box
+                key={rule}
+                color={passwordRulesStatus[rule] ? "green.500" : "gray.500"}
+              >
+                <Box
+                  mr={2}
+                  as={passwordRulesStatus[rule] ? CheckCircleIcon : WarningIcon}
+                  color={passwordRulesStatus[rule] ? "green.500" : "gray.500"}
+                />
                 {description}
               </Box>
             ))}
@@ -163,7 +166,7 @@ function Signup() {
             mt={4}
             type="submit"
             isLoading={isLoading}
-            // isDisabled={isDisabled && isLoading}
+            isDisabled={isDisabled}
           >
             Sign Up
           </Button>
