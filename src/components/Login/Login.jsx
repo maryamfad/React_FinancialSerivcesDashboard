@@ -11,8 +11,6 @@ import {
   VStack,
   Heading,
   Text,
-  Alert,
-  AlertIcon,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -29,7 +27,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const [serverError, setServerError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const formWidth = useBreakpointValue({ base: "90%", md: "50%", lg: "40%" });
 
@@ -51,10 +49,10 @@ function Login() {
         .then(() => navigate("/dashboard"))
         .catch((error) => {
           if (error.status === 400) {
-            setServerError("Invalid credentials");
+            setErrorMessage("Username or password is incorrect");
             onOpen(); 
           } else {
-            setServerError(error.message || "An unexpected error occurred.");
+            setErrorMessage(error.message || "An unexpected error occurred.");
             onOpen(); 
           }
         });
@@ -139,7 +137,7 @@ function Login() {
             flexDirection="column"
           >
             <Text fontSize="lg" mb={4}>
-              Invalid credentials
+              {errorMessage}
             </Text>
             <Button colorScheme="red" onClick={onClose}>
               Close
