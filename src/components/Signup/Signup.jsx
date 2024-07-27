@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import { MdError } from "react-icons/md";
-import { GiConfirmed } from "react-icons/gi";
-import { MdErrorOutline } from "react-icons/md";
 import "./Signup.css";
 import { signUp } from "../../services/AuthServices";
-import { insertUserIntoUsers } from "../../services/UserServices";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -25,8 +21,11 @@ import {
   ModalBody,
   ModalCloseButton,
   Icon,
+  List,
+  ListItem,
+  ListIcon,
 } from "@chakra-ui/react";
-import { WarningIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon, WarningIcon } from '@chakra-ui/icons';
 function Signup() {
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -36,22 +35,36 @@ function Signup() {
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-
-
-  const passwordRequirements = {
-    minLength: password.length >= 8,
-    hasSpecialChar: /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(password),
-    hasNumber: /\d/.test(password),
-    hasUppercase: /[A-Z]/.test(password),
+  const passwordRules = {
+    minLength: "Password must be at least 8 characters long.",
+    hasUpperCase: "Password must contain at least one uppercase letter.",
+    hasLowerCase: "Password must contain at least one lowercase letter.",
+    hasNumber: "Password must contain at least one number.",
+    hasSpecialChar: "Password must contain at least one special character.",
   };
-  let isDisabled = !(
-    passwordRequirements.hasNumber &&
-    passwordRequirements.hasSpecialChar &&
-    passwordRequirements.hasUppercase &&
-    passwordRequirements.minLength &&
-    confirmPassword
-  );
-console.log("isDisabled",isDisabled);
+
+
+  const checkPasswordRules = (password) => {
+    return {
+      minLength: password.length >= 8,
+      hasUpperCase: /[A-Z]/.test(password),
+      hasLowerCase: /[a-z]/.test(password),
+      hasNumber: /[0-9]/.test(password),
+      hasSpecialChar: /[!@#$%^&*]/.test(password),
+    };
+  };
+  const passwordRulesStatus = checkPasswordRules(password);
+
+
+  console.log(passwordRulesStatus);
+  // let isDisabled = !(
+  //   passwordRulesStatus.hasNumber &&
+  //   passwordRulesStatus.hasSpecialChar &&
+  //   passwordRulesStatus.hasUppercase &&
+  //   passwordRulesStatus.minLength &&
+  //   confirmPassword
+  // );
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (isLoading) return;
@@ -80,7 +93,7 @@ console.log("isDisabled",isDisabled);
   const formWidth = useBreakpointValue({ base: "90%", md: "50%", lg: "40%" });
   const inputBg = useColorModeValue("white", "gray.700");
   const inputBorderColor = useColorModeValue("gray.300", "gray.600");
-console.log("isloading: " +isLoading);
+ 
   return (
     <Box
       bg="white"
@@ -135,6 +148,14 @@ console.log("isloading: " +isLoading);
               borderColor={inputBorderColor}
             />
           </FormControl>
+          <Box width={'100%'} spacing={2} mt={2} mb={4} ml={2} fontSize="sm">
+            {Object.entries(passwordRules).map(([rule, description]) => (
+              <Box key={rule} color={passwordRulesStatus[rule] ? 'green.500' : 'gray.500'}>
+                <Box mr={2} as={passwordRulesStatus[rule] ? CheckCircleIcon : WarningIcon} color={passwordRulesStatus[rule] ? 'green.500' : 'gray.500'} />
+                {description}
+              </Box>
+            ))}
+          </Box>
           <Button
             colorScheme="blue"
             size="lg"
@@ -142,7 +163,7 @@ console.log("isloading: " +isLoading);
             mt={4}
             type="submit"
             isLoading={isLoading}
-            isDisabled={isDisabled && isLoading}
+            // isDisabled={isDisabled && isLoading}
           >
             Sign Up
           </Button>
