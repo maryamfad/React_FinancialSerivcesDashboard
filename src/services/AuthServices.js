@@ -16,10 +16,11 @@ export const signUp = async (username, password) => {
       const error = new Error("Network response was not ok");
       error.status = response.status;
       error.details = errorDetails;
+      console.log(error);
       throw error;
     }
 
-    return response;
+    return response.json();
   } catch (error) {
     throw error;
   }
