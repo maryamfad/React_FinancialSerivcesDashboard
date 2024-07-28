@@ -60,7 +60,6 @@ const Scroller = ({ setSymbol }) => {
     enrichScrollerDataWithLogo()
       .then((updatedData) => {
         setMostActiveStocks(updatedData);
-      
       })
       .catch((error) => {
         // Handle or log error
@@ -73,7 +72,7 @@ const Scroller = ({ setSymbol }) => {
   return (
     <Box
       className="scroller"
-      mt={"5%"}
+      // mt={"5%"}
       width={"100%"}
       data-animated={
         !window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -81,19 +80,13 @@ const Scroller = ({ setSymbol }) => {
           : "false"
       }
     >
-      <Flex
-        width={"2000%"}
-        paddingBlock={"1rem"}
-        gap={"1rem"}
-        className="scroller_inner"
-      >
+      <Flex width={"2000%"} className="scroller_inner">
         {[...mostActiveStocks, ...mostActiveStocks].map((stock, index) => (
           <Box
-            // className="box"
             p={3}
-            boxShadow={
-              "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-            }
+            ml={3}
+            bg={"white"}
+            boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset"
             key={index}
           >
             <div className="d-flex justify-content-between">

@@ -31,22 +31,16 @@ const Home = () => {
     <Box width="100vw" minHeight="100vh">
       {/* Top Boxes */}
       {/* <Box width="100%" mb={4}> */}
-      <Box
-        position="fixed"
-        top={0}
-        left={0}
-        width="100%"
-        zIndex={1000}
-      >
+      <Box position="fixed" top={0} left={0} width="100%" zIndex={1000}>
         <NavbarMenu />
       </Box>
-      <Box bg="blue.500" width="100%" p={4} mt={{base:"12%", md:"5%"}}>
-        Top Box 2
+      <Box  width="100%"  mt={{ base: "12%", md: "5%" }}>
+        <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
       </Box>
       {/* </Box> */}
 
       {/* Main Content */}
-      <Box width="100%" height="calc(100% - 128px)">
+      <Box width="100%" height="calc(100% - 128px)" mt={"1%"}>
         {" "}
         {/* Adjust height as needed */}
         <Flex
