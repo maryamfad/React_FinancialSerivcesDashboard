@@ -1,3 +1,5 @@
+import { Navigate } from "react-router-dom";
+
 export const signUp = async (username, password) => {
   try {
     const response = await fetch(
@@ -53,4 +55,29 @@ export const login = async (username, password) => {
   }
 };
 
-export const logout = () => {};
+export const logout = async () => {
+  const token = localStorage.getItem("token"); // Adjust based on your token storage
+
+  try {
+    const response = await fetch(
+      "https://wealthpath-385e08c18cf4.herokuapp.com/auth/logout",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.ok) {
+      localStorage.removeItem("token"); // Remove the token
+      Navigate("/login"); // Redirect to login page
+    } else {
+      const errorText = await response.text();
+      console.error("Logout failed", errorText);
+    }
+  } catch (error) {
+    console.error("Logout failed", error);
+  }
+};

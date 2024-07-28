@@ -9,17 +9,14 @@ import MarketLosers from "./MarketLosers/MarketLosers.jsx";
 import StockNews from "./StockNews/StocksNew.jsx";
 import { Box, Flex } from "@chakra-ui/react";
 import NavbarMenu from "../Navbar/Navbar.jsx";
-// import NavbarMenu from "./Navbar/Navbar.jsx";
 
 const Home = () => {
   const [symbol, setSymbol] = useState("AAPL");
-
   const [stockLogo, setStockLogo] = useState(null);
 
   const loadStockLogo = async (symbol) => {
     try {
       const result = await getStockLogo(symbol);
-
       setStockLogo(result);
     } catch (error) {
       console.error("Failed to fetch data: ", error);
@@ -53,11 +50,8 @@ const Home = () => {
           xl: "65vh",
         }}
         width={"100%"}
-        // borderWidth={"3px"}
         pl={15}
         pr={15}
-        // gap={{ base: 5, sm: 5, md: 5 }}
-        // p={{ base: 5, sm: 5, md: 5, lg: 15, xl: 15}}
         justifyContent={"space-evenly"}
         alignItems={{ base: "center", sm: "center", md: "center" }}
       >

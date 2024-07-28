@@ -35,6 +35,7 @@ function NavbarMenu() {
       // setUser(JSON.parse(storedUser));
     }
   }, []);
+
   return (
     <Flex
       backgroundColor="#003366"
@@ -169,7 +170,7 @@ function NavbarMenu() {
           </Box>
         </Flex>
       </Box>
-      {localStorage.getItem("user") ? (
+      {localStorage.getItem("token") ? (
         <Flex
           justifyContent={"center"}
           alignItems={"center"}
@@ -198,9 +199,7 @@ function NavbarMenu() {
           onClick={() => {
             updateSelectedItem("logout");
             logout();
-            localStorage.removeItem("user");
             setUser(null);
-            navigate("/home");
           }}
         >
           <Text>{user}</Text>
