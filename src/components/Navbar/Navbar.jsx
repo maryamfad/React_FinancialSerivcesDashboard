@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../services/AuthServices";
 import { Box, Flex, Text } from "@chakra-ui/react";
 
 function NavbarMenu() {
   let navigate = useNavigate();
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
+
   const [user, setUser] = useState(null);
   const [selectedItem, setSelectedItem] = useState({
     menu: false,
@@ -39,23 +43,113 @@ function NavbarMenu() {
   return (
     <Flex
       backgroundColor="#003366"
-      height={{base:"150px",sm:"150px",md:"60px",lg:"60px", xl:"60px"}}
-      position={"fixed"}
-      minWidth={"100vw"}
-      zIndex={2}
-      boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
       justifyContent={"space-between"}
       alignItems={"center"}
-      pr={"30px"}
+      pr={"5%"}
     >
-      <Box width={"60%"} ml={"70px"}>
-        <Flex flexDir={{base:"column", sm:"column", md:"row", lg:"row", xl:"row"}} 
-        width={{base:"60%", sm:"60%", md:"100%", lg:"100%", xl:"100%"}}>
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        width="100%"
+        color={"white"}
+      >
+        <Flex>
+          <Link to="/home">
+            <Box
+              bg={isActive("/home") ? "rgba(255, 255, 255, 0.1)" : ""}
+              p={{base: 1, md:2}}
+              m={{base: 0, md:2}}
+              borderRadius={"5px"}
+              _hover={{
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                borderRadius: "5px",
+              }}
+            >
+              Home
+            </Box>
+          </Link>
+          <Link to="/about">
+            <Box
+              bg={isActive("/about") ? "rgba(255, 255, 255, 0.1)" : ""}
+              _hover={{
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                borderRadius: "5px",
+              }}
+              borderRadius={"5px"}
+               p={{base: 1, md:2}}
+              m={{base: 0, md:2}}
+            >
+              About
+            </Box>
+          </Link>
+          <Link to="/services">
+            <Box
+              bg={isActive("/services") ? "rgba(255, 255, 255, 0.1)" : ""}
+              borderRadius={"5px"}
+              _hover={{
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                borderRadius: "5px",
+              }}
+               p={{base: 1, md:2}}
+              m={{base: 0, md:2}}
+            >
+              Services
+            </Box>
+          </Link>
+          <Link to="/dashboard">
+            <Box
+              bg={isActive("/dashboard") ? "rgba(255, 255, 255, 0.1)" : ""}
+              borderRadius={"5px"}
+              _hover={{
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                borderRadius: "5px",
+              }}
+               p={{base: 1, md:2}}
+              m={{base: 0, md:2}}
+            >
+              Dashboard
+            </Box>
+          </Link>
+        </Flex>
+        <Flex>
+          <Link to="/signup">
+            <Box
+              _hover={{
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                borderRadius: "5px",
+              }}
+              borderRadius={"5px"}
+               p={{base: 1, md:2}}
+              m={{base: 0, md:2}}
+            >
+              Signup
+            </Box>
+          </Link>
+          <Link to="/login">
+            <Box
+              _hover={{
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                borderRadius: "5px",
+              }}
+              borderRadius={"5px"}
+               p={{base: 1, md:2}}
+              m={{base: 0, md:2}}
+            >
+              Login
+            </Box>
+          </Link>
+        </Flex>
+      </Flex>
+      {/* <Box width={"100%"} >
+        <Flex //flexDir={{base:"column", sm:"row", md:"row", lg:"row", xl:"row"}}
+          width={{ base: "100%", sm: "100%", md: "100%", lg: "100%", xl: "100%" }}
+          fontSize={{base:"xs",  lg:"md"}}
+        >
           <Flex
             justifyContent={"center"}
             alignItems={"center"}
-            width={"100px"}
-            fontSize={"20px"}
+            // width={"100px"}
+            // fontSize={"20px"}
             fontWeight={"500"}
             cursor={"pointer"}
             backgroundColor={selectedItem.home && "rgba(255, 255, 255, 0.4)"}
@@ -86,8 +180,8 @@ function NavbarMenu() {
           <Flex
             justifyContent={"center"}
             alignItems={"center"}
-            width={"100px"}
-            fontSize={"20px"}
+            // width={"100px"}
+            // fontSize={"20px"}
             cursor={"pointer"}
             fontWeight={"500"}
             backgroundColor={selectedItem.about && "rgba(255, 255, 255, 0.4)"}
@@ -118,8 +212,8 @@ function NavbarMenu() {
           <Flex
             justifyContent={"center"}
             alignItems={"center"}
-            width={"100px"}
-            fontSize={"20px"}
+            // width={"100px"}
+            // fontSize={"20px"}
             cursor={"pointer"}
             fontWeight={"500"}
             backgroundColor={
@@ -159,7 +253,7 @@ function NavbarMenu() {
             p={2}
             color={"white"}
             textAlign={"center"}
-            marginLeft={{base:0, sm:0, md:0, lg:120,xl:120}}
+            marginLeft={{ base: 0, sm: 0, md: 0, lg: 120, xl: 120 }}
             borderWidth={"2px"}
             borderRadius={"5px"}
             onClick={() => {
@@ -174,8 +268,8 @@ function NavbarMenu() {
         <Flex
           justifyContent={"center"}
           alignItems={"center"}
-          width={"100px"}
-          fontSize={"20px"}
+          // width={"100px"}
+          // fontSize={"20px"}
           cursor={"pointer"}
           fontWeight={"500"}
           backgroundColor={selectedItem.logout && "rgba(255, 255, 255, 0.4)"}
@@ -209,8 +303,8 @@ function NavbarMenu() {
         <Flex
           justifyContent={"center"}
           alignItems={"center"}
-          width={"100px"}
-          fontSize={"20px"}
+          // width={"100px"}
+          // fontSize={"20px"}
           cursor={"pointer"}
           fontWeight={"500"}
           backgroundColor={selectedItem.login && "rgba(255, 255, 255, 0.4)"}
@@ -238,7 +332,7 @@ function NavbarMenu() {
         >
           Login
         </Flex>
-      )}
+      )} */}
     </Flex>
   );
 }
