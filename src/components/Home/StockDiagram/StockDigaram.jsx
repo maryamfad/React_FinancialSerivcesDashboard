@@ -128,26 +128,28 @@ function StockDiagram({ symbol, stockLogo }) {
     <Flex
       flexDir={"column"}
       justifyContent={"space-between"}
-      // mr={{lg:5, xl:5}}
-      mt={1}
+      bg={"white"}
+      borderRadius={"10px"}
       boxShadow={
         "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
       }
-      height={"90%"}
+      // height={"100%"}
     >
-      <Flex justifyContent={"space-evenly"} alignItems={"center"}>
-        <Text textAlign={"center"} fontSize={"24px"} fontWeight={"bold"}>
+      <Flex justifyContent={"space-evenly"} alignItems={"center"} mt={2}>
+        <Text textAlign={"center"} fontSize={"lg"} fontWeight={"bold"} justifyContent={"center"}>
           {symbol}
         </Text>
 
         <Image
           src={stockLogo}
           alt="logo"
-          width={"60px"}
-          height={"60px"}
+          width={"5%"}
+          height={"auto"}
           objectFit={"cover"}
           borderRadius={"5px"}
           padding={1}
+          mt={1}
+          bg="#EED3D9"
         />
       </Flex>
       <Divider m={0} />

@@ -49,6 +49,8 @@ const SearchStocks = ({ setSymbol }) => {
       position={"relative"}
       flexDir={"column"}
       alignSelf={"center"}
+      bg={"white"}
+      borderRadius={"10px"}
       // pt={{base:5, sm:5, md:5}}
       width={"100%"}
       onBlur={handleBlur}

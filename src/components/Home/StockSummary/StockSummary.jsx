@@ -18,6 +18,7 @@ const StockSummary = ({ symbol }) => {
   return (
     <Box
       height={"100%"}
+      bg="#EED3D9"
       boxShadow={
         "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
       }
@@ -28,7 +29,6 @@ const StockSummary = ({ symbol }) => {
       <Flex
         p={5}
         flexDir={"column"}
-        height={"90%"}
         justifyContent={"space-between"}
         backgroundColor={"#f9f9f9"}
         border={"1px solid #dee2e6"}
@@ -37,7 +37,6 @@ const StockSummary = ({ symbol }) => {
           justifyContent={"space-between"}
           alignItems={"center"}
           width={"100%"}
-          height={"100%"}
           borderBottom={"1px solid #dee2e6"}
         >
           <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
@@ -51,7 +50,6 @@ const StockSummary = ({ symbol }) => {
           justifyContent={"space-between"}
           alignItems={"center"}
           width={"100%"}
-          height={"100%"}
           borderBottom={"1px solid #dee2e6;"}
         >
           <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>

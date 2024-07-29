@@ -19,17 +19,18 @@ const StockNews = ({ symbol }) => {
   }, [symbol]);
   return (
     <Box
-      m={5}
+      // m={5}
       // mt={5}
       // width={{ sm:"100%", base: "50%", md: "100%", lg: "50%" }}
-      width={{
-        base: "90%",
-        sm: "90%",
-        md: "95%",
-        lg: "50%",
-        xl: "50%",
-      }}
+      // width={{
+      //   base: "90%",
+      //   sm: "90%",
+      //   md: "95%",
+      //   lg: "50%",
+      //   xl: "50%",
+      // }}
       // pr={{base: 5, sm:5, md:5}}
+      bg={"white"}
       height={"50vh"}
       overflow={"auto"}
       boxShadow={
