@@ -82,6 +82,7 @@ const StockSummary = ({ symbol }) => {
             borderBottom="1px solid #dee2e6"
             pr={3}
             pl={3}
+            mb={0}
             _last={{ borderBottom: "none" }}
             bg={index % 2 === 0 ? "#F5DBDB" : "white"}
           >

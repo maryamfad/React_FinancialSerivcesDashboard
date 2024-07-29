@@ -61,6 +61,7 @@ const SearchStocks = ({ setSymbol }) => {
           "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
         }
         type="text"
+        height={{base:"auto", md:"50px"}}
         placeholder="Search..."
         value={query}
         onChange={handleSearchChange}

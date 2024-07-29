@@ -38,7 +38,7 @@ function StockDiagram({ symbol, stockLogo }) {
           volume: stock.volume,
         }))
       );
-  
+
       setIsDataReady(true);
     } catch (error) {
       // setError(error.message);
@@ -60,7 +60,7 @@ function StockDiagram({ symbol, stockLogo }) {
           volume: stock.volume,
         }))
       );
-    
+
       setIsDataReady(true);
       // } catch (error) {
       // setError(error.message);
@@ -127,35 +127,44 @@ function StockDiagram({ symbol, stockLogo }) {
   return (
     <Flex
       flexDir={"column"}
-      justifyContent={"space-between"}
+      // justifyContent={"space-between"}
       bg={"white"}
       borderRadius={"10px"}
       boxShadow={
         "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
       }
-      // height={"100%"}
+      mt={5}
+      height={"95%"}
     >
-      <Flex justifyContent={"space-evenly"} alignItems={"center"} mt={2}>
-        <Text textAlign={"center"} fontSize={"lg"} fontWeight={"bold"} justifyContent={"center"}>
+      <Flex
+        justifyContent={"space-evenly"}
+        alignItems={"center"}
+        mt={4}
+        mb={4}
+        borderRadius={"5px"}
+        width={"60%"}
+        alignSelf={"center"}
+        bg="#F5DBDB"
+      >
+        <Text fontSize={"md"} fontWeight={"bold"} mb={0}>
           {symbol}
         </Text>
 
         <Image
           src={stockLogo}
           alt="logo"
-          width={"5%"}
+          width={"10%"}
           height={"auto"}
           objectFit={"cover"}
           borderRadius={"5px"}
           padding={1}
-          mt={1}
-          bg="#EED3D9"
         />
       </Flex>
-      <Divider m={0} />
-      <Flex justifyContent={"flex-end"} pr={5}>
+      {/* <Divider m={0} /> */}
+      <Flex justifyContent={"flex-end"} pr={5} mt={5}>
         <Flex justifyContent={"space-between"} cursor={"pointer"} width={"50%"}>
           <Text
+            m={0}
             color={timeFrame === "1D" && "#007BFF"}
             fontWeight={timeFrame === "1D" && "bold"}
             onClick={() => setTimeFrame("1D")}
@@ -163,6 +172,7 @@ function StockDiagram({ symbol, stockLogo }) {
             1D
           </Text>
           <Text
+            m={0}
             color={timeFrame === "5D" && "#007BFF"}
             fontWeight={timeFrame === "5D" && "bold"}
             onClick={() => setTimeFrame("5D")}
@@ -170,6 +180,7 @@ function StockDiagram({ symbol, stockLogo }) {
             5D
           </Text>
           <Text
+            m={0}
             color={timeFrame === "1M" && "#007BFF"}
             fontWeight={timeFrame === "1M" && "bold"}
             onClick={() => setTimeFrame("1M")}
@@ -177,6 +188,7 @@ function StockDiagram({ symbol, stockLogo }) {
             1M
           </Text>
           <Text
+            m={0}
             color={timeFrame === "3M" && "#007BFF"}
             fontWeight={timeFrame === "3M" && "bold"}
             onClick={() => setTimeFrame("3M")}
@@ -184,6 +196,7 @@ function StockDiagram({ symbol, stockLogo }) {
             3M
           </Text>
           <Text
+            m={0}
             color={timeFrame === "6M" && "#007BFF"}
             fontWeight={timeFrame === "6M" && "bold"}
             onClick={() => setTimeFrame("6M")}
@@ -191,6 +204,7 @@ function StockDiagram({ symbol, stockLogo }) {
             6M
           </Text>
           <Text
+            m={0}
             color={timeFrame === "1Y" && "#007BFF"}
             fontWeight={timeFrame === "1Y" && "bold"}
             onClick={() => setTimeFrame("1Y")}

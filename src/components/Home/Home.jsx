@@ -52,13 +52,10 @@ const Home = () => {
           <Box
             width={{ base: "100%", md: "50%" }}
             p={4}
-            display="flex"
-            flexDirection="column"
-            
           >
             <Box
               bg="#EED3D9"
-              borderRadius={"5px"}
+              borderTopRadius={"5px"}
               width="100%"
               height={{ base: "auto", md: "10%" }}
               mb={{ base: 4, md: 0 }}
@@ -69,6 +66,7 @@ const Home = () => {
             <Box
               bg="#EED3D9"
               width="100%"
+              borderBottomRadius={"5px"}
               height={{ base: "auto", md: "90%" }}
               p={4}
             >
@@ -84,7 +82,8 @@ const Home = () => {
           >
             <Box
               bg="#EED3D9"
-              borderRadius={"5px"}
+              borderTopRadius={"5px"}
+       
               width="100%"
               height={{ base: "auto", md: "50%" }} 
               mb={{ base: 4, md: 0 }}
@@ -111,7 +110,8 @@ const Home = () => {
             <Box
               bg="#EED3D9"
               width="100%"
-              height={{ base: "auto", md: "50%" }} 
+              height={{ base: "auto", md: "50%" }}
+              borderBottomRadius={"5px"}
               p={4}
             >
               <Text fontWeight={"bold"}>Market Biggest Losers</Text>
