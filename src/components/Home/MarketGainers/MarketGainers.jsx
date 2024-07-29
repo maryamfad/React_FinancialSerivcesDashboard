@@ -16,8 +16,6 @@ import {
   Td,
   Icon,
 } from "@chakra-ui/react";
-// import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
-// import {GoFoldUp, GoFoldDown } from "react-icons/go";
 const MarketGainers = ({ setSymbol }) => {
   // const [marketGainers, setMarketGainers] = useState([]);
 

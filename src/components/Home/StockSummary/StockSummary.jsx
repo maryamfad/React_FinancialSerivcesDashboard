@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import getFullQuote from "../../../api/getFullQuote";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, Icon } from "@chakra-ui/react";
+import {
+  FaDollarSign,
+  FaChartLine,
+  FaBuilding,
+  FaCaretUp,
+  FaCaretDown,
+  FaChartBar,
+} from "react-icons/fa";
+
 const StockSummary = ({ symbol }) => {
   const [stockSummary, setStockSummary] = useState([]);
 
@@ -16,114 +25,78 @@ const StockSummary = ({ symbol }) => {
     loadStockSummaryData(symbol);
   }, [symbol]);
   return (
-    <Box
-      height={"100%"}
-      bg="#EED3D9"
-      boxShadow={
-        "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-      }
-    >
-      <Text pl={5} pt={1} fontWeight={500} fontSize={"18px"}>
+    <Box height="100%" bg="#EED3D9" borderRadius="md" p={4}>
+      <Text pl={5} pt={1} fontWeight="bold" color="#333">
         Summary
       </Text>
       <Flex
-        p={5}
-        flexDir={"column"}
-        justifyContent={"space-between"}
-        backgroundColor={"#f9f9f9"}
-        border={"1px solid #dee2e6"}
+        flexDir="column"
+        bg="white"
+        borderRadius="10px"
+        mt={4}
+        p={2}
+        boxShadow={
+          "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+        }
+        border={"2x"}
+        borderColor={"#F1D7D7"}
       >
-        <Flex
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          width={"100%"}
-          borderBottom={"1px solid #dee2e6"}
-        >
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>Name:</Text> {stockSummary?.name}
+        {[
+          { label: "Name", value: stockSummary?.name, icon: FaBuilding },
+          {
+            label: "Exchange",
+            value: stockSummary?.exchange,
+            icon: FaChartBar,
+          },
+          { label: "Price", value: stockSummary?.price, icon: FaDollarSign },
+          {
+            label: "Change",
+            value: stockSummary?.change,
+            icon: stockSummary?.change > 0 ? FaCaretUp : FaCaretDown,
+            color: stockSummary?.change > 0 ? "green.500" : "red.500",
+          },
+          { label: "High", value: stockSummary?.dayHigh, icon: FaChartLine },
+          { label: "Low", value: stockSummary?.dayLow, icon: FaChartLine },
+          {
+            label: "Market Cap",
+            value: stockSummary?.marketCap,
+            icon: FaBuilding,
+          },
+          { label: "Open", value: stockSummary?.open, icon: FaDollarSign },
+          {
+            label: "Previous Close",
+            value: stockSummary?.previousClose,
+            icon: FaDollarSign,
+          },
+          { label: "Volume", value: stockSummary?.volume, icon: FaChartBar },
+          {
+            label: "Average Volume",
+            value: stockSummary?.avgVolume,
+            icon: FaChartBar,
+          },
+        ].map((item, index) => (
+          <Flex
+            key={index}
+            justifyContent="space-between"
+            alignItems="center"
+            borderBottom="1px solid #dee2e6"
+            pr={3}
+            pl={3}
+            _last={{ borderBottom: "none" }}
+            bg={index % 2 === 0 ? "#F5DBDB" : "white"}
+          >
+            <Flex alignItems="center">
+              <Icon
+                as={item.icon}
+                mr={2}
+                mb={2}
+                color={item.color || "gray.600"}
+              />
+              <Text fontWeight={600}>{item.label}:</Text>
+            </Flex>
+            <Text color={item.color || "black"}>{item.value}</Text>
           </Flex>
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>Exchange:</Text> {stockSummary?.exchange}
-          </Flex>
-        </Flex>
-        <Flex
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          width={"100%"}
-          borderBottom={"1px solid #dee2e6;"}
-        >
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            {" "}
-            <Text fontWeight={"500"}>Price:</Text>{" "}
-            <Text>{stockSummary?.price}</Text>
-          </Flex>
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>Change:</Text> {stockSummary?.change}
-          </Flex>
-        </Flex>
-        <Flex
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          width={"100%"}
-          height={"100%"}
-          borderBottom={"1px solid #dee2e6"}
-        >
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>High:</Text>{" "}
-            <Text>{stockSummary?.dayHigh}</Text>
-          </Flex>
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>Low:</Text>{" "}
-            <Text>{stockSummary?.dayLow}</Text>
-          </Flex>
-        </Flex>
-        <Flex
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          width={"100%"}
-          height={"100%"}
-          borderBottom={"1px solid #dee2e6;"}
-        >
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>Market Cap:</Text>{" "}
-            <Text>{stockSummary?.marketCap}</Text>
-          </Flex>
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>open:</Text>
-            <Text>{stockSummary?.open}</Text>
-          </Flex>
-        </Flex>
-        <Flex
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          width={"100%"}
-          height={"100%"}
-          borderBottom={"1px solid #dee2e6;"}
-        >
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>Prevouse Close:</Text>{" "}
-            <Text>{stockSummary?.previousClose}</Text>
-          </Flex>
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>Price:</Text>{" "}
-            <Text>{stockSummary?.price}</Text>
-          </Flex>
-        </Flex>
-        <Flex
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          width={"100%"}
-          height={"100%"}
-        >
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>Volume:</Text>
-            <Text>{stockSummary?.volume}</Text>
-          </Flex>
-          <Flex width={"50%"} justifyContent={"space-between"} pl={3} pr={3}>
-            <Text fontWeight={"500"}>Average Volume:</Text>
-            <Text> {stockSummary?.avgVolume}</Text>
-          </Flex>
-        </Flex>
+        ))}
       </Flex>
     </Box>
   );
