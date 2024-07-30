@@ -79,21 +79,26 @@ const Scroller = ({ setSymbol }) => {
           : "false"
       }
     >
-      <Flex width={"2000%"} className="scroller_inner">
+      <Flex width={{ base: "4000%", md: "2000%" }} className="scroller_inner">
         {[...mostActiveStocks, ...mostActiveStocks].map((stock, index) => (
           <Box
+            width={{ base: "140px", md: "150px" }}
+            height={{base: "85px", md: "90px" }}
             bg="#EED3D9"
             p={3}
+            pt={1}
             ml={3}
             boxShadow={
               "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
             }
             key={index}
             borderRadius={"5px"}
+            borderWidth={"2px"}
+            borderColor={"black"}
           >
-            <div className="d-flex justify-content-between">
-              <div>
-                <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between" style={{width:"100%"}}>
+              <div style={{width:"100%"}}>
+                <div className="d-flex justify-content-between" style={{width:"100%"}}>
                   <div
                     className="stock-symbol"
                     onClick={() => setSymbol(stock.symbol)}
@@ -117,6 +122,7 @@ const Scroller = ({ setSymbol }) => {
                           fontSize: "14px",
                           borderWidth: "2px",
                           borderColor: "#F1D7D7",
+                          width: "100%",
                         }
                       : {
                           color: "#009975",
@@ -127,6 +133,7 @@ const Scroller = ({ setSymbol }) => {
                           fontSize: "14px",
                           borderWidth: "2px",
                           borderColor: "#F1D7D7",
+                          width: "100%",
                         }
                   }
                 >

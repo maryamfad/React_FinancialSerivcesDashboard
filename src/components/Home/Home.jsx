@@ -29,8 +29,6 @@ const Home = () => {
 
   return (
     <Box width="100vw" minHeight="100vh">
-      {/* Top Boxes */}
-      {/* <Box width="100%" mb={4}> */}
       <Box position="fixed" top={0} left={0} width="100%" zIndex={1000}>
         <NavbarMenu />
       </Box>
