@@ -5,7 +5,7 @@ import LinearChart from "./LinearChart";
 // import getStockLogo from "../../../api/getStockLogo";
 import getTodayHistoricalChart from "../../../api/getTodayHistoricalChart";
 import getEndOfDayHistorical from "../../../api/getEndOfDayHistorical";
-import { Divider, Flex, Text, Box, Image } from "@chakra-ui/react";
+import { Flex, Text, Box, Image } from "@chakra-ui/react";
 function StockDiagram({ symbol, stockLogo }) {
   // const [symbol, setSymbol] = useState("AMZN");
   const [data, setData] = useState(null);

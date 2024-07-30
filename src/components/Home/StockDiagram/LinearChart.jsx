@@ -133,7 +133,7 @@ const LinearChart = ({ data, timeFrame }) => {
         .attr("stroke", "#000")
         .attr("stroke-width", 1)
         .style("opacity", 0);
-      // console.log("formatteddata", formattedData);
+      
       // Invisible rectangle to capture hover events
       svg
         .append("rect")
@@ -151,10 +151,7 @@ const LinearChart = ({ data, timeFrame }) => {
           const bisectDate = d3.bisector((d) => d.time).left;
           const mouseX = d3.pointer(event)[0];
           const x0 = xScale.invert(mouseX);
-          console.log(containerRect);
-          console.log("x0", x0);
           const i = bisectDate(formattedData, x0, 1);
-          console.log("i", i);
           const d0 = formattedData[i - 1];
           const d1 = formattedData[i];
           const d =
