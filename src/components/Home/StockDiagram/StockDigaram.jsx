@@ -28,16 +28,21 @@ function StockDiagram({ symbol, stockLogo }) {
   const loadTodayHistoricalChart = async (symbol, today) => {
     try {
       const result = await getTodayHistoricalChart(symbol, today);
+
       setData(
-        result.map((stock) => ({
-          time: new Date(stock.date).toISOString().split(" ")[0],
-          close: stock.close,
-          low: stock.low,
-          high: stock.high,
-          open: stock.open,
-          volume: stock.volume,
-        }))
+        result
+          .map((stock) => ({
+            time: new Date(stock.date).toISOString().split(" ")[0],
+            close: stock.close,
+            low: stock.low,
+            high: stock.high,
+            open: stock.open,
+            volume: stock.volume,
+          }))
+          
       );
+
+      // console.log("data",data);
 
       setIsDataReady(true);
     } catch (error) {

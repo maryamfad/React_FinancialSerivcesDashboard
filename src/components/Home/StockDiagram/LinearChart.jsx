@@ -30,31 +30,16 @@ const LinearChart = ({ data, timeFrame }) => {
     if (data && d3Container.current && data.length > 0 && width > 0) {
       d3.select(d3Container.current).selectAll("*").remove();
 
-      // const parseTime = d3.timeParse("%H:%M");
-      // const parseDate = d3.timeParse("%Y-%m-%d");
       const formattedData = data.map((d) => ({
-      //   time: parseTime(
-      //     new Date(d.time).getHours().toString().padStart(2, "0") +
-      //       ":" +
-      //       new Date(d.time).getMinutes().toString().padStart(2, "0")
-      //   ),
-      //   date: parseDate(
-      //     new Date(d.time).getFullYear() +
-      //       "-" +
-      //       new Date(d.time).getMonth() +
-      //       1 +
-      //       "-" +
-      //       new Date(d.time).getDate()
-      //   ),
-      time: new Date(d.time),
+        time: new Date(d.time),
         close: d.close,
         open: d.open,
         high: d.high,
         low: d.low,
         volume: d.volume,
       }));
-      // console.log(data);
-      // console.log(formattedData);
+
+      formattedData.sort((a, b) => a.time - b.time);
       const margin = { top: 10, right: 20, bottom: 30, left: 40 },
         //   width = 660 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
@@ -139,7 +124,8 @@ const LinearChart = ({ data, timeFrame }) => {
         .style("border", "solid")
         .style("border-width", "2px")
         .style("border-radius", "5px")
-        .style("padding", "5px");
+        .style("padding", "5px")
+        .style("z-index", 3);;
 
       // Mouse move line
       const mouseLine = svg
@@ -147,7 +133,7 @@ const LinearChart = ({ data, timeFrame }) => {
         .attr("stroke", "#000")
         .attr("stroke-width", 1)
         .style("opacity", 0);
-
+      // console.log("formatteddata", formattedData);
       // Invisible rectangle to capture hover events
       svg
         .append("rect")
@@ -156,7 +142,6 @@ const LinearChart = ({ data, timeFrame }) => {
         .style("fill", "none")
         .style("pointer-events", "all")
         .on("mouseover", () => {
-          //  tooltipDiv.style("display", null);
           mouseLine.style("opacity", 1);
         })
         .on("mousemove", function (event) {
@@ -164,8 +149,12 @@ const LinearChart = ({ data, timeFrame }) => {
             .querySelector(".svg-container")
             .getBoundingClientRect();
           const bisectDate = d3.bisector((d) => d.time).left;
-          const x0 = xScale.invert(d3.pointer(event, this)[0]);
+          const mouseX = d3.pointer(event)[0];
+          const x0 = xScale.invert(mouseX);
+          console.log(containerRect);
+          console.log("x0", x0);
           const i = bisectDate(formattedData, x0, 1);
+          console.log("i", i);
           const d0 = formattedData[i - 1];
           const d1 = formattedData[i];
           const d =
