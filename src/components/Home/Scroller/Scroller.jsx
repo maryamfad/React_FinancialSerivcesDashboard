@@ -72,8 +72,6 @@ const Scroller = ({ setSymbol }) => {
   return (
     <Box
       className="scroller"
-      // mt={"5%"}
-      
       width={"100%"}
       data-animated={
         !window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -84,11 +82,12 @@ const Scroller = ({ setSymbol }) => {
       <Flex width={"2000%"} className="scroller_inner">
         {[...mostActiveStocks, ...mostActiveStocks].map((stock, index) => (
           <Box
-          bg="#EED3D9"
+            bg="#EED3D9"
             p={3}
             ml={3}
-            // bg={"white"}
-            boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset"
+            boxShadow={
+              "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+            }
             key={index}
             borderRadius={"5px"}
           >
@@ -99,24 +98,45 @@ const Scroller = ({ setSymbol }) => {
                     className="stock-symbol"
                     onClick={() => setSymbol(stock.symbol)}
                   >
-                    {index}-{stock.symbol}
+                    {stock.symbol}
                   </div>
                   <img src={stock.logo} alt="logo" className="stock-logo" />
                 </div>
                 <div
+                  boxShadow={
+                    "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+                  }
                   style={
                     stock.change < 0
-                      ? { color: "#FF6B6B", backgroundColor:"white",padding:"5", margin:"2", borderRadius:"5px"}
-                      : { color: "#009975", backgroundColor:"white",padding:"5", margin:"2" ,borderRadius:"5px"}
-                      
+                      ? {
+                          color: "#FF6B6B",
+                          backgroundColor: "white",
+                          paddingLeft: "5px",
+                          paddingRight: "5px",
+                          borderRadius: "5px",
+                          fontSize: "14px",
+                          borderWidth: "2px",
+                          borderColor: "#F1D7D7",
+                        }
+                      : {
+                          color: "#009975",
+                          backgroundColor: "white",
+                          paddingLeft: "5px",
+                          paddingRight: "5px",
+                          borderRadius: "5px",
+                          fontSize: "14px",
+                          borderWidth: "2px",
+                          borderColor: "#F1D7D7",
+                        }
                   }
                 >
                   {stock.change < 0 ? (
-                    <AiOutlineFall size={"25px"} />
+                    <AiOutlineFall size={"20px"} />
                   ) : (
-                    <AiOutlineRise size={"25px"} />
+                    <AiOutlineRise size={"20px"} />
                   )}
-                  {stock.change} ({stock.changesPercentage} %)
+                  {Number(stock.change).toFixed(2)} (
+                  {Number(stock.changesPercentage).toFixed(2)} %)
                 </div>
               </div>
             </div>

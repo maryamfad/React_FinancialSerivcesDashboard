@@ -142,82 +142,13 @@ const Home = () => {
           <Box bg="#EED3D9" width={{ base: "100%", md: "50%" }} p={4}>
             <StockNews symbol={symbol} />
           </Box>
-          <Box bg="orange.500" width={{ base: "100%", md: "50%" }} p={4}>
-            Fifth Box
+          <Box bg="#EED3D9" width={{ base: "100%", md: "50%" }} p={4}>
+            
           </Box>
         </Flex>
       </Box>
     </Box>
-    // {/* <NavbarMenu />
-    // <Box mt={{ base: "32%", sm: "32%", md: "3%", lg: "0", xl: "0" }}>
-    //   <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
-    // </Box> */}
-
-    // {/* <Flex
-    //   flexDir={{
-    //     base: "column",
-    //     sm: "column",
-    //     md: "column",
-    //     lg: "row",
-    //     xl: "row",
-    //   }}
-    //   height={{
-    //     base: "180vh",
-    //     sm: "180vh",
-    //     md: "180vh",
-    //     lg: "65vh",
-    //     xl: "65vh",
-    //   }}
-    //   width={"100%"}
-    //   pl={15}
-    //   pr={15}
-    //   justifyContent={"space-evenly"}
-    //   alignItems={{ base: "center", sm: "center", md: "center" }}
-    // >
-    //   <Flex
-    //     height={"100%"}
-    //     width={{
-    //       base: "100%",
-    //       sm: "100%",
-    //       md: "100%",
-    //       lg: "25%",
-    //       xl: "25%",
-    //     }}
-    //   >
-    //     <StockSummary symbol={symbol} />
-    //   </Flex>
-    //   <Box
-    //     height={"100%"}
-    //     width={{
-    //       base: "100%",
-    //       sm: "100%",
-    //       md: "100%",
-    //       lg: "45%",
-    //       xl: "45%",
-    //     }}
-    //   >
-    //     <SearchStocks setSymbol={setSymbol} />
-    //     <StockDiagram symbol={symbol} stockLogo={stockLogo} />
-    //   </Box>
-
-    //   <Flex
-    //     height={"100%"}
-    //     flexDir={"column"}
-    //     justifyContent={"space-between"}
-    //     width={{
-    //       base: "100%",
-    //       sm: "100%",
-    //       md: "100%",
-    //       lg: "25%",
-    //       xl: "25%",
-    //     }}
-    //   >
-    //     <MarketGainers setSymbol={setSymbol} />
-    //     <MarketLosers setSymbol={setSymbol} />
-    //   </Flex>
-    // </Flex> */}
-
-    // {/* <StockNews symbol={symbol} /> */}
+    
   );
 };
 
