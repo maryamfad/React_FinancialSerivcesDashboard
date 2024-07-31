@@ -55,7 +55,7 @@ function Sidebar() {
       borderBottomRightRadius={sidebarSize === "small" ? "15px" : "30px"}
       flexDir={"column"}
       justifyContent={"space-between"}
-      backgroundColor={"#125667"}
+      backgroundColor={"teal"}
     >
       <Flex p={"5%"} flexDir={"column"} as={"nav"}>
         <IconButton
