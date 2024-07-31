@@ -93,8 +93,6 @@ const Scroller = ({ setSymbol }) => {
             }
             key={index}
             borderRadius={"5px"}
-            borderWidth={"2px"}
-            borderColor={"black"}
           >
             <div className="d-flex justify-content-between" style={{width:"100%"}}>
               <div style={{width:"100%"}}>

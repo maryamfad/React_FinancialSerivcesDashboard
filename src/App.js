@@ -19,7 +19,7 @@ function App() {
       <AuthProvider>
       
         <Routes>
-          <Route path="/" element={<Navigate replace to="/home" />} />
+          <Route path="/" element={<Navigate replace to="/dashboard" />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />

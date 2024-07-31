@@ -4,7 +4,7 @@ import Portfolio from "./Protfolio/Portfolio";
 import Orders from "./Orders/Orders";
 import Positions from "./Positions/Positions";
 import BuySell from "./BuySell/BuySell";
-import BuyingPower from "./BuyingPower/BuyingPower";
+import AccountOverview from "./AccountOverview/AccountOverview";
 import { useNavigate } from "react-router-dom";
 import Watchlist from "./Watchlist";
 
@@ -75,7 +75,7 @@ const Dashboard = () => {
                 xl: "45%",
               }}
             >
-              <BuyingPower />
+              <AccountOverview />
               <Portfolio />
             </Flex>
             <Orders />
