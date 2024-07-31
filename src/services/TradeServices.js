@@ -21,8 +21,9 @@ export const buyStock = async (quantity, stockSymbol, purchasePrice) => {
 		);
 
 		if (!response.ok) {
+			
 			const errorDetails = await response.json();
-			const error = new Error("Network response was not ok");
+			const error = new Error(errorDetails.error);
 			error.status = response.status;
 			error.details = errorDetails;
 			throw error;

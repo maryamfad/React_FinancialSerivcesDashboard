@@ -10,9 +10,19 @@ import {
 	RadioGroup,
 	Radio,
 	Stack,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalBody,
+	ModalCloseButton,
+	useDisclosure,
+	Icon,
+	Button,
 } from "@chakra-ui/react";
 import { buyStock } from "../../../services/TradeServices";
 import getShortQuote from "../../../api/getShortQuote";
+import { WarningIcon } from "@chakra-ui/icons";
 
 function BuySell() {
 	const [isBuySelected, setBuySelected] = useState(false);
@@ -22,6 +32,7 @@ function BuySell() {
 	const [errorMessage, setErrorMessage] = useState("");
 	const [quantity, setQuantity] = useState(0);
 	const [stockSymbol, setStockSymbol] = useState("AAPL");
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	const handleOrderChange = (event) => {
 		setOrderType(event.target.value);
@@ -37,13 +48,19 @@ function BuySell() {
 
 	const handleBuyStock = async () => {
 		try {
-			const price = await getShortQuote(stockSymbol);
-			console.log(price);
-			const data = await buyStock(quantity, stockSymbol, price);
-			console.log(data);
+			if (quantity === 0) {
+				setErrorMessage(
+					"The quantity is 0, please pick an amount for quantity"
+				);
+				onOpen();
+			} else {
+				const price = await getShortQuote(stockSymbol);
+				await buyStock(quantity, stockSymbol, price);
+			}
 		} catch (error) {
 			console.error(error);
 			setErrorMessage(error.message);
+			onOpen();
 		}
 	};
 
@@ -320,6 +337,29 @@ function BuySell() {
 					</Text>
 				</Flex>
 			</Box>
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader display="flex" alignItems="center">
+						<Icon as={WarningIcon} color="red.500" mr={2} />
+						Error
+					</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody
+						display="flex"
+						alignItems="center"
+						justifyContent="center"
+						flexDirection="column"
+					>
+						<Text fontSize="lg" mb={4}>
+							{errorMessage}
+						</Text>
+						<Button colorScheme="red" onClick={onClose}>
+							Close
+						</Button>
+					</ModalBody>
+				</ModalContent>
+			</Modal>
 		</Box>
 	);
 }
