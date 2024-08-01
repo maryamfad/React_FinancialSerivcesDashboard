@@ -149,7 +149,7 @@ function StockDiagram({ symbol, stockLogo }) {
         borderRadius={"5px"}
         width={"60%"}
         alignSelf={"center"}
-        bg="#F5DBDB"
+        bg="accentColor"
       >
         <Text fontSize={"md"} fontWeight={"bold"} mb={0}>
           {symbol}

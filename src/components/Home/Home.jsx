@@ -52,7 +52,7 @@ const Home = () => {
             p={4}
           >
             <Box
-              bg="#EED3D9"
+              bg="secondary"
               borderTopRadius={"5px"}
               width="100%"
               height={{ base: "auto", md: "10%" }}
@@ -62,7 +62,7 @@ const Home = () => {
               <SearchStocks setSymbol={setSymbol} />
             </Box>
             <Box
-              bg="#EED3D9"
+              bg="secondary"
               width="100%"
               borderBottomRadius={"5px"}
               height={{ base: "auto", md: "90%" }}
@@ -79,7 +79,7 @@ const Home = () => {
             
           >
             <Box
-              bg="#EED3D9"
+              bg="secondary"
               borderTopRadius={"5px"}
        
               width="100%"
@@ -106,7 +106,7 @@ const Home = () => {
               </Box>
             </Box>
             <Box
-              bg="#EED3D9"
+              bg="secondary"
               width="100%"
               height={{ base: "auto", md: "50%" }}
               borderBottomRadius={"5px"}
@@ -137,10 +137,10 @@ const Home = () => {
           width="100%"
           height={{ base: "auto", md: "50%" }}
         >
-          <Box bg="#EED3D9" width={{ base: "100%", md: "50%" }} p={4}>
+          <Box bg="secondary" width={{ base: "100%", md: "50%" }} p={4}>
             <StockNews symbol={symbol} />
           </Box>
-          <Box bg="#EED3D9" width={{ base: "100%", md: "50%" }} p={4}>
+          <Box bg="secondary" width={{ base: "100%", md: "50%" }} p={4}>
             
           </Box>
         </Flex>

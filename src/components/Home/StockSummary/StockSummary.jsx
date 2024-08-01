@@ -25,7 +25,7 @@ const StockSummary = ({ symbol }) => {
     loadStockSummaryData(symbol);
   }, [symbol]);
   return (
-    <Box height="100%" bg="#EED3D9" borderRadius="md" p={4}>
+    <Box height="100%" bg="secondary" borderRadius="md" p={4}>
       <Text pl={5} pt={1} fontWeight="bold" color="#333">
         Summary
       </Text>
@@ -83,7 +83,7 @@ const StockSummary = ({ symbol }) => {
             pl={3}
             mb={0}
             _last={{ borderBottom: "none" }}
-            bg={index % 2 === 0 ? "#F5DBDB" : "white"}
+            bg={index % 2 === 0 ? "accentColor" : "white"}
           >
             <Flex alignItems="center">
               <Icon

@@ -33,7 +33,7 @@ const MarketGainers = ({ setSymbol }) => {
   }, []);
 
   return (
-    <Table sx={{ "tbody tr:nth-of-type(odd)": { bg: "#F5DBDB" } }}>
+    <Table sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}>
       <Thead position="sticky" top={0} zIndex={1}>
         <Tr>
           <Th p={3} pb={1}>

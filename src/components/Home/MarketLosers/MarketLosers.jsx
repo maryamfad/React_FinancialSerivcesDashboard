@@ -35,7 +35,7 @@ const MarketLosers = ({ setSymbol }) => {
 
   return (
     <Table
-      sx={{ "tbody tr:nth-of-type(odd)": { bg: "#F5DBDB" } }}
+      sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}
     >
       <Thead position={"sticky"} mt={0} pt={0}>
         <Tr>

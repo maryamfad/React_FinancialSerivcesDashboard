@@ -84,7 +84,7 @@ const Scroller = ({ setSymbol }) => {
           <Box
             width={{ base: "140px", md: "150px" }}
             height={{base: "85px", md: "90px" }}
-            bg="#EED3D9"
+            bg="secondary"
             p={3}
             pt={1}
             ml={3}
