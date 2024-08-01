@@ -11,6 +11,7 @@ const AccountOverview = () => {
 
   useEffect(() => {
     getAccountOverviewInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getAccountOverviewInfo = () => {
