@@ -4,8 +4,8 @@ import { getAccountOverview } from "../../../services/UserServices";
 import getUserIdFromToken from "../../../util/getUserIdFromToken";
 
 const AccountOverview = () => {
-  const [errorMessage, setErrorMessage] = useState("");
-  const [loading, setLoading] = useState(true);
+  // const [errorMessage, setErrorMessage] = useState("");
+  // const [loading, setLoading] = useState(true);
   const [accountOverview, setAccountOverview] = useState({});
   const userId = getUserIdFromToken();
 
@@ -17,14 +17,14 @@ const AccountOverview = () => {
     getAccountOverview(userId)
       .then((data) => {
         setAccountOverview(data);
-        setLoading(false);
+        // setLoading(false);
       })
       .catch((error) => {
-        setLoading(false);
+        // setLoading(false);
         if (error.status === 400) {
-          setErrorMessage("Username or password is incorrect");
+          // setErrorMessage("Username or password is incorrect");
         } else {
-          setErrorMessage(error.message || "An unexpected error occurred.");
+          // setErrorMessage(error.message || "An unexpected error occurred.");
         }
       });
   };
