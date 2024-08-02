@@ -81,7 +81,8 @@ const StockSummary = ({ symbol }) => {
             borderBottom="1px solid #dee2e6"
             pr={3}
             pl={3}
-            mb={0}
+            // pt={1}
+            // pb={0}
             _last={{ borderBottom: "none" }}
             bg={index % 2 === 0 ? "accentColor" : "white"}
           >
@@ -90,11 +91,12 @@ const StockSummary = ({ symbol }) => {
                 as={item.icon}
                 mr={2}
                 mb={2}
+                mt={1}
                 color={item.color || "gray.600"}
               />
-              <Text fontWeight={600}>{item.label}:</Text>
+              <Text fontWeight={600} mt={1}>{item.label}:</Text>
             </Flex>
-            <Text color={item.color || "black"}>{item.value}</Text>
+            <Text mt={1} color={item.color || "#475344"} fontWeight={"500"}>{item.value}</Text>
           </Flex>
         ))}
       </Flex>

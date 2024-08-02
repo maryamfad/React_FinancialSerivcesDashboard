@@ -36,20 +36,20 @@ const Home = () => {
         <Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
       </Box>
 
-      <Box width="100%" height="calc(100% - 128px)" mt={"1%"}>
+      <Box width="100%" height="calc(100% - 128px)" mt={"0.5%"}>
         <Flex
           direction={{ base: "column", md: "row" }}
           width="100%"
           height={{ base: "auto", md: "50%" }}
-          mb={4}
+          mb={0}
           wrap="wrap"
         >
-          <Box width={{ base: "100%", md: "25%" }} p={4}>
+          <Box width={{ base: "100%", md: "24%" }} p={1}>
             <StockSummary symbol={symbol} height={"100%"} />
           </Box>
           <Box
-            width={{ base: "100%", md: "50%" }}
-            p={4}
+            width={{ base: "100%", md: "51%" }}
+            p={1}
           >
             <Box
               bg="secondary"
@@ -72,8 +72,8 @@ const Home = () => {
             </Box>
           </Box>
           <Box
-            width={{ base: "100%", md: "25%" }}
-            p={4}
+            width={{ base: "100%", md: "24%" }}
+            p={1}
             display="flex"
             flexDirection="column"
             
@@ -137,10 +137,10 @@ const Home = () => {
           width="100%"
           height={{ base: "auto", md: "50%" }}
         >
-          <Box bg="secondary" width={{ base: "100%", md: "50%" }} p={4}>
+          <Box bg="secondary" width={{ base: "100%", md: "50%" }} p={4} m={1} borderRadius={"5px"}>
             <StockNews symbol={symbol} />
           </Box>
-          <Box bg="secondary" width={{ base: "100%", md: "50%" }} p={4}>
+          <Box bg="secondary" width={{ base: "100%", md: "50%" }} p={4} m={1} borderRadius={"5px"}>
             
           </Box>
         </Flex>
