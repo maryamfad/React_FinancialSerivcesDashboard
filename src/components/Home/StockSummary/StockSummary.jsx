@@ -39,6 +39,7 @@ const StockSummary = ({ symbol }) => {
           "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
         }
         borderColor={"#F1D7D7"}
+        
       >
         {[
           { label: "Name", value: stockSummary?.name, icon: FaBuilding },
@@ -85,6 +86,7 @@ const StockSummary = ({ symbol }) => {
             // pb={0}
             _last={{ borderBottom: "none" }}
             bg={index % 2 === 0 ? "accentColor" : "white"}
+            
           >
             <Flex alignItems="center">
               <Icon

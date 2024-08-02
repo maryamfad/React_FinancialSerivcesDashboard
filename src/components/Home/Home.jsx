@@ -44,8 +44,8 @@ const Home = () => {
           mb={0}
           wrap="wrap"
         >
-          <Box width={{ base: "100%", md: "24%" }} p={1}>
-            <StockSummary symbol={symbol} height={"100%"} />
+          <Box width={{ base: "100%", md: "24%" }} p={1} >
+            <StockSummary symbol={symbol} height={"100%"} borderColor={"primary"} borderWidth={"2px"}/>
           </Box>
           <Box
             width={{ base: "100%", md: "51%" }}

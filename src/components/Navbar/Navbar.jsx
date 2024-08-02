@@ -15,7 +15,7 @@ function NavbarMenu() {
 
   return (
     <Flex
-      backgroundColor="#003366"
+      backgroundColor="primary"
       justifyContent={"space-between"}
       alignItems={"center"}
       pr={"5%"}

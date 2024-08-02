@@ -4,9 +4,9 @@ const theme = extendTheme({
   styles: {
     global: {
       ':root': {
-        '--primary-color': '#3498db',
-        '--secondary-color': '#B8D8D6',
-        '--accent-color': '#FBD7D2',
+        '--primary-color' :'#003366',
+        '--secondary-color': '#C4DDE8 ',
+        '--accent-color': '#D4D7E2',
         '--background-color': '#f4f4f4',
         '--text-color': '#333',
         '--navbar-color' : '#3498db',
