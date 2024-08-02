@@ -30,7 +30,7 @@ A full-stack web application built with MongoDB, Express.js, React, and Node.js.
 
 
 
-### Frontend Setup
+### Setup
 
 1. Clone the repository:
 
@@ -55,33 +55,7 @@ A full-stack web application built with MongoDB, Express.js, React, and Node.js.
    ```bash
    npm start
    ```
-### Backend Setup
 
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/maryamfad/dashboard_backend.git
-   ```
-
-2. Navigate to the backend directory:
-
-   ```bash
-   cd dashboard_backend
-   ```
-
-3. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-4. Create a `.env` file and add your environment variables.
-
-5. Start the server:
-
-   ```bash
-   npm run dev
-   ```
 Your application should now be running at `http://localhost:3000`.
 
 ## Usage
