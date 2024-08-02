@@ -7,10 +7,10 @@ const Portfolio = () => {
       // mb={0}
       // height={"auto"}
       flexGrow={1}
-      boxShadow={
-        "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-      }
-      borderRadius={"5px"}
+      boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+			borderColor={"teal"}
+			borderWidth={"2px"}
+			borderRadius={"10px"}
     >
       <Flex
         m={{ base: 2, sm: 2, md: 2, lg: 5, xl: 5 }}

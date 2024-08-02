@@ -2,12 +2,11 @@ import { Box, Flex, Text, Divider } from "@chakra-ui/react";
 const Orders = () => {
   return (
     <Box
-      // m={5}
       width={{ base: "100%", sm: "100%", md: "100%", lg: "25%", xl: "25%" }}
-      boxShadow={
-        "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-      }
-      borderRadius={"5px"}
+      boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+			borderColor={"teal"}
+			borderWidth={"2px"}
+			borderRadius={"10px"}
     >
       <Flex m={5} p={5} mb={0} pb={0} justifyContent={"space-between"}>
         <Box width={"50%"}>

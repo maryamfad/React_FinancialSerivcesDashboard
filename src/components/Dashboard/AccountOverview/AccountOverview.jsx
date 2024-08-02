@@ -34,9 +34,9 @@ const AccountOverview = () => {
       mb={5}
       height={{ base: "auto", sm: "auto", md: "20%", lg: "20%", xl: "20%" }}
       boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-      borderWidth="2px"
-      borderColor="#EED3D9"
-      borderRadius="5px"
+			borderColor={"teal"}
+			borderWidth={"2px"}
+			borderRadius={"10px"}
       p={5}
       role="region"
       aria-label="Financial Overview"
