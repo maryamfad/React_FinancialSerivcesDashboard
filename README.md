@@ -1,5 +1,5 @@
-# MERN Stack Web Application: WealthPath  (https://wealthpath.netlify.app/home)
-
+# MERN Stack Web Application: WealthPath  (https://wealthpath.netlify.app)
+https://wealthpath.netlify.app
 A full-stack web application built with MongoDB, Express.js, React, and Node.js. This project demonstrates my ability to develop robust and scalable web applications using the MERN stack.
 
 ## Features
