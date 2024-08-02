@@ -25,7 +25,7 @@ const Dashboard = () => {
       >
         <Flex>
           <Button
-            borderColor={"teal"}
+            borderColor={"dashboardPrimary"}
             borderWidth={"2px"}
             // m={"10px"}
             onClick={() => navigate("/home")}

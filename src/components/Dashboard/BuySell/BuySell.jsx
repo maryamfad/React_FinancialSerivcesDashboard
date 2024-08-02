@@ -81,7 +81,7 @@ function BuySell() {
 			width={{ base: "100%", lg: "25%" }}
 			height={{ base: "auto", lg: "100%" }}
 			boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-			borderColor={"teal"}
+			borderColor={"dashboardPrimary"}
 			borderWidth={"2px"}
 			borderRadius={"10px"}
 		>
@@ -91,17 +91,17 @@ function BuySell() {
 					justifyContent="center"
 					alignItems="center"
 					width="50%"
-					backgroundColor={isBuySelected ? "teal" : "transparent"}
+					backgroundColor={isBuySelected ? "dashboardPrimary" : "transparent"}
 					cursor="pointer"
 					borderRadius="5px"
 					onClick={() => {
 						setBuySelected(true);
 					}}
 					aria-pressed={isBuySelected}
-					_focus={{ outline: "2px solid teal" }}
+					_focus={{ outline: "2px solid dashboardPrimary" }}
 					_hover={{
 						backgroundColor: isBuySelected
-							? "teal"
+							? "dashboardPrimary"
 							: "rgba(0, 0, 0, 0.05)",
 					}}
 				>
@@ -119,15 +119,15 @@ function BuySell() {
 					justifyContent="center"
 					alignItems="center"
 					width="50%"
-					backgroundColor={!isBuySelected ? "teal" : "transparent"}
+					backgroundColor={!isBuySelected ? "dashboardPrimary" : "transparent"}
 					cursor="pointer"
 					borderRadius="5px"
 					onClick={() => setBuySelected(false)}
 					aria-pressed={!isBuySelected}
-					_focus={{ outline: "2px solid teal" }}
+					_focus={{ outline: "2px solid dashboardPrimary" }}
 					_hover={{
 						backgroundColor: !isBuySelected
-							? "teal"
+							? "dashboardPrimary"
 							: "rgba(0, 0, 0, 0.05)",
 					}}
 				>
@@ -157,12 +157,12 @@ function BuySell() {
 							borderRadius="4px"
 							// p="8px"
 							_focus={{
-								borderColor: "teal",
+								borderColor: "dashboardPrimary",
 								boxShadow: "0 0 0 3px rgba(56, 178, 172, 0.6)",
 								outline: "none",
 							}}
 							_hover={{
-								borderColor: "teal",
+								borderColor: "dashboardPrimary",
 							}}
 						/>
 					</Box>
@@ -190,12 +190,12 @@ function BuySell() {
 						border="2px solid #ccc"
 						borderRadius="4px"
 						_focus={{
-							borderColor: "teal",
+							borderColor: "dashboardPrimary",
 							boxShadow: "0 0 0 3px rgba(56, 178, 172, 0.6)",
 							outline: "none",
 						}}
 						_hover={{
-							borderColor: "teal",
+							borderColor: "dashboardPrimary",
 						}}
 					>
 						<option value="market">Market</option>
@@ -220,22 +220,22 @@ function BuySell() {
 							borderRadius="4px"
 							p="8px"
 							_focus={{
-								borderColor: "teal",
+								borderColor: "dashboardPrimary",
 								boxShadow: "0 0 0 3px rgba(56, 178, 172, 0.6)",
 								outline: "none",
 							}}
 							_hover={{
-								borderColor: "teal",
+								borderColor: "dashboardPrimary",
 							}}
 						>
 							<Radio
 								borderColor={"gray"}
 								borderWidth={"2px"}
 								value="dollars"
-								_focus={{ outline: "2px solid teal" }}
+								_focus={{ outline: "2px solid dashboardPrimary" }}
 								_hover={{
 									backgroundColor: isBuySelected
-										? "teal"
+										? "dashboardPrimary"
 										: "rgba(0, 0, 0, 0.05)",
 								}}
 							>
@@ -246,10 +246,10 @@ function BuySell() {
 								borderWidth={"2px"}
 								ml={"10%"}
 								value="shares"
-								_focus={{ outline: "2px solid teal" }}
+								_focus={{ outline: "2px solid dashboardPrimary" }}
 								_hover={{
 									backgroundColor: isBuySelected
-										? "teal"
+										? "dashboardPrimary"
 										: "rgba(0, 0, 0, 0.05)",
 								}}
 							>
@@ -274,12 +274,12 @@ function BuySell() {
 							borderRadius="4px"
 							p="8px"
 							_focus={{
-								borderColor: "teal",
+								borderColor: "dashboardPrimary",
 								boxShadow: "0 0 0 3px rgba(56, 178, 172, 0.6)",
 								outline: "none",
 							}}
 							_hover={{
-								borderColor: "teal",
+								borderColor: "dashboardPrimary",
 							}}
 						/>
 					</Box>
@@ -306,12 +306,12 @@ function BuySell() {
 						border="2px solid #ccc"
 						borderRadius="4px"
 						_focus={{
-							borderColor: "teal",
+							borderColor: "dashboardPrimary",
 							boxShadow: "0 0 0 3px rgba(56, 178, 172, 0.6)",
 							outline: "none",
 						}}
 						_hover={{
-							borderColor: "teal",
+							borderColor: "dashboardPrimary",
 						}}
 					>
 						<option value="day">DAY</option>
@@ -327,7 +327,7 @@ function BuySell() {
 					justifyContent="center"
 					alignItems="center"
 					width="100%"
-					backgroundColor="teal"
+					backgroundColor="dashboardPrimary"
 					cursor="pointer"
 					borderRadius="5px"
 					mt={4}
@@ -340,10 +340,10 @@ function BuySell() {
 						}
 					}}
 					aria-pressed={isBuySelected}
-					_focus={{ outline: "2px solid teal" }}
+					_focus={{ outline: "2px solid dashboardPrimary" }}
 					// _hover={{
 					// 	backgroundColor: isBuySelected
-					// 		? "teal"
+					// 		? "dashboardPrimary"
 					// 		: "rgba(0, 0, 0, 0.05)",
 					// }}
 				>

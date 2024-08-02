@@ -4,7 +4,7 @@ const Orders = () => {
     <Box
       width={{ base: "100%", sm: "100%", md: "100%", lg: "25%", xl: "25%" }}
       boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-			borderColor={"teal"}
+			borderColor={"dashboardPrimary"}
 			borderWidth={"2px"}
 			borderRadius={"10px"}
     >

@@ -34,7 +34,7 @@ const AccountOverview = () => {
       mb={5}
       height={{ base: "auto", sm: "auto", md: "20%", lg: "20%", xl: "20%" }}
       boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-			borderColor={"teal"}
+			borderColor={"dashboardPrimary"}
 			borderWidth={"2px"}
 			borderRadius={"10px"}
       p={5}
@@ -58,15 +58,18 @@ const AccountOverview = () => {
           <Text
             fontWeight="600"
             fontSize="large"
-            bg="#FFD700"
-            p={2}
+            // bg="#FFD700"
+            p={1}
             borderRadius="5px"
             boxShadow="0px 1px 3px rgba(0, 0, 0, 0.2)"
+            borderColor={"dashboardSecondary"}
+            borderWidth={"2px"}
+            bg={"dashboardSecondary"}
           >
-            Account Balance
+            Balance
           </Text>
           <Text fontWeight="500" color="#343a40">
-            {accountOverview.balance} $
+            {Number(accountOverview.balance).toFixed(2)} $
           </Text>
         </Box>
         <Box
@@ -77,10 +80,12 @@ const AccountOverview = () => {
           <Text
             fontWeight="600"
             fontSize="large"
-            bg="#90EE90"
-            p={2}
+            borderColor={"dashboardSecondary"}
+            borderWidth={"2px"}
+            p={1}
             borderRadius="5px"
             boxShadow="0px 1px 3px rgba(0, 0, 0, 0.2)"
+            bg={"dashboardSecondary"}
           >
             Buying Power
           </Text>
@@ -96,10 +101,12 @@ const AccountOverview = () => {
           <Text
             fontWeight="600"
             fontSize="large"
-            bg="#90EE90"
-            p={2}
+            borderColor={"dashboardSecondary"}
+            borderWidth={"2px"}
+            p={1}
             borderRadius="5px"
             boxShadow="0px 1px 3px rgba(0, 0, 0, 0.2)"
+            bg={"dashboardSecondary"}
           >
             Cash
           </Text>
@@ -111,10 +118,12 @@ const AccountOverview = () => {
           <Text
             fontWeight="600"
             fontSize="large"
-            bg="#ADD8E6"
-            p={2}
+            borderColor={"dashboardSecondary"}
+            borderWidth={"2px"}
+            p={1}
             borderRadius="5px"
             boxShadow="0px 1px 3px rgba(0, 0, 0, 0.2)"
+            bg={"dashboardSecondary"}
           >
             Daily Change
           </Text>

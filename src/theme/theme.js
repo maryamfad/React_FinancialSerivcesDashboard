@@ -9,7 +9,9 @@ const theme = extendTheme({
         '--accent-color': '#FBD7D2',
         '--background-color': '#f4f4f4',
         '--text-color': '#333',
-        '--navbar-color' : '#3498db'
+        '--navbar-color' : '#3498db',
+        '--dashboard-primary': '#008080',
+        '--dashboard-secondary': '#BEC8EB'
       },
       body: {
         backgroundColor: 'var(--background-color)',
@@ -22,6 +24,8 @@ const theme = extendTheme({
     secondary: 'var(--secondary-color)',
     navbar: 'var(--navbar-color)',
     accentColor: 'var(--accent-color)',
+    dashboardSecondary: 'var(--dashboard-secondary)',
+    dashboardPrimary: 'var(--dashboard-primary)',
   },
 });
 
