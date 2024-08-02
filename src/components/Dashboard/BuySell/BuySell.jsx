@@ -20,7 +20,7 @@ import {
 	Icon,
 	Button,
 } from "@chakra-ui/react";
-import { buyStock } from "../../../services/TradeServices";
+import { buyStock, sellStock } from "../../../services/TradeServices";
 import getShortQuote from "../../../api/getShortQuote";
 import { WarningIcon } from "@chakra-ui/icons";
 
@@ -57,6 +57,17 @@ function BuySell() {
 				const price = await getShortQuote(stockSymbol);
 				await buyStock(quantity, stockSymbol, price);
 			}
+		} catch (error) {
+			console.error(error);
+			setErrorMessage(error.message);
+			onOpen();
+		}
+	};
+
+	const handleSellStock = async () => {
+		try {
+			const price = await getShortQuote(stockSymbol);
+			await sellStock(quantity, stockSymbol, price);
 		} catch (error) {
 			console.error(error);
 			setErrorMessage(error.message);
@@ -233,7 +244,7 @@ function BuySell() {
 							<Radio
 								borderColor={"gray"}
 								borderWidth={"2px"}
-								ml={10}
+								ml={"10%"}
 								value="shares"
 								_focus={{ outline: "2px solid teal" }}
 								_hover={{
@@ -322,7 +333,11 @@ function BuySell() {
 					mt={4}
 					p={0}
 					onClick={() => {
-						handleBuyStock();
+						if (isBuySelected) {
+							handleBuyStock();
+						} else {
+							handleSellStock();
+						}
 					}}
 					aria-pressed={isBuySelected}
 					_focus={{ outline: "2px solid teal" }}

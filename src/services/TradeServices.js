@@ -21,7 +21,40 @@ export const buyStock = async (quantity, stockSymbol, purchasePrice) => {
 		);
 
 		if (!response.ok) {
-			
+			const errorDetails = await response.json();
+			const error = new Error(errorDetails.error);
+			error.status = response.status;
+			error.details = errorDetails;
+			throw error;
+		}
+
+		return response.json();
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const sellStock = async (quantity, stockSymbol, sellingPrice) => {
+	try {
+		const userId = getUserIdFromToken();
+		const response = await fetch(
+			`https://wealthpath-385e08c18cf4.herokuapp.com/trade/sell`,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					authorization: `Bearer ${localStorage.getItem("token")}`,
+				},
+				body: JSON.stringify({
+					userId: userId,
+					quantity: Number(quantity),
+					stockSymbol: stockSymbol,
+					sellingPrice: sellingPrice,
+				}),
+			}
+		);
+
+		if (!response.ok) {
 			const errorDetails = await response.json();
 			const error = new Error(errorDetails.error);
 			error.status = response.status;
