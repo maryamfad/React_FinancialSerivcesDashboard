@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { stockNames } from "../../Home/stockNames";
 import {
 	Box,
@@ -33,7 +33,15 @@ function BuySell() {
 	const [errorMessage, setErrorMessage] = useState("");
 	const [quantity, setQuantity] = useState(0);
 	const [stockSymbol, setStockSymbol] = useState("AAPL");
+	const [stockPrice, setStockPrice] = useState(0);
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const {
+		isOpen: isPreviewModalOpen,
+		onOpen: onPreviewModalOpen,
+		onClose: onPreviewModalClose,
+	} = useDisclosure();
+
+	let price;
 
 	const handleStockChange = (event) => {
 		setStockSymbol(event.target.value);
@@ -58,8 +66,9 @@ function BuySell() {
 				);
 				onOpen();
 			} else {
-				const price = await getShortQuote(stockSymbol);
+				 price = await getShortQuote(stockSymbol);
 				await buyStock(quantity, stockSymbol, price, orderType);
+				onPreviewModalClose();
 			}
 		} catch (error) {
 			console.error(error);
@@ -68,17 +77,28 @@ function BuySell() {
 		}
 	};
 
+
 	const handleSellStock = async () => {
 		try {
-			const price = await getShortQuote(stockSymbol);
-			await sellStock(quantity, stockSymbol, price, orderType);
+			if (quantity === 0) {
+				setErrorMessage(
+					"The quantity is 0, please pick an amount for quantity"
+				);
+				onOpen();
+			} else {
+				 price = await getShortQuote(stockSymbol);
+				await sellStock(quantity, stockSymbol, price, orderType);
+				onPreviewModalClose();
+			}
 		} catch (error) {
 			console.error(error);
 			setErrorMessage(error.message);
 			onOpen();
 		}
 	};
-
+useEffect(()=>{
+	getShortQuote(stockSymbol).then((price)=>{setStockPrice(price)}).catch((error)=>{console.log(error);})
+},[stockSymbol])
 	return (
 		<Box
 			mr={{ base: 0, lg: 5 }}
@@ -173,21 +193,20 @@ function BuySell() {
 								borderColor: "dashboardPrimary",
 							}}
 						>
-							{stockNames.map((stockName) => (
-								<option value={stockName}>{stockName}</option>
+							{stockNames.map((stockName, index) => (
+								<option key={index} value={stockName}>{stockName}</option>
 							))}
 						</Select>
 					</Box>
 					<Box
 						width={{ base: "100%", md: "48%" }}
 						ml={{ md: 10 }}
-						// mb={4}
 					>
 						<Text fontWeight="500" mb={0}>
 							Market Price
 						</Text>
 						<Text fontWeight="500" color="#343a40">
-							181.98 $
+							{stockPrice} $
 						</Text>
 					</Box>
 				</Flex>
@@ -349,17 +368,13 @@ function BuySell() {
 					mt={4}
 					p={0}
 					onClick={() => {
-						if (isBuySelected) {
-							handleBuyStock();
-						} else {
-							handleSellStock();
-						}
+						onPreviewModalOpen();
 					}}
 					aria-pressed={isBuySelected}
 					_focus={{ outline: "2px solid dashboardPrimary" }}
 				>
 					<Text color={"white"} fontWeight="600" mb={0} p={2}>
-						Order
+						Preview Order
 					</Text>
 				</Flex>
 			</Box>
@@ -383,6 +398,54 @@ function BuySell() {
 						<Button colorScheme="red" onClick={onClose}>
 							Close
 						</Button>
+					</ModalBody>
+				</ModalContent>
+			</Modal>
+
+			<Modal
+				isOpen={isPreviewModalOpen}
+				onClose={onPreviewModalClose}
+				isCentered
+			>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader display="flex" alignItems="center">
+						<Icon as={WarningIcon} color={"teal"} mr={2} />
+						Preview Order
+					</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody
+						display="flex"
+						alignItems="center"
+						justifyContent="center"
+						flexDirection="column"
+					>
+						<Text fontSize="lg" mb={4}>
+							{isBuySelected ? "Buy" : "Sell"} {quantity} unit
+							from {stockSymbol}
+						</Text>
+						<Flex width={"60%"} justifyContent={"space-between"}>
+							<Button
+								colorScheme="gray"
+								onClick={() => {
+									onPreviewModalClose();
+								}}
+							>
+								No
+							</Button>
+							<Button
+								colorScheme="teal"
+								onClick={() => {
+									if (isBuySelected) {
+										handleBuyStock();
+									} else {
+										handleSellStock();
+									}
+								}}
+							>
+								Yes
+							</Button>
+						</Flex>
 					</ModalBody>
 				</ModalContent>
 			</Modal>
