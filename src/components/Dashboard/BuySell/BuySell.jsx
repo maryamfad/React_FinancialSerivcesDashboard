@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { stockNames } from "../../Home/stockNames";
 import {
 	Box,
 	Text,
@@ -34,6 +35,9 @@ function BuySell() {
 	const [stockSymbol, setStockSymbol] = useState("AAPL");
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
+	const handleStockChange = (event) => {
+		setStockSymbol(event.target.value);
+	};
 	const handleOrderChange = (event) => {
 		setOrderType(event.target.value);
 	};
@@ -91,7 +95,9 @@ function BuySell() {
 					justifyContent="center"
 					alignItems="center"
 					width="50%"
-					backgroundColor={isBuySelected ? "dashboardPrimary" : "transparent"}
+					backgroundColor={
+						isBuySelected ? "dashboardPrimary" : "transparent"
+					}
 					cursor="pointer"
 					borderRadius="5px"
 					onClick={() => {
@@ -119,7 +125,9 @@ function BuySell() {
 					justifyContent="center"
 					alignItems="center"
 					width="50%"
-					backgroundColor={!isBuySelected ? "dashboardPrimary" : "transparent"}
+					backgroundColor={
+						!isBuySelected ? "dashboardPrimary" : "transparent"
+					}
 					cursor="pointer"
 					borderRadius="5px"
 					onClick={() => setBuySelected(false)}
@@ -148,14 +156,14 @@ function BuySell() {
 						<Text fontWeight="500" mb={0}>
 							Symbol
 						</Text>
-						<Input
-							aria-label="stockSymbol"
-							name="stockSymbol"
+
+						<Select
+							width={"100%"}
+							id="stockSymbol"
 							value={stockSymbol}
-							onChange={(e) => setStockSymbol(e.target.value)}
+							onChange={handleStockChange}
 							border="2px solid #ccc"
 							borderRadius="4px"
-							// p="8px"
 							_focus={{
 								borderColor: "dashboardPrimary",
 								boxShadow: "0 0 0 3px rgba(56, 178, 172, 0.6)",
@@ -164,7 +172,11 @@ function BuySell() {
 							_hover={{
 								borderColor: "dashboardPrimary",
 							}}
-						/>
+						>
+							{stockNames.map((stockName) => (
+								<option value={stockName}>{stockName}</option>
+							))}
+						</Select>
 					</Box>
 					<Box
 						width={{ base: "100%", md: "48%" }}
@@ -232,7 +244,9 @@ function BuySell() {
 								borderColor={"gray"}
 								borderWidth={"2px"}
 								value="dollars"
-								_focus={{ outline: "2px solid dashboardPrimary" }}
+								_focus={{
+									outline: "2px solid dashboardPrimary",
+								}}
 								_hover={{
 									backgroundColor: isBuySelected
 										? "dashboardPrimary"
@@ -246,7 +260,9 @@ function BuySell() {
 								borderWidth={"2px"}
 								ml={"10%"}
 								value="shares"
-								_focus={{ outline: "2px solid dashboardPrimary" }}
+								_focus={{
+									outline: "2px solid dashboardPrimary",
+								}}
 								_hover={{
 									backgroundColor: isBuySelected
 										? "dashboardPrimary"
@@ -341,11 +357,6 @@ function BuySell() {
 					}}
 					aria-pressed={isBuySelected}
 					_focus={{ outline: "2px solid dashboardPrimary" }}
-					// _hover={{
-					// 	backgroundColor: isBuySelected
-					// 		? "dashboardPrimary"
-					// 		: "rgba(0, 0, 0, 0.05)",
-					// }}
 				>
 					<Text color={"white"} fontWeight="600" mb={0} p={2}>
 						Order
