@@ -25,8 +25,8 @@ import getShortQuote from "../../../api/getShortQuote";
 import { WarningIcon } from "@chakra-ui/icons";
 
 function BuySell() {
-	const [isBuySelected, setBuySelected] = useState(false);
-	const [orderType, setOrderType] = useState("");
+	const [isBuySelected, setBuySelected] = useState(true);
+	const [orderType, setOrderType] = useState("market");
 	const [tradeOption, setTradeOption] = useState("");
 	const [timeInForce, setTimeInForce] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
@@ -55,7 +55,7 @@ function BuySell() {
 				onOpen();
 			} else {
 				const price = await getShortQuote(stockSymbol);
-				await buyStock(quantity, stockSymbol, price);
+				await buyStock(quantity, stockSymbol, price, orderType);
 			}
 		} catch (error) {
 			console.error(error);
@@ -67,7 +67,7 @@ function BuySell() {
 	const handleSellStock = async () => {
 		try {
 			const price = await getShortQuote(stockSymbol);
-			await sellStock(quantity, stockSymbol, price);
+			await sellStock(quantity, stockSymbol, price, orderType);
 		} catch (error) {
 			console.error(error);
 			setErrorMessage(error.message);

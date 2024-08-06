@@ -11,7 +11,7 @@ const theme = extendTheme({
         '--text-color': '#333',
         '--navbar-color' : '#3498db',
         '--dashboard-primary': '#008080',
-        '--dashboard-secondary': '#BEC8EB'
+        '--dashboard-secondary': '#DEF2C8'
       },
       body: {
         backgroundColor: 'var(--background-color)',

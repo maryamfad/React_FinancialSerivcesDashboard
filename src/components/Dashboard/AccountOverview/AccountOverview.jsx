@@ -61,9 +61,9 @@ const AccountOverview = () => {
             // bg="#FFD700"
             p={1}
             borderRadius="5px"
-            boxShadow="0px 1px 3px rgba(0, 0, 0, 0.2)"
-            borderColor={"dashboardSecondary"}
-            borderWidth={"2px"}
+            // boxShadow="0px 1px 3px rgba(0, 0, 0, 0.2)"
+            // borderColor={"dashboardSecondary"}
+            // borderWidth={"2px"}
             bg={"dashboardSecondary"}
           >
             Balance
@@ -72,7 +72,7 @@ const AccountOverview = () => {
             {Number(accountOverview.balance).toFixed(2)} $
           </Text>
         </Box>
-        <Box
+        {/* <Box
           textAlign="center"
           mb={{ base: 3, sm: 3, md: 0 }}
           aria-label="Buying Power"
@@ -92,7 +92,7 @@ const AccountOverview = () => {
           <Text fontWeight="500" color="#343a40">
             {accountOverview.buyingPower} $
           </Text>
-        </Box>
+        </Box> */}
         <Box
           textAlign="center"
           mb={{ base: 3, sm: 3, md: 0 }}
@@ -101,11 +101,11 @@ const AccountOverview = () => {
           <Text
             fontWeight="600"
             fontSize="large"
-            borderColor={"dashboardSecondary"}
-            borderWidth={"2px"}
+            // borderColor={"dashboardSecondary"}
+            // borderWidth={"2px"}
             p={1}
             borderRadius="5px"
-            boxShadow="0px 1px 3px rgba(0, 0, 0, 0.2)"
+            // boxShadow="0px 1px 3px rgba(0, 0, 0, 0.2)"
             bg={"dashboardSecondary"}
           >
             Cash
@@ -118,11 +118,11 @@ const AccountOverview = () => {
           <Text
             fontWeight="600"
             fontSize="large"
-            borderColor={"dashboardSecondary"}
-            borderWidth={"2px"}
+            // borderColor={"dashboardSecondary"}
+            // borderWidth={"2px"}
             p={1}
             borderRadius="5px"
-            boxShadow="0px 1px 3px rgba(0, 0, 0, 0.2)"
+            // boxShadow="0px 1px 3px rgba(0, 0, 0, 0.2)"
             bg={"dashboardSecondary"}
           >
             Daily Change
