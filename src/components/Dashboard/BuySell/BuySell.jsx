@@ -8,9 +8,6 @@ import {
 	Select,
 	FormControl,
 	FormLabel,
-	RadioGroup,
-	Radio,
-	Stack,
 	Modal,
 	ModalOverlay,
 	ModalContent,
@@ -28,7 +25,7 @@ import { WarningIcon } from "@chakra-ui/icons";
 function BuySell() {
 	const [isBuySelected, setBuySelected] = useState(true);
 	const [orderType, setOrderType] = useState("market");
-	const [tradeOption, setTradeOption] = useState("");
+	// const [tradeOption, setTradeOption] = useState("");
 	const [timeInForce, setTimeInForce] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [quantity, setQuantity] = useState(0);
@@ -50,9 +47,9 @@ function BuySell() {
 		setOrderType(event.target.value);
 	};
 
-	const handleTradeOptionChange = (value) => {
-		setTradeOption(value);
-	};
+	// const handleTradeOptionChange = (value) => {
+	// 	setTradeOption(value);
+	// };
 
 	const handleTimeInForceChange = (event) => {
 		setTimeInForce(event.target.value);
