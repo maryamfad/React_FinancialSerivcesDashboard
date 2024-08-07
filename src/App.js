@@ -14,23 +14,44 @@ import Dashboard from "./components/Dashboard/Dashboard";
 // import NavbarMenu from "./components/Navbar/Navbar";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <AuthProvider>
-      
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/home" />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          {/* <Route path="/dashboard" element={<PrivateRouter><Dashboard /></PrivateRouter>} /> */}
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
-  );
+	function isTokenExpired(token) {
+		try {
+			const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+			const currentTime = Math.floor(Date.now() / 1000);
+			return tokenPayload.exp < currentTime;
+		} catch (e) {
+			return true;
+		}
+	}
+
+	function removeExpiredToken() {
+		const token = localStorage.getItem("token");
+
+		if (token && isTokenExpired(token)) {
+			localStorage.removeItem("token");
+			console.log("Token expired and removed from localStorage.");
+		}
+	}
+
+	removeExpiredToken();
+
+	setInterval(removeExpiredToken, 60000);
+	return (
+		<BrowserRouter>
+			<AuthProvider>
+				<Routes>
+					<Route path="/" element={<Navigate replace to="/home" />} />
+					<Route path="/home" element={<Home />} />
+					<Route path="/about" element={<About />} />
+					<Route path="/services" element={<Services />} />
+					<Route path="/signup" element={<Signup />} />
+					<Route path="/login" element={<Login />} />
+					{/* <Route path="/dashboard" element={<PrivateRouter><Dashboard /></PrivateRouter>} /> */}
+					<Route path="/dashboard" element={<Dashboard />} />
+				</Routes>
+			</AuthProvider>
+		</BrowserRouter>
+	);
 }
 
 export default App;

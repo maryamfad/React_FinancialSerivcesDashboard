@@ -241,7 +241,7 @@ useEffect(()=>{
 					<FormLabel>
 						Choose how to {isBuySelected ? "buy" : "sell"}
 					</FormLabel>
-					<RadioGroup
+					{/* <RadioGroup
 						onChange={handleTradeOptionChange}
 						value={tradeOption}
 					>
@@ -291,7 +291,7 @@ useEffect(()=>{
 								Shares
 							</Radio>
 						</Stack>
-					</RadioGroup>
+					</RadioGroup> */}
 				</FormControl>
 
 				<Flex justifyContent="space-between" mt={4} flexWrap="nowrap">
@@ -327,7 +327,7 @@ useEffect(()=>{
 							Estimated Cost
 						</Text>
 						<Text fontWeight="500" color="#343a40">
-							181.98 $
+							{quantity * stockPrice}
 						</Text>
 					</Box>
 				</Flex>

@@ -8,7 +8,9 @@ const Orders = () => {
 		getAllOrders()
 			// .then((d) => d.json())
 			.then((data) => {
-				data.sort((a, b) =>new Date(b.executedAt) - new Date(a.executedAt));
+				data.sort(
+					(a, b) => new Date(b.executedAt) - new Date(a.executedAt)
+				);
 				setOrders(data);
 				console.log("orders", data);
 			})
@@ -43,7 +45,6 @@ const Orders = () => {
 				lg: "25%",
 				xl: "25%",
 			}}
-			
 			boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
 			borderColor={"dashboardPrimary"}
 			borderWidth={"2px"}
@@ -73,40 +74,38 @@ const Orders = () => {
 					<Box>Status</Box>
 					<Box>Date</Box>
 				</Flex>
-				<Box >
-				{orders.map((order) => (
-					<Flex
-					
-						key={order.id}
-						py={2}
-						borderBottom="1px"
-						borderColor="gray.200"
-						_hover={{ bg: "gray.100" }}
-						fontSize={"xs"}
-						justifyContent={"space-evenly"}
-						alignItems={"center"}
-					>
-						<Box flex={1} textAlign={"center"}>
-							{order.stockSymbol}
-						</Box>
-						<Box flex={1} textAlign={"center"}>
-							{order.orderType}-{order.tradeType}
-						</Box>
-						<Box flex={1} textAlign={"center"}>
-							{order.quantity}
-						</Box>
-						<Box flex={1} textAlign={"center"}>
-							{order.price}
-						</Box>
-						<Box flex={1} textAlign={"center"}>
-							{order.status}
-						</Box>
-						<Box flex={1} textAlign={"center"}>
-							{formatDate(order.executedAt)}
-						</Box>
-					</Flex>
-					
-				))}
+				<Box>
+					{orders.map((order) => (
+						<Flex
+							key={order.id}
+							py={2}
+							borderBottom="1px"
+							borderColor="gray.200"
+							_hover={{ bg: "gray.100" }}
+							fontSize={"xs"}
+							justifyContent={"space-evenly"}
+							alignItems={"center"}
+						>
+							<Box flex={1} textAlign={"center"}>
+								{order.stockSymbol}
+							</Box>
+							<Box flex={1} textAlign={"center"}>
+								{order.orderType}-{order.tradeType}
+							</Box>
+							<Box flex={1} textAlign={"center"}>
+								{order.quantity}
+							</Box>
+							<Box flex={1} textAlign={"center"}>
+								{order.price}
+							</Box>
+							<Box flex={1} textAlign={"center"}>
+								{order.status}
+							</Box>
+							<Box flex={1} textAlign={"center"}>
+								{formatDate(order.executedAt)}
+							</Box>
+						</Flex>
+					))}
 				</Box>
 			</Box>
 		</Box>
