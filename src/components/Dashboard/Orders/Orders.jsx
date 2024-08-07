@@ -21,6 +21,7 @@ const Orders = () => {
 					setErrorMessage(
 						error.message || "An unexpected error occurred."
 					);
+					console.log(errorMessage);
 				}
 			});
 	};
