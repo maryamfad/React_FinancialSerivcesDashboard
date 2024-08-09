@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
 import "../Home.css";
-const LinearChart = ({ data, timeFrame }) => {
+const LinearChart = ({ data }) => {
   const d3Container = useRef(null);
   const tooltip = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
