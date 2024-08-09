@@ -38,18 +38,25 @@ const Portfolio = () => {
 			borderRadius={"10px"}
 		>
 			<Flex
-				m={{ base: 2, sm: 2, md: 2, lg: 5, xl: 5 }}
-				p={{ base: 2, sm: 2, md: 2, lg: 5, xl: 5 }}
-				mb={0}
-				pb={0}
+				// m={{ base: 2, sm: 2, md: 2, lg: 2, xl: 2 }}
+				// p={{ base: 2, sm: 2, md: 2, lg: 2, xl: 2 }}
+				// mb={0}
+				// pb={0}
 				justifyContent={"space-between"}
 			>
-				<Box width={"50%"}>
-					<Text fontWeight={500} fontSize={"18px"}>
-						{" "}
+				<Flex width={"50%"} height={"100%"}>
+					<Text
+						m={0}
+						width={"100%"}
+						height={"100%"}
+						pl={"3"}
+						pt={2}
+						fontWeight={"bold"}
+						fontSize={"18px"}
+					>
 						Your Protfolio
 					</Text>
-				</Box>
+				</Flex>
 				<Flex
 					width={{
 						base: "60%",
@@ -66,8 +73,8 @@ const Portfolio = () => {
 					<Button>All</Button>
 				</Flex>
 			</Flex>
-			<Divider />
-			<Box>
+			<Divider p={0} m={0} />
+			<Flex>
 				<Flex ml={5} mt={5}>
 					<Text mb={0} fontSize={"18px"} fontWeight={"500"}>
 						$ 100,002.88
@@ -84,7 +91,7 @@ const Portfolio = () => {
 				>
 					May 01, 03:21 PM EDT
 				</Flex>
-			</Box>
+			</Flex>
 			<Box>
 				<LineChart data={portfolioData} />
 			</Box>

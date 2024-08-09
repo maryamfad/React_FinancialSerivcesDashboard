@@ -10,7 +10,9 @@ const LinearChart = ({ data }) => {
 		// Initialize resize observer
 		const resizeObserver = new ResizeObserver((entries) => {
 			for (let entry of entries) {
-				setContainerWidth(entry.contentRect.width);
+				setContainerWidth(
+					entry.contentRect.width - entry.contentRect.width / 10
+				);
 			}
 		});
 		if (d3Container.current) {
@@ -36,7 +38,7 @@ const LinearChart = ({ data }) => {
 
 			data.sort((a, b) => a.date - b.date);
 			const margin = { top: 10, right: 20, bottom: 30, left: 40 },
-				height = 300 - margin.top - margin.bottom;
+				height = 280 - margin.top - margin.bottom;
 
 			const svg = d3
 				.select(d3Container.current)

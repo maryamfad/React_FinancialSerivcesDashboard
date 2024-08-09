@@ -28,7 +28,9 @@ function StockDiagram({ symbol, stockLogo }) {
   const loadTodayHistoricalChart = async (symbol, today) => {
     try {
       const result = await getTodayHistoricalChart(symbol, today);
-
+      if (!Array.isArray(result) || result.length === 0 || !result) {
+        throw new Error("Invalid or empty result received from the API");
+      }
       setData(
         result
           .map((stock) => ({
@@ -47,7 +49,13 @@ function StockDiagram({ symbol, stockLogo }) {
       setIsDataReady(true);
     } catch (error) {
       // setError(error.message);
-    } finally {
+      if (error.name === 'FetchError') {
+        console.error('Network error or timeout occurred:', error.message);
+    } else {
+        console.error('An error occurred:', error.message);
+    }
+    } 
+    finally {
       // setLoading(false);
     }
   };
@@ -55,6 +63,9 @@ function StockDiagram({ symbol, stockLogo }) {
   const loadEndOfDayHistorical = async (symbol, end, start) => {
     try {
       const result = await getEndOfDayHistorical(symbol, end, start);
+      if (!Array.isArray(result) || result.length === 0 || !result) {
+        throw new Error("Invalid or empty result received from the API");
+      }
       setData(
         result.historical.map((stock) => ({
           time: stock.date,
@@ -69,7 +80,13 @@ function StockDiagram({ symbol, stockLogo }) {
       setIsDataReady(true);
       // } catch (error) {
       // setError(error.message);
-    } finally {
+    } catch(error) {
+      if (error.name === 'FetchError') {
+        console.error('Network error or timeout occurred:', error.message);
+    } else {
+        console.error('An error occurred:', error.message);
+    }
+      // throw error
       // setLoading(false);
     }
   };
