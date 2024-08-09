@@ -9,8 +9,6 @@ import {
 	Tr,
 	Th,
 	Td,
-	TableCaption,
-	TableContainer,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { getAllOrders } from "../../../services/TradeServices";
