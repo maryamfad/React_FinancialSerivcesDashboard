@@ -5,10 +5,17 @@ const getTodayHistoricalChart = async (symbol, today) => {
       method: "GET",
     });
     const data = await response.json();
+    if (!Array.isArray(data) || data.length === 0 || !data) {
+      throw new Error(data['Error Message']);
+    }
     return data;
   } catch (error) {
     console.log(error.message);
-    throw error;
+    if (error.name === 'FetchError') {
+      console.error('Network error or timeout occurred:', error.message);
+  } else {
+      console.error('An error occurred:', error.message);
+  }
   }
 };
 export default getTodayHistoricalChart;
