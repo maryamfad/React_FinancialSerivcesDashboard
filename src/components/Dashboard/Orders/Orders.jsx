@@ -6,13 +6,11 @@ const Orders = () => {
 	const [errorMessage, setErrorMessage] = useState("");
 	const getOrders = () => {
 		getAllOrders()
-			// .then((d) => d.json())
 			.then((data) => {
 				data.sort(
 					(a, b) => new Date(b.executedAt) - new Date(a.executedAt)
 				);
 				setOrders(data);
-				// console.log("orders", data);
 			})
 			.catch((error) => {
 				if (error.status === 400) {

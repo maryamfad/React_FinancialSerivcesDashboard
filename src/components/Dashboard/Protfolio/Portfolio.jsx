@@ -27,6 +27,7 @@ const Portfolio = () => {
 	};
 	useEffect(() => {
 		getUserPortfolio();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
 		<Box
