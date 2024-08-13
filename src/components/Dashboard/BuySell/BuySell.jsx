@@ -63,7 +63,7 @@ function BuySell() {
 				);
 				onOpen();
 			} else {
-				 price = await getShortQuote(stockSymbol);
+				price = await getShortQuote(stockSymbol);
 				await buyStock(quantity, stockSymbol, price, orderType);
 				onPreviewModalClose();
 			}
@@ -74,7 +74,6 @@ function BuySell() {
 		}
 	};
 
-
 	const handleSellStock = async () => {
 		try {
 			if (quantity === 0) {
@@ -83,7 +82,7 @@ function BuySell() {
 				);
 				onOpen();
 			} else {
-				 price = await getShortQuote(stockSymbol);
+				price = await getShortQuote(stockSymbol);
 				await sellStock(quantity, stockSymbol, price, orderType);
 				onPreviewModalClose();
 			}
@@ -93,9 +92,15 @@ function BuySell() {
 			onOpen();
 		}
 	};
-useEffect(()=>{
-	getShortQuote(stockSymbol).then((price)=>{setStockPrice(price)}).catch((error)=>{console.log(error);})
-},[stockSymbol])
+	useEffect(() => {
+		getShortQuote(stockSymbol)
+			.then((price) => {
+				setStockPrice(price);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, [stockSymbol]);
 	return (
 		<Box
 			mr={{ base: 0, lg: 5 }}
@@ -191,14 +196,13 @@ useEffect(()=>{
 							}}
 						>
 							{stockNames.map((stockName, index) => (
-								<option key={index} value={stockName}>{stockName}</option>
+								<option key={index} value={stockName}>
+									{stockName}
+								</option>
 							))}
 						</Select>
 					</Box>
-					<Box
-						width={{ base: "100%", md: "48%" }}
-						ml={{ md: 10 }}
-					>
+					<Box width={{ base: "100%", md: "48%" }} ml={{ md: 10 }}>
 						<Text fontWeight="500" mb={0}>
 							Market Price
 						</Text>

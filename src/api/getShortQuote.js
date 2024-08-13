@@ -3,7 +3,7 @@ const getShortQuote = async (symbol) => {
 		throw new Error("Invalid stock symbol provided");
 	}
 
-	const url = `https://financialmodelingprep.com/api/v3/quote-short/${symbol}?apikey=${process.env.FINANCIAL_MODELING_PREP_API_KEY}`;
+	const url = `https://financialmodelingprep.com/api/v3/quote-short/${symbol}?apikey=${process.env.REACT_APP_FINANCIAL_MODELING_PREP_API_KEY}`;
 	try {
 		const response = await fetch(url, {
 			method: "GET",
