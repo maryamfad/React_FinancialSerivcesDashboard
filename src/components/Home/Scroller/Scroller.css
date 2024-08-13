@@ -1,82 +1,81 @@
 .scroller {
-  /* width: 100%; */
-  /* margin-top: 5%; */
-  /* z-index: 0; */
- 
+	/* width: 100%; */
+	/* margin-top: 5%; */
+	/* z-index: 0; */
 }
 .scroller[data-animated="true"] {
-  overflow: hidden;
-  /* mask: linear-gradient(40deg, transparent, white 10%, white 80%, transparent); */
-  /* background-color: blue; */
+	overflow: hidden;
+	/* mask: linear-gradient(40deg, transparent, white 10%, white 80%, transparent); */
+	/* background-color: blue; */
 }
 .scroller_inner {
-  /* width: 2000%; */
-  /* display: flex; */
-  /* padding-block: 1rem; */
-  /* gap: 1rem; */
-  /* flex-wrap: wrap; */
+	/* width: 2000%; */
+	/* display: flex; */
+	/* padding-block: 1rem; */
+	/* gap: 1rem; */
+	/* flex-wrap: wrap; */
 }
 
 .scroller[data-animated="true"] .scroller_inner {
-  display: inline-flex;
-  flex-direction: row;
-  /* flex-wrap: nowrap; */
-  animation: scroll 700s linear infinite;
+	display: inline-flex;
+	flex-direction: row;
+	/* flex-wrap: nowrap; */
+	animation: scroll 700s linear infinite;
 }
 .scroller[data-animated="true"] .scroller_inner:hover {
-  animation-play-state: paused;
+	animation-play-state: paused;
 }
 .box {
-  display: flex;
-  background-color: #F8F9FA;
-  font-family: Arial, sans-serif;
-  border: 2px solid #343a40;
-  border-radius: 15px;
-  padding: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  font-size: 14px;
+	display: flex;
+	background-color: #f8f9fa;
+	font-family: Arial, sans-serif;
+	border: 2px solid #343a40;
+	border-radius: 15px;
+	padding: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	font-size: 14px;
 }
 /* .stock-trade_count {
   font-size: 0.7rem;
 } */
 .stock-volume {
-  /* font-size: 0.7rem; */
+	/* font-size: 0.7rem; */
 }
 .stock-name {
-  /* font-size: 14px; */
-  border: 1px;
-  
+	/* font-size: 14px; */
+	border: 1px;
 }
 .stock-symbol {
-  /* font-size: 14px; */
-  font-weight: bold;
+	/* font-size: 14px; */
+	font-weight: bold;
 }
 
 .stock-price {
-  /* font-size: 14px; */
+	/* font-size: 14px; */
 }
 
 .stock-change {
-  /* font-size: 12px; */
-  /* margin-top: 5px; */
+	/* font-size: 12px; */
+	/* margin-top: 5px; */
 }
 
 .stock-volume {
-  /* font-size: 14px; */
-  /* margin-top: 5px; */
-  color: #666;
+	/* font-size: 14px; */
+	/* margin-top: 5px; */
+	color: #666;
 }
 
-.stock-logo{
-  width: 30px;
-  height: 30px;
-  object-fit: cover;
-  border-radius: 5px;
-  padding: 1%;
-  border: 1px;
+.stock-logo {
+	width: 30px;
+	height: 30px;
+	object-fit: cover;
+	border-radius: 5px;
+	padding: 1%;
+	border: 1px;
+	background-color: #d4d7e2;
 }
 @media (max-width: 450px) {
-  .scroller{
-    margin-top: 10%;
-  }
+	.scroller {
+		margin-top: 10%;
+	}
 }
