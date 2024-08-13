@@ -1,35 +1,125 @@
-import { Box, Flex, Text, Divider } from "@chakra-ui/react";
-
+import {
+	Box,
+	Flex,
+	Text,
+	Divider,
+	Table,
+	Thead,
+	Tbody,
+	Tr,
+	Th,
+	Td,
+} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { getWatchlist } from "../../services/WatchlistServices";
 const Watchlist = () => {
-  return (
-    <Box
-      mb={5}
-      ml={6}
-      width={{ base: "100%", sm: "100%", md: "100%", lg: "52%", xl: "52%" }}
-      minHeight={{
-        base: "100px",
-        sm: "100px",
-        md: "100px",
-        lg: "300px",
-        xl: "300px",
-      }}
-      overflow={"auto"}
-      boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+	const [watchlist, setWatchlist] = useState([]);
+	const [errorMessage, setErrorMessage] = useState("");
+	const loadWatchlist = () => {
+		getWatchlist()
+			.then((data) => {
+				setWatchlist(data.stocks);
+				console.log(data.stocks);
+			})
+			.catch((error) => {
+				if (error.status === 400) {
+					setErrorMessage("Invalid Credentials");
+				} else {
+					setErrorMessage(
+						error.message || "An unexpected error occurred."
+					);
+					console.log(errorMessage);
+				}
+			});
+	};
+	useEffect(() => {
+		loadWatchlist();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+	return (
+		<Box
+			mb={5}
+			width={{
+				base: "100%",
+				lg: "45%",
+			}}
+			boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
 			borderColor={"dashboardPrimary"}
 			borderWidth={"2px"}
 			borderRadius={"10px"}
-    >
-      {" "}
-      <Flex m={5} p={5} mb={0} pb={0} justifyContent={"space-between"}>
-        <Box width={"50%"}>
-          <Text fontWeight={500} fontSize={"18px"}>
-            {" "}
-            Watchlist
-          </Text>
-        </Box>
-      </Flex>
-      <Divider />
-    </Box>
-  );
+		>
+			{" "}
+			<Flex>
+				<Box width={"50%"}>
+					<Text
+						m={0}
+						width={"100%"}
+						height={"100%"}
+						pl={"3"}
+						pt={2}
+						pb={1}
+						fontWeight={"bold"}
+						fontSize={"18px"}
+					>
+						{" "}
+						Watchlist
+					</Text>
+				</Box>
+			</Flex>
+			<Divider p={0} m={0} />
+			<Box
+				pl={4}
+				bg="white"
+				w="100%"
+				h="240px"
+				overflowY="auto"
+				borderRadius={"10px"}
+				boxShadow={
+					"rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
+				}
+				border={"2x"}
+				borderColor={"#F1D7D7"}
+			>
+				<Table
+					mt={5}
+					sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}
+				>
+					<Thead position="sticky" top={0} zIndex={1}>
+						<Tr>
+							<Th p={0} textAlign={"center"} pb={2}>
+								Symbol
+							</Th>
+
+							<Th p={0} textAlign={"center"} pb={2}>
+								price
+							</Th>
+							<Th p={0} textAlign={"center"} pb={2}>
+								Market Cap
+							</Th>
+						</Tr>
+					</Thead>
+					<Tbody>
+						{watchlist.map((o, index) => (
+							<Tr key={index}>
+								<Td p={1} textAlign={"center"} color={"blue"}>
+									{o.stockSymbol}
+								</Td>
+
+								<Td p={1} textAlign={"center"}>
+									{o.price}
+								</Td>
+								<Td p={1} textAlign={"center"}>
+									${o.price}
+								</Td>
+								<Td p={1} textAlign={"center"}>
+									{o.marketCap}
+								</Td>
+							</Tr>
+						))}
+					</Tbody>
+				</Table>
+			</Box>
+		</Box>
+	);
 };
 export default Watchlist;

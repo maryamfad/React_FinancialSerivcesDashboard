@@ -45,14 +45,7 @@ const Holdings = () => {
 				lg: "45%",
 				xl: "45%",
 			}}
-			// minHeight={{
-			// 	base: "100px",
-			// 	sm: "100px",
-			// 	md: "100px",
-			// 	lg: "300px",
-			// 	xl: "300px",
-			// }}
-			// overflow={"auto"}
+			
 			boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
 			borderColor={"dashboardPrimary"}
 			borderWidth={"2px"}
