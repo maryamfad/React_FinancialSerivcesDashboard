@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import getFullQuote from "../../../api/getFullQuote";
-import { Box, Flex, Text, Icon } from "@chakra-ui/react";
+import { Box, Flex, Text, Icon, Divider } from "@chakra-ui/react";
 import {
   FaDollarSign,
   FaChartLine,
@@ -25,16 +25,17 @@ const StockSummary = ({ symbol }) => {
     loadStockSummaryData(symbol);
   }, [symbol]);
   return (
-    <Box height="100%" bg="secondary" borderRadius="md" p={4}>
-      <Text pl={5} pt={1} fontWeight="bold" color="#333">
+    <Box height="100%" borderRadius="10px"  borderColor={"primary"} borderWidth={"2px"}>
+      <Text pl={3} pt={3} fontWeight="bold" color="#333">
         Summary
       </Text>
+      <Divider p={0} m={0} />
       <Flex
         flexDir="column"
         bg="white"
         borderRadius="10px"
         mt={4}
-        p={2}
+        p={4}
         boxShadow={
           "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
         }
