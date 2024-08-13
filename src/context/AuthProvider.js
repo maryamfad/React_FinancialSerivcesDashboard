@@ -1,10 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-	const [user, setUser] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [userToken, setUserToken] = useState(null);
 
 	const signUp = async (username, password) => {
 		try {
@@ -54,7 +55,8 @@ const AuthProvider = ({ children }) => {
 				error.details = errorDetails;
 				throw error;
 			}
-
+			setUserToken(response.token);
+            setIsAuthenticated(true);
 			return response.json();
 		} catch (error) {
 			throw error;
@@ -75,10 +77,10 @@ const AuthProvider = ({ children }) => {
 					},
 				}
 			);
-
+            setIsAuthenticated(false);
 			if (response.ok) {
-				localStorage.removeItem("token"); // Remove the token
-				Navigate("/login"); // Redirect to login page
+				localStorage.removeItem("token"); 
+				Navigate("/login"); 
 			} else {
 				const errorText = await response.text();
 				console.error("Logout failed", errorText);
@@ -89,7 +91,7 @@ const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, signUp, login, logout }}>
+		<AuthContext.Provider value={{ userToken, signUp, login, logout, isAuthenticated }}>
 			{children}
 		</AuthContext.Provider>
 	);

@@ -2,15 +2,15 @@ import "./App.css";
 import { AuthProvider } from "./context/AuthProvider";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
-import { BrowserRouter, Routes, Route, Navigate,  } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Services from "./components/Services/Services";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
-
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
-  // let navigate = useNavigate();
+	// let navigate = useNavigate();
 	function isTokenExpired(token) {
 		try {
 			const tokenPayload = JSON.parse(atob(token.split(".")[1]));
@@ -27,7 +27,7 @@ function App() {
 		if (token && isTokenExpired(token)) {
 			localStorage.removeItem("token");
 			console.log("Token expired and removed from localStorage.");
-      // navigate("/login")
+			// navigate("/login")
 		}
 	}
 
@@ -44,8 +44,14 @@ function App() {
 					<Route path="/services" element={<Services />} />
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/login" element={<Login />} />
-					{/* <Route path="/dashboard" element={<PrivateRouter><Dashboard /></PrivateRouter>} /> */}
-					<Route path="/dashboard" element={<Dashboard />} />
+					<Route
+						path="/dashboard"
+						element={
+							<ProtectedRoute>
+								<Dashboard />
+							</ProtectedRoute>
+						}
+					/>
 				</Routes>
 			</AuthProvider>
 		</BrowserRouter>

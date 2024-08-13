@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Box, Flex } from "@chakra-ui/react";
-import { logout } from "../../services/AuthServices";
+import { AuthContext } from "../../context/AuthProvider";
 
 function NavbarMenu() {
+	const { logout } = useContext(AuthContext);
 	let navigate = useNavigate();
 	
 	const location = useLocation();
@@ -85,11 +86,12 @@ function NavbarMenu() {
 						</Box>
 					</Link>
 					<Link
-						to={
-							localStorage.getItem("token")
-								? "/dashboard"
-								: "/login"
-						}
+					to={"/dashboard"}
+						// to={
+						// 	localStorage.getItem("token")
+						// 		? "/dashboard"
+						// 		: "/login"
+						// }
 					>
 						<Box
 							bg={
