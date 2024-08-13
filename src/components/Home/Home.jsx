@@ -45,15 +45,15 @@ const Home = () => {
 					wrap="wrap"
 				>
 					<Box width={{ base: "100%", md: "24%" }} p={1}>
-						<StockSummary symbol={symbol} height={"100%"} />
+						{/* <StockSummary symbol={symbol} height={"100%"} /> */}
 					</Box>
 					<Box width={{ base: "100%", md: "51%" }} p={1}>
 						<Flex
 							borderColor={"primary"}
-              bg={"accentColor"}
+							bg={"accentColor"}
 							borderWidth={"2px"}
 							borderRadius={"10px"}
-              justifyContent={"center"}
+							justifyContent={"center"}
 							width="100%"
 							height={{ base: "auto", md: "9%" }}
 							mb={{ base: 4, md: 1 }}
@@ -69,10 +69,10 @@ const Home = () => {
 							height={{ base: "auto", md: "90%" }}
 							p={4}
 						>
-							<StockDiagram
+							{/* <StockDiagram
 								symbol={symbol}
 								stockLogo={stockLogo}
-							/>
+							/> */}
 						</Box>
 					</Box>
 					<Box
@@ -125,10 +125,10 @@ const Home = () => {
 							borderRadius={"10px"}
 							// p={4}
 						>
-							<Text pl={3} pt={3}fontWeight={"bold"}>
+							<Text pl={3} pt={3} fontWeight={"bold"}>
 								Market Biggest Losers
 							</Text>
-              <Divider p={0} m={0} />
+							<Divider p={0} m={0} />
 							<Box
 								w="100%"
 								h="100%"
@@ -159,11 +159,9 @@ const Home = () => {
 					height={{ base: "auto", md: "50%" }}
 				>
 					<Box
-						
 						width={{ base: "100%", md: "50%" }}
 						height={"50vh"}
 						m={1}
-						
 					>
 						<StockNews symbol={symbol} />
 					</Box>

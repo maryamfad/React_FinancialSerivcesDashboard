@@ -1,5 +1,5 @@
 import "./App.css";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthProvider";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import { BrowserRouter, Routes, Route, Navigate,  } from "react-router-dom";
@@ -38,7 +38,7 @@ function App() {
 		<BrowserRouter>
 			<AuthProvider>
 				<Routes>
-					<Route path="/" element={<Navigate replace to="/dashboard" />} />
+					<Route path="/" element={<Navigate replace to="/home" />} />
 					<Route path="/home" element={<Home />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/services" element={<Services />} />

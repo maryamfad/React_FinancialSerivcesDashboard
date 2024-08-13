@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Login.css";
-import { login } from "../../services/AuthServices";
+// import { login } from "../../services/AuthServices";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -22,7 +22,9 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { WarningIcon } from "@chakra-ui/icons";
+import { AuthContext } from '../../context/AuthProvider';
 function Login() {
+  const { login } = useContext(AuthContext);
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
