@@ -48,22 +48,24 @@ const Home = () => {
 						<StockSummary symbol={symbol} height={"100%"} />
 					</Box>
 					<Box width={{ base: "100%", md: "51%" }} p={1}>
-						<Box
+						<Flex
 							borderColor={"primary"}
+              bg={"accentColor"}
 							borderWidth={"2px"}
-							borderTopRadius={"10px"}
+							borderRadius={"10px"}
+              justifyContent={"center"}
 							width="100%"
-							height={{ base: "auto", md: "10%" }}
-							mb={{ base: 4, md: 0 }}
-							p={4}
+							height={{ base: "auto", md: "9%" }}
+							mb={{ base: 4, md: 1 }}
+							// p={4}
 						>
 							<SearchStocks setSymbol={setSymbol} />
-						</Box>
+						</Flex>
 						<Box
 							borderColor={"primary"}
 							borderWidth={"2px"}
 							width="100%"
-							borderBottomRadius={"5px"}
+							borderRadius={"10px"}
 							height={{ base: "auto", md: "90%" }}
 							p={4}
 						>
