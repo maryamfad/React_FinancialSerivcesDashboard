@@ -41,7 +41,7 @@ const Watchlist = () => {
 			mb={5}
 			width={{
 				base: "100%",
-				lg: "45%",
+				lg: "52%",
 			}}
 			boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
 			borderColor={"dashboardPrimary"}
@@ -89,9 +89,18 @@ const Watchlist = () => {
 							<Th p={0} textAlign={"center"} pb={2}>
 								Symbol
 							</Th>
+							<Th p={0} textAlign={"center"} pb={2}>
+								name
+							</Th>
+							<Th p={0} textAlign={"center"} pb={2}>
+								exchange
+							</Th>
 
 							<Th p={0} textAlign={"center"} pb={2}>
 								price
+							</Th>
+							<Th p={0} textAlign={"center"} pb={2}>
+								Change (%)
 							</Th>
 							<Th p={0} textAlign={"center"} pb={2}>
 								Market Cap
@@ -104,12 +113,18 @@ const Watchlist = () => {
 								<Td p={1} textAlign={"center"} color={"blue"}>
 									{o.stockSymbol}
 								</Td>
-
 								<Td p={1} textAlign={"center"}>
-									{o.price}
+									{o.name}
 								</Td>
 								<Td p={1} textAlign={"center"}>
-									${o.price}
+									{o.exchange}
+								</Td>
+
+								<Td p={1} textAlign={"center"}>
+									$ {o.price}
+								</Td>
+								<Td p={1} textAlign={"center"}>
+									{o.change} ({o.changesPercentage} %)
 								</Td>
 								<Td p={1} textAlign={"center"}>
 									{o.marketCap}

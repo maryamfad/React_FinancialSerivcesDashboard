@@ -92,6 +92,7 @@ const Dashboard = () => {
 						<BuySell />
 					</Flex>
 					<Flex
+					gap={"7"}
 						flexDir={{
 							base: "column",
 							sm: "column",
