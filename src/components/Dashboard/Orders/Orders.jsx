@@ -11,6 +11,7 @@ import {
 	Td,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import { IoIosAddCircleOutline } from "react-icons/io";
 import { getAllOrders } from "../../../services/TradeServices";
 const Orders = () => {
 	const [orders, setOrders] = useState([]);
@@ -138,59 +139,14 @@ const Orders = () => {
 								<Td p={1} textAlign={"center"}>
 									{formatDate(o.createdAt)}
 								</Td>
+								<Td p={1} textAlign={"center"}>
+									<IoIosAddCircleOutline />
+								</Td>
 							</Tr>
 						))}
 					</Tbody>
 				</Table>
 			</Box>
-			{/* <Box p={4} height={"400px"} overflowY={"auto"}>
-				<Flex
-					mb={4}
-					fontWeight="bold"
-					fontSize={"xs"}
-					justifyContent={"space-evenly"}
-				>
-					<Box>Symbol</Box>
-					<Box>Type</Box>
-					<Box>Quantity</Box>
-					<Box>Price</Box>
-					<Box>Status</Box>
-					<Box>Date</Box>
-				</Flex>
-				<Box>
-					{orders.map((order) => (
-						<Flex
-							key={order.id}
-							py={2}
-							borderBottom="1px"
-							borderColor="gray.200"
-							_hover={{ bg: "gray.100" }}
-							fontSize={"xs"}
-							justifyContent={"space-evenly"}
-							alignItems={"center"}
-						>
-							<Box flex={1} textAlign={"center"}>
-								{order.stockSymbol}
-							</Box>
-							<Box flex={1} textAlign={"center"}>
-								{order.orderType}-{order.tradeType}
-							</Box>
-							<Box flex={1} textAlign={"center"}>
-								{order.quantity}
-							</Box>
-							<Box flex={1} textAlign={"center"}>
-								{order.price}
-							</Box>
-							<Box flex={1} textAlign={"center"}>
-								{order.status}
-							</Box>
-							<Box flex={1} textAlign={"center"}>
-								{formatDate(order.executedAt)}
-							</Box>
-						</Flex>
-					))}
-				</Box>
-			</Box> */}
 		</Box>
 	);
 };
