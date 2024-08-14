@@ -67,9 +67,9 @@ export const removeFromWatchlist = async (symbol) => {
 			throw error;
 		}
 		const data = await response.json();
-		console.log("when removing: ", data);
+		console.log("when removing: ", data.watchlist);
 
-		return data;
+		return data.watchlist;
 	} catch (error) {
 		throw error;
 	}

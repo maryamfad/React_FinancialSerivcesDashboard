@@ -11,7 +11,10 @@ import {
 	Td,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import { getWatchlist } from "../../services/WatchlistServices";
+import {
+	getWatchlist,
+	removeFromWatchlist,
+} from "../../services/WatchlistServices";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 const Watchlist = () => {
 	const [watchlist, setWatchlist] = useState([]);
@@ -20,6 +23,26 @@ const Watchlist = () => {
 		getWatchlist()
 			.then((data) => {
 				setWatchlist(data.stocks);
+				console.log(data.stocks);
+			})
+			.catch((error) => {
+				if (error.status === 400) {
+					setErrorMessage("Invalid Credentials");
+				} else {
+					setErrorMessage(
+						error.message || "An unexpected error occurred."
+					);
+					console.log(errorMessage);
+				}
+			});
+	};
+
+	const removeStock = (symbol) => {
+		removeFromWatchlist(symbol)
+			.then((data) => {
+				setWatchlist(
+					watchlist.filter((item) => item.stockSymbol !== symbol)
+				);
 				console.log(data.stocks);
 			})
 			.catch((error) => {
@@ -109,7 +132,7 @@ const Watchlist = () => {
 						</Tr>
 					</Thead>
 					<Tbody>
-						{watchlist.map((o, index) => (
+						{watchlist?.map((o, index) => (
 							<Tr key={index}>
 								<Td p={1} textAlign={"center"} color={"blue"}>
 									{o.stockSymbol}
@@ -135,9 +158,11 @@ const Watchlist = () => {
 									{o.marketCap}
 								</Td>
 								<Td p={1} textAlign={"center"}>
-
-									<IoIosCloseCircleOutline onClick={()=>{console.log(o.stockSymbol);
-									}}/>
+									<IoIosCloseCircleOutline
+										onClick={() => {
+											removeStock(o.stockSymbol);
+										}}
+									/>
 								</Td>
 							</Tr>
 						))}
