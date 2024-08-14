@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { getWatchlist } from "../../services/WatchlistServices";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 const Watchlist = () => {
 	const [watchlist, setWatchlist] = useState([]);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -123,11 +124,20 @@ const Watchlist = () => {
 								<Td p={1} textAlign={"center"}>
 									$ {o.price}
 								</Td>
-								<Td p={1} textAlign={"center"}>
+								<Td
+									p={1}
+									textAlign={"center"}
+									color={o.change >= 0 ? "green" : "red"}
+								>
 									{o.change} ({o.changesPercentage} %)
 								</Td>
 								<Td p={1} textAlign={"center"}>
 									{o.marketCap}
+								</Td>
+								<Td p={1} textAlign={"center"}>
+
+									<IoIosCloseCircleOutline onClick={()=>{console.log(o.stockSymbol);
+									}}/>
 								</Td>
 							</Tr>
 						))}
