@@ -45,6 +45,7 @@ const AuthProvider = ({ children }) => {
 			removeExpiredToken();
 		}, 60000);
 		return () => clearInterval(intervalId);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const signUp = async (username, password) => {
