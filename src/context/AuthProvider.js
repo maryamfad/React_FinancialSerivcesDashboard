@@ -1,11 +1,51 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [userToken, setUserToken] = useState(null);
+	const [isAuthenticated, setIsAuthenticated] = useState(() => {
+		const token = localStorage.getItem("token");
+		return token && !isTokenExpired(token);
+	});
+	const [userToken, setUserToken] = useState(localStorage.getItem("token"));
+
+	function isTokenExpired(token) {
+		try {
+			const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+			const currentTime = Math.floor(Date.now() / 1000);
+			return tokenPayload.exp < currentTime;
+		} catch (e) {
+			return true;
+		}
+	}
+
+	function removeExpiredToken() {
+		const token = localStorage.getItem("token");
+
+		if (token && isTokenExpired(token)) {
+			localStorage.removeItem("token");
+			setIsAuthenticated(false);
+			setUserToken(null);
+			console.log("Token expired and removed from localStorage.");
+		}
+	}
+
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (token && !isTokenExpired(token)) {
+			setIsAuthenticated(true);
+			setUserToken(token);
+		} else {
+			removeExpiredToken();
+			setIsAuthenticated(false);
+		}
+
+		const intervalId = setInterval(() => {
+			removeExpiredToken();
+		}, 60000);
+		return () => clearInterval(intervalId);
+	}, []);
 
 	const signUp = async (username, password) => {
 		try {
@@ -55,9 +95,14 @@ const AuthProvider = ({ children }) => {
 				error.details = errorDetails;
 				throw error;
 			}
-			setUserToken(response.token);
-            setIsAuthenticated(true);
-			return response.json();
+
+			const data = await response.json();
+			localStorage.setItem("token", data.token);
+			setUserToken(data.token);
+
+			console.log("response", data.token);
+			setIsAuthenticated(true);
+			return data;
 		} catch (error) {
 			throw error;
 		}
@@ -77,10 +122,11 @@ const AuthProvider = ({ children }) => {
 					},
 				}
 			);
-            setIsAuthenticated(false);
+			setIsAuthenticated(false);
+			setUserToken(null);
 			if (response.ok) {
-				localStorage.removeItem("token"); 
-				Navigate("/login"); 
+				localStorage.removeItem("token");
+				Navigate("/login");
 			} else {
 				const errorText = await response.text();
 				console.error("Logout failed", errorText);
@@ -91,7 +137,9 @@ const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ userToken, signUp, login, logout, isAuthenticated }}>
+		<AuthContext.Provider
+			value={{ userToken, signUp, login, logout, isAuthenticated }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);

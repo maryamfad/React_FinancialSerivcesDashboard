@@ -10,30 +10,6 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
-	// let navigate = useNavigate();
-	function isTokenExpired(token) {
-		try {
-			const tokenPayload = JSON.parse(atob(token.split(".")[1]));
-			const currentTime = Math.floor(Date.now() / 1000);
-			return tokenPayload.exp < currentTime;
-		} catch (e) {
-			return true;
-		}
-	}
-
-	function removeExpiredToken() {
-		const token = localStorage.getItem("token");
-
-		if (token && isTokenExpired(token)) {
-			localStorage.removeItem("token");
-			console.log("Token expired and removed from localStorage.");
-			// navigate("/login")
-		}
-	}
-
-	removeExpiredToken();
-
-	setInterval(removeExpiredToken, 60000);
 	return (
 		<BrowserRouter>
 			<AuthProvider>
