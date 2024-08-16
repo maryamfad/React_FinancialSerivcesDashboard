@@ -39,16 +39,13 @@ const WatchlistProvider = ({ children }) => {
 						error: "An error occurred, but no details were provided",
 					};
 				}
-                
-                
-				
-					const error = new Error(
-						errorDetails.error || "Unknown error"
-					);
-					error.status = response.status;
-					error.details = errorDetails;
-					throw error;
-				
+
+				console.log(errorDetails);
+
+				const error = new Error(errorDetails.error || "Unknown error");
+				error.status = response.status;
+				error.details = errorDetails;
+				throw error;
 			}
 			const data = await response.json();
 			setWatchlist(data.stocks);
@@ -86,7 +83,7 @@ const WatchlistProvider = ({ children }) => {
 					};
 				}
 				console.log("response status: " + response.status);
-                
+
 				if (response.status === 400) {
 					console.log(errorDetails);
 
@@ -156,8 +153,8 @@ const WatchlistProvider = ({ children }) => {
 				setWatchlist,
 				addToWatchlist,
 				removeFromWatchlist,
-                errorMessage,
-                setErrorMessage
+				errorMessage,
+				setErrorMessage,
 			}}
 		>
 			{children}

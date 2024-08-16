@@ -8,33 +8,27 @@ import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import { WatchlistProvider } from "./context/WatchlistProvider";
 
 function App() {
 	return (
 		<BrowserRouter>
 			<AuthProvider>
-				<WatchlistProvider>
-					<Routes>
-						<Route
-							path="/"
-							element={<Navigate replace to="/home" />}
-						/>
-						<Route path="/home" element={<Home />} />
-						<Route path="/about" element={<About />} />
-						<Route path="/services" element={<Services />} />
-						<Route path="/signup" element={<Signup />} />
-						<Route path="/login" element={<Login />} />
-						<Route
-							path="/dashboard"
-							element={
-								<ProtectedRoute>
-									<Dashboard />
-								</ProtectedRoute>
-							}
-						/>
-					</Routes>
-				</WatchlistProvider>
+				<Routes>
+					<Route path="/" element={<Navigate replace to="/home" />} />
+					<Route path="/home" element={<Home />} />
+					<Route path="/about" element={<About />} />
+					<Route path="/services" element={<Services />} />
+					<Route path="/signup" element={<Signup />} />
+					<Route path="/login" element={<Login />} />
+					<Route
+						path="/dashboard"
+						element={
+							<ProtectedRoute>
+								<Dashboard />
+							</ProtectedRoute>
+						}
+					/>
+				</Routes>
 			</AuthProvider>
 		</BrowserRouter>
 	);
