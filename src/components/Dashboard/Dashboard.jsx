@@ -13,7 +13,7 @@ const Dashboard = () => {
 	let navigate = useNavigate();
 	return (
 		<WatchlistProvider>
-			<Flex //
+			<Flex 
 				className="dashboard-container"
 				height="100vh"
 				width="100%"
