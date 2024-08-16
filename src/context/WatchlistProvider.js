@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import getUserIdFromToken from "../util/getUserIdFromToken";
+import getFullQuote from "../api/getFullQuote";
 
 const WatchlistContext = createContext();
 
@@ -48,7 +49,25 @@ const WatchlistProvider = ({ children }) => {
 				throw error;
 			}
 			const data = await response.json();
-			setWatchlist(data.stocks);
+			let arr = [];
+			data.stocks.map(async (stock) => {
+				const stockInfos = await getFullQuote(stock.stockSymbol);
+				console.log("arr", arr);
+				arr.push({
+					stockSymbol: stock.stockSymbol,
+					price: stockInfos[0]?.price,
+					marketCap: stockInfos[0]?.marketCap,
+					change: Number(stockInfos[0]?.change).toFixed(2),
+					changesPercentage: Number(
+						stockInfos[0]?.changesPercentage
+					).toFixed(2),
+					exchange: stockInfos[0]?.exchange,
+					name: stockInfos[0]?.name,
+				});
+				setWatchlist(arr);
+			});
+
+			// setWatchlist(arr);
 			return data;
 		} catch (error) {
 			throw error;
@@ -98,7 +117,25 @@ const WatchlistProvider = ({ children }) => {
 				}
 			}
 			const data = await response.json();
-			setWatchlist(data.watchlist);
+			console.log("data", data);
+
+			let arr = [];
+			// data.watchlist.stocks.map(async (stock) => {
+			const stockInfos = await getFullQuote(symbol);
+			console.log("arr", arr);
+			watchlist.push({
+				stockSymbol: symbol,
+				price: stockInfos[0]?.price,
+				marketCap: stockInfos[0]?.marketCap,
+				change: Number(stockInfos[0]?.change).toFixed(2),
+				changesPercentage: Number(
+					stockInfos[0]?.changesPercentage
+				).toFixed(2),
+				exchange: stockInfos[0]?.exchange,
+				name: stockInfos[0]?.name,
+			});
+			setWatchlist(watchlist);
+			// });
 			return data.watchlist;
 		} catch (error) {
 			throw error;
