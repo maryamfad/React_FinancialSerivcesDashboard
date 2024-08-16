@@ -1,4 +1,5 @@
 import { Button, Flex, Box, Heading } from "@chakra-ui/react";
+import {WatchlistProvider} from "../../context/WatchlistProvider";
 import Sidebar from "./Sidebar/Sidebar";
 import Portfolio from "./Protfolio/Portfolio";
 import Orders from "./Orders/Orders";
@@ -7,7 +8,7 @@ import BuySell from "./BuySell/BuySell";
 import AccountOverview from "./AccountOverview/AccountOverview";
 import { useNavigate } from "react-router-dom";
 import Watchlist from "./Watchlist";
-import { WatchlistProvider } from "../../context/WatchlistProvider";
+
 
 const Dashboard = () => {
 	let navigate = useNavigate();
