@@ -10,32 +10,35 @@ import {
 	Th,
 	Td,
 } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
-import {
-	getWatchlist,
-	removeFromWatchlist,
-} from "../../services/WatchlistServices";
+import React, { useState, useEffect, useContext } from "react";
+// import {
+// 	getWatchlist,
+// 	removeFromWatchlist,
+// } from "../../services/WatchlistServices";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { WatchlistContext } from "../../context/watchlistProvider";
 const Watchlist = () => {
-	const [watchlist, setWatchlist] = useState([]);
+	// const [watchlist, setWatchlist] = useState([]);
+	const { watchlist, setWatchlist, removeFromWatchlist } =
+		useContext(WatchlistContext);
 	const [errorMessage, setErrorMessage] = useState("");
-	const loadWatchlist = () => {
-		getWatchlist()
-			.then((data) => {
-				setWatchlist(data.stocks);
-				console.log(data.stocks);
-			})
-			.catch((error) => {
-				if (error.status === 400) {
-					setErrorMessage("Invalid Credentials");
-				} else {
-					setErrorMessage(
-						error.message || "An unexpected error occurred."
-					);
-					console.log(errorMessage);
-				}
-			});
-	};
+	// const loadWatchlist = () => {
+	// 	getWatchlist()
+	// 		.then((data) => {
+	// 			setWatchlist(data.stocks);
+	// 			console.log(data.stocks);
+	// 		})
+	// 		.catch((error) => {
+	// 			if (error.status === 400) {
+	// 				setErrorMessage("Invalid Credentials");
+	// 			} else {
+	// 				setErrorMessage(
+	// 					error.message || "An unexpected error occurred."
+	// 				);
+	// 				console.log(errorMessage);
+	// 			}
+	// 		});
+	// };
 
 	const removeStock = (symbol) => {
 		removeFromWatchlist(symbol)
@@ -57,7 +60,7 @@ const Watchlist = () => {
 			});
 	};
 	useEffect(() => {
-		loadWatchlist();
+		// loadWatchlist();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (

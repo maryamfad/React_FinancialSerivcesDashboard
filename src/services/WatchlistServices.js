@@ -107,8 +107,6 @@ export const addToWatchlist = async (symbol) => {
 			throw error;
 		}
 		const data = await response.json();
-		console.log("when adding: ", data.watchlist);
-
 		return data.watchlist;
 	} catch (error) {
 		throw error;

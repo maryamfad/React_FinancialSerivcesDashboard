@@ -10,12 +10,16 @@ import {
 	Th,
 	Td,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { getAllOrders } from "../../../services/TradeServices";
+import { WatchlistContext } from "../../../context/watchlistProvider";
+
 const Orders = () => {
 	const [orders, setOrders] = useState([]);
 	const [errorMessage, setErrorMessage] = useState("");
+	const { watchlist, setWatchlist, addToWatchlist } =
+		useContext(WatchlistContext);
 	const getOrders = () => {
 		getAllOrders()
 			.then((data) => {
@@ -43,6 +47,23 @@ const Orders = () => {
 
 		return `${year}-${month}-${day}`;
 	}
+	const addStock = (symbol) => {
+		addToWatchlist(symbol)
+			.then((data) => {
+				console.log("add to watchlist:", data.stocks);
+				setWatchlist(data.stocks);
+			})
+			.catch((error) => {
+				if (error.status === 400) {
+					setErrorMessage("Invalid Credentials");
+				} else {
+					setErrorMessage(
+						error.message || "An unexpected error occurred."
+					);
+					console.log(errorMessage);
+				}
+			});
+	};
 	useEffect(() => {
 		getOrders();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -140,7 +161,11 @@ const Orders = () => {
 									{formatDate(o.createdAt)}
 								</Td>
 								<Td p={1} textAlign={"center"}>
-									<IoIosAddCircleOutline />
+									<IoIosAddCircleOutline
+										onClick={() => {
+											addStock(o.stockSymbol);
+										}}
+									/>
 								</Td>
 							</Tr>
 						))}
