@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Box, Flex } from "@chakra-ui/react";
-import { AuthContext } from "../../context/AuthProvider";
+import { AuthContext } from "../../Context/AuthProvider";
 
 function NavbarMenu() {
 	const { logout } = useContext(AuthContext);

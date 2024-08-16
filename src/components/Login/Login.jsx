@@ -22,7 +22,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { WarningIcon } from "@chakra-ui/icons";
-import { AuthContext } from '../../context/AuthProvider';
+import { AuthContext } from '../../Context/AuthProvider';
 function Login() {
   const { login } = useContext(AuthContext);
   let navigate = useNavigate();

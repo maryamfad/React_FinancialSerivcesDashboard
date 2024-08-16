@@ -22,7 +22,7 @@ import {
 import { WarningIcon } from "@chakra-ui/icons";
 import React, { useEffect, useContext } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { WatchlistContext } from "../../context/WatchlistProvider";
+import { WatchlistContext } from "../../Context/test";
 const Watchlist = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const {
