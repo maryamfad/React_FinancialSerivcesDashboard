@@ -8,7 +8,7 @@ import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import { WatchlistProvider } from "./context/watchlistProvider";
+import { WatchlistProvider } from "./context/WatchlistProvider";
 
 function App() {
 	return (

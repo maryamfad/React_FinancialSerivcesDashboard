@@ -9,6 +9,7 @@ export const useWatchlist = () => {
 
 const WatchlistProvider = ({ children }) => {
 	const [watchlist, setWatchlist] = useState([]);
+	const [errorMessage, setErrorMessage] = useState();
 
 	useEffect(() => {
 		getWatchlist();
@@ -38,12 +39,18 @@ const WatchlistProvider = ({ children }) => {
 						error: "An error occurred, but no details were provided",
 					};
 				}
-				const error = new Error(errorDetails.error || "Unknown error");
-				error.status = response.status;
-				error.details = errorDetails;
-				throw error;
+                
+                
+				
+					const error = new Error(
+						errorDetails.error || "Unknown error"
+					);
+					error.status = response.status;
+					error.details = errorDetails;
+					throw error;
+				
 			}
-			const data = await response.json(); 
+			const data = await response.json();
 			setWatchlist(data.stocks);
 			return data;
 		} catch (error) {
@@ -78,10 +85,20 @@ const WatchlistProvider = ({ children }) => {
 						error: "An error occurred, but no details were provided",
 					};
 				}
-				const error = new Error(errorDetails.error || "Unknown error");
-				error.status = response.status;
-				error.details = errorDetails;
-				throw error;
+				console.log("response status: " + response.status);
+                
+				if (response.status === 400) {
+					console.log(errorDetails);
+
+					setErrorMessage("The stock is already in the Watchlist");
+				} else {
+					const error = new Error(
+						errorDetails.error || "Unknown error"
+					);
+					error.status = response.status;
+					error.details = errorDetails;
+					throw error;
+				}
 			}
 			const data = await response.json();
 			setWatchlist(data.watchlist);
@@ -134,11 +151,18 @@ const WatchlistProvider = ({ children }) => {
 
 	return (
 		<WatchlistContext.Provider
-			value={{ watchlist,setWatchlist,  addToWatchlist, removeFromWatchlist }}
+			value={{
+				watchlist,
+				setWatchlist,
+				addToWatchlist,
+				removeFromWatchlist,
+                errorMessage,
+                setErrorMessage
+			}}
 		>
 			{children}
 		</WatchlistContext.Provider>
 	);
 };
 
-export {WatchlistContext, WatchlistProvider};
+export { WatchlistContext, WatchlistProvider };

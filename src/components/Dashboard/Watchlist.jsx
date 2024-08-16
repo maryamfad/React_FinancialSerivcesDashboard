@@ -9,36 +9,31 @@ import {
 	Tr,
 	Th,
 	Td,
+	useDisclosure,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalBody,
+	ModalCloseButton,
+	Button,
+	Icon,
 } from "@chakra-ui/react";
+import { WarningIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect, useContext } from "react";
-// import {
-// 	getWatchlist,
-// 	removeFromWatchlist,
-// } from "../../services/WatchlistServices";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { WatchlistContext } from "../../context/watchlistProvider";
+import { WatchlistContext } from "../../context/WatchlistProvider";
 const Watchlist = () => {
-	// const [watchlist, setWatchlist] = useState([]);
-	const { watchlist, setWatchlist, removeFromWatchlist } =
-		useContext(WatchlistContext);
-	const [errorMessage, setErrorMessage] = useState("");
-	// const loadWatchlist = () => {
-	// 	getWatchlist()
-	// 		.then((data) => {
-	// 			setWatchlist(data.stocks);
-	// 			console.log(data.stocks);
-	// 		})
-	// 		.catch((error) => {
-	// 			if (error.status === 400) {
-	// 				setErrorMessage("Invalid Credentials");
-	// 			} else {
-	// 				setErrorMessage(
-	// 					error.message || "An unexpected error occurred."
-	// 				);
-	// 				console.log(errorMessage);
-	// 			}
-	// 		});
-	// };
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const {
+		watchlist,
+		setWatchlist,
+		removeFromWatchlist,
+		errorMessage,
+		setErrorMessage,
+	} = useContext(WatchlistContext);
+	// const [errorMessage, setErrorMessage] = useState("");
+
 
 	const removeStock = (symbol) => {
 		removeFromWatchlist(symbol)
@@ -51,18 +46,21 @@ const Watchlist = () => {
 			.catch((error) => {
 				if (error.status === 400) {
 					setErrorMessage("Invalid Credentials");
+					onOpen();
 				} else {
 					setErrorMessage(
 						error.message || "An unexpected error occurred."
 					);
-					console.log(errorMessage);
+					onOpen();
 				}
 			});
 	};
 	useEffect(() => {
-		// loadWatchlist();
+		if(errorMessage){
+			onOpen()
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [errorMessage]);
 	return (
 		<Box
 			mb={5}
@@ -172,6 +170,29 @@ const Watchlist = () => {
 					</Tbody>
 				</Table>
 			</Box>
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader display="flex" alignItems="center">
+						<Icon as={WarningIcon} color="red.500" mr={2} />
+						Error
+					</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody
+						display="flex"
+						alignItems="center"
+						justifyContent="center"
+						flexDirection="column"
+					>
+						<Text fontSize="lg" mb={4}>
+							{errorMessage}
+						</Text>
+						<Button colorScheme="red" onClick={()=>{onClose(); setErrorMessage("")}}>
+							Close
+						</Button>
+					</ModalBody>
+				</ModalContent>
+			</Modal>
 		</Box>
 	);
 };
