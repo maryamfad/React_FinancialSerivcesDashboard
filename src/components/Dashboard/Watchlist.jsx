@@ -21,7 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { WarningIcon } from "@chakra-ui/icons";
 import React, { useEffect, useContext } from "react";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { IoRemoveCircleOutline } from "react-icons/io5";
 import { WatchlistContext } from "../../context/WatchlistProvider";
 const Watchlist = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -74,7 +74,7 @@ const Watchlist = () => {
 			borderRadius={"10px"}
 		>
 			{" "}
-			<Flex>
+			<Flex bg={"dashboardSecondary"} borderTopRadius={"10px"}>
 				<Box width={"50%"}>
 					<Text
 						m={0}
@@ -93,7 +93,7 @@ const Watchlist = () => {
 			</Flex>
 			<Divider p={0} m={0} />
 			<Box
-				pl={4}
+				// pl={4}
 				bg="white"
 				w="100%"
 				h="240px"
@@ -106,7 +106,7 @@ const Watchlist = () => {
 				borderColor={"#F1D7D7"}
 			>
 				<Table
-					mt={5}
+					// mt={5}
 					sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}
 				>
 					<Thead position="sticky" top={0} zIndex={1}>
@@ -129,6 +129,9 @@ const Watchlist = () => {
 							</Th>
 							<Th p={0} textAlign={"center"} pb={2}>
 								Market Cap
+							</Th>
+							<Th p={0} textAlign={"center"} pb={2}>
+								
 							</Th>
 						</Tr>
 					</Thead>
@@ -159,7 +162,7 @@ const Watchlist = () => {
 									{o.marketCap}
 								</Td>
 								<Td p={1} textAlign={"center"}>
-									<IoIosCloseCircleOutline
+								<IoRemoveCircleOutline size={"20"} 
 										onClick={() => {
 											removeStock(o.stockSymbol);
 										}}

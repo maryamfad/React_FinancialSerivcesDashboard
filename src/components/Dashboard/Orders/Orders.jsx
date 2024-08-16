@@ -13,13 +13,12 @@ import {
 import { useState, useEffect, useContext } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { getAllOrders } from "../../../services/TradeServices";
-import { WatchlistContext } from "../../../context/WatchlistProvider";//
+import { WatchlistContext } from "../../../context/WatchlistProvider"; //
 
 const Orders = () => {
 	const [orders, setOrders] = useState([]);
 	const [errorMessage, setErrorMessage] = useState("");
-	const { setWatchlist, addToWatchlist } =
-		useContext(WatchlistContext);
+	const { setWatchlist, addToWatchlist } = useContext(WatchlistContext);
 	const getOrders = () => {
 		getAllOrders()
 			.then((data) => {
@@ -82,13 +81,13 @@ const Orders = () => {
 			borderWidth={"2px"}
 			borderRadius={"10px"}
 		>
-			<Flex>
+			<Flex bg={"dashboardSecondary"} borderTopRadius={"10px"}>
 				<Box width={"50%"}>
 					<Text
 						m={0}
 						width={"100%"}
 						height={"100%"}
-						pl={"3"}
+						pl={3}
 						pt={2}
 						pb={1}
 						fontWeight={"bold"}
@@ -101,7 +100,7 @@ const Orders = () => {
 			</Flex>
 			<Divider p={0} m={0} />
 			<Box
-				pl={4}
+				// pl={4}
 				bg="white"
 				w="100%"
 				h="480px"
@@ -114,12 +113,12 @@ const Orders = () => {
 				borderColor={"#F1D7D7"}
 			>
 				<Table
-					mt={5}
+					// mt={5}
 					sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}
 				>
 					<Thead position="sticky" top={0} zIndex={1}>
 						<Tr>
-							<Th p={0} textAlign={"center"} pb={2}>
+							<Th p={0} textAlign={"center"} pb={2} pl={2}>
 								Symbol
 							</Th>
 							<Th p={0} textAlign={"center"} pb={2}>
@@ -137,6 +136,7 @@ const Orders = () => {
 							<Th p={0} textAlign={"center"} pb={2}>
 								Date
 							</Th>
+							<Th p={0} textAlign={"center"} pb={2}></Th>
 						</Tr>
 					</Thead>
 					<Tbody>
@@ -162,6 +162,7 @@ const Orders = () => {
 								</Td>
 								<Td p={1} textAlign={"center"}>
 									<IoIosAddCircleOutline
+										size={"18"}
 										onClick={() => {
 											addStock(o.stockSymbol);
 										}}

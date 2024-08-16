@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import LineChart from "./LinearChart";
 import { getPortfolio } from "../../../services/TradeServices";
-import { Box, Flex, Text, Button, Divider } from "@chakra-ui/react";
+import { Box, Flex, Text, Divider } from "@chakra-ui/react";
 
 const Portfolio = () => {
 	const [portfolioData, setPortfolioData] = useState([]);
 	const [errorMessage, setErrorMessage] = useState("");
+	const [timeFrame, setTimeFrame] = useState("1D");
 	const getUserPortfolio = () => {
 		getPortfolio()
 			.then((data) => {
@@ -38,13 +39,11 @@ const Portfolio = () => {
 			borderRadius={"10px"}
 		>
 			<Flex
-				// m={{ base: 2, sm: 2, md: 2, lg: 2, xl: 2 }}
-				// p={{ base: 2, sm: 2, md: 2, lg: 2, xl: 2 }}
-				// mb={0}
-				// pb={0}
+				bg={"dashboardSecondary"}
+				borderTopRadius={"10px"}
 				justifyContent={"space-between"}
 			>
-				<Flex width={"50%"} height={"100%"}>
+				<Flex width={"50%"} height={"100%"} >
 					<Text
 						m={0}
 						width={"100%"}
@@ -67,10 +66,62 @@ const Portfolio = () => {
 					}}
 					justifyContent={"space-evenly"}
 				>
-					<Button>1D</Button>
-					<Button>1M</Button>
-					<Button>1Y</Button>
-					<Button>All</Button>
+					<Flex justifyContent={"flex-end"} pr={5} mt={5} width={"100%"}>
+						<Flex
+							justifyContent={"space-between"}
+							cursor={"pointer"}
+							width={"100%"}
+						>
+							<Text
+								m={0}
+								color={timeFrame === "1D" && "#007BFF"}
+								fontWeight={timeFrame === "1D" && "bold"}
+								onClick={() => setTimeFrame("1D")}
+							>
+								1D
+							</Text>
+							<Text
+								m={0}
+								color={timeFrame === "5D" && "#007BFF"}
+								fontWeight={timeFrame === "5D" && "bold"}
+								onClick={() => setTimeFrame("5D")}
+							>
+								5D
+							</Text>
+							<Text
+								m={0}
+								color={timeFrame === "1M" && "#007BFF"}
+								fontWeight={timeFrame === "1M" && "bold"}
+								onClick={() => setTimeFrame("1M")}
+							>
+								1M
+							</Text>
+							<Text
+								m={0}
+								color={timeFrame === "3M" && "#007BFF"}
+								fontWeight={timeFrame === "3M" && "bold"}
+								onClick={() => setTimeFrame("3M")}
+							>
+								3M
+							</Text>
+							<Text
+								m={0}
+								color={timeFrame === "6M" && "#007BFF"}
+								fontWeight={timeFrame === "6M" && "bold"}
+								onClick={() => setTimeFrame("6M")}
+							>
+								6M
+							</Text>
+							<Text
+								m={0}
+								color={timeFrame === "1Y" && "#007BFF"}
+								fontWeight={timeFrame === "1Y" && "bold"}
+								onClick={() => setTimeFrame("1Y")}
+							>
+								1Y
+							</Text>
+						</Flex>
+					</Flex>
 				</Flex>
 			</Flex>
 			<Divider p={0} m={0} />

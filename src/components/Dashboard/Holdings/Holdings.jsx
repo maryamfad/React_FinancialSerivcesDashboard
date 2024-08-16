@@ -52,7 +52,7 @@ const Holdings = () => {
 			borderRadius={"10px"}
 		>
 			{" "}
-			<Flex>
+			<Flex bg={"dashboardSecondary"} borderTopRadius={"10px"}>
 				<Box width={"50%"}>
 					<Text
 						m={0}
@@ -71,7 +71,7 @@ const Holdings = () => {
 			</Flex>
 			<Divider p={0} m={0} />
 			<Box
-				pl={4}
+				// pl={4}
 				bg="white"
 				w="100%"
 				h="240px"
@@ -84,7 +84,7 @@ const Holdings = () => {
 				borderColor={"#F1D7D7"}
 			>
 				<Table
-					mt={5}
+					// mt={5}
 					sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}
 				>
 					<Thead position="sticky" top={0} zIndex={1}>
