@@ -20,7 +20,7 @@ import {
 	Icon,
 } from "@chakra-ui/react";
 import { WarningIcon } from "@chakra-ui/icons";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { WatchlistContext } from "../../context/WatchlistProvider";
 const Watchlist = () => {
