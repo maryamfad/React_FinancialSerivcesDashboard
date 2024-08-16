@@ -45,7 +45,7 @@ const Home = () => {
 					wrap="wrap"
 				>
 					<Box width={{ base: "100%", md: "24%" }} p={1}>
-						{/* <StockSummary symbol={symbol} height={"100%"} /> */}
+						<StockSummary symbol={symbol} height={"100%"} />
 					</Box>
 					<Box width={{ base: "100%", md: "51%" }} p={1}>
 						<Flex
@@ -69,10 +69,10 @@ const Home = () => {
 							height={{ base: "auto", md: "90%" }}
 							p={4}
 						>
-							{/* <StockDiagram
+							<StockDiagram
 								symbol={symbol}
 								stockLogo={stockLogo}
-							/> */}
+							/>
 						</Box>
 					</Box>
 					<Box
