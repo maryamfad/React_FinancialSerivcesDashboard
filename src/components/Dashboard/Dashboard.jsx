@@ -1,5 +1,5 @@
 import { Button, Flex, Box, Heading } from "@chakra-ui/react";
-import {WatchlistProvider} from "../../context/watchlistProvider";
+import {WatchlistProvider} from "../../context/WatchlistProvider";
 import Sidebar from "./Sidebar/Sidebar";
 import Portfolio from "./Protfolio/Portfolio";
 import Orders from "./Orders/Orders";
