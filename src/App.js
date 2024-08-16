@@ -1,5 +1,4 @@
 import "./App.css";
-import { AuthProvider } from "./Context/AuthProvider";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -8,7 +7,7 @@ import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ProtectedRoute from "./routes/ProtectedRoute";
-//
+import { AuthProvider } from "./context/AuthProvider";
 function App() {
 	return (
 		<BrowserRouter>

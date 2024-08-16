@@ -13,7 +13,7 @@ import {
 import { useState, useEffect, useContext } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { getAllOrders } from "../../../services/TradeServices";
-import { WatchlistContext } from "../../../Context/test";//
+import { WatchlistContext } from "../../../context/test";//
 
 const Orders = () => {
 	const [orders, setOrders] = useState([]);
