@@ -14,7 +14,7 @@ const Dashboard = () => {
 	return (
 		<WatchlistProvider>
 			<Flex
-				className="dashboard-container" ///
+				className="dashboard-container"
 				height="100vh"
 				width="100%"
 				overflowX="hidden"
