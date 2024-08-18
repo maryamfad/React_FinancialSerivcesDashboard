@@ -32,18 +32,17 @@ const Portfolio = () => {
 	}, []);
 	return (
 		<Box
-			flexGrow={1}
-			boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
 			borderColor={"dashboardPrimary"}
 			borderWidth={"2px"}
 			borderRadius={"10px"}
+			height={"100%"}
 		>
 			<Flex
 				bg={"dashboardSecondary"}
 				borderTopRadius={"10px"}
 				justifyContent={"space-between"}
 			>
-				<Flex width={"50%"} height={"100%"} >
+				<Flex width={"50%"} height={"100%"}>
 					<Text
 						m={0}
 						width={"100%"}
@@ -66,7 +65,12 @@ const Portfolio = () => {
 					}}
 					justifyContent={"space-evenly"}
 				>
-					<Flex justifyContent={"flex-end"} pr={5} mt={5} width={"100%"}>
+					<Flex
+						justifyContent={"flex-end"}
+						pr={5}
+						mt={5}
+						width={"100%"}
+					>
 						<Flex
 							justifyContent={"space-between"}
 							cursor={"pointer"}

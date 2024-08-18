@@ -34,7 +34,6 @@ const Watchlist = () => {
 	} = useContext(WatchlistContext);
 	// const [errorMessage, setErrorMessage] = useState("");
 
-
 	const removeStock = (symbol) => {
 		removeFromWatchlist(symbol)
 			.then((data) => {
@@ -56,8 +55,8 @@ const Watchlist = () => {
 			});
 	};
 	useEffect(() => {
-		if(errorMessage){
-			onOpen()
+		if (errorMessage) {
+			onOpen();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [errorMessage]);
@@ -68,7 +67,6 @@ const Watchlist = () => {
 				base: "100%",
 				lg: "52%",
 			}}
-			boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
 			borderColor={"dashboardPrimary"}
 			borderWidth={"2px"}
 			borderRadius={"10px"}
@@ -130,9 +128,7 @@ const Watchlist = () => {
 							<Th p={0} textAlign={"center"} pb={2}>
 								Market Cap
 							</Th>
-							<Th p={0} textAlign={"center"} pb={2}>
-								
-							</Th>
+							<Th p={0} textAlign={"center"} pb={2}></Th>
 						</Tr>
 					</Thead>
 					<Tbody>
@@ -162,7 +158,8 @@ const Watchlist = () => {
 									{o.marketCap}
 								</Td>
 								<Td p={1} textAlign={"center"}>
-								<IoRemoveCircleOutline size={"20"} 
+									<IoRemoveCircleOutline
+										size={"20"}
 										onClick={() => {
 											removeStock(o.stockSymbol);
 										}}
@@ -190,7 +187,13 @@ const Watchlist = () => {
 						<Text fontSize="lg" mb={4}>
 							{errorMessage}
 						</Text>
-						<Button colorScheme="red" onClick={()=>{onClose(); setErrorMessage("")}}>
+						<Button
+							colorScheme="red"
+							onClick={() => {
+								onClose();
+								setErrorMessage("");
+							}}
+						>
 							Close
 						</Button>
 					</ModalBody>

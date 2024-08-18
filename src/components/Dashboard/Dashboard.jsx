@@ -53,23 +53,19 @@ const Dashboard = () => {
 							</Heading>
 						</Box>
 						<Flex
-							className="middle-area"
-							justifyContent={"space-between"}
-							height={{
-								base: "100%",
-								sm: "100%",
-								md: "100%",
-								lg: "57%",
-								xl: "57%",
-							}}
-							flexDir={{
+							
+							gap={"15px"}
+							
+							flexDirection={{
 								base: "column",
 								sm: "column",
 								md: "column",
-								bg: "row",
+								lg: "row",
 								xl: "row",
 							}}
+							fl
 							mb={5}
+							overflowX="auto"
 						>
 							<Flex
 								flexDir={"column"}
@@ -95,12 +91,12 @@ const Dashboard = () => {
 							<BuySell />
 						</Flex>
 						<Flex
-							gap={"7"}
+							gap={"15px"}
 							flexDir={{
 								base: "column",
 								sm: "column",
 								md: "column",
-								bg: "row",
+								lg: "row",
 								xl: "row",
 							}}
 						>
