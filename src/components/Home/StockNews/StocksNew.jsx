@@ -24,7 +24,14 @@ const StockNews = ({ symbol }) => {
 			borderColor={"primary"}
 			borderWidth={"2px"}
 		>
-			<Text pl={3} pt={3} fontWeight="bold" color="#333">
+			<Text
+				m={0}
+				pl={3}
+				pt={2}
+				pb={1}
+				fontWeight={"bold"}
+				fontSize={"18px"}
+			>
 				Stock News
 			</Text>
 			<Divider p={0} m={0} />

@@ -36,13 +36,13 @@ const MarketGainers = ({ setSymbol }) => {
     <Table sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}>
       <Thead position="sticky" top={0} zIndex={1}>
         <Tr>
-          <Th p={3} pb={1}>
+          <Th p={1} pb={2} pl={2}>
             Symbol
           </Th>
-          <Th p={3} pb={1}>
+          <Th p={1} pb={2}>
             Name
           </Th>
-          <Th p={3} pb={1}>
+          <Th p={1} pb={2}>
             Price
           </Th>
         </Tr>

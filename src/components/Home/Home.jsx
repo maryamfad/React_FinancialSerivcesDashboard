@@ -57,7 +57,6 @@ const Home = () => {
 							width="100%"
 							height={{ base: "auto", md: "9%" }}
 							mb={{ base: 4, md: 1 }}
-							// p={4}
 						>
 							<SearchStocks setSymbol={setSymbol} />
 						</Flex>
@@ -88,9 +87,15 @@ const Home = () => {
 							width="100%"
 							height={{ base: "auto", md: "50%" }}
 							mb={4}
-							// p={4}
 						>
-							<Text pl={3} pt={3} fontWeight={"bold"}>
+							<Text
+								m={0}
+								pl={3}
+								pt={2}
+								pb={1}
+								fontWeight={"bold"}
+								fontSize={"18px"}
+							>
 								Market Biggest Gainers
 							</Text>
 							<Divider p={0} m={0} />
@@ -99,7 +104,6 @@ const Home = () => {
 								h="100%"
 								overflow="hidden"
 								borderRadius="10px"
-								pl={4}
 							>
 								<Box
 									bg="white"
@@ -107,9 +111,6 @@ const Home = () => {
 									h="240px"
 									overflowY="auto"
 									borderRadius={"10px"}
-									boxShadow={
-										"rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-									}
 									border={"2x"}
 									borderColor={"#F1D7D7"}
 								>
@@ -123,9 +124,15 @@ const Home = () => {
 							width="100%"
 							height={{ base: "auto", md: "50%" }}
 							borderRadius={"10px"}
-							// p={4}
 						>
-							<Text pl={3} pt={3} fontWeight={"bold"}>
+							<Text
+								m={0}
+								pl={3}
+								pt={2}
+								pb={1}
+								fontWeight={"bold"}
+								fontSize={"18px"}
+							>
 								Market Biggest Losers
 							</Text>
 							<Divider p={0} m={0} />

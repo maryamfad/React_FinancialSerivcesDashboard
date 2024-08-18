@@ -38,14 +38,14 @@ const MarketLosers = ({ setSymbol }) => {
       sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}
     >
       <Thead position={"sticky"} mt={0} pt={0}>
-        <Tr>
-          <Th p={3} pb={1}>
+      <Tr>
+          <Th p={1} pb={2} pl={2}>
             Symbol
           </Th>
-          <Th p={3} pb={1}>
+          <Th p={1} pb={2}>
             Name
           </Th>
-          <Th p={3} pb={1}>
+          <Th p={1} pb={2}>
             Price
           </Th>
         </Tr>
