@@ -6,7 +6,7 @@ const theme = extendTheme({
       ':root': {
         '--primary-color' :'#003366',
         '--secondary-color': '#C4DDE8 ',
-        '--accent-color': '#BAD1CD',
+        '--accent-color': '#D2D7DF',
         '--background-color': '#f4f4f4',
         '--text-color': '#333',
         '--navbar-color' : '#3498db',
