@@ -105,7 +105,7 @@ const Watchlist = () => {
 			>
 				<Table
 					// mt={5}
-					sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}
+					sx={{ "tbody tr:nth-of-type(odd)": { bg: "dashboardAccentColor" } }}
 				>
 					<Thead position="sticky" top={0} zIndex={1}>
 						<Tr>

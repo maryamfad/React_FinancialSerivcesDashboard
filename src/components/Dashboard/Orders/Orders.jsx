@@ -76,7 +76,6 @@ const Orders = () => {
 				lg: "25%",
 				xl: "25%",
 			}}
-	
 			// height={"480px"}
 			// boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
 			borderColor={"dashboardPrimary"}
@@ -102,21 +101,17 @@ const Orders = () => {
 			</Flex>
 			<Divider p={0} m={0} />
 			<Box
-				// pl={4}
 				bg="white"
 				w="100%"
 				h="475px"
 				overflowY="auto"
 				borderRadius={"10px"}
-				boxShadow={
-					"rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-				}
 				border={"2x"}
 				borderColor={"#F1D7D7"}
 			>
 				<Table
 					// mt={5}
-					sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}
+					sx={{ "tbody tr:nth-of-type(odd)": { bg: "dashboardAccentColor" } }}
 				>
 					<Thead position="sticky" top={0} zIndex={1}>
 						<Tr>

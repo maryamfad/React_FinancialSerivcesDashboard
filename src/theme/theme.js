@@ -6,12 +6,13 @@ const theme = extendTheme({
       ':root': {
         '--primary-color' :'#003366',
         '--secondary-color': '#C4DDE8 ',
-        '--accent-color': '#D4D7E2',
+        '--accent-color': '#C5C5C5',
         '--background-color': '#f4f4f4',
         '--text-color': '#333',
         '--navbar-color' : '#3498db',
         '--dashboard-primary': '#008080',
-        '--dashboard-secondary': '#DEF2C8'
+        '--dashboard-secondary': '#C7DADA',
+        '--dashboard-accent-color': '#F5DDCB'
       },
       body: {
         backgroundColor: 'var(--background-color)',
@@ -26,6 +27,7 @@ const theme = extendTheme({
     accentColor: 'var(--accent-color)',
     dashboardSecondary: 'var(--dashboard-secondary)',
     dashboardPrimary: 'var(--dashboard-primary)',
+    dashboardAccentColor: 'var(--dashboard-accent-color)',
   },
 });
 
