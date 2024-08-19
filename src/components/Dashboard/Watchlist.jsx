@@ -68,7 +68,7 @@ const Watchlist = () => {
 			mb={5}
 			width={{
 				base: "100%",
-				lg: "52%",
+				lg: "51%",
 			}}
 			borderColor={"dashboardPrimary"}
 			borderWidth={"2px"}
@@ -141,7 +141,7 @@ const Watchlist = () => {
 					{watchlist.length === 0 ? (
 						<Flex
 							height={"200"}
-							width={"500%"}
+							width={"400%"}
 							justifyContent={"center"}
 							alignItems={"center"}
 						>
