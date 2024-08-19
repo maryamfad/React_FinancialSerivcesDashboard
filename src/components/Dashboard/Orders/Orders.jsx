@@ -22,10 +22,16 @@ const Orders = () => {
 	const getOrders = () => {
 		getAllOrders()
 			.then((data) => {
-				data.sort(
-					(a, b) => new Date(b.executedAt) - new Date(a.executedAt)
-				);
-				setOrders(data);
+				if (data.message === "No Holding found for this user") {
+					setOrders([]);
+				} else {
+					data.sort(
+						(a, b) =>
+							new Date(b.executedAt) - new Date(a.executedAt)
+					);
+
+					setOrders(data);
+				}
 			})
 			.catch((error) => {
 				if (error.status === 400) {
@@ -49,8 +55,11 @@ const Orders = () => {
 	const addStock = (symbol) => {
 		addToWatchlist(symbol)
 			.then((data) => {
-				console.log("add to watchlist:", data.stocks);
-				setWatchlist(data.stocks);
+				if (data.message === "No Order found for this user") {
+					setWatchlist([]);
+				} else {
+					setWatchlist(data.stocks);
+				}
 			})
 			.catch((error) => {
 				if (error.status === 400) {
@@ -108,7 +117,11 @@ const Orders = () => {
 				borderColor={"#F1D7D7"}
 			>
 				<Table
-					sx={{ "tbody tr:nth-of-type(odd)": { bg: "dashboardAccentColor" } }}
+					sx={{
+						"tbody tr:nth-of-type(odd)": {
+							bg: "dashboardAccentColor",
+						},
+					}}
 				>
 					<Thead position="sticky" top={0} zIndex={1}>
 						<Tr>
@@ -133,38 +146,53 @@ const Orders = () => {
 							<Th p={0} textAlign={"center"} pb={2}></Th>
 						</Tr>
 					</Thead>
-					<Tbody>
-						{orders.map((o, index) => (
-							<Tr key={index}>
-								<Td p={1} textAlign={"center"} color={"blue"}>
-									{o.stockSymbol}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									{o.orderType}/{o.tradeType}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									{o.quantity}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									${o.price.toFixed(2)}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									{o.status}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									{formatDate(o.createdAt)}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									<IoIosAddCircleOutline
-										size={"18"}
-										onClick={() => {
-											addStock(o.stockSymbol);
-										}}
-									/>
-								</Td>
-							</Tr>
-						))}
-					</Tbody>
+					{orders.length === 0 ? (
+						<Flex
+							height={"400"}
+							width={"400%"}
+							justifyContent={"center"}
+							alignItems={"center"}
+						>
+							No Order yet
+						</Flex>
+					) : (
+						<Tbody>
+							{orders.map((o, index) => (
+								<Tr key={index}>
+									<Td
+										p={1}
+										textAlign={"center"}
+										color={"blue"}
+									>
+										{o.stockSymbol}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										{o.orderType}/{o.tradeType}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										{o.quantity}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										${o.price.toFixed(2)}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										{o.status}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										{formatDate(o.createdAt)}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										<IoIosAddCircleOutline
+											size={"18"}
+											onClick={() => {
+												addStock(o.stockSymbol);
+											}}
+										/>
+									</Td>
+								</Tr>
+							))}
+						</Tbody>
+					)}
 				</Table>
 			</Box>
 		</Box>

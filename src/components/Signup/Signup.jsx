@@ -73,7 +73,7 @@ function Signup() {
     setIsLoading(true);
     signUp(username, password)
       .then(() => {
-        navigate("/dashboard");
+        navigate("/login");
       })
       .catch((error) => {
         if (error.status === 400) {

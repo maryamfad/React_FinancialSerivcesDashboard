@@ -37,10 +37,13 @@ const Watchlist = () => {
 	const removeStock = (symbol) => {
 		removeFromWatchlist(symbol)
 			.then((data) => {
-				setWatchlist(
-					watchlist.filter((item) => item.stockSymbol !== symbol)
-				);
-				console.log(data.stocks);
+				if (data.message === "No watchlist found for this user") {
+					setWatchlist([]);
+				} else {
+					setWatchlist(
+						watchlist.filter((item) => item.stockSymbol !== symbol)
+					);
+				}
 			})
 			.catch((error) => {
 				if (error.status === 400) {
@@ -105,7 +108,11 @@ const Watchlist = () => {
 			>
 				<Table
 					// mt={5}
-					sx={{ "tbody tr:nth-of-type(odd)": { bg: "dashboardAccentColor" } }}
+					sx={{
+						"tbody tr:nth-of-type(odd)": {
+							bg: "dashboardAccentColor",
+						},
+					}}
 				>
 					<Thead position="sticky" top={0} zIndex={1}>
 						<Tr>
@@ -131,43 +138,58 @@ const Watchlist = () => {
 							<Th p={0} textAlign={"center"} pb={2}></Th>
 						</Tr>
 					</Thead>
-					<Tbody>
-						{watchlist?.map((o, index) => (
-							<Tr key={index}>
-								<Td p={1} textAlign={"center"} color={"blue"}>
-									{o.stockSymbol}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									{o.name}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									{o.exchange}
-								</Td>
+					{watchlist.length === 0 ? (
+						<Flex
+							height={"200"}
+							width={"500%"}
+							justifyContent={"center"}
+							alignItems={"center"}
+						>
+							No Watchlist yet
+						</Flex>
+					) : (
+						<Tbody>
+							{watchlist?.map((o, index) => (
+								<Tr key={index}>
+									<Td
+										p={1}
+										textAlign={"center"}
+										color={"blue"}
+									>
+										{o.stockSymbol}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										{o.name}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										{o.exchange}
+									</Td>
 
-								<Td p={1} textAlign={"center"}>
-									$ {o.price}
-								</Td>
-								<Td
-									p={1}
-									textAlign={"center"}
-									color={o.change >= 0 ? "green" : "red"}
-								>
-									{o.change} ({o.changesPercentage} %)
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									{o.marketCap}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									<IoRemoveCircleOutline
-										size={"20"}
-										onClick={() => {
-											removeStock(o.stockSymbol);
-										}}
-									/>
-								</Td>
-							</Tr>
-						))}
-					</Tbody>
+									<Td p={1} textAlign={"center"}>
+										$ {o.price}
+									</Td>
+									<Td
+										p={1}
+										textAlign={"center"}
+										color={o.change >= 0 ? "green" : "red"}
+									>
+										{o.change} ({o.changesPercentage} %)
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										{o.marketCap}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										<IoRemoveCircleOutline
+											size={"20"}
+											onClick={() => {
+												removeStock(o.stockSymbol);
+											}}
+										/>
+									</Td>
+								</Tr>
+							))}
+						</Tbody>
+					)}
 				</Table>
 			</Box>
 			<Modal isOpen={isOpen} onClose={onClose} isCentered>

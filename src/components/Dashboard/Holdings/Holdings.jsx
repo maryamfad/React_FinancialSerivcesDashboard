@@ -18,7 +18,11 @@ const Holdings = () => {
 	const getUserHoldings = () => {
 		getHoldings()
 			.then((data) => {
-				setHoldings(data);
+				if (data.message === "No Holding found for this user") {
+					setHoldings([]);
+				} else {
+					setHoldings(data);
+				}
 			})
 			.catch((error) => {
 				if (error.status === 400) {
@@ -77,6 +81,7 @@ const Holdings = () => {
 				borderRadius={"10px"}
 				border={"2x"}
 				borderColor={"#F1D7D7"}
+				
 			>
 				<Table
 					sx={{
@@ -84,6 +89,8 @@ const Holdings = () => {
 							bg: "dashboardAccentColor",
 						},
 					}}
+					height={"100%"}
+							width={"100%"}
 				>
 					<Thead position="sticky" top={0} zIndex={1}>
 						<Tr>
@@ -102,25 +109,40 @@ const Holdings = () => {
 							</Th>
 						</Tr>
 					</Thead>
-					<Tbody>
-						{holdings.map((o, index) => (
-							<Tr key={index}>
-								<Td p={1} textAlign={"center"} color={"blue"}>
-									{o.stockSymbol}
-								</Td>
+					{holdings.length === 0 ? (
+						<Flex
+							height={"100%"}
+							width={"300%"}
+							justifyContent={"center"}
+							alignItems={"center"}
+						>
+							No Holding yet
+						</Flex>
+					) : (
+						<Tbody>
+							{holdings.map((o, index) => (
+								<Tr key={index}>
+									<Td
+										p={1}
+										textAlign={"center"}
+										color={"blue"}
+									>
+										{o.stockSymbol}
+									</Td>
 
-								<Td p={1} textAlign={"center"}>
-									{o.quantity}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									${o.value.toFixed(2)}
-								</Td>
-								<Td p={1} textAlign={"center"}>
-									{o.percentage} %
-								</Td>
-							</Tr>
-						))}
-					</Tbody>
+									<Td p={1} textAlign={"center"}>
+										{o.quantity}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										${o.value.toFixed(2)}
+									</Td>
+									<Td p={1} textAlign={"center"}>
+										{o.percentage} %
+									</Td>
+								</Tr>
+							))}
+						</Tbody>
+					)}
 				</Table>
 			</Box>
 		</Box>

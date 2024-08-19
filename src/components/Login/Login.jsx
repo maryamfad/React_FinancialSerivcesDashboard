@@ -46,7 +46,9 @@ function Login() {
     if (Object.keys(validationErrors).length === 0) {
       login(username, password)
         .then((t) => {
-          // localStorage.setItem("token", t.token);
+          localStorage.setItem("token", t.token);
+          console.log("token",localStorage.getItem("token"));
+          
         })
         .then(() => navigate("/dashboard"))
         .catch((error) => {

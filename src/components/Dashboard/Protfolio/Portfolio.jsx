@@ -10,10 +10,15 @@ const Portfolio = () => {
 	const getUserPortfolio = () => {
 		getPortfolio()
 			.then((data) => {
-				data.sort(
-					(a, b) => new Date(b.executedAt) - new Date(a.executedAt)
-				);
-				setPortfolioData(data[0].performance);
+				if (data.message === "No portfolio found for this user") {
+					setPortfolioData([]);
+				} else {
+					data.sort(
+						(a, b) =>
+							new Date(b.executedAt) - new Date(a.executedAt)
+					);
+					setPortfolioData(data[0].performance);
+				}
 			})
 			.catch((error) => {
 				if (error.status === 400) {
@@ -147,9 +152,13 @@ const Portfolio = () => {
 					May 01, 03:21 PM EDT
 				</Flex>
 			</Flex>
-			<Box>
-				<LineChart data={portfolioData} />
-			</Box>
+			{portfolioData.length === 0 ? (
+				<Flex justifyContent={"center"} alignItems={"center"} height={"290"}>No portfolio yet</Flex>
+			) : (
+				<Box>
+					<LineChart data={portfolioData} />
+				</Box>
+			)}
 		</Box>
 	);
 };
