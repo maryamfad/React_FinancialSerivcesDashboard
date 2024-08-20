@@ -12,38 +12,40 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect, useContext } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { getAllOrders } from "../../../services/TradeServices";
+// import { getAllOrders } from "../../../services/TradeServices";
+import { OrderContext } from "../../../context/OrderProvider";
 import { WatchlistContext } from "../../../context/WatchlistProvider"; //
 
 const Orders = () => {
-	const [orders, setOrders] = useState([]);
+	// const [orders, setOrders] = useState([]);
+	const{orders} = useContext(OrderContext);
 	const [errorMessage, setErrorMessage] = useState("");
 	const { setWatchlist, addToWatchlist } = useContext(WatchlistContext);
-	const getOrders = () => {
-		getAllOrders()
-			.then((data) => {
-				if (data.message === "No Holding found for this user") {
-					setOrders([]);
-				} else {
-					data.sort(
-						(a, b) =>
-							new Date(b.executedAt) - new Date(a.executedAt)
-					);
+	// const getOrders = () => {
+	// 	getAllOrders()
+	// 		.then((data) => {
+	// 			if (data.message === "No Holding found for this user") {
+	// 				setOrders([]);
+	// 			} else {
+	// 				data.sort(
+	// 					(a, b) =>
+	// 						new Date(b.executedAt) - new Date(a.executedAt)
+	// 				);
 
-					setOrders(data);
-				}
-			})
-			.catch((error) => {
-				if (error.status === 400) {
-					setErrorMessage("Invalid Credentials");
-				} else {
-					setErrorMessage(
-						error.message || "An unexpected error occurred."
-					);
-					console.log(errorMessage);
-				}
-			});
-	};
+	// 				setOrders(data);
+	// 			}
+	// 		})
+	// 		.catch((error) => {
+	// 			if (error.status === 400) {
+	// 				setErrorMessage("Invalid Credentials");
+	// 			} else {
+	// 				setErrorMessage(
+	// 					error.message || "An unexpected error occurred."
+	// 				);
+	// 				console.log(errorMessage);
+	// 			}
+	// 		});
+	// };
 	function formatDate(isoString) {
 		const date = new Date(isoString);
 		const year = date.getFullYear();
@@ -72,10 +74,10 @@ const Orders = () => {
 				}
 			});
 	};
-	useEffect(() => {
-		getOrders();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	// useEffect(() => {
+	// 	getOrders();
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
 	return (
 		<Box
 			width={{
