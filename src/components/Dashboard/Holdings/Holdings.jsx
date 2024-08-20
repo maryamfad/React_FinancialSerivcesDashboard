@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import {
 	Box,
 	Flex,
@@ -11,34 +11,10 @@ import {
 	Th,
 	Td,
 } from "@chakra-ui/react";
-import { getHoldings } from "../../../services/TradeServices";
+import { HoldingContext } from "../../../context/HoldingProvider";
+
 const Holdings = () => {
-	const [holdings, setHoldings] = useState([]);
-	const [errorMessage, setErrorMessage] = useState("");
-	const getUserHoldings = () => {
-		getHoldings()
-			.then((data) => {
-				if (data.message === "No Holding found for this user") {
-					setHoldings([]);
-				} else {
-					setHoldings(data);
-				}
-			})
-			.catch((error) => {
-				if (error.status === 400) {
-					setErrorMessage("Invalid Credentials");
-				} else {
-					setErrorMessage(
-						error.message || "An unexpected error occurred."
-					);
-					console.log(errorMessage);
-				}
-			});
-	};
-	useEffect(() => {
-		getUserHoldings();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	const { holdings } = useContext(HoldingContext);
 	return (
 		<Box
 			mb={5}
@@ -81,7 +57,6 @@ const Holdings = () => {
 				borderRadius={"10px"}
 				border={"2x"}
 				borderColor={"#F1D7D7"}
-				
 			>
 				<Table
 					sx={{
@@ -90,7 +65,7 @@ const Holdings = () => {
 						},
 					}}
 					height={"100%"}
-							width={"100%"}
+					width={"100%"}
 				>
 					<Thead position="sticky" top={0} zIndex={1}>
 						<Tr>

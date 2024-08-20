@@ -241,57 +241,6 @@ function BuySell() {
 					<FormLabel>
 						Choose how to {isBuySelected ? "buy" : "sell"}
 					</FormLabel>
-					{/* <RadioGroup
-						onChange={handleTradeOptionChange}
-						value={tradeOption}
-					>
-						<Stack
-							direction="row"
-							border="2px solid #ccc"
-							borderRadius="4px"
-							p="8px"
-							_focus={{
-								borderColor: "dashboardPrimary",
-								boxShadow: "0 0 0 3px rgba(56, 178, 172, 0.6)",
-								outline: "none",
-							}}
-							_hover={{
-								borderColor: "dashboardPrimary",
-							}}
-						>
-							<Radio
-								borderColor={"gray"}
-								borderWidth={"2px"}
-								value="dollars"
-								_focus={{
-									outline: "2px solid dashboardPrimary",
-								}}
-								_hover={{
-									backgroundColor: isBuySelected
-										? "dashboardPrimary"
-										: "rgba(0, 0, 0, 0.05)",
-								}}
-							>
-								Dollars
-							</Radio>
-							<Radio
-								borderColor={"gray"}
-								borderWidth={"2px"}
-								ml={"10%"}
-								value="shares"
-								_focus={{
-									outline: "2px solid dashboardPrimary",
-								}}
-								_hover={{
-									backgroundColor: isBuySelected
-										? "dashboardPrimary"
-										: "rgba(0, 0, 0, 0.05)",
-								}}
-							>
-								Shares
-							</Radio>
-						</Stack>
-					</RadioGroup> */}
 				</FormControl>
 
 				<Flex justifyContent="space-between" mt={4} flexWrap="nowrap">

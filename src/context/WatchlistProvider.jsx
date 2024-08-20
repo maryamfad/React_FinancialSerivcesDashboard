@@ -66,8 +66,6 @@ const WatchlistProvider = ({ children }) => {
 				});
 				setWatchlist(arr);
 			});
-
-			// setWatchlist(arr);
 			return data;
 		} catch (error) {
 			throw error;
@@ -118,11 +116,7 @@ const WatchlistProvider = ({ children }) => {
 			}
 			const data = await response.json();
 			console.log("data", data);
-
-			let arr = [];
-			// data.watchlist.stocks.map(async (stock) => {
 			const stockInfos = await getFullQuote(symbol);
-			console.log("arr", arr);
 			watchlist.push({
 				stockSymbol: symbol,
 				price: stockInfos[0]?.price,
@@ -135,7 +129,6 @@ const WatchlistProvider = ({ children }) => {
 				name: stockInfos[0]?.name,
 			});
 			setWatchlist(watchlist);
-			// });
 			return data.watchlist;
 		} catch (error) {
 			throw error;
