@@ -39,11 +39,14 @@ const OrderProvider = ({ children }) => {
                 throw error;
             }
             const data = await response.json();
-    
+            
+            let arr = data
+            arr.sort((a, b) =>  new Date(b.createdAt) - new Date(a.createdAt));
+            console.log("orders",arr);
             if (data.message === "No Holding found for this user") {
 				setOrders([]);
 			} else {
-				setOrders(data);
+				setOrders(arr);
 			}
         } catch (error) {
             throw error;

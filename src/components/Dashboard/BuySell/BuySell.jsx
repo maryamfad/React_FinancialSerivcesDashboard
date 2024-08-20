@@ -22,9 +22,11 @@ import { buyStock, sellStock } from "../../../services/TradeServices";
 import getShortQuote from "../../../api/getShortQuote";
 import { WarningIcon } from "@chakra-ui/icons";
 import { HoldingContext } from "../../../context/HoldingProvider";
+import { OrderContext } from "../../../context/OrderProvider";
 
 function BuySell() {
-	const {  getHoldings } = useContext(HoldingContext);
+	const { getHoldings } = useContext(HoldingContext);
+	const { getAllOrders } = useContext(OrderContext);
 	const [isBuySelected, setBuySelected] = useState(true);
 	const [orderType, setOrderType] = useState("market");
 	// const [tradeOption, setTradeOption] = useState("");
@@ -446,11 +448,14 @@ function BuySell() {
 					>
 						<Flex justifyContent="center" alignContent={"center"}>
 							<Text fontSize="lg" mb={4} width={"100%"}>
-								Done<br/> 
-								Trade Type:
-								&nbsp;&nbsp;&nbsp;&nbsp;<b>{isBuySelected ? "Buy" : "Sell"}</b>
-								<br /> Quantity: &nbsp;&nbsp;&nbsp;&nbsp;<b>{quantity}</b> <br />
-								Symbol: &nbsp;&nbsp;&nbsp;&nbsp;<b>{stockSymbol}</b>
+								Done
+								<br />
+								Trade Type: &nbsp;&nbsp;&nbsp;&nbsp;
+								<b>{isBuySelected ? "Buy" : "Sell"}</b>
+								<br /> Quantity: &nbsp;&nbsp;&nbsp;&nbsp;
+								<b>{quantity}</b> <br />
+								Symbol: &nbsp;&nbsp;&nbsp;&nbsp;
+								<b>{stockSymbol}</b>
 							</Text>
 						</Flex>
 						<Flex
@@ -458,14 +463,13 @@ function BuySell() {
 							justifyContent={"space-between"}
 							gap={5}
 						>
-				
 							<Button
 								width={"100%"}
 								colorScheme="teal"
-								onClick={async() => {
+								onClick={async () => {
 									await getHoldings();
+									await getAllOrders();
 									onConfirmationModalClose();
-									
 								}}
 							>
 								Ok
