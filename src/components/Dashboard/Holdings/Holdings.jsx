@@ -15,6 +15,7 @@ import { HoldingContext } from "../../../context/HoldingProvider";
 
 const Holdings = () => {
 	const { holdings } = useContext(HoldingContext);
+	
 	return (
 		<Box
 			mb={5}

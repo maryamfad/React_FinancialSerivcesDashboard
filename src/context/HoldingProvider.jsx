@@ -9,7 +9,7 @@ export const useHolding = () => {
 
 const HoldingProvider = ({ children }) => {
 	const [holdings, setHoldings] = useState([]);
-	const [errorMessage, setErrorMessage] = useState("");
+	// const [errorMessage, setErrorMessage] = useState("");
 
 	const getHoldings = async () => {
 		try {
@@ -42,7 +42,7 @@ const HoldingProvider = ({ children }) => {
 				throw error;
 			}
 			const data = await response.json();
-			console.log("holding data", data);
+			// console.log("holding data", data);
 
 			if (data.message === "No Holding found for this user") {
 				setHoldings([]);

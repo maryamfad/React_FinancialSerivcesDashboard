@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { stockNames } from "../../Home/stockNames";
 import {
 	Box,
@@ -21,8 +21,10 @@ import {
 import { buyStock, sellStock } from "../../../services/TradeServices";
 import getShortQuote from "../../../api/getShortQuote";
 import { WarningIcon } from "@chakra-ui/icons";
+import { HoldingContext } from "../../../context/HoldingProvider";
 
 function BuySell() {
+	const {  getHoldings } = useContext(HoldingContext);
 	const [isBuySelected, setBuySelected] = useState(true);
 	const [orderType, setOrderType] = useState("market");
 	// const [tradeOption, setTradeOption] = useState("");
@@ -36,6 +38,12 @@ function BuySell() {
 		isOpen: isPreviewModalOpen,
 		onOpen: onPreviewModalOpen,
 		onClose: onPreviewModalClose,
+	} = useDisclosure();
+
+	const {
+		isOpen: isConfirmationModalOpen,
+		onOpen: onConfirmationModalOpen,
+		onClose: onConfirmationModalClose,
 	} = useDisclosure();
 
 	let price;
@@ -65,7 +73,7 @@ function BuySell() {
 			} else {
 				price = await getShortQuote(stockSymbol);
 				await buyStock(quantity, stockSymbol, price, orderType);
-				onPreviewModalClose();
+				// onPreviewModalClose();
 			}
 		} catch (error) {
 			console.error(error);
@@ -84,7 +92,7 @@ function BuySell() {
 			} else {
 				price = await getShortQuote(stockSymbol);
 				await sellStock(quantity, stockSymbol, price, orderType);
-				onPreviewModalClose();
+				// onPreviewModalClose();
 			}
 		} catch (error) {
 			console.error(error);
@@ -368,13 +376,27 @@ function BuySell() {
 						alignItems="center"
 						justifyContent="center"
 						flexDirection="column"
+						width={"100%"}
 					>
-						<Text fontSize="lg" mb={4}>
-							{isBuySelected ? "Buy" : "Sell"} {quantity} unit
-							from {stockSymbol}
+						<Text
+							fontSize="lg"
+							mb={4}
+							width={"100%"}
+							textAlign={"center"}
+						>
+							Are you sure you want to{" "}
+							<b>{isBuySelected ? "Buy" : "Sell"}</b>{" "}
+							<i>{quantity}</i> share/s of <b>{stockSymbol}</b>?
 						</Text>
-						<Flex width={"60%"} justifyContent={"space-between"}>
+						<Flex
+							width={"70%"}
+							justifyContent={"space-between"}
+							gap={5}
+						>
 							<Button
+								width={"100%"}
+								borderWidth={"1px"}
+								borderColor={"gray"}
 								colorScheme="gray"
 								onClick={() => {
 									onPreviewModalClose();
@@ -383,6 +405,7 @@ function BuySell() {
 								No
 							</Button>
 							<Button
+								width={"100%"}
 								colorScheme="teal"
 								onClick={() => {
 									if (isBuySelected) {
@@ -390,9 +413,62 @@ function BuySell() {
 									} else {
 										handleSellStock();
 									}
+									onConfirmationModalOpen();
+									onPreviewModalClose();
 								}}
 							>
 								Yes
+							</Button>
+						</Flex>
+					</ModalBody>
+				</ModalContent>
+			</Modal>
+
+			<Modal
+				isOpen={isConfirmationModalOpen}
+				onClose={onConfirmationModalClose}
+				isCentered
+			>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader display="flex" alignItems="center">
+						<Icon as={WarningIcon} color={"teal"} mr={2} />
+						Confirmation
+					</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody
+						display="flex"
+						alignItems="center"
+						justifyContent="center"
+						alignContent={"center"}
+						flexDirection="column"
+						width={"100%"}
+					>
+						<Flex justifyContent="center" alignContent={"center"}>
+							<Text fontSize="lg" mb={4} width={"100%"}>
+								Done<br/> 
+								Trade Type:
+								&nbsp;&nbsp;&nbsp;&nbsp;<b>{isBuySelected ? "Buy" : "Sell"}</b>
+								<br /> Quantity: &nbsp;&nbsp;&nbsp;&nbsp;<b>{quantity}</b> <br />
+								Symbol: &nbsp;&nbsp;&nbsp;&nbsp;<b>{stockSymbol}</b>
+							</Text>
+						</Flex>
+						<Flex
+							width={"70%"}
+							justifyContent={"space-between"}
+							gap={5}
+						>
+				
+							<Button
+								width={"100%"}
+								colorScheme="teal"
+								onClick={async() => {
+									await getHoldings();
+									onConfirmationModalClose();
+									
+								}}
+							>
+								Ok
 							</Button>
 						</Flex>
 					</ModalBody>

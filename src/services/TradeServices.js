@@ -1,6 +1,11 @@
 import getUserIdFromToken from "../util/getUserIdFromToken";
 
-export const buyStock = async (quantity, stockSymbol, purchasePrice, orderType) => {
+export const buyStock = async (
+	quantity,
+	stockSymbol,
+	purchasePrice,
+	orderType
+) => {
 	try {
 		const userId = getUserIdFromToken();
 		const response = await fetch(
@@ -28,14 +33,20 @@ export const buyStock = async (quantity, stockSymbol, purchasePrice, orderType) 
 			error.details = errorDetails;
 			throw error;
 		}
+		const data = await response.json();
 
-		return response.json();
+		return data;
 	} catch (error) {
 		throw error;
 	}
 };
 
-export const sellStock = async (quantity, stockSymbol, sellingPrice, orderType) => {
+export const sellStock = async (
+	quantity,
+	stockSymbol,
+	sellingPrice,
+	orderType
+) => {
 	try {
 		const userId = getUserIdFromToken();
 		const response = await fetch(
@@ -89,7 +100,9 @@ export const getAllOrders = async () => {
 			try {
 				errorDetails = await response.json();
 			} catch (jsonError) {
-				errorDetails = { error: "An error occurred, but no details were provided" };
+				errorDetails = {
+					error: "An error occurred, but no details were provided",
+				};
 			}
 			const error = new Error(errorDetails.error || "Unknown error");
 			error.status = response.status;
@@ -123,7 +136,9 @@ export const getPortfolio = async () => {
 			try {
 				errorDetails = await response.json();
 			} catch (jsonError) {
-				errorDetails = { error: "An error occurred, but no details were provided" };
+				errorDetails = {
+					error: "An error occurred, but no details were provided",
+				};
 			}
 			const error = new Error(errorDetails.error || "Unknown error");
 			error.status = response.status;
@@ -137,4 +152,3 @@ export const getPortfolio = async () => {
 		throw error;
 	}
 };
-

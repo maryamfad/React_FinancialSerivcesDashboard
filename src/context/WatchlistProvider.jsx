@@ -52,7 +52,6 @@ const WatchlistProvider = ({ children }) => {
 			let arr = [];
 			data.stocks.map(async (stock) => {
 				const stockInfos = await getFullQuote(stock.stockSymbol);
-				console.log("arr", arr);
 				arr.push({
 					stockSymbol: stock.stockSymbol,
 					price: stockInfos[0]?.price,
