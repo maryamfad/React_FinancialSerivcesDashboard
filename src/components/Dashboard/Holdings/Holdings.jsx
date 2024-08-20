@@ -15,7 +15,7 @@ import { HoldingContext } from "../../../context/HoldingProvider";
 
 const Holdings = () => {
 	const { holdings } = useContext(HoldingContext);
-	
+
 	return (
 		<Box
 			mb={5}
@@ -65,8 +65,6 @@ const Holdings = () => {
 							bg: "dashboardAccentColor",
 						},
 					}}
-					height={"100%"}
-					width={"100%"}
 				>
 					<Thead position="sticky" top={0} zIndex={1}>
 						<Tr>
@@ -87,7 +85,7 @@ const Holdings = () => {
 					</Thead>
 					{holdings.length === 0 ? (
 						<Flex
-							height={"100%"}
+							height={"200"}
 							width={"300%"}
 							justifyContent={"center"}
 							alignItems={"center"}
