@@ -7,6 +7,18 @@ const Portfolio = () => {
 	const [portfolioData, setPortfolioData] = useState([]);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [timeFrame, setTimeFrame] = useState("1D");
+	const formatDate = (date) => {
+		const options = {
+			month: "long",
+			day: "2-digit",
+			hour: "2-digit",
+			minute: "2-digit",
+			hour12: true,
+			timeZoneName: "short",
+		};
+
+		return date.toLocaleString("en-US", options);
+	};
 	const getUserPortfolio = () => {
 		getPortfolio()
 			.then((data) => {
@@ -149,11 +161,17 @@ const Portfolio = () => {
 					fontWeight={"bold"}
 					color={"gray"}
 				>
-					May 01, 03:21 PM EDT
+					{formatDate(new Date())}
 				</Flex>
 			</Flex>
 			{portfolioData.length === 0 ? (
-				<Flex justifyContent={"center"} alignItems={"center"} height={"290"}>No portfolio yet</Flex>
+				<Flex
+					justifyContent={"center"}
+					alignItems={"center"}
+					height={"290"}
+				>
+					No portfolio yet
+				</Flex>
 			) : (
 				<Box>
 					<LineChart data={portfolioData} />
