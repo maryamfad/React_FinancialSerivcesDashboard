@@ -240,10 +240,10 @@ function BuySell() {
 						}}
 					>
 						<option value="market">Market</option>
-						<option value="limit">Limit</option>
-						<option value="stop">Stop</option>
-						<option value="stop-limit">Stop Limit</option>
-						<option value="trailing-stop">Trailing Stop</option>
+						<option value="limit" disabled>Limit</option>
+						<option value="stop" disabled>Stop</option>
+						<option value="stop-limit" disabled>Stop Limit</option>
+						<option value="trailing-stop" disabled>Trailing Stop</option>
 					</Select>
 				</FormControl>
 
@@ -309,11 +309,11 @@ function BuySell() {
 						}}
 					>
 						<option value="day">DAY</option>
-						<option value="gtc">GTC - Good till Cancelled</option>
-						<option value="fok">FOK - Fill or Kill</option>
-						<option value="ioc">IOC - Immediate or Cancel</option>
-						<option value="opg">At the Open</option>
-						<option value="cls">At the Close</option>
+						<option value="gtc" disabled>GTC - Good till Cancelled</option>
+						<option value="fok" disabled>FOK - Fill or Kill</option>
+						<option value="ioc" disabled>IOC - Immediate or Cancel</option>
+						<option value="opg" disabled>At the Open</option>
+						<option value="cls" disabled>At the Close</option>
 					</Select>
 				</FormControl>
 				<Flex
