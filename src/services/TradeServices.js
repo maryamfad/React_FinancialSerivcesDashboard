@@ -33,11 +33,12 @@ export const buyStock = async (
 			error.details = errorDetails;
 			throw error;
 		}
-		const data = await response.json();
-
-		return data;
+		return true;
 	} catch (error) {
-		throw error;
+		// throw error;
+		console.log(error);
+		return false;
+		
 	}
 };
 

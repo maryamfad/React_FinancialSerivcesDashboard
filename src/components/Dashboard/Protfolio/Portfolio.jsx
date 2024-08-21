@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import LineChart from "./LinearChart";
 import { getPortfolio } from "../../../services/TradeServices";
 import { Box, Flex, Text, Divider } from "@chakra-ui/react";
+import { AuthContext } from "../../../context/AuthProvider";
 
 const Portfolio = () => {
+	const { userInfo } = useContext(AuthContext);
 	const [portfolioData, setPortfolioData] = useState([]);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [timeFrame, setTimeFrame] = useState("1D");
@@ -148,11 +150,19 @@ const Portfolio = () => {
 			<Divider p={0} m={0} />
 			<Flex>
 				<Flex ml={5} mt={5}>
-					<Text mb={0} fontSize={"18px"} fontWeight={"500"}>
-						$ 100,002.88
-					</Text>
-					<Text mb={0} fontSize={"16px"} fontWeight={"400"} ml={5}>
-						+0.00%
+					{portfolioData.length && (
+						<Text mb={0} fontSize={"18px"} fontWeight={"500"}>
+							$ {portfolioData[portfolioData.length - 1]}
+						</Text>
+					)}
+					<Text
+						mb={0}
+						fontSize={"16px"}
+						fontWeight={"400"}
+						ml={5}
+						color={userInfo.dailyChange < 0 ? "red" : "green"}
+					>
+						{userInfo.dailyChange}
 					</Text>
 				</Flex>
 				<Flex

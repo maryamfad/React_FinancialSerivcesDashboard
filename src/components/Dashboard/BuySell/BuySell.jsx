@@ -74,7 +74,27 @@ function BuySell() {
 				onOpen();
 			} else {
 				price = await getShortQuote(stockSymbol);
-				await buyStock(quantity, stockSymbol, price, orderType);
+				console.log("price", price);
+				let data;
+				if (typeof price === "number") {
+					data = await buyStock(
+						quantity,
+						stockSymbol,
+						price,
+						orderType
+					);
+					if (data) {
+						onConfirmationModalOpen();
+					} else {
+						setErrorMessage("the buy action failed.");
+					}
+				} else {
+					setErrorMessage(
+						"The third party api Subscription's limit has reached, please try again later."
+					);
+					onOpen();
+					onConfirmationModalClose();
+				}
 				// onPreviewModalClose();
 			}
 		} catch (error) {
@@ -240,10 +260,18 @@ function BuySell() {
 						}}
 					>
 						<option value="market">Market</option>
-						<option value="limit" disabled>Limit</option>
-						<option value="stop" disabled>Stop</option>
-						<option value="stop-limit" disabled>Stop Limit</option>
-						<option value="trailing-stop" disabled>Trailing Stop</option>
+						<option value="limit" disabled>
+							Limit
+						</option>
+						<option value="stop" disabled>
+							Stop
+						</option>
+						<option value="stop-limit" disabled>
+							Stop Limit
+						</option>
+						<option value="trailing-stop" disabled>
+							Trailing Stop
+						</option>
 					</Select>
 				</FormControl>
 
@@ -309,11 +337,21 @@ function BuySell() {
 						}}
 					>
 						<option value="day">DAY</option>
-						<option value="gtc" disabled>GTC - Good till Cancelled</option>
-						<option value="fok" disabled>FOK - Fill or Kill</option>
-						<option value="ioc" disabled>IOC - Immediate or Cancel</option>
-						<option value="opg" disabled>At the Open</option>
-						<option value="cls" disabled>At the Close</option>
+						<option value="gtc" disabled>
+							GTC - Good till Cancelled
+						</option>
+						<option value="fok" disabled>
+							FOK - Fill or Kill
+						</option>
+						<option value="ioc" disabled>
+							IOC - Immediate or Cancel
+						</option>
+						<option value="opg" disabled>
+							At the Open
+						</option>
+						<option value="cls" disabled>
+							At the Close
+						</option>
 					</Select>
 				</FormControl>
 				<Flex
@@ -415,7 +453,7 @@ function BuySell() {
 									} else {
 										handleSellStock();
 									}
-									onConfirmationModalOpen();
+
 									onPreviewModalClose();
 								}}
 							>
