@@ -9,7 +9,7 @@ export const useHolding = () => {
 
 const HoldingProvider = ({ children }) => {
 	const [holdings, setHoldings] = useState([]);
-	// const [errorMessage, setErrorMessage] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const getHoldings = async () => {
 		try {
@@ -28,21 +28,9 @@ const HoldingProvider = ({ children }) => {
 			);
 
 			if (!response.ok) {
-				let errorDetails;
-				try {
-					errorDetails = await response.json();
-				} catch (jsonError) {
-					errorDetails = {
-						error: "An error occurred, but no details were provided",
-					};
-				}
-				const error = new Error(errorDetails.error || "Unknown error");
-				error.status = response.status;
-				error.details = errorDetails;
-				throw error;
+				setErrorMessage(response.message);
 			}
 			const data = await response.json();
-			// console.log("holding data", data);
 
 			if (data.message === "No Holding found for this user") {
 				setHoldings([]);
@@ -50,7 +38,7 @@ const HoldingProvider = ({ children }) => {
 				setHoldings(data);
 			}
 		} catch (error) {
-			throw error;
+			setErrorMessage(error);
 		}
 	};
 	useEffect(() => {
@@ -63,6 +51,7 @@ const HoldingProvider = ({ children }) => {
 				holdings,
 				setHoldings,
 				getHoldings,
+				errorMessage,
 			}}
 		>
 			{children}
