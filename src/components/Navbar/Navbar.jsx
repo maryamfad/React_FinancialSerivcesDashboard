@@ -41,6 +41,7 @@ function NavbarMenu() {
 							p={{ base: 1, md: 2 }}
 							m={{ base: 0, md: 2 }}
 							borderRadius={"5px"}
+							
 							_hover={{
 								backgroundColor: "rgba(255, 255, 255, 0.1)",
 								borderRadius: "5px",
@@ -87,11 +88,7 @@ function NavbarMenu() {
 					</Link>
 					<Link
 					to={"/dashboard"}
-						// to={
-						// 	localStorage.getItem("token")
-						// 		? "/dashboard"
-						// 		: "/login"
-						// }
+					
 					>
 						<Box
 							bg={
@@ -100,12 +97,15 @@ function NavbarMenu() {
 									: ""
 							}
 							borderRadius={"5px"}
+							borderWidth={"2px"}
+							borderColor={"white"}
 							_hover={{
 								backgroundColor: "rgba(255, 255, 255, 0.1)",
 								borderRadius: "5px",
 							}}
 							p={{ base: 1, md: 2 }}
 							m={{ base: 0, md: 2 }}
+							ml={"2%"}
 						>
 							Dashboard
 						</Box>

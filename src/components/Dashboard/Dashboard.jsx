@@ -1,4 +1,4 @@
-import { Button, Flex, Box, Heading } from "@chakra-ui/react";
+import { Flex, Box, Heading } from "@chakra-ui/react";
 import { WatchlistProvider } from "../../context/WatchlistProvider";
 import Sidebar from "./Sidebar/Sidebar";
 import Portfolio from "./Protfolio/Portfolio";
@@ -6,13 +6,11 @@ import Orders from "./Orders/Orders";
 import Holdings from "./Holdings/Holdings";
 import BuySell from "./BuySell/BuySell";
 import AccountOverview from "./AccountOverview/AccountOverview";
-import { useNavigate } from "react-router-dom";
 import Watchlist from "./Watchlist";
 import { HoldingProvider } from "../../context/HoldingProvider";
 import { OrderProvider } from "../../context/OrderProvider";
 
 const Dashboard = () => {
-	let navigate = useNavigate();
 	return (
 		<OrderProvider>
 			<HoldingProvider>
@@ -35,7 +33,7 @@ const Dashboard = () => {
 							}}
 							p={5}
 						>
-							<Flex>
+							{/* <Flex>
 								<Button
 									borderColor={"dashboardPrimary"}
 									borderWidth={"2px"}
@@ -43,7 +41,7 @@ const Dashboard = () => {
 								>
 									Home
 								</Button>
-							</Flex>
+							</Flex> */}
 							<Box w={"100%"}>
 								<Box p={5}>
 									<Heading

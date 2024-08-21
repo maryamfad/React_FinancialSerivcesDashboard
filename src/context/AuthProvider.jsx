@@ -152,17 +152,13 @@ const AuthProvider = ({ children }) => {
 			);
 
 			if (!response.ok) {
-				const errorDetails = await response.json();
-				const error = new Error("Network response was not ok");
-				error.status = response.status;
-				error.details = errorDetails;
-				throw error;
+				console.log(response.message);
 			}
 			const data = await response.json();
 
 			setUserInfo(data);
 		} catch (error) {
-			throw error;
+			console.log("Error in loading current user info", error);
 		}
 	};
 	useEffect(() => {

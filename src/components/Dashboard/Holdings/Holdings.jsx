@@ -94,7 +94,7 @@ const Holdings = () => {
 						</Flex>
 					) : (
 						<Tbody>
-							{holdings.map((o, index) => (
+							{holdings?.map((o, index) => (
 								<Tr key={index}>
 									<Td
 										p={1}
