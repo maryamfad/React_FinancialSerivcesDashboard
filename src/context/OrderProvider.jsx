@@ -9,65 +9,56 @@ export const useOrder = () => {
 
 const OrderProvider = ({ children }) => {
 	const [orders, setOrders] = useState([]);
+	const [errorMessage, setErrorMessage] = useState();
+	const getAllOrders = async () => {
+		try {
+			const userId = getUserIdFromToken();
+			const response = await fetch(
+				`https://wealthpath-385e08c18cf4.herokuapp.com/trade/orders/${userId}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						authorization: `Bearer ${localStorage.getItem(
+							"token"
+						)}`,
+					},
+				}
+			);
 
-   const getAllOrders = async () => {
-        try {
-            const userId = getUserIdFromToken();
-            const response = await fetch(
-                `https://wealthpath-385e08c18cf4.herokuapp.com/trade/orders/${userId}`,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                }
-            );
-    
-            if (!response.ok) {
-                let errorDetails;
-                try {
-                    errorDetails = await response.json();
-                } catch (jsonError) {
-                    errorDetails = {
-                        error: "An error occurred, but no details were provided",
-                    };
-                }
-                const error = new Error(errorDetails.error || "Unknown error");
-                error.status = response.status;
-                error.details = errorDetails;
-                throw error;
-            }
-            const data = await response.json();
-            
-            let arr = data
-            arr.sort((a, b) =>  new Date(b.createdAt) - new Date(a.createdAt));
-            console.log("orders",arr);
-            if (data.message === "No Holding found for this user") {
+			if (!response.ok) {
+				setErrorMessage(response.message);
+			}
+			const data = await response.json();
+
+			let arr = data;
+			arr.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+			if (data.message === "No Holding found for this user") {
 				setOrders([]);
 			} else {
 				setOrders(arr);
 			}
-        } catch (error) {
-            throw error;
-        }
-    };
+		} catch (error) {
+			setErrorMessage(error);
+		}
+	};
 
-    useEffect(() => {
+	useEffect(() => {
 		getAllOrders();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-    return (
+	return (
 		<OrderContext.Provider
 			value={{
 				orders,
 				setOrders,
 				getAllOrders,
+                errorMessage
 			}}
 		>
 			{children}
 		</OrderContext.Provider>
 	);
-}
+};
 
 export { OrderContext, OrderProvider };
