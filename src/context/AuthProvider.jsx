@@ -159,8 +159,7 @@ const AuthProvider = ({ children }) => {
 				throw error;
 			}
 			const data = await response.json();
-			console.log("userInfo", data);
-			
+
 			setUserInfo(data);
 		} catch (error) {
 			throw error;

@@ -32,25 +32,11 @@ const WatchlistProvider = ({ children }) => {
 			);
 
 			if (!response.ok) {
-				let errorDetails;
-				try {
-					errorDetails = await response.json();
-				} catch (jsonError) {
-					errorDetails = {
-						error: "An error occurred, but no details were provided",
-					};
-				}
-
-				console.log(errorDetails);
-
-				const error = new Error(errorDetails.error || "Unknown error");
-				error.status = response.status;
-				error.details = errorDetails;
-				throw error;
+				setErrorMessage(response.message);
 			}
 			const data = await response.json();
 			let arr = [];
-			data.stocks.map(async (stock) => {
+			data.stocks?.map(async (stock) => {
 				const stockInfos = await getFullQuote(stock.stockSymbol);
 				arr.push({
 					stockSymbol: stock.stockSymbol,
@@ -67,7 +53,9 @@ const WatchlistProvider = ({ children }) => {
 			});
 			return data;
 		} catch (error) {
-			throw error;
+			console.log("error in getWatchlist",error);
+			
+			setErrorMessage(error);
 		}
 	};
 	const addToWatchlist = async (symbol) => {
@@ -90,31 +78,13 @@ const WatchlistProvider = ({ children }) => {
 			);
 
 			if (!response.ok) {
-				let errorDetails;
-				try {
-					errorDetails = await response.json();
-				} catch (jsonError) {
-					errorDetails = {
-						error: "An error occurred, but no details were provided",
-					};
-				}
-				console.log("response status: " + response.status);
-
 				if (response.status === 400) {
-					console.log(errorDetails);
-
 					setErrorMessage("The stock is already in the Watchlist");
 				} else {
-					const error = new Error(
-						errorDetails.error || "Unknown error"
-					);
-					error.status = response.status;
-					error.details = errorDetails;
-					throw error;
+					setErrorMessage(response.message);
 				}
 			}
 			const data = await response.json();
-			console.log("data", data);
 			const stockInfos = await getFullQuote(symbol);
 			watchlist.push({
 				stockSymbol: symbol,
@@ -130,7 +100,7 @@ const WatchlistProvider = ({ children }) => {
 			setWatchlist(watchlist);
 			return data.watchlist;
 		} catch (error) {
-			throw error;
+			setErrorMessage(error);
 		}
 	};
 
@@ -154,24 +124,14 @@ const WatchlistProvider = ({ children }) => {
 			);
 
 			if (!response.ok) {
-				let errorDetails;
-				try {
-					errorDetails = await response.json();
-				} catch (jsonError) {
-					errorDetails = {
-						error: "An error occurred, but no details were provided",
-					};
-				}
-				const error = new Error(errorDetails.error || "Unknown error");
-				error.status = response.status;
-				error.details = errorDetails;
-				throw error;
+				setErrorMessage(response.message);
 			}
 			const data = await response.json();
 			setWatchlist(data.watchlist);
 			return data.watchlist;
 		} catch (error) {
-			throw error;
+		
+			setErrorMessage(error);
 		}
 	};
 
