@@ -1,34 +1,11 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { getAccountOverview } from "../../../services/UserServices";
-import getUserIdFromToken from "../../../util/getUserIdFromToken";
+import { useContext } from "react";
+// import { getAccountOverview } from "../../../services/UserServices";
+import { AuthContext } from "../../../context/AuthProvider";
 
 const AccountOverview = () => {
-	// const [errorMessage, setErrorMessage] = useState("");
-	// const [loading, setLoading] = useState(true);
-	const [accountOverview, setAccountOverview] = useState({});
-	const userId = getUserIdFromToken();
+	const { userInfo } = useContext(AuthContext);
 
-	useEffect(() => {
-		getAccountOverviewInfo();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	const getAccountOverviewInfo = () => {
-		getAccountOverview(userId)
-			.then((data) => {
-				setAccountOverview(data);
-				// setLoading(false);
-			})
-			.catch((error) => {
-				// setLoading(false);
-				if (error.status === 400) {
-					// setErrorMessage("Username or password is incorrect");
-				} else {
-					// setErrorMessage(error.message || "An unexpected error occurred.");
-				}
-			});
-	};
 	return (
 		<Box
 			mb={5}
@@ -65,7 +42,7 @@ const AccountOverview = () => {
 						Balance
 					</Text>
 					<Text fontWeight="500" color="#343a40">
-						{Number(accountOverview.balance).toFixed(2)} $
+						{Number(userInfo.balance).toFixed(2)} $
 					</Text>
 				</Box>
 
@@ -84,7 +61,7 @@ const AccountOverview = () => {
 						Cash
 					</Text>
 					<Text fontWeight="500" color="#343a40">
-						{accountOverview.cash} $
+						{userInfo.cash} $
 					</Text>
 				</Box>
 				<Box textAlign="center" aria-label="Daily Change">
@@ -98,7 +75,7 @@ const AccountOverview = () => {
 						Daily Change
 					</Text>
 					<Text fontWeight="500" color="#343a40">
-						{accountOverview.dailyChange}
+						{userInfo.dailyChange}
 					</Text>
 				</Box>
 			</Flex>

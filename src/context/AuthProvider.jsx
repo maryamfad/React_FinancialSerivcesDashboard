@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import getUserIdFromToken from "../util/getUserIdFromToken";
 
 const AuthContext = createContext(null);
 
@@ -9,7 +10,7 @@ const AuthProvider = ({ children }) => {
 		return token && !isTokenExpired(token);
 	});
 	const [userToken, setUserToken] = useState(localStorage.getItem("token"));
-
+	const [userInfo, setUserInfo] = useState({});
 	function isTokenExpired(token) {
 		try {
 			const tokenPayload = JSON.parse(atob(token.split(".")[1]));
@@ -137,9 +138,48 @@ const AuthProvider = ({ children }) => {
 		}
 	};
 
+	const getCurrentUserInfo = async () => {
+		try {
+			const userId = getUserIdFromToken();
+			const response = await fetch(
+				`https://wealthpath-385e08c18cf4.herokuapp.com/user/${userId}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			if (!response.ok) {
+				const errorDetails = await response.json();
+				const error = new Error("Network response was not ok");
+				error.status = response.status;
+				error.details = errorDetails;
+				throw error;
+			}
+			const data = await response.json();
+			console.log("userInfo", data);
+			
+			setUserInfo(data);
+		} catch (error) {
+			throw error;
+		}
+	};
+	useEffect(() => {
+		getCurrentUserInfo();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	return (
 		<AuthContext.Provider
-			value={{ userToken, signUp, login, logout, isAuthenticated }}
+			value={{
+				userToken,
+				signUp,
+				login,
+				logout,
+				isAuthenticated,
+				userInfo,
+			}}
 		>
 			{children}
 		</AuthContext.Provider>
