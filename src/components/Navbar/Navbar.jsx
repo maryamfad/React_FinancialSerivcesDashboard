@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthProvider";
 function NavbarMenu() {
 	const { logout } = useContext(AuthContext);
 	let navigate = useNavigate();
-	
+
 	const location = useLocation();
 
 	const isActive = (path) => location.pathname === path;
@@ -41,7 +41,6 @@ function NavbarMenu() {
 							p={{ base: 1, md: 2 }}
 							m={{ base: 0, md: 2 }}
 							borderRadius={"5px"}
-							
 							_hover={{
 								backgroundColor: "rgba(255, 255, 255, 0.1)",
 								borderRadius: "5px",
@@ -86,10 +85,7 @@ function NavbarMenu() {
 							Services
 						</Box>
 					</Link>
-					<Link
-					to={"/dashboard"}
-					
-					>
+					<Link to={"/dashboard"}>
 						<Box
 							bg={
 								isActive("/dashboard")
@@ -127,9 +123,28 @@ function NavbarMenu() {
 							</Box>
 						</Link>
 					)}
-					{
-						localStorage.getItem("token") != null ? (
-							// <Link to="/login">
+					{localStorage.getItem("token") != null ? (
+						<Box
+							_hover={{
+								backgroundColor: "rgba(255, 255, 255, 0.1)",
+								borderRadius: "5px",
+							}}
+							borderRadius={"5px"}
+							p={{ base: 1, md: 2 }}
+							m={{ base: 0, md: 2 }}
+							onClick={() => {
+								// localStorage.removeItem("token");
+
+								logout().then(() => {
+									navigate("/home");
+								});
+							}}
+							cursor={"pointer"}
+						>
+							Logout
+						</Box>
+					) : (
+						<Link to="/login">
 							<Box
 								_hover={{
 									backgroundColor: "rgba(255, 255, 255, 0.1)",
@@ -138,35 +153,11 @@ function NavbarMenu() {
 								borderRadius={"5px"}
 								p={{ base: 1, md: 2 }}
 								m={{ base: 0, md: 2 }}
-								onClick={() => {
-									// localStorage.removeItem("token");
-									
-									logout().then(() => {
-									navigate("/home")
-									});
-								}}
-								cursor={"pointer"}
 							>
-								Logout
+								Login
 							</Box>
-						) : (
-							<Link to="/login">
-								<Box
-									_hover={{
-										backgroundColor:
-											"rgba(255, 255, 255, 0.1)",
-										borderRadius: "5px",
-									}}
-									borderRadius={"5px"}
-									p={{ base: 1, md: 2 }}
-									m={{ base: 0, md: 2 }}
-								>
-									Login
-								</Box>
-							</Link>
-						)
-						// </Link>
-					}
+						</Link>
+					)}
 				</Flex>
 			</Flex>
 		</Flex>

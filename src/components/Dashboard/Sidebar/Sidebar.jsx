@@ -20,7 +20,7 @@ function Sidebar() {
 			justifyContent={"space-between"}
 			backgroundColor={"dashboardPrimary"}
 		>
-			<Flex p={"5%"} flexDir={"column"} as={"nav"} mt={"10%"}>
+			<Flex flexDir={"column"} as={"nav"} mt={"50%"} p={2}>
 				<SidebarItem title={"Home"} icon={FiHome} />
 				<SidebarItem title={"Stocks"} icon={FiDollarSign} />
 				<SidebarItem title={"Reports"} icon={FiBriefcase} />
