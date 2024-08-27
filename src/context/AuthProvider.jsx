@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
 		return token && !isTokenExpired(token);
 	});
 	const [userToken, setUserToken] = useState(localStorage.getItem("token"));
-	const [userInfo, setUserInfo] = useState({});
+	const [userInfo, setUserInfo] = useState(null);
 	function isTokenExpired(token) {
 		try {
 			const tokenPayload = JSON.parse(atob(token.split(".")[1]));
@@ -156,15 +156,14 @@ const AuthProvider = ({ children }) => {
 			}
 			const data = await response.json();
 
-			setUserInfo(data);
+			return data;
 		} catch (error) {
 			console.log("Error in loading current user info", error);
+			// setUserInfo(null);
+			return null;
 		}
 	};
-	useEffect(() => {
-		getCurrentUserInfo();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -173,7 +172,7 @@ const AuthProvider = ({ children }) => {
 				login,
 				logout,
 				isAuthenticated,
-				userInfo,
+				getCurrentUserInfo,
 			}}
 		>
 			{children}

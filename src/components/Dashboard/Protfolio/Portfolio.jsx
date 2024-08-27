@@ -160,9 +160,9 @@ const Portfolio = () => {
 						fontSize={"16px"}
 						fontWeight={"400"}
 						ml={5}
-						color={userInfo.dailyChange < 0 ? "red" : "green"}
+						// color={userInfo.dailyChange < 0 ? "red" : "green"}
 					>
-						{userInfo.dailyChange}
+						{/* {userInfo.dailyChange} */}
 					</Text>
 				</Flex>
 				<Flex

@@ -1,11 +1,18 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 // import { getAccountOverview } from "../../../services/UserServices";
 import { AuthContext } from "../../../context/AuthProvider";
 
 const AccountOverview = () => {
-	const { userInfo } = useContext(AuthContext);
-
+	const [userInfo, setUserInfo] = useState(null);
+	const { getCurrentUserInfo } = useContext(AuthContext);
+	useEffect(() => {
+		getCurrentUserInfo().then((data) => {
+			// console.log("data: " + data.balance);
+			//JSON.stringify(data)
+			setUserInfo({ ...data })});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	return (
 		<Box
 			mb={5}
@@ -42,13 +49,12 @@ const AccountOverview = () => {
 						Balance
 					</Text>
 					<Text fontWeight="500" color="#343a40">
-						{Number(userInfo.balance).toFixed(2)} $
+						{Number(userInfo?.balance).toFixed(2)} $
 					</Text>
 				</Box>
 
 				<Box
 					textAlign="center"
-					// mb={{ base: 3, sm: 3, md: 0 }}
 					aria-label="Cash"
 				>
 					<Text
@@ -61,7 +67,7 @@ const AccountOverview = () => {
 						Cash
 					</Text>
 					<Text fontWeight="500" color="#343a40">
-						{userInfo.cash} $
+						{userInfo?.cash} $
 					</Text>
 				</Box>
 				<Box textAlign="center" aria-label="Daily Change">
@@ -75,7 +81,7 @@ const AccountOverview = () => {
 						Daily Change
 					</Text>
 					<Text fontWeight="500" color="#343a40">
-						{userInfo.dailyChange}
+						{userInfo?.dailyChange}
 					</Text>
 				</Box>
 			</Flex>

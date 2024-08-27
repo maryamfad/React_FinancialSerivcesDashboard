@@ -36,14 +36,14 @@ function Sidebar() {
 				<Divider display={"flex"} />
 				<Flex mt={"4"} align={"center"}>
 					<Avatar size={"sm"} />
-					<Flex flexDir={"column"} ml={"4"} display={"flex"}>
+					{/* <Flex flexDir={"column"} ml={"4"} display={"flex"}>
 						<Heading as={"h3"} size={"sm"}>
 							{userInfo.username}
 						</Heading>
 						{userInfo.role && (
 							<Text color={"grey"}>{userInfo.role}</Text>
 						)}
-					</Flex>
+					</Flex> */}
 				</Flex>
 			</Flex>
 		</Flex>
