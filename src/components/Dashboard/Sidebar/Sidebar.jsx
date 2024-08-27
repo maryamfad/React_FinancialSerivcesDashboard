@@ -1,4 +1,4 @@
-import { useContext , useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import { Flex, Divider, Avatar, Heading, Text } from "@chakra-ui/react";
 import { FiBriefcase, FiDollarSign, FiHome, FiSettings } from "react-icons/fi";
 import SidebarItem from "./SidebarItem";
@@ -6,7 +6,7 @@ import { AuthContext } from "../../../context/AuthProvider";
 
 function Sidebar() {
 	const { getCurrentUserInfo } = useContext(AuthContext);
-	const [userInfo, setUserInfo] = useState(null)
+	const [userInfo, setUserInfo] = useState(null);
 	useEffect(() => {
 		getCurrentUserInfo().then((data) => {
 			setUserInfo({ ...data });
@@ -19,7 +19,7 @@ function Sidebar() {
 			position="sticky"
 			top="0"
 			overflowY="auto"
-			width={"10%"}
+			width={{ base: "20%", md: "10%" }}
 			transition="all 0.3s ease-in-out"
 			borderTopRightRadius="10px"
 			borderBottomRightRadius="10px"
@@ -37,18 +37,30 @@ function Sidebar() {
 				p="5%"
 				flexDir={"column"}
 				w={"100%"}
-				alignItems={"flex-start"}
 				mb={4}
 			>
 				<Divider display={"flex"} />
-				<Flex mt={"4"} align={"center"}>
+				<Flex mt={"4"} justifyContent={"center"}>
 					<Avatar size={"sm"} />
-					<Flex flexDir={"column"} ml={"4"} display={"flex"}>
-						<Heading as={"h3"} size={"sm"}>
+					<Flex
+						display={{ base: "none", md: "flex" }}
+						flexDir={"column"}
+						ml={"4"}
+					>
+						<Heading
+							as={"h3"}
+							size={"sm"}
+							display={{ base: "none", md: "flex" }}
+						>
 							{userInfo?.username}
 						</Heading>
 						{userInfo?.role && (
-							<Text color={"grey"}>{userInfo?.role}</Text>
+							<Text
+								color={"grey"}
+								display={{ base: "none", md: "flex" }}
+							>
+								{userInfo?.role}
+							</Text>
 						)}
 					</Flex>
 				</Flex>

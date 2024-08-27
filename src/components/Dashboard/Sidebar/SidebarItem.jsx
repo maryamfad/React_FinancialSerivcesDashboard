@@ -23,7 +23,11 @@ const SidebarItem = ({ title, icon, active }) => {
 		>
 			<Menu placement="right">
 				<Link
-					to={title === "Home" ?"/home":`/dashboard/${title.toLowerCase()}`}
+					to={
+						title === "Home"
+							? "/home"
+							: `/dashboard/${title.toLowerCase()}`
+					}
 					backgroundColor={active && "#AEC8CA"}
 					borderRadius={8}
 					_hover={{ textDecor: title, backgroundColor: "#AEC8CA" }}
@@ -43,6 +47,7 @@ const SidebarItem = ({ title, icon, active }) => {
 								ml={2}
 							/>
 							<Flex
+								display={{ base: "none", md: "flex" }}
 								ml={2}
 								color={active ? "#82AAAD" : "white"}
 								pr={title === "Home" ? 4 : 0}
