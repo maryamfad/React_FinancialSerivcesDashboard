@@ -1,11 +1,18 @@
-import { useContext } from "react";
+import { useContext , useEffect, useState} from "react";
 import { Flex, Divider, Avatar, Heading, Text } from "@chakra-ui/react";
 import { FiBriefcase, FiDollarSign, FiHome, FiSettings } from "react-icons/fi";
 import SidebarItem from "./SidebarItem";
 import { AuthContext } from "../../../context/AuthProvider";
 
 function Sidebar() {
-	const { userInfo } = useContext(AuthContext);
+	const { getCurrentUserInfo } = useContext(AuthContext);
+	const [userInfo, setUserInfo] = useState(null)
+	useEffect(() => {
+		getCurrentUserInfo().then((data) => {
+			setUserInfo({ ...data });
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	return (
 		<Flex
 			height="100vh"
@@ -36,14 +43,14 @@ function Sidebar() {
 				<Divider display={"flex"} />
 				<Flex mt={"4"} align={"center"}>
 					<Avatar size={"sm"} />
-					{/* <Flex flexDir={"column"} ml={"4"} display={"flex"}>
+					<Flex flexDir={"column"} ml={"4"} display={"flex"}>
 						<Heading as={"h3"} size={"sm"}>
-							{userInfo.username}
+							{userInfo?.username}
 						</Heading>
-						{userInfo.role && (
-							<Text color={"grey"}>{userInfo.role}</Text>
+						{userInfo?.role && (
+							<Text color={"grey"}>{userInfo?.role}</Text>
 						)}
-					</Flex> */}
+					</Flex>
 				</Flex>
 			</Flex>
 		</Flex>
