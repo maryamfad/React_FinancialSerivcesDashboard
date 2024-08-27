@@ -8,9 +8,8 @@ const AccountOverview = () => {
 	const { getCurrentUserInfo } = useContext(AuthContext);
 	useEffect(() => {
 		getCurrentUserInfo().then((data) => {
-			// console.log("data: " + data.balance);
-			//JSON.stringify(data)
-			setUserInfo({ ...data })});
+			setUserInfo({ ...data });
+		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
@@ -53,10 +52,7 @@ const AccountOverview = () => {
 					</Text>
 				</Box>
 
-				<Box
-					textAlign="center"
-					aria-label="Cash"
-				>
+				<Box textAlign="center" aria-label="Cash">
 					<Text
 						fontWeight="600"
 						fontSize="large"

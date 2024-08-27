@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
 		return token && !isTokenExpired(token);
 	});
 	const [userToken, setUserToken] = useState(localStorage.getItem("token"));
-	const [userInfo, setUserInfo] = useState(null);
+
 	function isTokenExpired(token) {
 		try {
 			const tokenPayload = JSON.parse(atob(token.split(".")[1]));

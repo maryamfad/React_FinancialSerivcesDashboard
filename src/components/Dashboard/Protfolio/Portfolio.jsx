@@ -5,7 +5,8 @@ import { Box, Flex, Text, Divider } from "@chakra-ui/react";
 import { AuthContext } from "../../../context/AuthProvider";
 
 const Portfolio = () => {
-	const { userInfo } = useContext(AuthContext);
+	const { getCurrentUserInfo } = useContext(AuthContext);
+	const [userInfo, setUserInfo] = useState(null)
 	const [portfolioData, setPortfolioData] = useState([]);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [timeFrame, setTimeFrame] = useState("1D");
@@ -47,6 +48,12 @@ const Portfolio = () => {
 	};
 	useEffect(() => {
 		getUserPortfolio();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+	useEffect(() => {
+		getCurrentUserInfo().then((data) => {
+			setUserInfo({ ...data });
+		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
@@ -160,9 +167,9 @@ const Portfolio = () => {
 						fontSize={"16px"}
 						fontWeight={"400"}
 						ml={5}
-						// color={userInfo.dailyChange < 0 ? "red" : "green"}
+						color={userInfo?.dailyChange < 0 ? "red" : "green"}
 					>
-						{/* {userInfo.dailyChange} */}
+						{userInfo?.dailyChange}
 					</Text>
 				</Flex>
 				<Flex
