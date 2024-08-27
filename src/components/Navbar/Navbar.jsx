@@ -86,7 +86,7 @@ function NavbarMenu() {
 						</Box>
 					</Link>
 					<Link to={"/dashboard"}>
-						<Box
+						<Flex
 							bg={
 								isActive("/dashboard")
 									? "rgba(255, 255, 255, 0.1)"
@@ -94,17 +94,20 @@ function NavbarMenu() {
 							}
 							borderRadius={"5px"}
 							borderWidth={"2px"}
+							width={"100%"}
+							alignItems={"center"}
+							justifyContent={"center"}
 							borderColor={"white"}
 							_hover={{
 								backgroundColor: "rgba(255, 255, 255, 0.1)",
 								borderRadius: "5px",
 							}}
 							p={{ base: 1, md: 2 }}
-							m={{ base: 0, md: 2 }}
+							m={{ base: 1, md: 2 }}
 							ml={"2%"}
 						>
 							Dashboard
-						</Box>
+						</Flex>
 					</Link>
 				</Flex>
 				<Flex>
