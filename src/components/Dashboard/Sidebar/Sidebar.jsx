@@ -19,7 +19,7 @@ function Sidebar() {
 			position="sticky"
 			top="0"
 			overflowY="auto"
-			width={{ base: "20%", md: "10%" }}
+			width={{ base: "auto", md: "10%" }}
 			transition="all 0.3s ease-in-out"
 			borderTopRightRadius="10px"
 			borderBottomRightRadius="10px"

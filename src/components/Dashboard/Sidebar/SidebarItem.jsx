@@ -7,9 +7,7 @@ const SidebarItem = ({ title, icon, active }) => {
 	return (
 		<Flex
 			mt={"10%"}
-			p={1}
 			flexDir={"column"}
-			w={"100%"}
 			bg={
 				isActive(`dashboard/${title.toLowerCase()}`)
 					? "rgba(255, 255, 255, 0.1)"
@@ -18,8 +16,10 @@ const SidebarItem = ({ title, icon, active }) => {
 			_hover={{
 				backgroundColor: "rgba(255, 255, 255, 0.1)",
 			}}
-			borderWidth={title === "Home" ? "2px" : 0}
-			borderRadius={"10px"}
+			borderWidth={
+				title === "Home" ? { base: "0px", md: "1px", lg: "2px" } : "0px"
+			}
+			borderRadius={{ base: 0, md: "3px", lg: "10px" }}
 		>
 			<Menu placement="right">
 				<Link
@@ -31,29 +31,25 @@ const SidebarItem = ({ title, icon, active }) => {
 					backgroundColor={active && "#AEC8CA"}
 					borderRadius={8}
 					_hover={{ textDecor: title, backgroundColor: "#AEC8CA" }}
-					w={"100%"}
 				>
 					<MenuButton
 						w={"100%"}
 						display="flex"
 						flexDir={"column"}
 						alignItems={"flex-start"}
+						p={1}
 					>
 						<Flex alignItems={"center"}>
 							<Icon
 								as={icon}
-								fontSize={"xl"}
 								color={active ? "#82AAAD" : "white"}
-								ml={2}
+								ml={{ base: 0, md: 0, lg: 2 }}
 							/>
 							<Flex
 								display={{ base: "none", md: "flex" }}
-								ml={2}
+								ml={{ base: 0, md: 1, lg: 2 }}
 								color={active ? "#82AAAD" : "white"}
-								pr={title === "Home" ? 4 : 0}
-								pt={title === "Home" ? 1 : 0}
-								pb={title === "Home" ? 1 : 0}
-								fontSize={title === "Home" ? "18px" : "16px"}
+								fontSize={title === "Home" ? "1.1vw" : "1vw"}
 							>
 								{title}
 							</Flex>
