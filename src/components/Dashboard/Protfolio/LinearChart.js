@@ -30,13 +30,12 @@ const LinearChart = ({ data }) => {
 	function drawChart(width) {
 		if (data && d3Container.current && data.length > 0 && width > 0) {
 			d3.select(d3Container.current).selectAll("*").remove();
-
+			data.sort((a, b) => a.date - b.date);
 			const formattedData = data.map((d) => ({
 				date: new Date(d.date),
 				value: d.value,
 			}));
 
-			data.sort((a, b) => a.date - b.date);
 			const margin = { top: 10, right: 20, bottom: 30, left: 40 },
 				height = 280 - margin.top - margin.bottom;
 

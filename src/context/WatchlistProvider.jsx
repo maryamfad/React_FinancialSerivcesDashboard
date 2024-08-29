@@ -51,7 +51,7 @@ const WatchlistProvider = ({ children }) => {
 				});
 				setWatchlist(arr);
 			});
-			return data;
+			return watchlist;
 		} catch (error) {
 			console.log("error in getWatchlist",error);
 			

@@ -31,7 +31,7 @@ const Orders = () => {
 	const addStock = (symbol) => {
 		addToWatchlist(symbol)
 			.then((data) => {
-				if (data.message === "No Order found for this user") {
+				if (data.message === "No watchlist found for this user") {
 					setWatchlist([]);
 				} else {
 					setWatchlist(data.stocks);

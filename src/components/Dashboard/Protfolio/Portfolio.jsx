@@ -25,14 +25,21 @@ const Portfolio = () => {
 	const getUserPortfolio = () => {
 		getPortfolio()
 			.then((data) => {
+				
+				
 				if (data.message === "No portfolio found for this user") {
 					setPortfolioData([]);
 				} else {
-					data.sort(
-						(a, b) =>
-							new Date(b.executedAt) - new Date(a.executedAt)
-					);
-					setPortfolioData(data[0].performance);
+					// data.sort(
+					// 	(a, b) =>
+					// 		new Date(b.executedAt) - new Date(a.executedAt)
+					// );
+					const newArray = data[0].performance.map(item => ({
+						date: item.date,
+						value: item.value
+					  }));
+					  console.log(newArray);
+					setPortfolioData(newArray);
 				}
 			})
 			.catch((error) => {
@@ -159,7 +166,7 @@ const Portfolio = () => {
 				<Flex ml={5} mt={5}>
 					{portfolioData.length && (
 						<Text mb={0} fontSize={"18px"} fontWeight={"500"}>
-							$ {portfolioData[portfolioData.length - 1]}
+							$ {Number((portfolioData[portfolioData.length - 1]).value).toFixed(2)}
 						</Text>
 					)}
 					<Text
