@@ -32,7 +32,6 @@ const Watchlist = () => {
 		errorMessage,
 		setErrorMessage,
 	} = useContext(WatchlistContext);
-	// const [errorMessage, setErrorMessage] = useState("");
 
 	const removeStock = (symbol) => {
 		removeFromWatchlist(symbol)
@@ -94,7 +93,6 @@ const Watchlist = () => {
 			</Flex>
 			<Divider p={0} m={0} />
 			<Box
-				// pl={4}
 				bg="white"
 				w="100%"
 				h="240px"
@@ -107,7 +105,6 @@ const Watchlist = () => {
 				borderColor={"#F1D7D7"}
 			>
 				<Table
-					// mt={5}
 					sx={{
 						"tbody tr:nth-of-type(odd)": {
 							bg: "dashboardAccentColor",

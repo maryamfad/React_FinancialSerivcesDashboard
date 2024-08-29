@@ -6,7 +6,7 @@ import { AuthContext } from "../../../context/AuthProvider";
 
 const Portfolio = () => {
 	const { getCurrentUserInfo } = useContext(AuthContext);
-	const [userInfo, setUserInfo] = useState(null)
+	const [userInfo, setUserInfo] = useState(null);
 	const [portfolioData, setPortfolioData] = useState([]);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [timeFrame, setTimeFrame] = useState("1D");
@@ -25,20 +25,14 @@ const Portfolio = () => {
 	const getUserPortfolio = () => {
 		getPortfolio()
 			.then((data) => {
-				
-				
 				if (data.message === "No portfolio found for this user") {
 					setPortfolioData([]);
 				} else {
-					// data.sort(
-					// 	(a, b) =>
-					// 		new Date(b.executedAt) - new Date(a.executedAt)
-					// );
-					const newArray = data[0].performance.map(item => ({
+					const newArray = data[0].performance.map((item) => ({
 						date: item.date,
-						value: item.value
-					  }));
-					  console.log(newArray);
+						value: item.value,
+					}));
+
 					setPortfolioData(newArray);
 				}
 			})
@@ -166,7 +160,10 @@ const Portfolio = () => {
 				<Flex ml={5} mt={5}>
 					{portfolioData.length && (
 						<Text mb={0} fontSize={"18px"} fontWeight={"500"}>
-							$ {Number((portfolioData[portfolioData.length - 1]).value).toFixed(2)}
+							${" "}
+							{Number(
+								portfolioData[portfolioData.length - 1].value
+							).toFixed(2)}
 						</Text>
 					)}
 					<Text

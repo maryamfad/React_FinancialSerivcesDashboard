@@ -12,9 +12,6 @@ const WatchlistProvider = ({ children }) => {
 	const [watchlist, setWatchlist] = useState([]);
 	const [errorMessage, setErrorMessage] = useState();
 
-	useEffect(() => {
-		getWatchlist();
-	}, []);
 	const getWatchlist = async () => {
 		try {
 			const userId = getUserIdFromToken();
@@ -35,6 +32,8 @@ const WatchlistProvider = ({ children }) => {
 				setErrorMessage(response.message);
 			}
 			const data = await response.json();
+			console.log("data from getWatchlist", data);
+
 			let arr = [];
 			data.stocks?.map(async (stock) => {
 				const stockInfos = await getFullQuote(stock.stockSymbol);
@@ -51,13 +50,17 @@ const WatchlistProvider = ({ children }) => {
 				});
 				setWatchlist(arr);
 			});
-			return watchlist;
+			return data.stocks;
 		} catch (error) {
-			console.log("error in getWatchlist",error);
-			
+			console.log("error in getWatchlist", error);
+
 			setErrorMessage(error);
 		}
 	};
+
+	useEffect(() => {
+		getWatchlist();
+	}, []);
 	const addToWatchlist = async (symbol) => {
 		try {
 			const userId = getUserIdFromToken();
@@ -83,22 +86,23 @@ const WatchlistProvider = ({ children }) => {
 				} else {
 					setErrorMessage(response.message);
 				}
+			} else {
+				const data = await response.json();
+				const stockInfos = await getFullQuote(symbol);
+				watchlist.push({
+					stockSymbol: symbol,
+					price: stockInfos[0]?.price,
+					marketCap: stockInfos[0]?.marketCap,
+					change: Number(stockInfos[0]?.change).toFixed(2),
+					changesPercentage: Number(
+						stockInfos[0]?.changesPercentage
+					).toFixed(2),
+					exchange: stockInfos[0]?.exchange,
+					name: stockInfos[0]?.name,
+				});
+				setWatchlist(watchlist);
+				return data.watchlist;
 			}
-			const data = await response.json();
-			const stockInfos = await getFullQuote(symbol);
-			watchlist.push({
-				stockSymbol: symbol,
-				price: stockInfos[0]?.price,
-				marketCap: stockInfos[0]?.marketCap,
-				change: Number(stockInfos[0]?.change).toFixed(2),
-				changesPercentage: Number(
-					stockInfos[0]?.changesPercentage
-				).toFixed(2),
-				exchange: stockInfos[0]?.exchange,
-				name: stockInfos[0]?.name,
-			});
-			setWatchlist(watchlist);
-			return data.watchlist;
 		} catch (error) {
 			setErrorMessage(error);
 		}
@@ -130,7 +134,6 @@ const WatchlistProvider = ({ children }) => {
 			setWatchlist(data.watchlist);
 			return data.watchlist;
 		} catch (error) {
-		
 			setErrorMessage(error);
 		}
 	};

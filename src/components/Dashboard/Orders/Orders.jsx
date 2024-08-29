@@ -31,6 +31,8 @@ const Orders = () => {
 	const addStock = (symbol) => {
 		addToWatchlist(symbol)
 			.then((data) => {
+				console.log("data after adding stocks", data.stocks);
+
 				if (data.message === "No watchlist found for this user") {
 					setWatchlist([]);
 				} else {
@@ -44,7 +46,9 @@ const Orders = () => {
 					setErrorMessage(
 						error.message || "An unexpected error occurred."
 					);
-					console.log(errorMessage);
+					if (errorMessage) {
+						console.log(errorMessage);
+					}
 				}
 			});
 	};
