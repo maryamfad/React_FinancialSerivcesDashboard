@@ -14,7 +14,7 @@ const OrderProvider = ({ children }) => {
 		try {
 			const userId = getUserIdFromToken();
 			const response = await fetch(
-				`https://wealthpath-385e08c18cf4.herokuapp.com/trade/orders/${userId}`,
+				`https://wealthpath-0fdb123d5bf7.herokuapp.com/trade/orders/${userId}`,
 				{
 					method: "GET",
 					headers: {

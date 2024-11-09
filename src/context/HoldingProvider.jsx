@@ -15,7 +15,7 @@ const HoldingProvider = ({ children }) => {
 		try {
 			const userId = getUserIdFromToken();
 			const response = await fetch(
-				`https://wealthpath-385e08c18cf4.herokuapp.com/portfolio/holdings/${userId}`,
+				`https://wealthpath-0fdb123d5bf7.herokuapp.com/portfolio/holdings/${userId}`,
 				{
 					method: "GET",
 					headers: {

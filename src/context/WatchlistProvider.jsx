@@ -16,7 +16,7 @@ const WatchlistProvider = ({ children }) => {
 		try {
 			const userId = getUserIdFromToken();
 			const response = await fetch(
-				`https://wealthpath-385e08c18cf4.herokuapp.com/watchlist/${userId}`,
+				`https://wealthpath-0fdb123d5bf7.herokuapp.com/watchlist/${userId}`,
 				{
 					method: "GET",
 					headers: {
@@ -65,7 +65,7 @@ const WatchlistProvider = ({ children }) => {
 		try {
 			const userId = getUserIdFromToken();
 			const response = await fetch(
-				`https://wealthpath-385e08c18cf4.herokuapp.com/watchlist/add/${userId}`,
+				`https://wealthpath-0fdb123d5bf7.herokuapp.com/watchlist/add/${userId}`,
 				{
 					method: "POST",
 					headers: {
@@ -112,7 +112,7 @@ const WatchlistProvider = ({ children }) => {
 		try {
 			const userId = getUserIdFromToken();
 			const response = await fetch(
-				`https://wealthpath-385e08c18cf4.herokuapp.com/watchlist/remove/${userId}`,
+				`https://wealthpath-0fdb123d5bf7.herokuapp.com/watchlist/remove/${userId}`,
 				{
 					method: "POST",
 					headers: {
