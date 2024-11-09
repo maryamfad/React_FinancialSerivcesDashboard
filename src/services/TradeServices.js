@@ -9,7 +9,7 @@ export const buyStock = async (
 	try {
 		const userId = getUserIdFromToken();
 		const response = await fetch(
-			`https://wealthpath-385e08c18cf4.herokuapp.com/trade/buy`,
+			`${process.env.REACT_APP_BACKEND_URL}/trade/buy`,
 			{
 				method: "POST",
 				headers: {
@@ -51,7 +51,7 @@ export const sellStock = async (
 	try {
 		const userId = getUserIdFromToken();
 		const response = await fetch(
-			`https://wealthpath-385e08c18cf4.herokuapp.com/trade/sell`,
+			`${process.env.REACT_APP_BACKEND_URL}/trade/sell`,
 			{
 				method: "POST",
 				headers: {
@@ -88,7 +88,7 @@ export const getPortfolio = async () => {
 	try {
 		const userId = getUserIdFromToken();
 		const response = await fetch(
-			`https://wealthpath-385e08c18cf4.herokuapp.com/portfolio/${userId}`,
+			`${process.env.REACT_APP_BACKEND_URL}/portfolio/${userId}`,
 			{
 				method: "GET",
 				headers: {
