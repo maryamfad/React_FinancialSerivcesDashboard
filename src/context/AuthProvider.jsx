@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
 	const signUp = async (username, password) => {
 		try {
 			const response = await fetch(
-				"https://wealthpath-385e08c18cf4.herokuapp.com/auth/signup",
+				"https://wealthpath-0fdb123d5bf7.herokuapp.com/auth/signup",
 				{
 					method: "POST",
 					headers: {
@@ -80,7 +80,7 @@ const AuthProvider = ({ children }) => {
 	const login = async (username, password) => {
 		try {
 			const response = await fetch(
-				"https://wealthpath-385e08c18cf4.herokuapp.com/auth/login",
+				"https://wealthpath-0fdb123d5bf7.herokuapp.com/auth/login",
 				{
 					method: "POST",
 					headers: {
@@ -115,7 +115,7 @@ const AuthProvider = ({ children }) => {
 
 		try {
 			const response = await fetch(
-				"https://wealthpath-385e08c18cf4.herokuapp.com/auth/logout",
+				"https://wealthpath-0fdb123d5bf7.herokuapp.com/auth/logout",
 				{
 					method: "POST",
 					headers: {
@@ -142,7 +142,7 @@ const AuthProvider = ({ children }) => {
 		try {
 			const userId = getUserIdFromToken();
 			const response = await fetch(
-				`https://wealthpath-385e08c18cf4.herokuapp.com/user/${userId}`,
+				`https://wealthpath-0fdb123d5bf7.herokuapp.com/user/${userId}`,
 				{
 					method: "GET",
 					headers: {
