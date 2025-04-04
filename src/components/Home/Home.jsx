@@ -171,7 +171,7 @@ const Home = () => {
 						height={"50vh"}
 						m={1}
 					>
-						<StockNews symbol={symbol} />
+						<StockNews symbol={symbol} stockLogo={stockLogo}/>
 					</Box>
 					<Box
 						// borderColor={"primary"}

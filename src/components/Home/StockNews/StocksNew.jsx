@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import getStocksNews from "../../../api/getStocksNews";
 import "./StockNews.css";
 import { Box, Divider, Flex, Image, Text } from "@chakra-ui/react";
-const StockNews = ({ symbol }) => {
+const StockNews = ({ symbol, stockLogo }) => {
 	const [stocksNews, setStocksNews] = useState([]);
 
 	const loadStocksList = async (stockSymbol) => {
@@ -24,16 +24,41 @@ const StockNews = ({ symbol }) => {
 			borderColor={"primary"}
 			borderWidth={"2px"}
 		>
-			<Text
-				m={0}
-				pl={3}
-				pt={2}
-				pb={1}
-				fontWeight={"bold"}
-				fontSize={"18px"}
-			>
-				Stock News
-			</Text>
+			<Flex>
+				<Text
+					m={0}
+					pl={3}
+					pt={2}
+					pb={1}
+					fontWeight={"bold"}
+					fontSize={"18px"}
+				>
+					Stock News
+				</Text>
+				<Text
+					fontSize={"md"}
+					fontWeight={"bold"}
+					m={0}
+					pl={"15%"}
+					pt={2}
+					pb={1}
+				>
+					{symbol}
+				</Text>
+				<Image
+					backgroundColor={"accentColor"}
+					ml={"15%"}
+					pt={2}
+					pb={1}
+					src={stockLogo}
+					alt="logo"
+					width={"5%"}
+					height={"auto"}
+					objectFit={"cover"}
+					borderRadius={"5px"}
+					padding={1}
+				/>
+			</Flex>
 			<Divider p={0} m={0} />
 
 			<Flex
