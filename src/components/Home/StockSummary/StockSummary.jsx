@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import getFullQuote from "../../../api/getFullQuote";
-import { Box, Flex, Text, Icon, Divider } from "@chakra-ui/react";
+import { Box, Flex, Text, Icon, Divider, Image } from "@chakra-ui/react";
 import {
 	FaDollarSign,
 	FaChartLine,
@@ -10,7 +10,7 @@ import {
 	FaChartBar,
 } from "react-icons/fa";
 
-const StockSummary = ({ symbol }) => {
+const StockSummary = ({ symbol, stockLogo }) => {
 	const [stockSummary, setStockSummary] = useState([]);
 
 	const loadStockSummaryData = async (stockSymbol) => {
@@ -31,23 +31,46 @@ const StockSummary = ({ symbol }) => {
 			borderColor={"primary"}
 			borderWidth={"2px"}
 		>
-			<Text
-				m={0}
-				pl={3}
-				pt={2}
-				pb={1}
-				fontWeight={"bold"}
-				fontSize={"18px"}
-			>
-				Stock Summary
-			</Text>
+			<Flex>
+				<Text
+					m={0}
+					pl={3}
+					pt={2}
+					pb={1}
+					fontWeight={"bold"}
+					fontSize={"18px"}
+				>
+					Stock News
+				</Text>
+				<Text
+					fontSize={"md"}
+					fontWeight={"bold"}
+					m={0}
+					pl={"15%"}
+					pt={2}
+					pb={1}
+				>
+					{symbol}
+				</Text>
+				<Image
+					backgroundColor={"accentColor"}
+					ml={"5%"}
+					pt={2}
+					pb={1}
+					src={stockLogo}
+					alt="logo"
+					width={"10%"}
+					height={"auto"}
+					objectFit={"cover"}
+					borderRadius={"5px"}
+					padding={1}
+				/>
+			</Flex>
 			<Divider p={0} m={0} />
 			<Flex
 				flexDir="column"
 				bg="white"
 				borderRadius="10px"
-				// mt={4}
-				// p={4}
 				boxShadow={
 					"rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
 				}
@@ -120,8 +143,6 @@ const StockSummary = ({ symbol }) => {
 						borderBottom="1px solid #dee2e6"
 						pr={3}
 						pl={3}
-						// pt={1}
-						// pb={0}
 						_last={{ borderBottom: "none" }}
 						bg={index % 2 === 0 ? "accentColor" : "white"}
 					>

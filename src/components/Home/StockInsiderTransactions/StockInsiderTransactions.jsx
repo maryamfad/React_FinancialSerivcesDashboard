@@ -49,7 +49,7 @@ const StockInsiderTransactions = ({ symbol, stockLogo }) => {
 					fontWeight={"bold"}
 					fontSize={"18px"}
 				>
-					Stock Isider Transactions
+					Stock Insider Transactions
 				</Text>
 				<Text
 					fontSize={"md"}
