@@ -31,7 +31,9 @@ const Watchlist = () => {
 		removeFromWatchlist,
 		errorMessage,
 		setErrorMessage,
+		isLoading,
 	} = useContext(WatchlistContext);
+console.log('watchlist222', watchlist);
 
 	const removeStock = (symbol) => {
 		removeFromWatchlist(symbol)
@@ -62,6 +64,11 @@ const Watchlist = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [errorMessage]);
+console.log("isLoading",isLoading);
+
+	if (isLoading) {
+		return <div>Loading...</div>;
+	  }
 	return (
 		<Box
 			mb={5}

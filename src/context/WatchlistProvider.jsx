@@ -11,6 +11,7 @@ export const useWatchlist = () => {
 const WatchlistProvider = ({ children }) => {
 	const [watchlist, setWatchlist] = useState([]);
 	const [errorMessage, setErrorMessage] = useState();
+	const [isLoading, setIsLoading] = useState(true);
 
 	const getWatchlist = async () => {
 		try {
@@ -32,25 +33,26 @@ const WatchlistProvider = ({ children }) => {
 				setErrorMessage(response.message);
 			}
 			const data = await response.json();
-			console.log("data from getWatchlist", data);
+			if (!data?.stocks) return [];
 
-			let arr = [];
-			data.stocks?.map(async (stock) => {
-				const stockInfos = await getFullQuote(stock.stockSymbol);
-				arr.push({
-					stockSymbol: stock.stockSymbol,
-					price: stockInfos[0]?.price,
-					marketCap: stockInfos[0]?.marketCap,
-					change: Number(stockInfos[0]?.change).toFixed(2),
-					changesPercentage: Number(
-						stockInfos[0]?.changesPercentage
-					).toFixed(2),
-					exchange: stockInfos[0]?.exchange,
-					name: stockInfos[0]?.name,
-				});
-				setWatchlist(arr);
-			});
-			return data.stocks;
+			const arr = await Promise.all(
+				data.stocks.map(async (stock) => {
+					const stockInfos = await getFullQuote(stock.stockSymbol);
+					return {
+						stockSymbol: stock.stockSymbol,
+						price: stockInfos[0]?.price,
+						marketCap: stockInfos[0]?.marketCap,
+						change: Number(stockInfos[0]?.change).toFixed(2),
+						changesPercentage: Number(
+							stockInfos[0]?.changesPercentage
+						).toFixed(2),
+						exchange: stockInfos[0]?.exchange,
+						name: stockInfos[0]?.name,
+					};
+				})
+			);
+
+			return arr;
 		} catch (error) {
 			console.log("error in getWatchlist", error);
 
@@ -59,7 +61,12 @@ const WatchlistProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		getWatchlist();
+		getWatchlist().then((watchlist) => {
+			console.log("watchlistttt", watchlist);
+
+			setWatchlist(watchlist);
+			setIsLoading(false);
+		});
 	}, []);
 	const addToWatchlist = async (symbol) => {
 		try {
@@ -147,6 +154,7 @@ const WatchlistProvider = ({ children }) => {
 				removeFromWatchlist,
 				errorMessage,
 				setErrorMessage,
+				isLoading,
 			}}
 		>
 			{children}
