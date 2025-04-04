@@ -68,8 +68,11 @@ After setting up the application, you can access it at `http://localhost:3000`.
 
 
 ## Screenshots
+Home Page:
 <img width="945" alt="1" src="https://github.com/user-attachments/assets/ab0ac861-bf9d-47b3-a43c-53a8414d81b2">
 
+Dashboard:
+![wealthpath netlify app_dashboard](https://github.com/user-attachments/assets/62fb9553-d3ea-4bfa-b266-50ac48fba2c3)
 
 ## Contact
 
