@@ -77,7 +77,7 @@ const StockInsiderTransactions = ({ symbol, stockLogo }) => {
 			</Flex>
 			<Divider p={0} m={0} />
 			<Flex height={"300px"} overflow={"auto"} mb={4}>
-				<Table>
+				<Table sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}>
 					<Thead position="sticky" top={0} zIndex={1}>
 						<Tr>
 							<Th p={1} pb={2} pl={2}>
