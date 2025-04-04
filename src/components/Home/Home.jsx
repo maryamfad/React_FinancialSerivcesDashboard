@@ -9,6 +9,7 @@ import MarketLosers from "./MarketLosers/MarketLosers.jsx";
 import StockNews from "./StockNews/StocksNew.jsx";
 import { Box, Flex, Text, Divider } from "@chakra-ui/react";
 import NavbarMenu from "../Navbar/Navbar.jsx";
+import StockInsiderTransactions from "./StockInsiderTransactions/StockInsiderTransactions.jsx";
 
 const Home = () => {
 	const [symbol, setSymbol] = useState("AAPL");
@@ -173,13 +174,15 @@ const Home = () => {
 						<StockNews symbol={symbol} />
 					</Box>
 					<Box
-						borderColor={"primary"}
-						borderWidth={"2px"}
+						// borderColor={"primary"}
+						// borderWidth={"2px"}
 						width={{ base: "100%", md: "50%" }}
-						p={4}
+						// p={4}
 						m={1}
 						borderRadius={"10px"}
-					></Box>
+					>
+						<StockInsiderTransactions symbol={symbol} stockLogo={stockLogo}/>
+					</Box>
 				</Flex>
 			</Box>
 		</Box>

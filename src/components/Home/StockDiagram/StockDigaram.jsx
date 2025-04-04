@@ -44,11 +44,11 @@ function StockDiagram({ symbol, stockLogo }) {
 				}))
 			);
 
-			// console.log("data",data);
+	
 
 			setIsDataReady(true);
 		} catch (error) {
-			// setError(error.message);
+
 			if (error.name === "FetchError") {
 				console.error(
 					"Network error or timeout occurred:",
@@ -58,7 +58,7 @@ function StockDiagram({ symbol, stockLogo }) {
 				console.error("An error occurred:", error.message);
 			}
 		} finally {
-			// setLoading(false);
+	
 		}
 	};
 
