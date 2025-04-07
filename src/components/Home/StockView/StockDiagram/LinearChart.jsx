@@ -1,7 +1,7 @@
 // src/LinearChart.js
 import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
-import "../Home.css";
+import "../../Home.css";
 const LinearChart = ({ data }) => {
   const d3Container = useRef(null);
   const tooltip = useRef(null);

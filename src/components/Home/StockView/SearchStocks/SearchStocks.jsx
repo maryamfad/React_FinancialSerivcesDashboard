@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 // import getStocksList from "../../../api/getStocksList";
-import { stockNames } from "../../Home/stockNames";
+import { stockNames } from "../../stockNames";
 
 import { Box, Flex, Input, Text } from "@chakra-ui/react";
 const SearchStocks = ({ setSymbol }) => {

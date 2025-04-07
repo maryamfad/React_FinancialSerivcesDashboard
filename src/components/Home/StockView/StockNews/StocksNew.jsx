@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import getStocksNews from "../../../api/getStocksNews";
+import getStocksNews from "../../../../api/getStocksNews";
 import "./StockNews.css";
 import { Box, Divider, Flex, Image, Text } from "@chakra-ui/react";
 const StockNews = ({ symbol, stockLogo }) => {

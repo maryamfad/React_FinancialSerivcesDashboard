@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import getFullQuote from "../../../api/getFullQuote";
+import getFullQuote from "../../../../api/getFullQuote";
 import { Box, Flex, Text, Icon, Divider, Image } from "@chakra-ui/react";
 import {
 	FaDollarSign,

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import "./Scroller.css";
 // import getLatestQuoteForStock from "../../../api/getLatestQuoteForAStock";
 // import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
-import getStockLogo from "../../../api/getStockLogo";
-import { scrollerData } from "../../Home/scrollerData";
+import getStockLogo from "../../../../api/getStockLogo";
+import { scrollerData } from "../../scrollerData";
 // import getMarketMostActiveStocks from "../../../api/getMarketMostActiveStocks";
 import { AiOutlineRise, AiOutlineFall } from "react-icons/ai";
 import { Box, Flex } from "@chakra-ui/react";
@@ -95,6 +95,7 @@ const Scroller = ({ setSymbol }) => {
 							ml={3}
 							key={index}
 							borderRadius={"10px"}
+							cursor="pointer"
 						>
 							<div
 								className="d-flex justify-content-between"

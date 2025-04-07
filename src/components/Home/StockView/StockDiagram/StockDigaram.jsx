@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import LinearChart from "./LinearChart";
 // import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
 // import getStockLogo from "../../../api/getStockLogo";
-import getTodayHistoricalChart from "../../../api/getTodayHistoricalChart";
-import getEndOfDayHistorical from "../../../api/getEndOfDayHistorical";
+import getTodayHistoricalChart from "../../../../api/getTodayHistoricalChart";
+import getEndOfDayHistorical from "../../../../api/getEndOfDayHistorical";
 import { Flex, Text, Box, Image } from "@chakra-ui/react";
 function StockDiagram({ symbol, stockLogo }) {
 	// const [symbol, setSymbol] = useState("AMZN");
@@ -168,9 +168,6 @@ function StockDiagram({ symbol, stockLogo }) {
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [timeFrame, symbol]);
-console.log('data', data);
-console.log('isDataReady', isDataReady);
-
 
 	return (
 		<Flex

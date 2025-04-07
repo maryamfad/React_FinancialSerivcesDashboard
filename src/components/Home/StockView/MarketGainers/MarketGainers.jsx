@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 // import getMostSearchedStocks from "../../../api/getFullQuote";
-import "./MarketLosers.css";
-// import getMarketLosers from "../../../api/getMarketLosers";
-import { marketLosersData } from "../../Home/marketLosersData";
-// import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
-import { AiOutlineFall } from "react-icons/ai";
-// import {GoFoldUp, GoFoldDown } from "react-icons/go";
+import "./MarketGainers.css";
+// import getMarketGainers from "../../../api/getMarketGainers";
+import { marketGainersData } from "../../marketGainersData";
+import { AiOutlineRise } from "react-icons/ai";
 import {
   Box,
   Flex,
@@ -18,27 +16,26 @@ import {
   Td,
   Icon,
 } from "@chakra-ui/react";
-const MarketLosers = ({ setSymbol }) => {
-  // const [marketLosers, setMarketLosers] = useState([]);
-  // const loadMarketLosers = async () => {
+const MarketGainers = ({ setSymbol }) => {
+  // const [marketGainers, setMarketGainers] = useState([]);
+
+  // const loadMarketGainers = async () => {
   //   try {
-  //     const result = await getMarketLosers();
+  //     const result = await getMarketGainers();
   //     console.log(result);
-  //     setMarketLosers(result);
+  //     setMarketGainers(result);
   //   } catch (error) {
   //     console.error("Failed to fetch data: ", error);
   //   }
   // };
   useEffect(() => {
-    // loadMarketLosers();
+    // loadMarketGainers();
   }, []);
 
   return (
-    <Table
-      sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}
-    >
-      <Thead position={"sticky"} mt={0} pt={0}>
-      <Tr>
+    <Table sx={{ "tbody tr:nth-of-type(odd)": { bg: "accentColor" } }}>
+      <Thead position="sticky" top={0} zIndex={1}>
+        <Tr>
           <Th p={1} pb={2} pl={2}>
             Symbol
           </Th>
@@ -51,8 +48,8 @@ const MarketLosers = ({ setSymbol }) => {
         </Tr>
       </Thead>
       <Tbody>
-        {marketLosersData ? (
-          marketLosersData.map((row) => (
+        {marketGainersData ? (
+          marketGainersData.map((row) => (
             <Tr key={row.symbol}>
               <Td
                 cursor="pointer"
@@ -68,14 +65,14 @@ const MarketLosers = ({ setSymbol }) => {
                 {row.name}
               </Td>
               <Td p={0}>
-                <Flex fontSize="sm" justifyContent={"space-evenly"}>
+                <Flex fontSize="sm" justifyContent="space-evenly">
                   <Box>{row.price}</Box>
                   <Flex
                     justifyContent="space-evenly"
                     alignItems="center"
-                    color="#FF6B6B"
+                    color="#009975"
                   >
-                    <Icon as={AiOutlineFall} boxSize={4} />
+                    <Icon as={AiOutlineRise} boxSize={4} />
                     <Text>{row.change}</Text>
                   </Flex>
                 </Flex>
@@ -93,4 +90,4 @@ const MarketLosers = ({ setSymbol }) => {
     </Table>
   );
 };
-export default MarketLosers;
+export default MarketGainers;
