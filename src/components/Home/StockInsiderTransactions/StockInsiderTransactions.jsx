@@ -22,10 +22,10 @@ const StockInsiderTransactions = ({ symbol, stockLogo }) => {
 	const loadStocksInsiderTransactions = async (stockSymbol) => {
 		try {
 			const result = await getStockInsiderTransactions(stockSymbol);
+			const first100Result = result.data.slice(0, 100)
+			console.log("result", first100Result);
 
-			console.log("result", result);
-
-			setStocksInsiderTransactions(result.data);
+			setStocksInsiderTransactions(first100Result);
 		} catch (error) {
 			console.error("Failed to fetch data: ", error);
 		}

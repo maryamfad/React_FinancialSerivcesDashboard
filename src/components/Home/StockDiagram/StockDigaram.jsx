@@ -28,11 +28,11 @@ function StockDiagram({ symbol, stockLogo }) {
 	const loadTodayHistoricalChart = async (symbol, today) => {
 		try {
 			const result = await getTodayHistoricalChart(symbol, today);
-			if (!Array.isArray(result) || result.length === 0 || !result) {
-				throw new Error(
-					"Invalid or empty result received from the API"
-				);
-			}
+			// if (!Array.isArray(result) || result.length === 0 || !result) {
+			// 	throw new Error(
+			// 		"Invalid or empty result received from the API"
+			// 	);
+			// }
 			setData(
 				result.map((stock) => ({
 					time: new Date(stock.date).toISOString().split(" ")[0],
@@ -44,11 +44,8 @@ function StockDiagram({ symbol, stockLogo }) {
 				}))
 			);
 
-	
-
 			setIsDataReady(true);
 		} catch (error) {
-
 			if (error.name === "FetchError") {
 				console.error(
 					"Network error or timeout occurred:",
@@ -58,18 +55,17 @@ function StockDiagram({ symbol, stockLogo }) {
 				console.error("An error occurred:", error.message);
 			}
 		} finally {
-	
 		}
 	};
 
 	const loadEndOfDayHistorical = async (symbol, end, start) => {
 		try {
 			const result = await getEndOfDayHistorical(symbol, end, start);
-			if (!Array.isArray(result) || result.length === 0 || !result) {
-				throw new Error(
-					"Invalid or empty result received from the API"
-				);
-			}
+			// if (!Array.isArray(result) || result.length === 0 || !result) {
+			// 	throw new Error(
+			// 		"Invalid or empty result received from the API"
+			// 	);
+			// }
 			setData(
 				result.historical.map((stock) => ({
 					time: stock.date,
@@ -82,8 +78,6 @@ function StockDiagram({ symbol, stockLogo }) {
 			);
 
 			setIsDataReady(true);
-			// } catch (error) {
-			// setError(error.message);
 		} catch (error) {
 			if (error.name === "FetchError") {
 				console.error(
@@ -93,8 +87,6 @@ function StockDiagram({ symbol, stockLogo }) {
 			} else {
 				console.error("An error occurred:", error.message);
 			}
-			// throw error
-			// setLoading(false);
 		}
 	};
 
@@ -176,6 +168,9 @@ function StockDiagram({ symbol, stockLogo }) {
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [timeFrame, symbol]);
+console.log('data', data);
+console.log('isDataReady', isDataReady);
+
 
 	return (
 		<Flex
