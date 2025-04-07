@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 
 import { Box, Text, HStack } from "@chakra-ui/react";
 import NavbarMenu from "../Navbar/Navbar.jsx";
-import getStockLogo from "../../api/getStockLogo.js";
+import getStockLogo from "../../api/stockViewAPIs/getStockLogo.js";
 import StockView from "./StockView/StockView.jsx";
 
 const Home = () => {
 	const [symbol, setSymbol] = useState("AAPL");
 	const [stockLogo, setStockLogo] = useState(null);
 	const [selectedAsset, setSelectedAsset] = useState("Stocks");
-	const assetTypes = ["Stocks", "Funds", "Bonds", "Crypto"];
+	const assetTypes = ["Stocks", "Funds", "Crypto"];
 	const loadStockLogo = async (symbol) => {
 		try {
 			const result = await getStockLogo(symbol);
@@ -61,8 +61,8 @@ const Home = () => {
 					stockLogo={stockLogo}
 				/>
 			)}
-			{/* {selectedAsset === "fund" && <FundView />}
-{selectedAsset === "bond" && <BondView />} */}
+			{/* {selectedAsset === "Funds" && <FundView />}
+{selectedAsset === "crypto" && <cryptoView />} */}
 		</Box>
 	);
 };

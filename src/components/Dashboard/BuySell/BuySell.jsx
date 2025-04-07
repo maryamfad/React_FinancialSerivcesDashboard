@@ -19,7 +19,7 @@ import {
 	Button,
 } from "@chakra-ui/react";
 import { buyStock, sellStock } from "../../../services/TradeServices";
-import getShortQuote from "../../../api/getShortQuote";
+import getShortQuote from "../../../api/stockViewAPIs/getShortQuote";
 import { WarningIcon } from "@chakra-ui/icons";
 import { HoldingContext } from "../../../context/HoldingProvider";
 import { OrderContext } from "../../../context/OrderProvider";

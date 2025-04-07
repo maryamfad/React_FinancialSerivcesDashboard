@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import getStockInsiderTransactions from "../../../../api/getStockInsiderTransactions";
+import getStockInsiderTransactions from "../../../../api/stockViewAPIs/getStockInsiderTransactions";
 import {
 	Box,
 	Flex,

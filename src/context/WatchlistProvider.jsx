@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import getUserIdFromToken from "../util/getUserIdFromToken";
-import getFullQuote from "../api/getFullQuote";
+import getFullQuote from "../api/stockViewAPIs/getFullQuote";
 
 const WatchlistContext = createContext();
 
