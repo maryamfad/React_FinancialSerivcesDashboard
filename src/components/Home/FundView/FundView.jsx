@@ -9,7 +9,7 @@ import {
 	Stack,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import IndexView from "./IndexView";
+import IndexView from "./IndexView/IndexView";
 const FundView = () => {
 	const fundTypes = ["Index, ETF & Mutual Fund"];
 	const [selectedFundType, setSelectedFundType] = useState(["Index"]);

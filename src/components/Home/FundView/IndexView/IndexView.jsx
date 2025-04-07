@@ -1,7 +1,8 @@
 import React from "react";
-import { Text, Box, HStack } from "@chakra-ui/react";
+import { Text, Box, HStack, Flex } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import getHistoricalPriceData from "../../../api/fundViewAPIs/getHistoricalPriceData";
+import getHistoricalPriceData from "../../../../api/fundViewAPIs/getHistoricalPriceData";
+import IndexDiagram from "./IndexDiagram";
 
 const IndexView = () => {
 	const indexSymbols = [
@@ -34,10 +35,10 @@ const IndexView = () => {
 	const loadIndexPriceHistoricalData = async (symbol, end, start) => {
 		try {
 			const result = await getHistoricalPriceData(symbol, end, start);
-			console.log(result);
+			console.log("result",result);
 
 			setData(
-				result.historical.map((stock) => ({
+				result.map((stock) => ({
 					time: stock.date,
 					close: stock.close,
 					low: stock.low,
@@ -65,17 +66,7 @@ const IndexView = () => {
 		let start;
 
 		switch (timeFrame) {
-			case "1D":
-				end = new Date();
-				start = new Date();
-				start.setDate(end.getDate() - 1);
-
-				loadIndexPriceHistoricalData(
-					selectedIndex,
-					toYYYYMMDD(start),
-					toYYYYMMDD(end)
-				);
-				break;
+		
 			case "5D":
 				end = new Date();
 				start = new Date();
@@ -126,10 +117,21 @@ const IndexView = () => {
 					toYYYYMMDD(end)
 				);
 				break;
+				case "5Y":
+					end = new Date();
+					start = new Date();
+					start.setDate(end.getDate() - 365*5);
+	
+					loadIndexPriceHistoricalData(
+						selectedIndex,
+						toYYYYMMDD(start),
+						toYYYYMMDD(end)
+					);
+					break;
 			default:
 				end = new Date();
 				start = new Date();
-				start.setDate(end.getDate() - 1);
+				start.setDate(end.getDate() - 5);
 				loadIndexPriceHistoricalData(
 					selectedIndex,
 					toYYYYMMDD(start),
@@ -142,37 +144,52 @@ const IndexView = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [timeFrame, selectedIndex]);
 	return (
-		<HStack
-			spacing={6}
-			p={4}
-			mt={"1%"}
-			width={"100%"}
-			justifyContent={"space-evenly"}
-		>
-			{indexSymbols.map((symbol) => (
-				<Box
-					key={symbol}
-					cursor="pointer"
-					onClick={() => setSelectedIndex(symbol)}
-					fontWeight="semibold"
-					position="relative"
-				>
-					<Text
-						borderWidth={"2px"}
-						borderRadius={"5"}
-						borderColor={"primary"}
-						bg={selectedIndex === symbol ? "accentColor" : "none"}
-						p={1}
-						_hover={{
-							bg: "accentColor",
-							borderRadius: "5px",
-						}}
+		<Box>
+			<HStack
+				spacing={6}
+				p={4}
+				mt={"1%"}
+				width={"100%"}
+				justifyContent={"space-evenly"}
+			>
+				{indexSymbols.map((symbol) => (
+					<Box
+						key={symbol}
+						cursor="pointer"
+						onClick={() => setSelectedIndex(symbol)}
+						fontWeight="semibold"
+						position="relative"
 					>
-						{symbol}
-					</Text>
-				</Box>
-			))}
-		</HStack>
+						<Text
+							borderWidth={"2px"}
+							borderRadius={"5"}
+							borderColor={"primary"}
+							bg={
+								selectedIndex === symbol
+									? "accentColor"
+									: "none"
+							}
+							p={1}
+							_hover={{
+								bg: "accentColor",
+								borderRadius: "5px",
+							}}
+						>
+							{symbol}
+						</Text>
+					</Box>
+				))}
+			</HStack>
+			<Flex justifyContent={"center"}>
+				<IndexDiagram
+					symbol={selectedIndex}
+					timeFrame={timeFrame}
+					setTimeFrame={setTimeFrame}
+					isDataReady={isDataReady}
+					data={data}
+				/>
+			</Flex>
+		</Box>
 	);
 };
 export default IndexView;
