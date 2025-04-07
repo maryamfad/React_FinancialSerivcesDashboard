@@ -9,7 +9,7 @@ import FundView from "./FundView/FundView.jsx";
 const Home = () => {
 	const [symbol, setSymbol] = useState("AAPL");
 	const [stockLogo, setStockLogo] = useState(null);
-	const [selectedAsset, setSelectedAsset] = useState("Funds");
+	const [selectedAsset, setSelectedAsset] = useState("Stocks");
 	const assetTypes = ["Stocks", "Funds", "Crypto"];
 	const loadStockLogo = async (symbol) => {
 		try {
