@@ -1,17 +1,9 @@
 import React from "react";
-import {
-	Flex,
-	Text,
-	Box,
-	HStack,
-	Checkbox,
-	CheckboxGroup,
-	Stack,
-} from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { Box, Checkbox, CheckboxGroup, Stack } from "@chakra-ui/react";
+import { useState } from "react";
 import IndexView from "./IndexView/IndexView";
 const FundView = () => {
-	const fundTypes = ["Index, ETF & Mutual Fund"];
+	// const fundTypes = ["Index, ETF & Mutual Fund"];
 	const [selectedFundType, setSelectedFundType] = useState(["Index"]);
 
 	return (
@@ -41,9 +33,8 @@ const FundView = () => {
 					</Checkbox>
 				</Stack>
 			</CheckboxGroup>
-            {selectedFundType.includes("Index") && <IndexView />}
-            {/* {selectedFundType.includes("ETF & Mutual Fund") && <ETFView />} */}
-			
+			{selectedFundType.includes("Index") && <IndexView />}
+			{/* {selectedFundType.includes("ETF & Mutual Fund") && <ETFView />} */}
 		</Box>
 	);
 };

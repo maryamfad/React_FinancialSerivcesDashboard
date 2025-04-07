@@ -1,4 +1,4 @@
-import { Flex, Text, Box, Image } from "@chakra-ui/react";
+import { Flex, Text, Box } from "@chakra-ui/react";
 import LinearChart from "./LinearChart";
 const IndexDiagram = ({
 	symbol,
