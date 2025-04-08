@@ -7,8 +7,6 @@ const IndexDiagram = ({
 	isDataReady,
 	data,
 }) => {
-	console.log("isDataReady", isDataReady);
-
 	return (
 		<Flex
 			flexDir={"column"}
