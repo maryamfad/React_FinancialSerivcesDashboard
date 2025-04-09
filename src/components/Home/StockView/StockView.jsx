@@ -25,11 +25,11 @@ const StockView = ({ symbol, setSymbol, stockLogo }) => {
 					wrap="wrap"
 				>
 					<Box width={{ base: "100%", md: "24%" }} p={1}>
-						{/* <StockSummary
+						<StockSummary
 							symbol={symbol}
 							stockLogo={stockLogo}
 							height={"100%"}
-						/> */}
+						/>
 					</Box>
 					<Box width={{ base: "100%", md: "51%" }} p={1}>
 						<Flex
@@ -52,10 +52,10 @@ const StockView = ({ symbol, setSymbol, stockLogo }) => {
 							height={{ base: "auto", md: "90%" }}
 							p={4}
 						>
-							{/* <StockDiagram
+							<StockDiagram
 								symbol={symbol}
 								stockLogo={stockLogo}
-							/> */}
+							/>
 						</Box>
 					</Box>
 					<Box
@@ -154,17 +154,17 @@ const StockView = ({ symbol, setSymbol, stockLogo }) => {
 						height={"50vh"}
 						m={1}
 					>
-						{/* <StockNews symbol={symbol} stockLogo={stockLogo} /> */}
+						<StockNews symbol={symbol} stockLogo={stockLogo} />
 					</Box>
 					<Box
 						width={{ base: "100%", md: "50%" }}
 						m={1}
 						borderRadius={"10px"}
 					>
-						{/* <StockInsiderTransactions
+						<StockInsiderTransactions
 							symbol={symbol}
 							stockLogo={stockLogo}
-						/> */}
+						/>
 					</Box>
 				</Flex>
 			</Box>

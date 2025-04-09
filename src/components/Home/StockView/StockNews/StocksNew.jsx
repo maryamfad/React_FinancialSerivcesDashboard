@@ -22,7 +22,7 @@ const StockNews = ({ symbol, stockLogo }) => {
 			height="100%"
 			borderRadius="10px"
 			borderColor={"primary"}
-			borderWidth={"2px"}
+			borderWidth={"1px"}
 		>
 			<Flex>
 				<Text
