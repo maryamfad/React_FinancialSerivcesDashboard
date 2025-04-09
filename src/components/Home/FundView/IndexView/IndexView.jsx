@@ -1,8 +1,7 @@
 import React from "react";
-import { Text, Box, HStack } from "@chakra-ui/react";
+import { Text, Box, HStack, Flex, Divider } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import getHistoricalPriceData from "../../../../api/fundViewAPIs/getHistoricalPriceData";
-import IndexDiagram from "./IndexDiagram";
 import MultiIndexDiagram from "./MultiIndexDiagram";
 
 const IndexView = () => {
@@ -53,7 +52,6 @@ const IndexView = () => {
 			});
 		});
 
-		// Return sorted array by date
 		return Array.from(dateMap.values()).sort((a, b) =>
 			a.time.localeCompare(b.time)
 		);
@@ -138,69 +136,145 @@ const IndexView = () => {
 	console.log("selectedIndexes", selectedIndexes);
 	const combinedData = getCombinedChartData(dataMap, true);
 	return (
-		<Box>
-			<HStack
-				spacing={6}
-				p={4}
-				mt={"1%"}
-				width={"100%"}
-				justifyContent={"space-evenly"}
+		<Flex>
+			<Box
+				borderWidth={"1px"}
+				borderColor={"primary"}
+				borderRadius={5}
+				width={"48%"}
+				m={5}
 			>
-				{indexSymbols.map((symbol) => (
-					<Box
-						key={symbol}
-						cursor="pointer"
-						onClick={() => {
-							setSelectedIndexes(
-								(prev) =>
+				<HStack
+					spacing={"2%"}
+					mt={"1%"}
+					width={"100%"}
+					justifyContent={"space-evenly"}
+				>
+					{indexSymbols.map((symbol) => (
+						<Box
+							key={symbol}
+							cursor="pointer"
+							onClick={() => {
+								setSelectedIndexes((prev) =>
 									prev.includes(symbol)
-										? prev.filter((s) => s !== symbol) // remove if already selected
-										: [...prev, symbol] // add if not selected
-							);
-						}}
-						fontWeight="semibold"
-						position="relative"
-					>
-						<Text
-							borderWidth={"2px"}
-							borderRadius={"5"}
-							borderColor={"primary"}
-							bg={
-								selectedIndexes.includes(symbol)
-									? "blue.100"
-									: "none"
-							}
-							p={1}
-							_hover={{
-								bg: "accentColor",
-								borderRadius: "5px",
+										? prev.filter((s) => s !== symbol)
+										: [...prev, symbol]
+								);
 							}}
+							fontWeight="semibold"
+							position="relative"
 						>
-							{symbol}
-						</Text>
-					</Box>
-				))}
-			</HStack>
+							<Text
+								borderWidth={"2px"}
+								borderRadius={"5"}
+								borderColor={"primary"}
+								bg={
+									selectedIndexes.includes(symbol)
+										? "blue.100"
+										: "none"
+								}
+								p={1}
+								_hover={{
+									bg: "accentColor",
+									borderRadius: "5px",
+								}}
+							>
+								{symbol}
+							</Text>
+						</Box>
+					))}
+				</HStack>
+				<Flex
+					justifyContent={"flex-end"}
+					cursor={"pointer"}
+					width={"50%"}
+				>
+					<Text
+						m={0}
+						pl={"5%"}
+						color={timeFrame === "5D" && "#007BFF"}
+						fontWeight={timeFrame === "5D" && "bold"}
+						onClick={() => setTimeFrame("5D")}
+					>
+						5D
+					</Text>
+					<Text
+						m={0}
+						pl={"5%"}
+						color={timeFrame === "1M" && "#007BFF"}
+						fontWeight={timeFrame === "1M" && "bold"}
+						onClick={() => setTimeFrame("1M")}
+					>
+						1M
+					</Text>
+					<Text
+						m={0}
+						pl={"5%"}
+						color={timeFrame === "3M" && "#007BFF"}
+						fontWeight={timeFrame === "3M" && "bold"}
+						onClick={() => setTimeFrame("3M")}
+					>
+						3M
+					</Text>
+					<Text
+						m={0}
+						pl={"5%"}
+						color={timeFrame === "6M" && "#007BFF"}
+						fontWeight={timeFrame === "6M" && "bold"}
+						onClick={() => setTimeFrame("6M")}
+					>
+						6M
+					</Text>
+					<Text
+						m={0}
+						pl={"5%"}
+						color={timeFrame === "1Y" && "#007BFF"}
+						fontWeight={timeFrame === "1Y" && "bold"}
+						onClick={() => setTimeFrame("1Y")}
+					>
+						1Y
+					</Text>
+					<Text
+						m={0}
+						pl={"5%"}
+						color={timeFrame === "5Y" && "#007BFF"}
+						fontWeight={timeFrame === "5Y" && "bold"}
+						onClick={() => setTimeFrame("5Y")}
+					>
+						1D
+					</Text>
+				</Flex>
 
-			{/* {selectedIndexes.map((symbol) => (
-				<Box key={symbol} mb={8}>
-					<IndexDiagram
-						symbol={symbol}
-						timeFrame={timeFrame}
-						setTimeFrame={setTimeFrame}
-						isDataReady={isDataReady[symbol]}
-						data={dataMap[symbol]}
-					/>
-				</Box>
-			))} */}
-
-			<Box>
-				<MultiIndexDiagram
-					data={combinedData}
-					symbols={selectedIndexes}
-				/>
+				<Flex justifyContent={"center"}>
+					{isDataReady && (
+						<MultiIndexDiagram
+							data={combinedData}
+							symbols={selectedIndexes}
+						/>
+					)}
+				</Flex>
 			</Box>
-		</Box>
+			<Box
+				borderWidth={"1px"}
+				borderColor={"primary"}
+				borderRadius={5}
+				width={"48%"}
+				m={5}
+				ml={0}
+			>
+				<Text
+					m={0}
+					pl={3}
+					pt={2}
+					pb={1}
+					fontWeight={"bold"}
+					fontSize={"18px"}
+				>
+					Index Summary
+				</Text>
+				<Divider p={0} m={0} />
+			</Box>
+		</Flex>
 	);
 };
 export default IndexView;

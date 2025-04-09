@@ -40,7 +40,7 @@ const StockSummary = ({ symbol, stockLogo }) => {
 					fontWeight={"bold"}
 					fontSize={"18px"}
 				>
-					Stock News
+					Stock Summary
 				</Text>
 				<Text
 					fontSize={"md"}
