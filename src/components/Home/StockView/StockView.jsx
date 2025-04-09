@@ -25,17 +25,17 @@ const StockView = ({ symbol, setSymbol, stockLogo }) => {
 					wrap="wrap"
 				>
 					<Box width={{ base: "100%", md: "24%" }} p={1}>
-						<StockSummary
+						{/* <StockSummary
 							symbol={symbol}
 							stockLogo={stockLogo}
 							height={"100%"}
-						/>
+						/> */}
 					</Box>
 					<Box width={{ base: "100%", md: "51%" }} p={1}>
 						<Flex
 							borderColor={"primary"}
 							bg={"accentColor"}
-							borderWidth={"2px"}
+							borderWidth={"1px"}
 							borderRadius={"10px"}
 							justifyContent={"center"}
 							width="100%"
@@ -46,16 +46,16 @@ const StockView = ({ symbol, setSymbol, stockLogo }) => {
 						</Flex>
 						<Box
 							borderColor={"primary"}
-							borderWidth={"2px"}
+							borderWidth={"1px"}
 							width="100%"
 							borderRadius={"10px"}
 							height={{ base: "auto", md: "90%" }}
 							p={4}
 						>
-							<StockDiagram
+							{/* <StockDiagram
 								symbol={symbol}
 								stockLogo={stockLogo}
-							/>
+							/> */}
 						</Box>
 					</Box>
 					<Box
@@ -66,7 +66,7 @@ const StockView = ({ symbol, setSymbol, stockLogo }) => {
 					>
 						<Box
 							borderColor={"primary"}
-							borderWidth={"2px"}
+							borderWidth={"1px"}
 							borderRadius={"10px"}
 							width="100%"
 							height={{ base: "auto", md: "50%" }}
@@ -104,7 +104,7 @@ const StockView = ({ symbol, setSymbol, stockLogo }) => {
 						</Box>
 						<Box
 							borderColor={"primary"}
-							borderWidth={"2px"}
+							borderWidth={"1px"}
 							width="100%"
 							height={{ base: "auto", md: "50%" }}
 							borderRadius={"10px"}

@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import getStockLogo from "../../../../api/stockViewAPIs/getStockLogo";
 import { scrollerData } from "../../scrollerData";
 import { AiOutlineRise, AiOutlineFall } from "react-icons/ai";
-import { Box, Flex, Text, Image, keyframes } from "@chakra-ui/react";
+import { Box, Flex, Text, Image } from "@chakra-ui/react";
 
-const slide = keyframes`
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-`;
 const Scroller = ({ setSymbol }) => {
 	const [mostActiveStocks, setMostActiveStocks] = useState([]);
+	const [isPaused, setIsPaused] = useState(false);
 
+	const scrollerRef = useRef(null);
+	const speed = 0.5;
+	const scrollPositionRef = useRef(0);
 	async function enrichScrollerDataWithLogo() {
 		try {
 			const promises = scrollerData.map((stock) =>
@@ -38,6 +38,54 @@ const Scroller = ({ setSymbol }) => {
 	};
 
 	useEffect(() => {
+		const el = scrollerRef.current;
+		let frameId;
+
+		const animateScroll = () => {
+			if (!isPaused && el) {
+				scrollPositionRef.current += speed;
+
+				if (
+					scrollPositionRef.current >
+					el.scrollWidth - el.clientWidth
+				) {
+					scrollPositionRef.current = 0;
+				}
+
+				el.style.transform = `translateX(-${scrollPositionRef.current}px)`;
+			}
+
+			frameId = requestAnimationFrame(animateScroll);
+		};
+
+		const pause = () => setIsPaused(true);
+		const resume = () => setIsPaused(false);
+
+		if (el) {
+			
+			el.addEventListener("touchstart", pause);
+			el.addEventListener("touchend", resume);
+			el.addEventListener("touchcancel", resume);
+			el.addEventListener("mouseenter", pause);
+			el.addEventListener("mouseleave", resume);
+		}
+
+		frameId = requestAnimationFrame(animateScroll);
+
+		return () => {
+			cancelAnimationFrame(frameId);
+			if (el) {
+				
+				el.removeEventListener("touchstart", pause);
+				el.removeEventListener("touchend", resume);
+				el.removeEventListener("touchcancel", resume);
+				el.removeEventListener("mouseenter", pause);
+				el.removeEventListener("mouseleave", resume);
+			}
+		};
+	}, [isPaused]);
+
+	useEffect(() => {
 		enrichScrollerDataWithLogo()
 			.then((updatedData) => {
 				setMostActiveStocks(updatedData);
@@ -48,33 +96,36 @@ const Scroller = ({ setSymbol }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const handleTouchStart = () => setIsPaused(true);
+	const handleTouchEnd = () => setIsPaused(false);
+
 	return (
 		<Box width="100%" overflow="hidden">
-			<Text pl={3} pb={1} fontWeight="bold" fontSize="18px">
+			<Text pl={3} mb={0} fontWeight="bold" fontSize="18px">
 				Most Active
 			</Text>
 			<Flex
 				as="div"
-				width="fit-content"
-				animation={
-					!window.matchMedia("(prefers-reduced-motion: reduce)")
-						.matches
-						? `${slide} 500s linear infinite`
-						: "none"
-				}
+				width={"2000px"}
+				ref={scrollerRef}
+				onTouchStart={handleTouchStart}
+				onTouchEnd={handleTouchEnd}
+				style={{ display: "flex", transition: "transform 0.1s ease" }}
 			>
 				{[...mostActiveStocks, ...mostActiveStocks].map(
 					(stock, index) => (
 						<Box
 							key={index}
-							minW={{ base: "120px", md: "130px" }}
-							h={{ base: "55px", md: "50px" }}
+							minW={{ base: "100px", md: "130px" }}
+							h={{ base: "50px", md: "50px" }}
 							border="1px solid"
 							borderColor={"primary"}
 							p={1}
 							ml={3}
 							borderRadius="7px"
 							cursor="pointer"
+							flexShrink={0}
+							display="inline-block" // Ensure the child items are displayed inline
 						>
 							<Flex direction="column" w="100%">
 								<Flex
@@ -84,8 +135,12 @@ const Scroller = ({ setSymbol }) => {
 								>
 									<Box h={"50px"}>
 										<Text
-											fontSize="14px"
+											fontSize={{
+												base: "12px",
+												md: "14px",
+											}}
 											fontWeight="bold"
+											isTruncated
 											mb={0}
 											onClick={() =>
 												setSymbol(stock.symbol)
@@ -94,7 +149,6 @@ const Scroller = ({ setSymbol }) => {
 											{stock.symbol}
 										</Text>
 										<Flex
-											// align="center"
 											fontSize="11px"
 											color={
 												stock.change < 0
@@ -123,6 +177,9 @@ const Scroller = ({ setSymbol }) => {
 										src={stock.logo || "/fallback-logo.png"}
 										alt={`${stock.symbol} logo`}
 										boxSize="30px"
+										bg={"accentColor"}
+										borderRadius={5}
+										p={1}
 										objectFit="contain"
 										onError={(e) => {
 											e.target.src = "/fallback-logo.png";
