@@ -12,7 +12,7 @@ import StockNews from "./StockNews/StocksNew.jsx";
 const StockView = ({ symbol, setSymbol, stockLogo }) => {
 	return (
 		<Box>
-			<Box width="100%" mt={{ base: "12%", md: "1%" }}>
+			<Box width="100%" >
 				<Scroller setSymbol={setSymbol} stockLogo={stockLogo} />
 			</Box>
 
@@ -154,17 +154,17 @@ const StockView = ({ symbol, setSymbol, stockLogo }) => {
 						height={"50vh"}
 						m={1}
 					>
-						<StockNews symbol={symbol} stockLogo={stockLogo} />
+						{/* <StockNews symbol={symbol} stockLogo={stockLogo} /> */}
 					</Box>
 					<Box
 						width={{ base: "100%", md: "50%" }}
 						m={1}
 						borderRadius={"10px"}
 					>
-						<StockInsiderTransactions
+						{/* <StockInsiderTransactions
 							symbol={symbol}
 							stockLogo={stockLogo}
-						/>
+						/> */}
 					</Box>
 				</Flex>
 			</Box>

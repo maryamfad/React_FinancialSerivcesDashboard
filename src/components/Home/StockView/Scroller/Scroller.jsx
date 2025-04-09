@@ -1,54 +1,36 @@
 import { useState, useEffect } from "react";
-import "./Scroller.css";
-// import getLatestQuoteForStock from "../../../api/getLatestQuoteForAStock";
-// import getLatestBarForAStock from "../../../api/getLatestBarForAStock";
 import getStockLogo from "../../../../api/stockViewAPIs/getStockLogo";
 import { scrollerData } from "../../scrollerData";
-// import getMarketMostActiveStocks from "../../../api/getMarketMostActiveStocks";
 import { AiOutlineRise, AiOutlineFall } from "react-icons/ai";
-import { Box, Flex } from "@chakra-ui/react";
-// import { color } from "d3";
+import { Box, Flex, Text, Image, keyframes } from "@chakra-ui/react";
 
+const slide = keyframes`
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+`;
 const Scroller = ({ setSymbol }) => {
 	const [mostActiveStocks, setMostActiveStocks] = useState([]);
-	// console.log(scrollerData);
-	// const loadMostActiveStocksData = async () => {
-	//   try {
-	//     const result = await getMarketMostActiveStocks();
-	//     // console.log(result);
-	//     // setMostActiveStocks(result);
-	//     return result;
-	//   } catch (error) {
-	//     console.error("Failed to fetch data: ", error);
-	//   }
-	// };
 
 	async function enrichScrollerDataWithLogo() {
 		try {
-			// const scrollerData = await loadMostActiveStocksData(); // Fetch initial scroller data
-
-			// Map over scrollerData to fetch logos
 			const promises = scrollerData.map((stock) =>
 				loadStockLogo(stock.symbol).then((logo) => ({
 					...stock,
-					logo: logo, // Enrich each stock with its logo
+					logo: logo,
 				}))
 			);
 
-			// Wait for all promises to resolve
 			const updatedData = await Promise.all(promises);
-			return updatedData; // This is the enriched scroller data
+			return updatedData;
 		} catch (error) {
 			console.error("Failed to enrich scroller data:", error);
-			throw error; // Rethrow or handle as needed
+			throw error;
 		}
 	}
 
 	const loadStockLogo = async (symbol) => {
 		try {
 			const result = await getStockLogo(symbol);
-			// console.log('logo',result);
-			// setStockLogo(result);
 			return result;
 		} catch (error) {
 			console.error("Failed to fetch data: ", error);
@@ -56,115 +38,98 @@ const Scroller = ({ setSymbol }) => {
 	};
 
 	useEffect(() => {
-		// loadMostActiveStocksData();
 		enrichScrollerDataWithLogo()
 			.then((updatedData) => {
 				setMostActiveStocks(updatedData);
 			})
 			.catch((error) => {
-				// Handle or log error
-
 				console.error("Error in processing:", error);
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
-		<Box
-			className="scroller"
-			width={"100%"}
-			data-animated={
-				!window.matchMedia("(prefers-reduced-motion: reduce)").matches
-					? "true"
-					: "false"
-			}
-		>
+		<Box width="100%" overflow="hidden">
+			<Text pl={3} pb={1} fontWeight="bold" fontSize="18px">
+				Most Active
+			</Text>
 			<Flex
-				width={{ base: "4000%", md: "2000%" }}
-				className="scroller_inner"
+				as="div"
+				width="fit-content"
+				animation={
+					!window.matchMedia("(prefers-reduced-motion: reduce)")
+						.matches
+						? `${slide} 500s linear infinite`
+						: "none"
+				}
 			>
 				{[...mostActiveStocks, ...mostActiveStocks].map(
 					(stock, index) => (
 						<Box
-							width={{ base: "140px", md: "150px" }}
-							height={{ base: "85px", md: "90px" }}
-							borderColor={"primary"}
-							borderWidth={"2px"}
-							p={3}
-							pt={1}
-							ml={3}
 							key={index}
-							borderRadius={"10px"}
+							minW={{ base: "120px", md: "130px" }}
+							h={{ base: "55px", md: "50px" }}
+							border="1px solid"
+							borderColor={"primary"}
+							p={1}
+							ml={3}
+							borderRadius="7px"
 							cursor="pointer"
 						>
-							<div
-								className="d-flex justify-content-between"
-								style={{ width: "100%" }}
-							>
-								<div style={{ width: "100%" }}>
-									<div
-										className="d-flex justify-content-between"
-										style={{ width: "100%" }}
-									>
-										<div
-											className="stock-symbol"
+							<Flex direction="column" w="100%">
+								<Flex
+									justify="space-between"
+									align="center"
+									mb={1}
+								>
+									<Box h={"50px"}>
+										<Text
+											fontSize="14px"
+											fontWeight="bold"
+											mb={0}
 											onClick={() =>
 												setSymbol(stock.symbol)
 											}
 										>
 											{stock.symbol}
-										</div>
-										<img
-											src={stock.logo}
-											alt="logo"
-											className="stock-logo"
-										/>
-									</div>
-									<div
-										boxShadow={
-											"rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"
-										}
-										style={
-											stock.change < 0
-												? {
-														color: "#FF6B6B",
-														backgroundColor:
-															"white",
-														paddingLeft: "5px",
-														paddingRight: "5px",
-														borderRadius: "5px",
-														fontSize: "14px",
-														// borderWidth: "2px",
-														// borderColor: "#F1D7D7",
-														width: "100%",
-												  }
-												: {
-														color: "#009975",
-														backgroundColor:
-															"white",
-														paddingLeft: "5px",
-														paddingRight: "5px",
-														borderRadius: "5px",
-														fontSize: "14px",
-														// borderWidth: "2px",
-														// borderColor: "#F1D7D7",
-														width: "100%",
-												  }
-										}
-									>
-										{stock.change < 0 ? (
-											<AiOutlineFall size={"20px"} />
-										) : (
-											<AiOutlineRise size={"20px"} />
-										)}
-										{Number(stock.change).toFixed(2)} (
-										{Number(
-											stock.changesPercentage
-										).toFixed(2)}{" "}
-										%)
-									</div>
-								</div>
-							</div>
+										</Text>
+										<Flex
+											// align="center"
+											fontSize="11px"
+											color={
+												stock.change < 0
+													? "#FF6B6B"
+													: "#009975"
+											}
+										>
+											{stock.change < 0 ? (
+												<AiOutlineFall size="18px" />
+											) : (
+												<AiOutlineRise size="18px" />
+											)}
+											<Text ml={1} mb={0} width={"100%"}>
+												{Number(stock.change).toFixed(
+													2
+												)}{" "}
+												(
+												{Number(
+													stock.changesPercentage
+												).toFixed(2)}
+												%)
+											</Text>
+										</Flex>
+									</Box>
+									<Image
+										src={stock.logo || "/fallback-logo.png"}
+										alt={`${stock.symbol} logo`}
+										boxSize="30px"
+										objectFit="contain"
+										onError={(e) => {
+											e.target.src = "/fallback-logo.png";
+										}}
+									/>
+								</Flex>
+							</Flex>
 						</Box>
 					)
 				)}

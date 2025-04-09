@@ -29,7 +29,7 @@ const Home = () => {
 			<Box position="fixed" top={0} left={0} width="100%" zIndex={1000}>
 				<NavbarMenu />
 			</Box>
-			<HStack spacing={6} p={4} mt={"5%"} ml={"2%"}>
+			<HStack pt={4} mt={{ base: "5%", md: "4%" }} ml={"2%"}>
 				{assetTypes.map((type) => (
 					<Box
 						key={type}
@@ -63,7 +63,7 @@ const Home = () => {
 				/>
 			)}
 			{selectedAsset === "Funds" && <FundView />}
-{/* {selectedAsset === "crypto" && <cryptoView />} */}
+			{/* {selectedAsset === "crypto" && <cryptoView />} */}
 		</Box>
 	);
 };
