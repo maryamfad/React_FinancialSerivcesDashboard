@@ -3,6 +3,7 @@ import { Text, Box, HStack } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import getHistoricalPriceData from "../../../../api/fundViewAPIs/getHistoricalPriceData";
 import IndexDiagram from "./IndexDiagram";
+import MultiIndexDiagram from "./MultiIndexDiagram";
 
 const IndexView = () => {
 	const indexSymbols = [
@@ -32,6 +33,31 @@ const IndexView = () => {
 
 		return `${year}-${formattedMonth}-${formattedDay}`;
 	}
+
+	const getCombinedChartData = (dataMap, normalize = false) => {
+		const dateMap = new Map();
+
+		Object.entries(dataMap).forEach(([symbol, data]) => {
+			if (!data) return;
+
+			const base = normalize ? data[0]?.close || 1 : 1;
+
+			data.forEach((point) => {
+				if (!dateMap.has(point.time)) {
+					dateMap.set(point.time, { time: point.time });
+				}
+				const entry = dateMap.get(point.time);
+				entry[symbol] = normalize
+					? (point.close / base) * 100
+					: point.close;
+			});
+		});
+
+		// Return sorted array by date
+		return Array.from(dateMap.values()).sort((a, b) =>
+			a.time.localeCompare(b.time)
+		);
+	};
 
 	useEffect(() => {
 		// Clean old data for unselected symbols
@@ -84,8 +110,6 @@ const IndexView = () => {
 						volume: stock.volume,
 					}));
 					return { symbol, formatted };
-					// setDataMap((prev) => ({ ...prev, [symbol]: formatted }));
-					// setIsDataReady((prev) => ({ ...prev, [symbol]: true }));
 				} catch (error) {
 					console.error("Error loading data for", symbol, error);
 					return { symbol, formatted: [] };
@@ -112,7 +136,7 @@ const IndexView = () => {
 	}, [selectedIndexes, timeFrame]);
 	console.log("datamap", dataMap);
 	console.log("selectedIndexes", selectedIndexes);
-
+	const combinedData = getCombinedChartData(dataMap, true);
 	return (
 		<Box>
 			<HStack
@@ -158,7 +182,7 @@ const IndexView = () => {
 				))}
 			</HStack>
 
-			{selectedIndexes.map((symbol) => (
+			{/* {selectedIndexes.map((symbol) => (
 				<Box key={symbol} mb={8}>
 					<IndexDiagram
 						symbol={symbol}
@@ -168,7 +192,14 @@ const IndexView = () => {
 						data={dataMap[symbol]}
 					/>
 				</Box>
-			))}
+			))} */}
+
+			<Box>
+				<MultiIndexDiagram
+					data={combinedData}
+					symbols={selectedIndexes}
+				/>
+			</Box>
 		</Box>
 	);
 };
