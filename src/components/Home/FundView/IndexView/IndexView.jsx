@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, Box, HStack, Flex, Divider } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { throttle } from "lodash";
 import getHistoricalPriceData from "../../../../api/fundViewAPIs/getHistoricalPriceData";
 import MultiIndexDiagram from "./MultiIndexDiagram";
 
@@ -57,28 +58,8 @@ const IndexView = () => {
 		);
 	};
 
-	useEffect(() => {
-		// Clean old data for unselected symbols
-		setDataMap((prev) => {
-			const filtered = {};
-			for (const symbol of selectedIndexes) {
-				if (prev[symbol]) {
-					filtered[symbol] = prev[symbol];
-				}
-			}
-			return filtered;
-		});
-
-		setIsDataReady((prev) => {
-			const filtered = {};
-			for (const symbol of selectedIndexes) {
-				if (prev[symbol]) {
-					filtered[symbol] = prev[symbol];
-				}
-			}
-			return filtered;
-		});
-		const fetchAllData = async () => {
+	const throttledFetchAllData = useMemo(() => {
+		return throttle(async (selectedIndexes, timeFrame) => {
 			const end = new Date();
 			const start = new Date();
 			const days =
@@ -129,11 +110,43 @@ const IndexView = () => {
 				});
 				return updated;
 			});
+		}, 1000); // only one call every 1000ms
+	}, []);
+
+	useEffect(() => {
+		return () => {
+			throttledFetchAllData.cancel(); // from lodash
 		};
-		fetchAllData();
-	}, [selectedIndexes, timeFrame]);
+	}, [throttledFetchAllData]);
+
+	useEffect(() => {
+		// Clean old data for unselected symbols
+		setDataMap((prev) => {
+			const filtered = {};
+			for (const symbol of selectedIndexes) {
+				if (prev[symbol]) {
+					filtered[symbol] = prev[symbol];
+				}
+			}
+			return filtered;
+		});
+
+		setIsDataReady((prev) => {
+			const filtered = {};
+			for (const symbol of selectedIndexes) {
+				if (prev[symbol]) {
+					filtered[symbol] = prev[symbol];
+				}
+			}
+			return filtered;
+		});
+
+		throttledFetchAllData();
+	}, [selectedIndexes, timeFrame, throttledFetchAllData]);
+
 	console.log("datamap", dataMap);
 	console.log("selectedIndexes", selectedIndexes);
+
 	const combinedData = getCombinedChartData(dataMap, true);
 	return (
 		<Flex>
@@ -145,9 +158,10 @@ const IndexView = () => {
 				m={5}
 			>
 				<HStack
-					spacing={"2%"}
+					spacing={{ base: "1%", md: "2%" }}
 					mt={"1%"}
 					width={"100%"}
+					// width={"fit-content"}
 					justifyContent={"space-evenly"}
 				>
 					{indexSymbols.map((symbol) => (
@@ -165,7 +179,7 @@ const IndexView = () => {
 							position="relative"
 						>
 							<Text
-								borderWidth={"2px"}
+								borderWidth={"1px"}
 								borderRadius={"5"}
 								borderColor={"primary"}
 								bg={
@@ -188,6 +202,7 @@ const IndexView = () => {
 					justifyContent={"flex-end"}
 					cursor={"pointer"}
 					width={"50%"}
+					h={"500px"}
 				>
 					<Text
 						m={0}
@@ -241,7 +256,7 @@ const IndexView = () => {
 						fontWeight={timeFrame === "5Y" && "bold"}
 						onClick={() => setTimeFrame("5Y")}
 					>
-						1D
+						5Y
 					</Text>
 				</Flex>
 
