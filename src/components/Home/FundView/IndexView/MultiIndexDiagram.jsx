@@ -37,7 +37,7 @@ const MultiIndexDiagram = ({ data, symbols }) => {
 	});
 	function drawChart(width) {
 		if (data && containerRef.current && data.length > 0 && width > 0) {
-			const margin = { top: 20, right: 20, bottom: 30, left: 40 },
+			const margin = { top: 20, right: 20, bottom: 30, left: 50 },
 				height = 300 - margin.top - margin.bottom;
 
 			const svg = d3
