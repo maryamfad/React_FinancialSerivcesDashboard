@@ -4,7 +4,6 @@ import { useState, useEffect, useMemo } from "react";
 import { throttle } from "lodash";
 import getHistoricalPriceData from "../../../../api/fundViewAPIs/getHistoricalPriceData";
 import MultiIndexDiagram from "./MultiIndexDiagram";
-// import {} from "@chakra-ui/react";
 
 const IndexView = () => {
 	const indexSymbols = [
@@ -35,27 +34,34 @@ const IndexView = () => {
 		return `${year}-${formattedMonth}-${formattedDay}`;
 	}
 
-	const getCombinedChartData = (dataMap, normalize = false) => {
+	const getCombinedChartData = (dataMap) => {
 		const dateMap = new Map();
 
 		Object.entries(dataMap).forEach(([symbol, data]) => {
 			if (!data) return;
 
-			const base = normalize ? data[0]?.close || 1 : 1;
-
 			data.forEach((point) => {
 				if (!dateMap.has(point.time)) {
-					dateMap.set(point.time, { time: point.time });
+					dateMap.set(point.time, { date: point.time });
 				}
 				const entry = dateMap.get(point.time);
-				entry[symbol] = normalize
-					? (point.close / base) * 100
-					: point.close;
+
+				// Create a sub-object for the symbol if it doesn't exist yet
+				if (!entry[symbol]) entry[symbol] = {};
+
+				entry[symbol] = {
+					open: point.open,
+					high: point.high,
+					low: point.low,
+					close: point.close,
+					volume: point.volume,
+					changePercent: point.changePercent,
+				};
 			});
 		});
 
 		return Array.from(dateMap.values()).sort((a, b) =>
-			a.time.localeCompare(b.time)
+			a.date.localeCompare(b.time)
 		);
 	};
 
@@ -73,7 +79,6 @@ const IndexView = () => {
 					"5Y": 365 * 5,
 				}[timeFrame] || 5;
 			start.setDate(end.getDate() - days);
-			console.log("selectedIndexes", selectedIndexes);
 
 			const promises = selectedIndexes.map(async (symbol) => {
 				try {
@@ -89,6 +94,7 @@ const IndexView = () => {
 						high: stock.high,
 						open: stock.open,
 						volume: stock.volume,
+						changePercent: stock.changePercent,
 					}));
 					return { symbol, formatted };
 				} catch (error) {
@@ -146,18 +152,15 @@ const IndexView = () => {
 		throttledFetchAllData(selectedIndexes, timeFrame);
 	}, [selectedIndexes, timeFrame, throttledFetchAllData]);
 
-	console.log("datamap", dataMap);
-	console.log("selectedIndexes", selectedIndexes);
-
-	const combinedData = getCombinedChartData(dataMap, true);
+	const combinedData = getCombinedChartData(dataMap);
 
 	return (
-		<Flex>
+		<Flex direction={{ base: "column", md: "row" }}>
 			<Box
 				borderWidth={"1px"}
 				borderColor={"primary"}
 				borderRadius={5}
-				width={"48%"}
+				width={{ base: "90%", md: "48%" }}
 				m={5}
 			>
 				<Wrap spacing={{ base: "1", md: "4" }} mt="1%" justify="center">
@@ -271,9 +274,10 @@ const IndexView = () => {
 				borderWidth={"1px"}
 				borderColor={"primary"}
 				borderRadius={5}
-				width={"48%"}
+				width={{ base: "90%", md: "48%" }}
 				m={5}
-				ml={0}
+				ml={{ base: "5", md: 0 }}
+				// height={{base:"100%"}}
 			>
 				<Text
 					m={0}
