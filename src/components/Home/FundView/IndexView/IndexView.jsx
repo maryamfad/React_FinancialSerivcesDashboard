@@ -72,6 +72,7 @@ const IndexView = () => {
 					"5Y": 365 * 5,
 				}[timeFrame] || 5;
 			start.setDate(end.getDate() - days);
+			console.log("selectedIndexes", selectedIndexes);
 
 			const promises = selectedIndexes.map(async (symbol) => {
 				try {
@@ -141,13 +142,14 @@ const IndexView = () => {
 			return filtered;
 		});
 
-		throttledFetchAllData();
+		throttledFetchAllData(selectedIndexes, timeFrame);
 	}, [selectedIndexes, timeFrame, throttledFetchAllData]);
 
 	console.log("datamap", dataMap);
 	console.log("selectedIndexes", selectedIndexes);
 
 	const combinedData = getCombinedChartData(dataMap, true);
+
 	return (
 		<Flex>
 			<Box
@@ -202,7 +204,7 @@ const IndexView = () => {
 					justifyContent={"flex-end"}
 					cursor={"pointer"}
 					width={"50%"}
-					h={"500px"}
+					// h={"500px"}
 				>
 					<Text
 						m={0}
@@ -260,14 +262,16 @@ const IndexView = () => {
 					</Text>
 				</Flex>
 
-				<Flex justifyContent={"center"}>
+				<Box justifyContent={"center"}
+				p={"1%"}
+				m={"1%"}>
 					{isDataReady && (
-						<MultiIndexDiagram
-							data={combinedData}
-							symbols={selectedIndexes}
-						/>
-					)}
-				</Flex>
+					<MultiIndexDiagram
+						data={combinedData}
+						symbols={selectedIndexes}
+					/>
+					)} 
+				</Box>
 			</Box>
 			<Box
 				borderWidth={"1px"}
