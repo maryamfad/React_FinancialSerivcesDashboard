@@ -1,9 +1,10 @@
 import React from "react";
-import { Text, Box, HStack, Flex, Divider } from "@chakra-ui/react";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { Text, Box, Flex, Divider, Wrap, WrapItem } from "@chakra-ui/react";
+import { useState, useEffect, useMemo } from "react";
 import { throttle } from "lodash";
 import getHistoricalPriceData from "../../../../api/fundViewAPIs/getHistoricalPriceData";
 import MultiIndexDiagram from "./MultiIndexDiagram";
+// import {} from "@chakra-ui/react";
 
 const IndexView = () => {
 	const indexSymbols = [
@@ -159,52 +160,47 @@ const IndexView = () => {
 				width={"48%"}
 				m={5}
 			>
-				<HStack
-					spacing={{ base: "1%", md: "2%" }}
-					mt={"1%"}
-					width={"100%"}
-					// width={"fit-content"}
-					justifyContent={"space-evenly"}
-				>
+				<Wrap spacing={{ base: "1", md: "4" }} mt="1%" justify="center">
 					{indexSymbols.map((symbol) => (
-						<Box
-							key={symbol}
-							cursor="pointer"
-							onClick={() => {
-								setSelectedIndexes((prev) =>
-									prev.includes(symbol)
-										? prev.filter((s) => s !== symbol)
-										: [...prev, symbol]
-								);
-							}}
-							fontWeight="semibold"
-							position="relative"
-						>
-							<Text
-								borderWidth={"1px"}
-								borderRadius={"5"}
-								borderColor={"primary"}
-								bg={
-									selectedIndexes.includes(symbol)
-										? "blue.100"
-										: "none"
+						<WrapItem key={symbol}>
+							<Box
+								cursor="pointer"
+								onClick={() =>
+									setSelectedIndexes((prev) =>
+										prev.includes(symbol)
+											? prev.filter((s) => s !== symbol)
+											: [...prev, symbol]
+									)
 								}
-								p={1}
-								_hover={{
-									bg: "accentColor",
-									borderRadius: "5px",
-								}}
+								position="relative"
 							>
-								{symbol}
-							</Text>
-						</Box>
+								<Text
+									borderColor="primary"
+									bg={
+										selectedIndexes.includes(symbol)
+											? "blue.100"
+											: "none"
+									}
+									fontWeight={"semibold"}
+									_hover={{
+										bg: "accentColor",
+										borderRadius: "5px",
+									}}
+									px={2}
+									py={1}
+									borderRadius="md"
+									textAlign="center"
+								>
+									{symbol}
+								</Text>
+							</Box>
+						</WrapItem>
 					))}
-				</HStack>
+				</Wrap>
 				<Flex
 					justifyContent={"flex-end"}
 					cursor={"pointer"}
 					width={"50%"}
-					// h={"500px"}
 				>
 					<Text
 						m={0}
@@ -262,15 +258,13 @@ const IndexView = () => {
 					</Text>
 				</Flex>
 
-				<Box justifyContent={"center"}
-				p={"1%"}
-				m={"1%"}>
+				<Box justifyContent={"center"} p={"1%"} m={"1%"}>
 					{isDataReady && (
-					<MultiIndexDiagram
-						data={combinedData}
-						symbols={selectedIndexes}
-					/>
-					)} 
+						<MultiIndexDiagram
+							data={combinedData}
+							symbols={selectedIndexes}
+						/>
+					)}
 				</Box>
 			</Box>
 			<Box
