@@ -37,7 +37,7 @@ const MultiIndexDiagram = ({ data, symbols }) => {
 	});
 	function drawChart(width) {
 		if (data && containerRef.current && data.length > 0 && width > 0) {
-			const margin = { top: 20, right: 20, bottom: 30, left: 50 },
+			const margin = { top: 20, right: 20, bottom: 30, left: 60 },
 				height = 300 - margin.top - margin.bottom;
 
 			const svg = d3
@@ -83,6 +83,25 @@ const MultiIndexDiagram = ({ data, symbols }) => {
 				.x((d) => x(new Date(d.date)))
 				.y((d) => y(d.value));
 
+			//Grids
+			svg.append("g")
+				.call(d3.axisLeft(y).tickSize(-width).tickFormat(""))
+				.style("color", "lightgray")
+				.selectAll(".tick line")
+				.style("stroke", "lightgray")
+				.style("stroke-opacity", "0.7")
+				.style("shape-rendering", "crispEdges")
+				.classed("grid", true);
+
+			svg.append("g")
+				.attr("transform", `translate(0,${height})`)
+				.call(d3.axisBottom(x).tickSize(-height).tickFormat(""))
+				.style("color", "lightgray")
+				.selectAll(".tick line")
+				.style("stroke", "lightgray")
+				.style("stroke-opacity", "0.7")
+				.style("shape-rendering", "crispEdges")
+				.classed("grid", true);
 			// Tooltip setup
 			const tooltipDiv = d3
 				.select(tooltip.current)
