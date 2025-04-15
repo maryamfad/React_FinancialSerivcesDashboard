@@ -4,7 +4,9 @@ import { useState, useEffect, useMemo } from "react";
 import { throttle } from "lodash";
 import getHistoricalPriceData from "../../../../api/fundViewAPIs/getHistoricalPriceData";
 import MultiIndexDiagram from "./MultiIndexDiagram";
-
+import IndexClosePriceDiagram from "./IndexClosePriceDigram";
+import { Select } from "@chakra-ui/react";
+import * as d3 from "d3";
 const IndexView = () => {
 	const indexSymbols = [
 		"^GSPC",
@@ -20,8 +22,11 @@ const IndexView = () => {
 	const [selectedIndexes, setSelectedIndexes] = useState(["^GSPC"]);
 	const [timeFrame, setTimeFrame] = useState("5D");
 	const [dataMap, setDataMap] = useState({});
-
+	const [selectedIndex, setSelectedIndex] = useState("^GSPC");
 	const [isDataReady, setIsDataReady] = useState({});
+	const [dataForOneIndex, setDataForOneIndex] = useState({});
+	const [isDataForOneIndexReady, setDataForOneIndexReady] = useState({});
+	const colorScale = d3.scaleOrdinal(d3.schemeTableau10).domain(indexSymbols);
 
 	function toYYYYMMDD(date) {
 		const year = date.getFullYear();
@@ -34,7 +39,7 @@ const IndexView = () => {
 		return `${year}-${formattedMonth}-${formattedDay}`;
 	}
 
-	const getCombinedChartData = (dataMap) => {
+	const getCombinedChartData = (dataMap, indexSymbols) => {
 		const dateMap = new Map();
 
 		Object.entries(dataMap).forEach(([symbol, data]) => {
@@ -121,6 +126,49 @@ const IndexView = () => {
 		}, 1000); // only one call every 1000ms
 	}, []);
 
+	const throttledFetchDataForOneSignal = useMemo(() => {
+		return throttle(async (selectedIndex, timeFrame) => {
+			const end = new Date();
+			const start = new Date();
+			const days =
+				{
+					"5D": 5,
+					"1M": 30,
+					"3M": 90,
+					"6M": 180,
+					"1Y": 365,
+					"5Y": 365 * 5,
+				}[timeFrame] || 5;
+			start.setDate(end.getDate() - days);
+
+			try {
+				const result = await getHistoricalPriceData(
+					selectedIndex,
+					toYYYYMMDD(start),
+					toYYYYMMDD(end)
+				);
+				const formatted = result.map((stock) => ({
+					time: stock.date,
+					close: stock.close,
+					low: stock.low,
+					high: stock.high,
+					open: stock.open,
+					volume: stock.volume,
+					changePercent: stock.changePercent,
+				}));
+				setDataForOneIndex(formatted);
+				setDataForOneIndexReady(true);
+				return { selectedIndex, formatted };
+			} catch (error) {
+				console.error("Error loading data for", selectedIndex, error);
+				return { selectedIndex, formatted: [] };
+			}
+		}, 1000);
+	}, []);
+	useEffect(() => {
+		throttledFetchDataForOneSignal("^GSPC", timeFrame);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	useEffect(() => {
 		return () => {
 			throttledFetchAllData.cancel(); // from lodash
@@ -154,6 +202,11 @@ const IndexView = () => {
 
 	const combinedData = getCombinedChartData(dataMap);
 
+	const handleSymbolChange = (event) => {
+		const symbol = event.target.value;
+		setSelectedIndex(symbol);
+		throttledFetchDataForOneSignal(symbol, timeFrame);
+	};
 	return (
 		<Flex direction={{ base: "column", md: "row" }}>
 			<Box
@@ -163,6 +216,17 @@ const IndexView = () => {
 				width={{ base: "90%", md: "48%" }}
 				m={5}
 			>
+				<Text
+					m={0}
+					pl={3}
+					pt={2}
+					pb={1}
+					fontWeight={"bold"}
+					fontSize={"18px"}
+				>
+					Index Change Percentage Comparison
+				</Text>
+				<Divider p={0} m={0} />
 				<Wrap spacing={{ base: "1", md: "4" }} mt="1%" justify="center">
 					{indexSymbols.map((symbol) => (
 						<WrapItem key={symbol}>
@@ -181,12 +245,12 @@ const IndexView = () => {
 									borderColor="primary"
 									bg={
 										selectedIndexes.includes(symbol)
-											? "blue.100"
+											? colorScale(symbol)
 											: "none"
 									}
 									fontWeight={"semibold"}
 									_hover={{
-										bg: "accentColor",
+										bg: colorScale(symbol),
 										borderRadius: "5px",
 									}}
 									px={2}
@@ -277,7 +341,6 @@ const IndexView = () => {
 				width={{ base: "90%", md: "48%" }}
 				m={5}
 				ml={{ base: "5", md: 0 }}
-				// height={{base:"100%"}}
 			>
 				<Text
 					m={0}
@@ -287,9 +350,40 @@ const IndexView = () => {
 					fontWeight={"bold"}
 					fontSize={"18px"}
 				>
-					Index Summary
+					Index Price
 				</Text>
 				<Divider p={0} m={0} />
+				<Flex
+					direction={"column"}
+					justifyContent={"space-between"}
+					p={"1%"}
+					m={"1%"}
+					height={"90%"}
+				>
+					<Select
+						placeholder="Select Index"
+						value={selectedIndex}
+						onChange={handleSymbolChange}
+					>
+						<option value="^GSPC">S&P 500 (^GSPC)</option>
+						<option value="^DJI">Dow Jones (^DJI)</option>
+						<option value="^IXIC">Nasdaq (^IXIC)</option>
+						<option value="^RUT">Russell 2000 (^RUT)</option>
+						<option value="^FTSE">FTSE 100 (^FTSE)</option>
+						<option value="^N225">Nikkei 225 (^N225)</option>
+						<option value="^HSI">Hang Seng (^HSI)</option>
+						<option value="^STOXX50E">
+							Euro Stoxx 50 (^STOXX50E)
+						</option>
+						<option value="^VIX">VIX (^VIX)</option>
+					</Select>
+					{isDataForOneIndexReady && (
+						<IndexClosePriceDiagram
+							data={dataForOneIndex}
+							symbol={selectedIndex}
+						/>
+					)}
+				</Flex>
 			</Box>
 		</Flex>
 	);

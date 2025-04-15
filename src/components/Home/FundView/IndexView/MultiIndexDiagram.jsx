@@ -6,7 +6,7 @@ const MultiIndexDiagram = ({ data, symbols }) => {
 	const tooltip = useRef(null);
 	const containerRef = useRef();
 	const [containerWidth, setContainerWidth] = useState(0);
-
+	const colorScale = d3.scaleOrdinal(d3.schemeTableau10).domain(symbols);
 	useEffect(() => {
 		// Initialize resize observer
 		const resizeObserver = new ResizeObserver((entries) => {
@@ -75,8 +75,6 @@ const MultiIndexDiagram = ({ data, symbols }) => {
 				])
 				.nice()
 				.range([height, 0]);
-
-			const color = d3.scaleOrdinal(d3.schemeTableau10).domain(symbols);
 
 			const line = d3
 				.line()
@@ -181,7 +179,7 @@ const MultiIndexDiagram = ({ data, symbols }) => {
 					svg.append("path")
 						.datum(symbolData)
 						.attr("fill", "none")
-						.attr("stroke", color(symbol))
+						.attr("stroke", colorScale(symbol))
 						.attr("stroke-width", 2)
 						.attr("d", line);
 				}
